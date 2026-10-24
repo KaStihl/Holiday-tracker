@@ -12,7 +12,7 @@ import requests
 
 UA = (
     "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) "
-    "Chrome/126.0 Safari/537.36 dovolenka-tracker/1.0 (+https://kastihl.github.io/Holiday-tracker/)"
+    "Chrome/126.0 Safari/537.36 dovolenka-tracker/1.0 (+https://github.com/KaStihl/Holiday-tracker)"
 )
 
 _session = None

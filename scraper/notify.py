@@ -18,7 +18,7 @@ from config import CONFIG  # noqa: E402
 
 DROP_EUR = 50
 MAX_ROWS = 15
-SITE = "https://kastihl.github.io/Holiday-tracker/"
+SITE = "https://github.com/KaStihl/Holiday-tracker/blob/main/dovolenka.html"
 
 
 def load(path):
@@ -56,7 +56,7 @@ def digest(prev, cur, budget):
         label = "Najlepšie ponuky All Inclusive do budgetu" if first_run else "Nové ponuky All Inclusive do budgetu"
         parts += [f"## 🆕 {label} ({len(new)})", head] + [row(o) for o in new[:MAX_ROWS]]
     parts += ["", f"Ceny sú za 1 dospelého + 2 deti; pri označení „orientačne“ ide o cenu za osobu × 3 – overte u cestovky.",
-              f"Všetky ponuky: {SITE}"]
+              f"Všetky ponuky: stiahnite si dovolenka.html (tlačidlo „Download raw file“) a otvorte ho v prehliadači – {SITE}"]
     bits = ([f"{len(drops)}× zlacnenie"] if drops else []) + ([f"{len(new)}× nová AI do {budget} €"] if new else [])
     title = ("Dovolenka: prvý prehľad – " if first_run else "Dovolenka: ") + ", ".join(bits)
     return title, "\n".join(parts)

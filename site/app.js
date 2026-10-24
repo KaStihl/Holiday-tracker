@@ -668,6 +668,13 @@
     setInterval(renderTimes, 60000);
   }
 
+  // dovolenka.html (single local file) carries the data inline; site/index.html fetches it.
+  var inline = document.getElementById("offers-data");
+  if (inline && !isSample) {
+    try { start(JSON.parse(inline.textContent)); } catch (e) { start(null); }
+    return;
+  }
+
   fetch(DATA_URL, { cache: "no-store" })
     .then(function (r) {
       if (!r.ok) throw new Error("HTTP " + r.status);

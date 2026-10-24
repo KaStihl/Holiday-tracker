@@ -1,5 +1,6 @@
-# Scrapes travel agencies twice a day, commits site/data/*.json, publishes site/ to GitHub Pages
-# and sends an e-mail digest when something changed (new AI offers within budget, price drops).
+# Scrapes travel agencies twice a day, rebuilds the single-file dovolenka.html (open it locally, no hosting),
+# commits it with site/data/*.json and sends an e-mail digest when something changed
+# (new AI offers within budget, price drops).
 #
 # Why twice a day: first-minute prices move at most a few times a day; more runs would only add load
 # on the agencies' sites. 04:17 and 16:17 UTC = ~06:17 / 18:17 Bratislava in summer, 05:17 / 17:17 in winter.
@@ -26,8 +27,6 @@ on:
 permissions:
   contents: write
   issues: write
-  pages: write
-  id-token: write
 
 concurrency:
   group: refresh
@@ -37,6 +36,8 @@ jobs:
   refresh:
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    env:
+      MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}  # secrets can't be read in `if:`, env can
     steps:
       - uses: actions/checkout@v4
 
@@ -55,6 +56,7 @@ jobs:
         run: |
           cp site/data/offers.json "$RUNNER_TEMP/prev.json" || echo '{}' > "$RUNNER_TEMP/prev.json"
           python scraper/run.py
+          python scraper/build_html.py
 
       - name: Build e-mail digest
         id: digest
@@ -77,7 +79,7 @@ jobs:
         run: |
           git config user.name "dovolenka-bot"
           git config user.email "dovolenka-bot@users.noreply.github.com"
-          git add site/data/offers.json site/data/history.json
+          git add site/data/offers.json site/data/history.json dovolenka.html
           if git diff --cached --quiet; then echo "no changes"; exit 0; fi
           git commit -m "Refresh offers $(date -u +%Y-%m-%dT%H:%MZ)"
           for i in 1 2 3; do
@@ -97,8 +99,6 @@ jobs:
 
       - name: Notify via e-mail (optional SMTP)
         if: steps.digest.outputs.send == 'true' && env.MAIL_USERNAME != ''
-        env:
-          MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: ${{ vars.MAIL_SERVER || 'smtp.gmail.com' }}
@@ -111,18 +111,4 @@ jobs:
           subject: ${{ steps.digest.outputs.title }}
           html_body: file://${{ runner.temp }}/body.md
           convert_markdown: true
-
-      - name: Upload site for GitHub Pages
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: site
-
-  deploy:
-    needs: refresh
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+          attachments: dovolenka.html

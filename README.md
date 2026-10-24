@@ -4,14 +4,16 @@ Flight-tracker štýl sledovania first minute / last minute dovoleniek na **leto
 1 dospelý + 2 deti (10 a 12 r.), 7–14 nocí, **letecky z Bratislavy/Viedne** alebo **autom so 2 psami**,
 budget ~3 000 €, preferované All Inclusive.
 
-**Stránka:** https://kastihl.github.io/Holiday-tracker/
+**Výsledok:** [`dovolenka.html`](dovolenka.html) – jeden súbor so všetkými dátami. Stiahnite ho
+(*Download raw file*) a otvorte dvojklikom v prehliadači, funguje aj offline. Obnovuje sa 2× denne.
 
 ## Ako to funguje
 - `scraper/` – Python (requests + BeautifulSoup). Každá cestovka má adaptér v `scraper/adapters/`.
   Kritériá sú v `scraper/config.py`. `run.py` filtruje, skóruje, deduplikuje a drží históriu cien.
-- `site/` – statická stránka (HTML/CSS/JS bez build kroku), číta `site/data/offers.json`.
+- `site/` – zdroj stránky (HTML/CSS/JS). `scraper/build_html.py` z neho a z `site/data/offers.json`
+  poskladá samostatný `dovolenka.html`.
 - `.github/workflows/refresh.yml` – 2× denne (04:17 a 16:17 UTC): testy → scraping → commit dát →
-  e-mail s digestom → nasadenie na GitHub Pages.
+  `dovolenka.html` → commit → e-mail s digestom.
 
 ## Zdroje
 | Cestovka | Režim |
@@ -30,6 +32,7 @@ Po každom behu, keď pribudne nová AI ponuka do budgetu alebo niečo zlacnie o
 
 Voliteľne aj priamy e-mail cez SMTP: v Settings → Secrets and variables → Actions pridajte
 `MAIL_USERNAME` (napr. Gmail adresa), `MAIL_PASSWORD` (Gmail app password) a voliteľne `MAIL_TO`.
+E-mail má `dovolenka.html` v prílohe.
 
 Ručne: Actions → Refresh → Run workflow (zaškrtnite „Poslať kompletný prehľad“).
 
@@ -38,5 +41,5 @@ Ručne: Actions → Refresh → Run workflow (zaškrtnite „Poslať kompletný 
 pip install -r scraper/requirements.txt
 python -m pytest -q scraper/tests
 python scraper/run.py            # všetky zdroje
-cd site && python -m http.server # http://localhost:8000/?sample=1 = ukážkové dáta
+python scraper/build_html.py     # -> dovolenka.html, otvorte v prehliadači
 ```
