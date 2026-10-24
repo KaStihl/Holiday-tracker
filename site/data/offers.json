@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-24T16:16:39Z",
+ "generated_at": "2026-10-24T18:27:07Z",
  "criteria": {
   "adults": 1,
   "children_ages": [
@@ -62,7 +62,7 @@
    "status": "ok",
    "count": 134,
    "error": null,
-   "duration_s": 95.9
+   "duration_s": 101.7
   },
   {
    "id": "cedok",
@@ -71,7 +71,7 @@
    "status": "ok",
    "count": 371,
    "error": null,
-   "duration_s": 47.3
+   "duration_s": 51.9
   },
   {
    "id": "tiptravel",
@@ -80,7 +80,7 @@
    "status": "empty",
    "count": 0,
    "error": null,
-   "duration_s": 3.9
+   "duration_s": 4.5
   },
   {
    "id": "kartago",
@@ -3403,7 +3403,7 @@
      2074
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Semiramis Village Hotel",
@@ -9563,7 +9563,7 @@
      2733
     ]
    ],
-   "price_change": 75
+   "price_change": 0
   },
   {
    "hotel": "Hotel GHT Costa Brava",
@@ -10018,7 +10018,7 @@
      3174
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Lopar Hotel",
@@ -17246,7 +17246,7 @@
    "date_from": "2027-08-21",
    "date_to": "2027-08-28",
    "nights": 7,
-   "price_total": 4236,
+   "price_total": 4239,
    "price_original": null,
    "discount_label": "Cena za os. × 3 (orientačne)",
    "pets_allowed": null,
@@ -17260,10 +17260,10 @@
    "price_history": [
     [
      "2026-10-24",
-     4236
+     4239
     ]
    ],
-   "price_change": 0
+   "price_change": 3
   },
   {
    "hotel": "Aeolos Beach Resort Korfu",
