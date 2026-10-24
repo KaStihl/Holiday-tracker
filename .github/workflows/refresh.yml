@@ -97,6 +97,10 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh label create dovolenka --color 0EA5E9 --description "Digest z trackera" 2>/dev/null || true
+          # Keep only the latest digest open, so the issue list stays a short inbox.
+          for n in $(gh issue list --label dovolenka --state open --json number -q '.[].number'); do
+            gh issue close "$n" --reason completed --comment "Nahradené novším prehľadom." >/dev/null
+          done
           gh issue create --title "${{ steps.digest.outputs.title }}" --body-file "$RUNNER_TEMP/body.md" \
             --label dovolenka --assignee "${{ github.repository_owner }}"
 

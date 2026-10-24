@@ -17,7 +17,7 @@ def test_new_and_drop():
     cur = {"offers": [_o("a", 2500), _o("b", 2800), _o("c", 2900, "HB"), _o("d", 3500)]}
     title, body = notify.digest(prev, cur, 3000)
     assert "1× zlacnenie" in title and "1× nová AI" in title
-    assert "(−100 €)" in body and "Hb" in body and "Hc" not in body and "Hd" not in body
+    assert "(−100\u00a0€)" in body and "Hb" in body and "Hc" not in body and "Hd" not in body
 
 
 def test_first_run_is_summary():

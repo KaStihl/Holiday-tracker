@@ -28,11 +28,23 @@ def load(path):
         return {}
 
 
+BOARD = {"UAI": "Ultra All Inclusive", "AI": "All Inclusive", "FB": "plná penzia", "HB": "polpenzia",
+         "BB": "raňajky", "RO": "bez stravy"}
+
+
+def eur(n):
+    return f"{n:,}".replace(",", "\u00a0") + "\u00a0€"
+
+
 def row(o, extra=""):
+    """One offer as a two-line card: tables with 7 columns are unreadable in phone mail apps."""
     where = ", ".join(x for x in (o.get("place"), o.get("country")) if x)
-    how = "✈️ " + (o.get("departure") or "") if o["transport"] == "flight" else "🚗 autom" + (" 🐕" if o.get("pets_allowed") else "")
-    return (f"| **{o['price_total']} €**{extra} | [{o['hotel']}]({o['url']}) | {where} | "
-            f"{o['date_from']} · {o['nights']} nocí | {o.get('board') or '?'} | {how} | {o['source_name']} |")
+    y, m, d = o["date_from"].split("-")
+    how = f"✈️ {o.get('departure') or ''}".strip() if o["transport"] == "flight" else "🚗 autom" + (" 🐕" if o.get("pets_allowed") else "")
+    stars = " " + "★" * int(o["stars"]) if o.get("stars") else ""
+    return (f"- **{eur(o['price_total'])}**{extra} · [{o['hotel']}]({o['url']}){stars}  \n"
+            f"  {where} · {int(d)}.\u00a0{int(m)}.\u00a0{y} · {o['nights']}\u00a0nocí · "
+            f"{BOARD.get(o.get('board'), '?')} · {how} · {o['source_name']}")
 
 
 def digest(prev, cur, budget):
@@ -47,16 +59,19 @@ def digest(prev, cur, budget):
         return None
     new.sort(key=lambda o: (-o.get("score", 0), o["price_total"]))
     drops.sort(key=lambda o: o["price_total"] - old[o["id"]]["price_total"])
-    head = "| Cena | Hotel | Kde | Termín | Strava | Doprava | Zdroj |\n|---|---|---|---|---|---|---|"
     parts = []
     if drops:
-        parts += [f"## 📉 Zlacnené o {DROP_EUR} € a viac ({len(drops)})", head]
-        parts += [row(o, f" (−{old[o['id']]['price_total'] - o['price_total']} €)") for o in drops[:MAX_ROWS]]
+        parts += [f"### 📉 Zlacnené o {DROP_EUR} € a viac ({len(drops)})", ""]
+        parts += [row(o, f" (−{eur(old[o['id']]['price_total'] - o['price_total'])})") for o in drops[:MAX_ROWS]]
     if new:
         label = "Najlepšie ponuky All Inclusive do budgetu" if first_run else "Nové ponuky All Inclusive do budgetu"
-        parts += [f"## 🆕 {label} ({len(new)})", head] + [row(o) for o in new[:MAX_ROWS]]
-    parts += ["", f"Ceny sú za 1 dospelého + 2 deti; pri označení „orientačne“ ide o cenu za osobu × 3 – overte u cestovky.",
-              f"Všetky ponuky: stiahnite si dovolenka.html (tlačidlo „Download raw file“) a otvorte ho v prehliadači – {SITE}"]
+        parts += ["", f"### 🆕 {label} ({len(new)})", ""] + [row(o) for o in new[:MAX_ROWS]]
+    if max(len(new), len(drops)) > MAX_ROWS:
+        parts += ["", f"…a ďalšie – všetky sú v dovolenka.html."]
+    parts += ["", "---",
+              "Ceny sú za 1 dospelého + 2 deti. Satur, Čedok a TIP uvádzajú len cenu za osobu pri 2 dospelých, "
+              "preto je to orientačne cena × 3 – pred rezerváciou overte u cestovky.",
+              "", f"📄 Všetky ponuky: [dovolenka.html]({SITE}) – stiahnite (Download raw file) a otvorte v prehliadači."]
     bits = ([f"{len(drops)}× zlacnenie"] if drops else []) + ([f"{len(new)}× nová AI do {budget} €"] if new else [])
     title = ("Dovolenka: prvý prehľad – " if first_run else "Dovolenka: ") + ", ".join(bits)
     return title, "\n".join(parts)
