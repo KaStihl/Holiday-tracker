@@ -55,7 +55,7 @@ jobs:
       - name: Scrape travel agencies
         run: |
           cp site/data/offers.json "$RUNNER_TEMP/prev.json" || echo '{}' > "$RUNNER_TEMP/prev.json"
-          if [ "${{ github.event_name }}" = "push" ]; then export DOVOLENKA_DUMP=1; python scraper/probe.py; fi  # TEMP
+          if [ "${{ github.event_name }}" = "push" ]; then export DOVOLENKA_DUMP=1; fi  # TEMP
           python scraper/run.py
           python scraper/build_html.py
 
@@ -84,8 +84,9 @@ jobs:
           if [ "${{ github.event_name }}" = "push" ]; then git add -f scraper/debug; fi  # TEMP
           if git diff --cached --quiet; then echo "no changes"; exit 0; fi
           git commit -m "Refresh offers $(date -u +%Y-%m-%dT%H:%MZ)"
+          # -X theirs: if an overlapping run pushed data meanwhile, keep this (newer) run's generated files
           for i in 1 2 3; do
-            git pull --rebase origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && exit 0
+            git pull --rebase -X theirs origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && exit 0
             sleep $((i * 5))
           done
           exit 1

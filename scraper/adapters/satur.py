@@ -15,7 +15,7 @@ NAME = "Satur.sk"
 HOME = "https://www.satur.sk"
 
 # (path, transport, pets_allowed, pages). Listings take ?termin=dd.mm.yyyy-dd.mm.yyyy, ?dlzka-pobytu=<nights>
-# and ?stranka=N (20 cards per page); each card shows the cheapest matching term of one hotel.
+# (or a list: 10,11) and ?stranka=N (20 cards per page); each card shows the cheapest matching term of one hotel.
 PAGES = [
     ("/dovolenka/chorvatsko/so-psom", "car", True, 3),
     ("/dovolenka/so-psom", "car", True, 3),
@@ -130,9 +130,10 @@ def to_offer(c, transport, pets, party):
     }
 
 
-# ?dlzka-pobytu values (nights) and how many pages of each PAGES entry to read: 7 nights gets the full page
-# budget, 10 and 14 nights only the first page (~60 requests in all)
-STAYS = [(7, None), (10, 1), (14, 1)]
+# ?dlzka-pobytu (nights; a comma list works, ranges like 10-11 are ignored) and max pages per PAGES entry:
+# 7 nights gets the full page budget, 10–11 and 14 only page 1 (<= 63 requests, ~56 in practice).
+# A length with no terms on a page falls back to other lengths (e.g. 4 or 7 nights); run.py drops/dedupes those.
+STAYS = [(7, None), ("10,11", 1), (14, 1)]
 
 
 def search(cfg):
