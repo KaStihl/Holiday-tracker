@@ -1,0 +1,1497 @@
+{
+ "generated_at": "2026-10-24T05:20:00Z",
+ "criteria": {
+  "adults": 1,
+  "children_ages": [
+   10,
+   12
+  ],
+  "date_from": "2027-07-01",
+  "date_to": "2027-08-31",
+  "nights_min": 7,
+  "nights_max": 14,
+  "budget_eur": 3000
+ },
+ "sources": [
+  {
+   "id": "ukazka",
+   "name": "Ukážka (fake)",
+   "home": "https://example.com",
+   "status": "ok",
+   "count": 26,
+   "error": null,
+   "duration_s": 0.4
+  },
+  {
+   "id": "invia",
+   "name": "Invia.sk",
+   "home": "https://www.invia.sk",
+   "status": "error",
+   "count": 0,
+   "error": "HTTP 403 Forbidden (ukážková chyba)",
+   "duration_s": 2.1
+  },
+  {
+   "id": "satur",
+   "name": "Satur",
+   "home": "https://www.satur.sk",
+   "status": "empty",
+   "count": 0,
+   "error": null,
+   "duration_s": 5.7
+  },
+  {
+   "id": "tiptravel",
+   "name": "Tip Travel",
+   "home": "https://www.tiptravel.sk",
+   "status": "disabled",
+   "count": 0,
+   "error": "iba deeplink",
+   "duration_s": null
+  }
+ ],
+ "deeplinks": [
+  {
+   "source": "invia",
+   "name": "Invia.sk",
+   "transport": "flight",
+   "label": "Letecky AI, júl–aug, 1+2",
+   "url": "https://www.invia.sk/"
+  },
+  {
+   "source": "satur",
+   "name": "Satur",
+   "transport": "flight",
+   "label": "Letecky z BTS, AI",
+   "url": "https://www.satur.sk/"
+  },
+  {
+   "source": "tiptravel",
+   "name": "Tip Travel",
+   "transport": "flight",
+   "label": "Letecky z VIE, 7–14 nocí",
+   "url": "https://www.tiptravel.sk/"
+  },
+  {
+   "source": "invia",
+   "name": "Invia.sk",
+   "transport": "car",
+   "label": "Vlastná doprava, Chorvátsko, so psom",
+   "url": "https://www.invia.sk/"
+  },
+  {
+   "source": "booking",
+   "name": "Booking.com",
+   "transport": "car",
+   "label": "Chorvátsko, psy povolené, 1+2",
+   "url": "https://www.booking.com/"
+  },
+  {
+   "source": "bad",
+   "name": "Zlý odkaz (má sa skryť)",
+   "transport": "car",
+   "label": "x",
+   "url": "javascript:alert(1)"
+  }
+ ],
+ "offers": [
+  {
+   "id": "ukazka:9f7c2b48a898",
+   "source": "ukazka",
+   "source_name": "Ukážka (fake)",
+   "hotel": "Ukážkový hotel 1",
+   "stars": 3.0,
+   "rating": 9.2,
+   "country": "Chorvátsko",
+   "country_code": "HR",
+   "region": "Istria",
+   "place": "Poreč",
+   "board": "BB",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-07-26",
+   "date_to": "2027-08-02",
+   "nights": 7,
+   "price_total": 1897,
+   "price_original": null,
+   "discount_pct": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "image": null,
+   "url": "https://example.com/ukazka/ponuka-1",
+   "score": 47,
+   "first_seen": "2026-10-15",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-15",
+     1897
+    ],
+    [
+     "2026-10-16",
+     1897
+    ]
+   ],
+   "price_change": 0
+  },
+  {
+   "id": "ukazka:fa94ac07f561",
+   "source": "ukazka",
+   "source_name": "Ukážka (fake)",
+   "hotel": "Ukážkový hotel 2",
+   "stars": 3.0,
+   "rating": 9.2,
+   "country": "Turecko",
+   "country_code": "TR",
+   "region": "Antalya",
+   "place": "Side",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "BUD",
+   "date_from": "2027-07-27",
+   "date_to": "2027-08-06",
+   "nights": 10,
+   "price_total": 2685,
+   "price_original": null,
+   "discount_pct": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "image": null,
+   "url": "https://example.com/ukazka/ponuka-2",
+   "score": 70,
+   "first_seen": "2026-10-15",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-15",
+     2685
+    ],
+    [
+     "2026-10-16",
+     2595
+    ],
+    [
+     "2026-10-17",
+     2625
+    ],
+    [
+     "2026-10-18",
+     2535
+    ],
+    [
+     "2026-10-19",
+     2495
+    ],
+    [
+     "2026-10-20",
+     2555
+    ],
+    [
+     "2026-10-21",
+     2685
+    ]
+   ],
+   "price_change": 130
+  },
+  {
+   "id": "ukazka:db60bdda0355",
+   "source": "ukazka",
+   "source_name": "Ukážka (fake)",
+   "hotel": "Ukážkový hotel 3",
+   "stars": 5.0,
+   "rating": 7.8,
+   "country": "Cyprus",
+   "country_code": "CY",
+   "region": "Larnaka",
+   "place": "Ayia Napa",
+   "board": "HB",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-07-03",
+   "date_to": "2027-07-10",
+   "nights": 7,
+   "price_total": 2245,
+   "price_original": 2738,
+   "discount_pct": 18,
+   "discount_label": "First minute",
+   "pets_allowed": null,
+   "image": null,
+   "url": "https://example.com/ukazka/ponuka-3",
+   "score": 51,
+   "first_seen": "2026-10-21",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-21",
+     2185
+    ],
+    [
+     "2026-10-22",
+     2095
+    ],
+    [
+     "2026-10-23",
+     2125
+    ],
+    [
+     "2026-10-24",
+     2125
+    ],
+    [
+     "2026-10-25",
+     2155
+    ],
+    [
+     "2026-10-26",
+     2215
+    ],
+    [
+     "2026-10-27",
+     2175
+    ],
+    [
+     "2026-10-28",
+     2085
+    ],
+    [
+     "2026-10-29",
+     2245
+    ]
+   ],
+   "price_change": 160
+  },
+  {
+   "id": "ukazka:69a8637f6b34",
+   "source": "ukazka",
+   "source_name": "Ukážka (fake)",
+   "hotel": "Ukážkový hotel 4",
+   "stars": 3.5,
+   "rating": 7.8,
+   "country": "Taliansko",
+   "country_code": "IT",
+   "region": "Sicília",
+   "place": "Cefalù",
+   "board": "AI",
+   "transport": "car",
+   "departure": null,
+   "date_from": "2027-07-04",
+   "date_to": "2027-07-15",
+   "nights": 11,
+   "price_total": 2216,
+   "price_original": null,
+   "discount_pct": null,
+   "discount_label": null,
+   "pets_allowed": true,
+   "image": null,
+   "url": "https://example.com/ukazka/ponuka-4",
+   "score": 81,
+   "first_seen": "2026-10-17",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-17",
+     2436
+    ],
+    [
+     "2026-10-18",
+     2436
+    ],
+    [
+     "2026-10-19",
+     2466
+    ],
+    [
+     "2026-10-20",
+     2466
+    ],
+    [
+     "2026-10-21",
+     2466
+    ],
+    [
+     "2026-10-22",
+     2216
+    ]
+   ],
+   "price_change": -250
+  },
+  {
+   "id": "ukazka:48d7c9cd6c18",
+   "source": "ukazka",
+   "source_name": "Ukážka (fake)",
+   "hotel": "Ukážkový <b>resort</b> & spa \"Mare\" 5",
+   "stars": 4.0,
+   "rating": 7.8,
+   "country": "Grécko",
+   "country_code": "GR",
+   "region": "Rodos",
+   "place": "Faliraki",
+   "board": "UAI",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-08-01",
+   "date_to": "2027-08-12",
+   "nights": 11,
+   "price_total": 3538,
+   "price_original": null,
+   "discount_pct": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "image": null,
+   "url": "https://example.com/ukazka/ponuka-5",
+   "score": 54,
+   "first_seen": "2026-10-14",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-14",
+     3688
+    ],
+    [
+     "2026-10-15",
+     3538
+    ]
+   ],
+   "price_change": -150
+  },
+  {
+   "id": "ukazka:60bde284604a",
+   "source": "ukazka",
+   "source_name": "Ukážka (fake)",
+   "hotel": "Ukážkový hotel 6",
+   "stars": 4.0,
+   "rating": 8.9,
+   "country": "Španielsko",
+   "country_code": "ES",
+   "region": "Mallorca",
+   "place": "Alcúdia",
+   "board": "BB",
+   "transport": "flight",
+   "departure": "KSC",
+   "date_from": "2027-07-03",
+   "date_to": "2027-07-13",
+   "nights": 10,
+   "price_total": 2017,
+   "price_original": 2460,
+   "discount_pct": 18,
+   "discount_label": "First minute",
+   "pets_allowed": null,
+   "image": null,
+   "url": "https://example.com/ukazka/ponuka-6",
+   "score": 87,
+   "first_seen": "2026-10-12",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-12",
+     2167
+    ],
+    [
+     "2026-10-13",
+     2197
+    ],
+    [
+     "2026-10-14",
+     2197
+    ],
+    [
+     "2026-10-15",
+     2227
+    ],
+    [
+     "2026-10-16",
+     2227
+    ],
+    [
+     "2026-10-17",
+     2017
+    ]
+   ],
+   "price_change": -210
+  },
+  {
+   "id": "ukazka:a3705fcb2be1",
+   "source": "ukazka",
+   "source_name": "Ukážka (fake)",
+   "hotel": "Ukážkový hotel 7",
+   "stars": 3.5,
+   "rating": 9.2,
+   "country": "Malta",
+   "country_code": "MT",
+   "region": "Malta",
+   "place": "St. Paul's Bay",
+   "board": "BB",
+   "transport": "flight",
+   "departure": "BTS",
+   "date_from": "2027-08-16",
+   "date_to": "2027-08-23",
+   "nights": 7,
+   "price_total": 2968,
+   "price_original": 3373,
+   "discount_pct": 12,
+   "discount_label": "Last minute",
+   "pets_allowed": null,
+   "image": "javascript:alert(1)",
+   "url": "https://example.com/ukazka/ponuka-7",
+   "score": 76,
+   "first_seen": "2026-10-13",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-13",
+     3188
+    ],
+    [
+     "2026-10-14",
+     3188
+    ],
+    [
+     "2026-10-15",
+     3248
+    ],
+    [
+     "2026-10-16",
+     3248
+    ],
+    [
+     "2026-10-17",
+     3308
+    ],
+    [
+     "2026-10-18",
+     3308
+    ],
+    [
+     "2026-10-19",
+     3218
+    ],
+    [
+     "2026-10-20",
+     2968
+    ]
+   ],
+   "price_change": -250
+  },
+  {
+   "id": "ukazka:e3990d2293a4",
+   "source": "ukazka",
+   "source_name": "Ukážka (fake)",
+   "hotel": "Ukážkový hotel 8",
+   "stars": 3.5,
+   "rating": 8.9,
+   "country": "Chorvátsko",
+   "country_code": "HR",
+   "region": "Dalmácia",
+   "place": "Makarska",
+   "board": "BB",
+   "transport": "car",
+   "departure": null,
+   "date_from": "2027-08-19",
+   "date_to": "2027-08-26",
+   "nights": 7,
+   "price_total": 2712,
+   "price_original": null,
+   "discount_pct": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "image": null,
+   "url": "https://example.com/ukazka/ponuka-8",
+   "score": 90,
+   "first_seen": "2026-10-17",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-17",
+     2792
+    ],
+    [
+     "2026-10-18",
+     2792
+    ],
+    [
+     "2026-10-19",
+     2702
+    ],
+    [
+     "2026-10-20",
+     2662
+    ],
+    [
+     "2026-10-21",
+     2662
+    ],
+    [
+     "2026-10-22",
+     2662
+    ],
+    [
+     "2026-10-23",
+     2712
+    ]
+   ],
+   "price_change": 50
+  },
+  {
+   "id": "ukazka:319ad1af24ab",
+   "source": "ukazka",
+   "source_name": "Ukážka (fake)",
+   "hotel": "Ukážkový hotel 9",
+   "stars": 3.0,
+   "rating": 8.9,
+   "country": "Turecko",
+   "country_code": "TR",
+   "region": "Antalya",
+   "place": "Belek",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "BUD",
+   "date_from": "2027-08-13",
+   "date_to": "2027-08-21",
+   "nights": 8,
+   "price_total": 2645,
+   "price_original": 3112,
+   "discount_pct": 15,
+   "discount_label": "First minute",
+   "pets_allowed": null,
+   "image": null,
+   "url": "javascript:alert(1)",
+   "score": 56,
+   "first_seen": "2026-10-21",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-21",
+     2645
+    ],
+    [
+     "2026-10-22",
+     2605
+    ],
+    [
+     "2026-10-23",
+     2645
+    ]
+   ],
+   "price_change": 40
+  },
+  {
+   "id": "ukazka:15bceba84718",
+   "source": "ukazka",
+   "source_name": "Ukážka (fake)",
+   "hotel": "Ukážkový hotel 10",
+   "stars": 5.0,
+   "rating": null,
+   "country": "Cyprus",
+   "country_code": "CY",
+   "region": "Paphos",
+   "place": "Paphos",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "BTS",
+   "date_from": "2027-07-01",
+   "date_to": "2027-07-09",
+   "nights": 8,
+   "price_total": 3416,
+   "price_original": null,
+   "discount_pct": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "image": null,
+   "url": "https://example.com/ukazka/ponuka-10",
+   "score": 94,
+   "first_seen": "2026-10-18",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-18",
+     3636
+    ],
+    [
+     "2026-10-19",
+     3596
+    ],
+    [
+     "2026-10-20",
+     3656
+    ],
+    [
+     "2026-10-21",
+     3686
+    ],
+    [
+     "2026-10-22",
+     3716
+    ],
+    [
+     "2026-10-23",
+     3416
+    ]
+   ],
+   "price_change": -300
+  },
+  {
+   "id": "ukazka:d37fa15d2d9a",
+   "source": "ukazka",
+   "source_name": "Ukážka (fake)",
+   "hotel": "Ukážkový hotel 11",
+   "stars": 4.0,
+   "rating": 9.2,
+   "country": "Taliansko",
+   "country_code": "IT",
+   "region": "Sardínia",
+   "place": "Villasimius",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "BTS",
+   "date_from": "2027-07-26",
+   "date_to": "2027-08-05",
+   "nights": 10,
+   "price_total": 2124,
+   "price_original": null,
+   "discount_pct": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "image": null,
+   "url": "https://example.com/ukazka/ponuka-11",
+   "score": 51,
+   "first_seen": "2026-10-13",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-13",
+     2064
+    ],
+    [
+     "2026-10-14",
+     1974
+    ],
+    [
+     "2026-10-15",
+     1934
+    ],
+    [
+     "2026-10-16",
+     1844
+    ],
+    [
+     "2026-10-17",
+     1804
+    ],
+    [
+     "2026-10-18",
+     1804
+    ],
+    [
+     "2026-10-19",
+     2124
+    ]
+   ],
+   "price_change": 320
+  },
+  {
+   "id": "ukazka:aa8e41dc4ae8",
+   "source": "ukazka",
+   "source_name": "Ukážka (fake)",
+   "hotel": "Ukážkový hotel 12",
+   "stars": 4.0,
+   "rating": 7.8,
+   "country": "Grécko",
+   "country_code": "GR",
+   "region": "Kréta",
+   "place": "Chersonissos",
+   "board": "HB",
+   "transport": "flight",
+   "departure": "KSC",
+   "date_from": "2027-07-10",
+   "date_to": "2027-07-21",
+   "nights": 11,
+   "price_total": 2115,
+   "price_original": 2579,
+   "discount_pct": 18,
+   "discount_label": "First minute",
+   "pets_allowed": null,
+   "image": null,
+   "url": "https://example.com/ukazka/ponuka-12",
+   "score": 61,
+   "first_seen": "2026-10-23",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-23",
+     2335
+    ],
+    [
+     "2026-10-24",
+     2115
+    ]
+   ],
+   "price_change": -220
+  },
+  {
+   "id": "ukazka:35e579f8038a",
+   "source": "ukazka",
+   "source_name": "Ukážka (fake)",
+   "hotel": "Ukážkový hotel 13",
+   "stars": 5.0,
+   "rating": 8.4,
+   "country": "Španielsko",
+   "country_code": "ES",
+   "region": "Mallorca",
+   "place": "Alcúdia",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "BTS",
+   "date_from": "2027-07-24",
+   "date_to": "2027-08-04",
+   "nights": 11,
+   "price_total": 2203,
+   "price_original": null,
+   "discount_pct": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "image": null,
+   "url": "https://example.com/ukazka/ponuka-13",
+   "score": 89,
+   "first_seen": "2026-10-16",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-16",
+     2203
+    ],
+    [
+     "2026-10-17",
+     2203
+    ],
+    [
+     "2026-10-18",
+     2203
+    ],
+    [
+     "2026-10-19",
+     2203
+    ],
+    [
+     "2026-10-20",
+     2113
+    ],
+    [
+     "2026-10-21",
+     2073
+    ],
+    [
+     "2026-10-22",
+     1983
+    ],
+    [
+     "2026-10-23",
+     2203
+    ]
+   ],
+   "price_change": 220
+  },
+  {
+   "id": "ukazka:4a437cb3146b",
+   "source": "ukazka",
+   "source_name": "Ukážka (fake)",
+   "hotel": "Ukážkový hotel 14",
+   "stars": 3.5,
+   "rating": 8.4,
+   "country": "Malta",
+   "country_code": "MT",
+   "region": "Malta",
+   "place": "St. Paul's Bay",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-07-02",
+   "date_to": "2027-07-13",
+   "nights": 11,
+   "price_total": 3863,
+   "price_original": 4390,
+   "discount_pct": 12,
+   "discount_label": "Last minute",
+   "pets_allowed": null,
+   "image": null,
+   "url": "https://example.com/ukazka/ponuka-14",
+   "score": 79,
+   "first_seen": "2026-10-21",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-21",
+     4013
+    ],
+    [
+     "2026-10-22",
+     3923
+    ],
+    [
+     "2026-10-23",
+     3953
+    ],
+    [
+     "2026-10-24",
+     3953
+    ],
+    [
+     "2026-10-25",
+     4013
+    ],
+    [
+     "2026-10-26",
+     3923
+    ],
+    [
+     "2026-10-27",
+     3983
+    ],
+    [
+     "2026-10-28",
+     3983
+    ],
+    [
+     "2026-10-29",
+     3863
+    ]
+   ],
+   "price_change": -120
+  },
+  {
+   "id": "ukazka:e827094f7e51",
+   "source": "ukazka",
+   "source_name": "Ukážka (fake)",
+   "hotel": "Ukážkový hotel 15",
+   "stars": 5.0,
+   "rating": null,
+   "country": "Chorvátsko",
+   "country_code": "HR",
+   "region": "Kvarner",
+   "place": "Krk",
+   "board": "UAI",
+   "transport": "flight",
+   "departure": "BTS",
+   "date_from": "2027-08-02",
+   "date_to": "2027-08-16",
+   "nights": 14,
+   "price_total": 2613,
+   "price_original": 3074,
+   "discount_pct": 15,
+   "discount_label": "First minute",
+   "pets_allowed": null,
+   "image": null,
+   "url": "https://example.com/ukazka/ponuka-15",
+   "score": 95,
+   "first_seen": "2026-10-17",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-17",
+     2693
+    ],
+    [
+     "2026-10-18",
+     2653
+    ],
+    [
+     "2026-10-19",
+     2683
+    ],
+    [
+     "2026-10-20",
+     2613
+    ]
+   ],
+   "price_change": -70
+  },
+  {
+   "id": "ukazka:8acba18b8dba",
+   "source": "ukazka",
+   "source_name": "Ukážka (fake)",
+   "hotel": "Ukážkový hotel 16",
+   "stars": 3.5,
+   "rating": 8.4,
+   "country": "Turecko",
+   "country_code": "TR",
+   "region": "Antalya",
+   "place": "Belek",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-07-17",
+   "date_to": "2027-07-27",
+   "nights": 10,
+   "price_total": 4178,
+   "price_original": null,
+   "discount_pct": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "image": null,
+   "url": "https://example.com/ukazka/ponuka-16",
+   "score": 75,
+   "first_seen": "2026-10-16",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-16",
+     4328
+    ],
+    [
+     "2026-10-17",
+     4328
+    ],
+    [
+     "2026-10-18",
+     4238
+    ],
+    [
+     "2026-10-19",
+     4198
+    ],
+    [
+     "2026-10-20",
+     4108
+    ],
+    [
+     "2026-10-21",
+     4178
+    ]
+   ],
+   "price_change": 70
+  },
+  {
+   "id": "ukazka:cde226940c6d",
+   "source": "ukazka",
+   "source_name": "Ukážka (fake)",
+   "hotel": "Ukážkový hotel 17",
+   "stars": 4.0,
+   "rating": null,
+   "country": "Cyprus",
+   "country_code": "CY",
+   "region": "Larnaka",
+   "place": "Ayia Napa",
+   "board": "UAI",
+   "transport": "flight",
+   "departure": "KSC",
+   "date_from": "2027-08-11",
+   "date_to": "2027-08-21",
+   "nights": 10,
+   "price_total": 2047,
+   "price_original": null,
+   "discount_pct": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "image": null,
+   "url": "https://example.com/ukazka/ponuka-17",
+   "score": 70,
+   "first_seen": "2026-10-17",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-17",
+     2047
+    ],
+    [
+     "2026-10-18",
+     2047
+    ],
+    [
+     "2026-10-19",
+     2007
+    ],
+    [
+     "2026-10-20",
+     2047
+    ]
+   ],
+   "price_change": 40
+  },
+  {
+   "id": "ukazka:3c6ece5d3c80",
+   "source": "ukazka",
+   "source_name": "Ukážka (fake)",
+   "hotel": "Ukážkový hotel 18",
+   "stars": 4.5,
+   "rating": 9.2,
+   "country": "Taliansko",
+   "country_code": "IT",
+   "region": "Sardínia",
+   "place": "Villasimius",
+   "board": "AI",
+   "transport": "car",
+   "departure": null,
+   "date_from": "2027-08-17",
+   "date_to": "2027-08-27",
+   "nights": 10,
+   "price_total": 1548,
+   "price_original": 1821,
+   "discount_pct": 15,
+   "discount_label": "First minute",
+   "pets_allowed": true,
+   "image": null,
+   "url": "https://example.com/ukazka/ponuka-18",
+   "score": 46,
+   "first_seen": "2026-10-21",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-21",
+     1548
+    ],
+    [
+     "2026-10-22",
+     1608
+    ],
+    [
+     "2026-10-23",
+     1568
+    ],
+    [
+     "2026-10-24",
+     1598
+    ],
+    [
+     "2026-10-25",
+     1628
+    ],
+    [
+     "2026-10-26",
+     1628
+    ],
+    [
+     "2026-10-27",
+     1688
+    ],
+    [
+     "2026-10-28",
+     1548
+    ]
+   ],
+   "price_change": -140
+  },
+  {
+   "id": "ukazka:98f8f274b74c",
+   "source": "ukazka",
+   "source_name": "Ukážka (fake)",
+   "hotel": "Ukážkový hotel 19",
+   "stars": 3.0,
+   "rating": 8.4,
+   "country": "Grécko",
+   "country_code": "GR",
+   "region": "Kréta",
+   "place": "Chersonissos",
+   "board": "BB",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-08-16",
+   "date_to": "2027-08-30",
+   "nights": 14,
+   "price_total": 2120,
+   "price_original": null,
+   "discount_pct": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "image": null,
+   "url": "https://example.com/ukazka/ponuka-19",
+   "score": 63,
+   "first_seen": "2026-10-12",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-12",
+     2340
+    ],
+    [
+     "2026-10-13",
+     2340
+    ],
+    [
+     "2026-10-14",
+     2120
+    ]
+   ],
+   "price_change": -220
+  },
+  {
+   "id": "ukazka:6bcfe4cf3750",
+   "source": "ukazka",
+   "source_name": "Ukážka (fake)",
+   "hotel": "Ukážkový hotel 20",
+   "stars": 4.0,
+   "rating": 9.2,
+   "country": "Španielsko",
+   "country_code": "ES",
+   "region": "Kanárske ostrovy",
+   "place": "Fuerteventura",
+   "board": "UAI",
+   "transport": "flight",
+   "departure": "BUD",
+   "date_from": "2027-08-07",
+   "date_to": "2027-08-21",
+   "nights": 14,
+   "price_total": 2762,
+   "price_original": null,
+   "discount_pct": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "image": null,
+   "url": "https://example.com/ukazka/ponuka-20",
+   "score": 71,
+   "first_seen": "2026-10-17",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-17",
+     2982
+    ],
+    [
+     "2026-10-18",
+     2892
+    ],
+    [
+     "2026-10-19",
+     2762
+    ]
+   ],
+   "price_change": -130
+  },
+  {
+   "id": "ukazka:c2fc49f920d4",
+   "source": "ukazka",
+   "source_name": "Ukážka (fake)",
+   "hotel": "Ukážkový hotel 21",
+   "stars": 3.5,
+   "rating": 7.8,
+   "country": "Malta",
+   "country_code": "MT",
+   "region": "Malta",
+   "place": "St. Paul's Bay",
+   "board": "HB",
+   "transport": "flight",
+   "departure": "BTS",
+   "date_from": "2027-07-10",
+   "date_to": "2027-07-21",
+   "nights": 11,
+   "price_total": 3791,
+   "price_original": 4212,
+   "discount_pct": 10,
+   "discount_label": "First minute",
+   "pets_allowed": null,
+   "image": null,
+   "url": "https://example.com/ukazka/ponuka-21",
+   "score": 84,
+   "first_seen": "2026-10-21",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-21",
+     3791
+    ]
+   ],
+   "price_change": null
+  },
+  {
+   "id": "ukazka:afe8ffc30184",
+   "source": "ukazka",
+   "source_name": "Ukážka (fake)",
+   "hotel": "Ukážkový hotel 22",
+   "stars": 4.5,
+   "rating": 8.9,
+   "country": "Chorvátsko",
+   "country_code": "HR",
+   "region": "Kvarner",
+   "place": "Krk",
+   "board": "AI",
+   "transport": "car",
+   "departure": null,
+   "date_from": "2027-08-05",
+   "date_to": "2027-08-12",
+   "nights": 7,
+   "price_total": 2597,
+   "price_original": null,
+   "discount_pct": null,
+   "discount_label": null,
+   "pets_allowed": true,
+   "image": null,
+   "url": "https://example.com/ukazka/ponuka-22",
+   "score": 93,
+   "first_seen": "2026-10-15",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-15",
+     2817
+    ],
+    [
+     "2026-10-16",
+     2817
+    ],
+    [
+     "2026-10-17",
+     2727
+    ],
+    [
+     "2026-10-18",
+     2757
+    ],
+    [
+     "2026-10-19",
+     2667
+    ],
+    [
+     "2026-10-20",
+     2627
+    ],
+    [
+     "2026-10-21",
+     2587
+    ],
+    [
+     "2026-10-22",
+     2587
+    ],
+    [
+     "2026-10-23",
+     2597
+    ]
+   ],
+   "price_change": 10
+  },
+  {
+   "id": "ukazka:6feaedde0f29",
+   "source": "ukazka",
+   "source_name": "Ukážka (fake)",
+   "hotel": "Ukážkový hotel 23",
+   "stars": 4.5,
+   "rating": 8.9,
+   "country": "Turecko",
+   "country_code": "TR",
+   "region": "Antalya",
+   "place": "Side",
+   "board": "HB",
+   "transport": "flight",
+   "departure": "BUD",
+   "date_from": "2027-07-21",
+   "date_to": "2027-07-31",
+   "nights": 10,
+   "price_total": 3770,
+   "price_original": null,
+   "discount_pct": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "image": null,
+   "url": "https://example.com/ukazka/ponuka-23",
+   "score": 60,
+   "first_seen": "2026-10-15",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-15",
+     3990
+    ],
+    [
+     "2026-10-16",
+     4050
+    ],
+    [
+     "2026-10-17",
+     4050
+    ],
+    [
+     "2026-10-18",
+     3770
+    ]
+   ],
+   "price_change": -280
+  },
+  {
+   "id": "ukazka:182c2a4d97de",
+   "source": "ukazka",
+   "source_name": "Ukážka (fake)",
+   "hotel": "Ukážkový hotel 24",
+   "stars": 4.0,
+   "rating": null,
+   "country": "Cyprus",
+   "country_code": "CY",
+   "region": "Paphos",
+   "place": "Paphos",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-07-13",
+   "date_to": "2027-07-24",
+   "nights": 11,
+   "price_total": 2261,
+   "price_original": 2899,
+   "discount_pct": 22,
+   "discount_label": "First minute",
+   "pets_allowed": null,
+   "image": null,
+   "url": "https://example.com/ukazka/ponuka-24",
+   "score": 90,
+   "first_seen": "2026-10-17",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-17",
+     2261
+    ],
+    [
+     "2026-10-18",
+     2261
+    ],
+    [
+     "2026-10-19",
+     2171
+    ],
+    [
+     "2026-10-20",
+     2231
+    ],
+    [
+     "2026-10-21",
+     2191
+    ],
+    [
+     "2026-10-22",
+     2191
+    ],
+    [
+     "2026-10-23",
+     2101
+    ],
+    [
+     "2026-10-24",
+     2261
+    ]
+   ],
+   "price_change": 160
+  },
+  {
+   "id": "ukazka:52747f71f30c",
+   "source": "ukazka",
+   "source_name": "Ukážka (fake)",
+   "hotel": "Ukážkový hotel 25",
+   "stars": 4.0,
+   "rating": 8.9,
+   "country": "Taliansko",
+   "country_code": "IT",
+   "region": "Sardínia",
+   "place": "Villasimius",
+   "board": "HB",
+   "transport": "car",
+   "departure": null,
+   "date_from": "2027-07-17",
+   "date_to": "2027-07-24",
+   "nights": 7,
+   "price_total": 1649,
+   "price_original": null,
+   "discount_pct": null,
+   "discount_label": null,
+   "pets_allowed": true,
+   "image": null,
+   "url": "https://example.com/ukazka/ponuka-25",
+   "score": 67,
+   "first_seen": "2026-10-17",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-17",
+     1649
+    ],
+    [
+     "2026-10-18",
+     1609
+    ],
+    [
+     "2026-10-19",
+     1669
+    ],
+    [
+     "2026-10-20",
+     1629
+    ],
+    [
+     "2026-10-21",
+     1589
+    ],
+    [
+     "2026-10-22",
+     1649
+    ],
+    [
+     "2026-10-23",
+     1649
+    ],
+    [
+     "2026-10-24",
+     1649
+    ]
+   ],
+   "price_change": 0
+  },
+  {
+   "id": "ukazka:86797a36e2df",
+   "source": "ukazka",
+   "source_name": "Ukážka (fake)",
+   "hotel": "Ukážkový hotel 26",
+   "stars": 4.5,
+   "rating": null,
+   "country": "Grécko",
+   "country_code": "GR",
+   "region": "Rodos",
+   "place": "Faliraki",
+   "board": "UAI",
+   "transport": "flight",
+   "departure": "BTS",
+   "date_from": "2027-08-16",
+   "date_to": "2027-08-23",
+   "nights": 7,
+   "price_total": 1779,
+   "price_original": null,
+   "discount_pct": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "image": null,
+   "url": "https://example.com/ukazka/ponuka-26",
+   "score": 95,
+   "first_seen": "2026-10-15",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-15",
+     1929
+    ],
+    [
+     "2026-10-16",
+     1929
+    ],
+    [
+     "2026-10-17",
+     1989
+    ],
+    [
+     "2026-10-18",
+     1899
+    ],
+    [
+     "2026-10-19",
+     1899
+    ],
+    [
+     "2026-10-20",
+     1899
+    ],
+    [
+     "2026-10-21",
+     1929
+    ],
+    [
+     "2026-10-22",
+     1779
+    ]
+   ],
+   "price_change": -150
+  }
+ ]
+}

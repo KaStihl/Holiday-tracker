@@ -1,0 +1,128 @@
+# Scrapes travel agencies twice a day, commits site/data/*.json, publishes site/ to GitHub Pages
+# and sends an e-mail digest when something changed (new AI offers within budget, price drops).
+#
+# Why twice a day: first-minute prices move at most a few times a day; more runs would only add load
+# on the agencies' sites. 04:17 and 16:17 UTC = ~06:17 / 18:17 Bratislava in summer, 05:17 / 17:17 in winter.
+#
+# E-mail:
+#  - always: a GitHub issue per digest -> GitHub e-mails the repo owner (Watch: "All activity" or "Participating")
+#  - optional: plain e-mail via SMTP when repo secrets MAIL_USERNAME, MAIL_PASSWORD (+ MAIL_TO) are set,
+#    e.g. Gmail with an app password (smtp.gmail.com:465).
+name: Refresh
+
+on:
+  schedule:
+    - cron: "17 4,16 * * *"
+  workflow_dispatch:
+    inputs:
+      full_digest:
+        description: "Poslať kompletný prehľad (nie len zmeny)"
+        type: boolean
+        default: false
+  push:
+    branches: [main]
+    paths: ["scraper/**", "site/**", ".github/workflows/refresh.yml"]
+
+permissions:
+  contents: write
+  issues: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: scraper/requirements.txt
+
+      - run: pip install -r scraper/requirements.txt
+
+      - name: Unit tests
+        run: python -m pytest -q scraper/tests
+
+      - name: Scrape travel agencies
+        run: |
+          cp site/data/offers.json "$RUNNER_TEMP/prev.json" || echo '{}' > "$RUNNER_TEMP/prev.json"
+          python scraper/run.py
+
+      - name: Build e-mail digest
+        id: digest
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # First digest ever (no "dovolenka" issue yet) or a manual full run: summary instead of changes.
+          prev="$RUNNER_TEMP/prev.json"
+          if [ "${{ inputs.full_digest }}" = "true" ] || [ -z "$(gh issue list --label dovolenka --state all --limit 1 --json number -q '.[].number' 2>/dev/null)" ]; then
+            prev=/dev/null
+          fi
+          python scraper/notify.py "$prev" site/data/offers.json "$RUNNER_TEMP/digest.md"
+          if [ -s "$RUNNER_TEMP/digest.md" ]; then
+            echo "title=$(head -n1 "$RUNNER_TEMP/digest.md")" >> "$GITHUB_OUTPUT"
+            tail -n +2 "$RUNNER_TEMP/digest.md" > "$RUNNER_TEMP/body.md"
+            echo "send=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit refreshed data
+        run: |
+          git config user.name "dovolenka-bot"
+          git config user.email "dovolenka-bot@users.noreply.github.com"
+          git add site/data/offers.json site/data/history.json
+          if git diff --cached --quiet; then echo "no changes"; exit 0; fi
+          git commit -m "Refresh offers $(date -u +%Y-%m-%dT%H:%MZ)"
+          for i in 1 2 3; do
+            git pull --rebase origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && exit 0
+            sleep $((i * 5))
+          done
+          exit 1
+
+      - name: Notify via GitHub issue
+        if: steps.digest.outputs.send == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create dovolenka --color 0EA5E9 --description "Digest z trackera" 2>/dev/null || true
+          gh issue create --title "${{ steps.digest.outputs.title }}" --body-file "$RUNNER_TEMP/body.md" \
+            --label dovolenka --assignee "${{ github.repository_owner }}"
+
+      - name: Notify via e-mail (optional SMTP)
+        if: steps.digest.outputs.send == 'true' && env.MAIL_USERNAME != ''
+        env:
+          MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: ${{ vars.MAIL_SERVER || 'smtp.gmail.com' }}
+          server_port: ${{ vars.MAIL_PORT || 465 }}
+          secure: true
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          from: Dovolenka tracker <${{ secrets.MAIL_USERNAME }}>
+          to: ${{ secrets.MAIL_TO || secrets.MAIL_USERNAME }}
+          subject: ${{ steps.digest.outputs.title }}
+          html_body: file://${{ runner.temp }}/body.md
+          convert_markdown: true
+
+      - name: Upload site for GitHub Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: refresh
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

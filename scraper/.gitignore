@@ -1,0 +1,4 @@
+__pycache__/
+.pytest_cache/
+# DOVOLENKA_DUMP=1 response dumps (local debugging only)
+debug/
