@@ -55,6 +55,7 @@ jobs:
       - name: Scrape travel agencies
         run: |
           cp site/data/offers.json "$RUNNER_TEMP/prev.json" || echo '{}' > "$RUNNER_TEMP/prev.json"
+          if [ "${{ github.event_name }}" = "push" ]; then export DOVOLENKA_DUMP=1; python scraper/probe.py; fi  # TEMP
           python scraper/run.py
           python scraper/build_html.py
 
@@ -80,6 +81,7 @@ jobs:
           git config user.name "dovolenka-bot"
           git config user.email "dovolenka-bot@users.noreply.github.com"
           git add site/data/offers.json site/data/history.json dovolenka.html
+          if [ "${{ github.event_name }}" = "push" ]; then git add -f scraper/debug; fi  # TEMP
           if git diff --cached --quiet; then echo "no changes"; exit 0; fi
           git commit -m "Refresh offers $(date -u +%Y-%m-%dT%H:%MZ)"
           for i in 1 2 3; do

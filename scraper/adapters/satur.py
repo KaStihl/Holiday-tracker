@@ -130,25 +130,31 @@ def to_offer(c, transport, pets, party):
     }
 
 
+# ?dlzka-pobytu values (nights) and how many pages of each PAGES entry to read: 7 nights gets the full page
+# budget, 10 and 14 nights only the first page (~60 requests in all)
+STAYS = [(7, None), (10, 1), (14, 1)]
+
+
 def search(cfg):
     party = cfg["adults"] + len(cfg["children_ages"])
     termin = f"{cfg['date_from']:%d.%m.%Y}-{cfg['date_to']:%d.%m.%Y}"
     offers, errors = [], []  # duplicates across pages are fine: run.py keeps the cheapest per offer id
-    # dlzka-pobytu=7: 7-night stays (the cheapest in our 7–14 range); longer ones are left to the deeplinks
-    for path, transport, pets, pages in PAGES:
-        for n in range(1, pages + 1):
-            params = {"termin": termin, "dlzka-pobytu": cfg["nights_min"], **({"stranka": n} if n > 1 else {})}
-            try:
-                cards = parse_cards(get(HOME + path, params=params))
-            except Exception as e:
-                print(f"[satur] {path} p{n}: {type(e).__name__} {str(e)[:120]}")
-                errors.append(f"{type(e).__name__}: {str(e)[:120]}")
-                break
-            got = [o for o in (to_offer(c, transport, pets, party) for c in cards) if o]
-            print(f"[satur] {path} p{n}: {len(cards)} cards, {len(got)} offers, first={cards[:1]}")
-            offers += got
-            if len(cards) < 20:
-                break
+    for stay, max_pages in STAYS:
+        for path, transport, pets, pages in PAGES:
+            for n in range(1, min(pages, max_pages or pages) + 1):
+                params = {"termin": termin, "dlzka-pobytu": stay, **({"stranka": n} if n > 1 else {})}
+                try:
+                    cards = parse_cards(get(HOME + path, params=params))
+                except Exception as e:
+                    print(f"[satur] {path} {stay}n p{n}: {type(e).__name__} {str(e)[:120]}")
+                    errors.append(f"{type(e).__name__}: {str(e)[:120]}")
+                    break
+                got = [o for o in (to_offer(c, transport, pets, party) for c in cards) if o]
+                nights = sorted({o["nights"] for o in got})
+                print(f"[satur] {path} {stay}n p{n}: {len(cards)} cards, {len(got)} offers, nights={nights}")
+                offers += got
+                if len(cards) < 20:
+                    break
     if errors and not offers:
         raise RuntimeError(f"all {len(errors)} satur.sk listing requests failed, first: {errors[0]}")
     return offers

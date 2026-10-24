@@ -80,6 +80,7 @@ def test_search_uses_summer_filter(monkeypatch):
     html = (FX / "satur_so_psom_summer.html").read_text()
     monkeypatch.setattr(satur, "get", lambda url, params=None: calls.append((url, params)) or html)
     offers = satur.search(CONFIG)
-    assert len(calls) == len(satur.PAGES)  # 3 cards < 20, so no page 2 anywhere
+    n = len(satur.PAGES) * len(satur.STAYS)  # 3 cards < 20, so no page 2 anywhere
+    assert len(calls) == n and len(offers) == 3 * n
     assert calls[0][1] == {"termin": "01.07.2027-31.08.2027", "dlzka-pobytu": 7}
-    assert len(offers) == 3 * len(satur.PAGES)
+    assert {c[1]["dlzka-pobytu"] for c in calls} == {s for s, _ in satur.STAYS}

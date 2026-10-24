@@ -23,14 +23,17 @@ HOME = "https://www.cedok.sk"
 DESTINATIONS = ["turecko", "grecko", "cyprus", "spanielsko", "kanarske-ostrovy", "taliansko", "malta",
                 "chorvatsko", "egypt"]
 AIRPORTS = {"bratislava": "BTS", "vieden": "VIE", "viede": "VIE", "kosice": "KSC", "budapest": "BUD"}
-PAGES = 3  # max pages (25 rates each) per destination
+# (durationMin, durationMax) in days and max pages (25 rates each) per destination. One wide 8–15 query only ever
+# showed the cheapest stay, 7 nights; separate ranges give real 7, 10–11 and 14 night terms.
+DURATIONS = [((8, 10), 3), ((11, 12), 2), ((15, 15), 2)]
 ADULTS = 2  # see module docstring
 
 
-def _query(cfg, page=1, adults=ADULTS):
+def _query(cfg, page=1, adults=ADULTS, days=None):
+    days = days or (cfg["nights_min"] + 1, cfg["nights_max"] + 1)
     q = {"departuresByPlane": ",".join(cfg["departures"]), "dateFrom": f"{cfg['date_from']:%d.%m.%Y}",
-         "dateTo": f"{cfg['date_to']:%d.%m.%Y}", "durationMin": cfg["nights_min"] + 1,
-         "durationMax": cfg["nights_max"] + 1, "order": "priceAsc", "participants[0][adults]": adults}
+         "dateTo": f"{cfg['date_to']:%d.%m.%Y}", "durationMin": days[0], "durationMax": days[1],
+         "order": "priceAsc", "participants[0][adults]": adults}
     if page > 1:
         q["page"] = page
     return q
@@ -120,20 +123,22 @@ def to_offer(r, links, party, adults=ADULTS):
 def search(cfg):
     party = cfg["adults"] + len(cfg["children_ages"])
     offers, errors = [], []
-    for slug in DESTINATIONS:
-        for page in range(1, PAGES + 1):
-            try:
-                html = get(f"{HOME}/vysledky-vyhladavania/dovolenky/{slug}/", params=_query(cfg, page))
-            except Exception as e:
-                print(f"[cedok] {slug} p{page}: {type(e).__name__} {str(e)[:120]}")
-                errors.append(f"{type(e).__name__}: {str(e)[:120]}")
-                break
-            rates, count, links = parse_page(html)
-            got = [o for o in (to_offer(r, links, party) for r in rates) if o]
-            print(f"[cedok] {slug} p{page}: {len(rates)}/{count} rates, {len(got)} offers")
-            offers += got
-            if page * 25 >= count or not rates:
-                break
+    for days, pages in DURATIONS:
+        for slug in DESTINATIONS:
+            for page in range(1, pages + 1):
+                try:
+                    html = get(f"{HOME}/vysledky-vyhladavania/dovolenky/{slug}/", params=_query(cfg, page, days=days))
+                except Exception as e:
+                    print(f"[cedok] {slug} {days} p{page}: {type(e).__name__} {str(e)[:120]}")
+                    errors.append(f"{type(e).__name__}: {str(e)[:120]}")
+                    break
+                rates, count, links = parse_page(html)
+                got = [o for o in (to_offer(r, links, party) for r in rates) if o]
+                nights = sorted({o["nights"] for o in got})
+                print(f"[cedok] {slug} {days} p{page}: {len(rates)}/{count} rates, {len(got)} offers, nights={nights}")
+                offers += got
+                if page * 25 >= count or not rates:
+                    break
     if errors and not offers:
         raise RuntimeError(f"all {len(errors)} cedok.sk requests failed, first: {errors[0]}")
     return offers
