@@ -39,6 +39,35 @@ def test_cedok_query_and_deeplinks():
     assert all(d["url"].startswith("https://www.cedok.sk/") for d in cedok.deeplinks(CONFIG))
 
 
+def test_cedok_10_11_and_14_night_pages():
+    # durationMin=11&durationMax=12 -> 10 and 11 night terms; 15/15 -> 14 nights
+    rates, count, links = cedok.parse_page((FX / "cedok_grecko_11_12.html").read_text())
+    offers = [cedok.to_offer(r, links, 3) for r in rates]
+    assert count == 42 and [o["nights"] for o in offers] == [10, 11, 10]
+    o = offers[1]
+    assert o["hotel"] == "Marianna Studios" and (o["date_from"], o["date_to"], o["departure"]) == ("2027-07-01", "2027-07-12", "VIE")
+    assert o["price_total"] == 2428 and o["discount_label"] == "Cena za os. × 3 (orientačne)"
+    assert all(run.normalise(o, "cedok", "Čedok", CONFIG) for o in offers)
+    rates, count, links = cedok.parse_page((FX / "cedok_turecko_15.html").read_text())
+    o = cedok.to_offer(rates[1], links, 3)
+    assert count == 65 and o["hotel"] == "Hotel Sunberk Side" and o["nights"] == 14
+    assert (o["date_from"], o["date_to"], o["board"], o["price_total"], o["price_original"]) == (
+        "2027-07-03", "2027-07-17", "AI", 3388, 4131)
+    assert o["discount_label"] == "First Minute (cena za os. × 3, orientačne)"
+    assert run.normalise(o, "cedok", "Čedok", CONFIG)["nights"] == 14
+
+
+def test_cedok_search_queries_each_length(monkeypatch):
+    calls = []
+    html = (FX / "cedok_turecko_15.html").read_text()
+    monkeypatch.setattr(cedok, "get", lambda url, params=None: calls.append(params) or html)
+    cedok.search(CONFIG)
+    days = [(p["durationMin"], p["durationMax"]) for p in calls]
+    assert sorted(set(days)) == [(8, 10), (11, 12), (15, 15)]
+    # 65 rates = 3 pages, capped per range
+    assert len(calls) == sum(min(3, pages) for _, pages in cedok.DURATIONS) * len(cedok.DESTINATIONS) <= 63
+
+
 def test_cedok_search_reports_total_failure(monkeypatch):
     def boom(*a, **k):
         raise OSError("403 blocked")

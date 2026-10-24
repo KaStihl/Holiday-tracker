@@ -80,7 +80,44 @@ def test_search_uses_summer_filter(monkeypatch):
     html = (FX / "satur_so_psom_summer.html").read_text()
     monkeypatch.setattr(satur, "get", lambda url, params=None: calls.append((url, params)) or html)
     offers = satur.search(CONFIG)
-    n = len(satur.PAGES) * len(satur.STAYS)  # 3 cards < 20, so no page 2 anywhere
+    n = sum(t in budget for _, budget in satur.STAYS for _, t, _, _ in satur.PAGES)  # 3 cards < 20: no page 2
     assert len(calls) == n and len(offers) == 3 * n
     assert calls[0][1] == {"termin": "01.07.2027-31.08.2027", "dlzka-pobytu": 7}
-    assert {c[1]["dlzka-pobytu"] for c in calls} == {s for s, _ in satur.STAYS}
+    assert {c[1]["dlzka-pobytu"] for c in calls} == {7, "10,11", 14}
+    # no 10–11 night car terms exist, so car pages are only asked for 7 and 14 nights
+    car = {p for p, t, _, _ in satur.PAGES if t == "car"}
+    assert not [c for c in calls if c[1]["dlzka-pobytu"] == "10,11" and c[0].removeprefix(satur.HOME) in car]
+
+
+def test_14_night_car_listing():
+    # ?dlzka-pobytu=14: Sat–Sat fortnights; the 2-person apartment at 1480 €/os. stays under the cap
+    cards = satur.parse_cards((FX / "satur_so_psom_14.html").read_text())
+    kept = [run.normalise(satur.to_offer(c, "car", True, 3), "satur", "Satur.sk", CONFIG) for c in cards]
+    assert [k and k["nights"] for k in kept] == [14, None, 14, 14]  # Medora Auri: 7866 € is over the cap
+    k = kept[3]
+    assert k["hotel"] == "Zaton (mobilné domčeky)" and (k["date_from"], k["date_to"]) == ("2027-08-17", "2027-08-31")
+    assert (k["price_total"], k["price_original"]) == (836 * 3, 1195 * 3)
+    assert k["discount_label"] == "Zľava (cena za os. × 3, orientačne)" and k["transport"] == "car"
+
+
+def test_10_11_night_flight_listing():
+    # ?dlzka-pobytu=10,11 (a comma list; "10-11" is ignored by the site)
+    cards = satur.parse_cards((FX / "satur_letecky_10_11.html").read_text())
+    offers = [satur.to_offer(c, "flight", None, 3) for c in cards]
+    assert [(o["nights"], o["departure"], o["board"]) for o in offers] == [(10, "BTS", "AI")] * 3
+    o = offers[0]
+    assert o["hotel"] == "Hotel Jaz Tamerina" and (o["date_from"], o["date_to"]) == ("2027-07-07", "2027-07-17")
+    assert o["price_total"] == 1651 * 3  # 4953 € is over the 4500 € cap ...
+    assert run.normalise(o, "satur", "Satur.sk", CONFIG) is None
+    assert run.normalise(dict(o, price_total=4400), "satur", "Satur.sk", CONFIG)["nights"] == 10  # ... not the length
+
+
+def test_paging_stops_on_length_fallback(monkeypatch):
+    # a page with no term of the asked length (site fell back to 7 nights) is not paged further
+    cards = satur.parse_cards((FX / "satur_so_psom_summer.html").read_text())  # 7-night terms
+    calls = []
+    monkeypatch.setattr(satur, "parse_cards", lambda h: cards * 7)  # 21 cards: a "full" page
+    monkeypatch.setattr(satur, "get", lambda url, params=None: calls.append(params) or "")
+    satur.search(CONFIG)
+    assert not [p for p in calls if p["dlzka-pobytu"] == 14 and "stranka" in p]
+    assert [p for p in calls if p["dlzka-pobytu"] == 7 and "stranka" in p]

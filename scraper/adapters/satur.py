@@ -130,19 +130,22 @@ def to_offer(c, transport, pets, party):
     }
 
 
-# ?dlzka-pobytu (nights; a comma list works, ranges like 10-11 are ignored) and max pages per PAGES entry:
-# 7 nights gets the full page budget, 10–11 and 14 only page 1 (<= 63 requests, ~56 in practice).
-# A length with no terms on a page falls back to other lengths (e.g. 4 or 7 nights); run.py drops/dedupes those.
-STAYS = [(7, None), ("10,11", 1), (14, 1)]
+# ?dlzka-pobytu (nights; a comma list works, ranges like 10-11 are ignored) -> {transport: max pages per PAGES
+# entry, None = all}. Checked 2026-10-24 for Jul–Aug: car stays are Saturday to Saturday (no 10–11 night terms)
+# and most 10–14 night flight terms cost more than price_cap, so those get one page. ~55 requests per run.
+STAYS = [(7, {"car": None, "flight": None}), ("10,11", {"flight": 1}), (14, {"car": 2, "flight": 1})]
 
 
 def search(cfg):
     party = cfg["adults"] + len(cfg["children_ages"])
     termin = f"{cfg['date_from']:%d.%m.%Y}-{cfg['date_to']:%d.%m.%Y}"
     offers, errors = [], []  # duplicates across pages are fine: run.py keeps the cheapest per offer id
-    for stay, max_pages in STAYS:
+    for stay, budget in STAYS:
+        wanted = {int(x) for x in str(stay).split(",")}
         for path, transport, pets, pages in PAGES:
-            for n in range(1, min(pages, max_pages or pages) + 1):
+            if transport not in budget:
+                continue
+            for n in range(1, min(pages, budget[transport] or pages) + 1):
                 params = {"termin": termin, "dlzka-pobytu": stay, **({"stranka": n} if n > 1 else {})}
                 try:
                     cards = parse_cards(get(HOME + path, params=params))
@@ -153,8 +156,9 @@ def search(cfg):
                 got = [o for o in (to_offer(c, transport, pets, party) for c in cards) if o]
                 nights = sorted({o["nights"] for o in got})
                 print(f"[satur] {path} {stay}n p{n}: {len(cards)} cards, {len(got)} offers, nights={nights}")
-                offers += got
-                if len(cards) < 20:
+                offers += got  # real terms either way; run.py drops lengths outside the criteria
+                # no term of the asked length: the site fell back to other lengths, more pages won't help
+                if len(cards) < 20 or not wanted & set(nights):
                     break
     if errors and not offers:
         raise RuntimeError(f"all {len(errors)} satur.sk listing requests failed, first: {errors[0]}")
