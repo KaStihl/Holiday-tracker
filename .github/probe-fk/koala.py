@@ -1,26 +1,30 @@
-"""TEMPORARY: find Koala SPA data endpoints in index.js / constants.js. Uses common.get (robots enforced)."""
-import re, sys
-sys.path.insert(0, "scraper")
-import common
-from common import get
+"""TEMPORARY: Koala tree.json (the SPA's catalogue file). Every fetch goes through common.get (robots enforced)."""
+import re
+import sys
 
-for name in ("constants.js", "index.js"):
-    js = get("https://koala.sk/" + name)
-    print(f"===== {name} len={len(js)}")
-    pats = [r"fetch\(", r"axios", r"XMLHttpRequest", r"/api/", r"graphql", r"\.json", r"\.ashx", r"search", r"baseUrl|apiUrl|API_URL|endpoint",
-            r"https?://[a-z0-9.-]+"]
-    for p in pats:
-        hits = [m.start() for m in re.finditer(p, js)]
-        print(f"--- /{p}/ hits={len(hits)}")
-        seen = set()
-        for i in hits[:400]:
-            ctx = js[max(0, i - 90): i + 110].replace("\n", " ")
-            key = ctx[60:150]
-            if key in seen: continue
-            seen.add(key)
-            if len(seen) > 12: break
-            print("   ", ctx)
-    urls = sorted(set(re.findall(r"https?://[a-z0-9.-]+[^\s\"'`)]{0,80}", js)))
-    print("ABS URLS", urls[:80])
-    strs = sorted(set(re.findall(r"[\"'`](/[A-Za-z][A-Za-z0-9_./{}$-]{2,80})[\"'`?]", js)))
-    print("PATH STRINGS", len(strs)); print("\n".join(strs[:300]))
+sys.path.insert(0, "scraper")
+import common  # noqa: E402
+from common import RobotsDisallowed, get  # noqa: E402
+
+try:
+    print("REDRED robots.txt:", repr(get("https://koala.redred.sk/robots.txt", retries=0)[:1500]))
+except Exception as e:
+    print("REDRED robots.txt ERR", repr(e)[:200])
+TREE = "https://koala.redred.sk/json/encoded/tree.json"
+print("allowed tree", common.allowed(TREE))
+
+js = get("https://koala.sk/index.js")
+for pat in [r"decode_json", r"this\.dayCount", r"/dovolenka/\$\{", r"tree\.json", r"searchHotels\(e=\{\}"]:
+    hits = [m.start() for m in re.finditer(pat, js)]
+    print(f"=== /{pat}/ {len(hits)}")
+    for i in hits[:3]:
+        print("   >>", js[max(0, i - 700): i + 900].replace("\n", " "))
+
+try:
+    t = get(TREE, retries=0)
+    print("TREE len", len(t), repr(t[:600]))
+    print("TREE tail", repr(t[-300:]))
+except RobotsDisallowed:
+    print("TREE disallowed by robots")
+except Exception as e:
+    print("TREE ERR", repr(e)[:200])
