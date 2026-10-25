@@ -1,22 +1,18 @@
 #!/usr/bin/env bash
-# TEMPORARY diagnostics for Firo-tour TLS and Koala robots/sitemaps. Delete when done.
+# TEMPORARY diagnostics for Firo-tour TLS and Koala. Delete when done.
 set +e
-for h in www.firotour.sk firotour.sk www.firotour.cz; do
-  echo "================ $h"
-  echo | timeout 20 openssl s_client -connect $h:443 -servername $h -showcerts 2>&1 \
-    | grep -E "^( *[0-9] s:| *i:|depth|verify|Verify return|Verification|subject=|issuer=| +v:)" | head -30
-  echo | timeout 20 openssl s_client -connect $h:443 -servername $h -showcerts 2>/dev/null \
-    | awk '/BEGIN CERT/{n++} n==1{print} /END CERT/{if(n==1) exit}' > /tmp/leaf_$h.pem
-  openssl x509 -in /tmp/leaf_$h.pem -noout -subject -issuer -dates -ext subjectAltName,authorityInfoAccess -fingerprint -sha256 2>&1
-  curl -sS -o /dev/null -w "curl %{http_code} ssl_verify=%{ssl_verify_result}\n" https://$h/ 2>&1 | head -3
+UA="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36 dovolenka-tracker/1.0 (+https://github.com/KaStihl/Holiday-tracker)"
+echo "================ FIRO plain-http redirects (headers only)"
+for u in http://www.firotour.sk/ http://firotour.sk/ http://www.firotour.cz/; do
+  echo "--- $u"; curl -sS -A "$UA" -o /dev/null -D - --max-time 20 "$u" | grep -iE "^(HTTP|location|server)"; sleep 2
 done
-python3 - <<'PY'
-import requests, ssl, certifi
-for u in ["https://www.firotour.sk/robots.txt", "https://www.firotour.cz/robots.txt"]:
-    try:
-        r = requests.get(u, timeout=20); print(u, r.status_code)
-    except Exception as e:
-        print(u, "ERR", repr(e)[:400])
-PY
+echo "================ FIRO alternate domains (verified TLS)"
+for h in www.firotravel.sk firotravel.sk www.firo-travel.sk www.firotravel.cz www.firo-tour.cz www.firo.sk; do
+  echo "--- $h"; getent hosts $h | head -2
+  curl -sS -A "$UA" -o /dev/null -D - --max-time 20 "https://$h/" 2>&1 | grep -iE "^(HTTP|location|curl)"
+  echo | timeout 15 openssl s_client -connect $h:443 -servername $h 2>/dev/null | openssl x509 -noout -subject -enddate -ext subjectAltName 2>/dev/null | head -4
+  sleep 2
+done
+getent hosts www.firotour.sk firotour.sk www.firotour.cz
 echo "================ KOALA"
 python3 .github/probe-fk/koala.py
