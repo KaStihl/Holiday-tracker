@@ -95,54 +95,28 @@ def cedok_report(tag, html):
         print("  ERR", flight[max(0, m.start() - 100):m.end() + 200])
 
 
-def cedok():
-    print("=================== CEDOK fixture")
-    from adapters import cedok as c
-    from config import CONFIG
-    o = next(o for o in OFFERS if o["source"] == "cedok" and o["board"] in ("AI", "UAI"))
-    html = get(c.occupancy_url(o["url"], CONFIG))
-    flight = c.rsc_payload(html)
-    print("VARIANTS", c.parse_detail(html)[:5], "offer", o["date_from"], o["date_to"], o["price_total"])
-    m = c._PARTY_RE.search(flight)
-    if m:
-        seg = flight[max(0, m.start() - 2500):m.end() + 1200]
-        print("SEGMENT_JSON", json.dumps(seg, ensure_ascii=False))
-        print("HTMLHEAD", json.dumps(html[:300], ensure_ascii=False))
-
-
 def satur():
-    print("=================== SATUR")
+    print("=================== SATUR passengers")
     lst = "https://www.satur.sk/dovolenka/letecky/z-bratislavy/all-inclusive"
     q = {"termin": "01.07.2027-31.08.2027", "dlzka-pobytu": 7}
-    for tag, extra in [("list_dospeli_deti_vek", {"dospeli": 1, "deti": 2, "vek": "10,12"})]:
+    for tag, extra in [("p1", {"passengers": 1}), ("p3", {"passengers": 3}),
+                       ("p1_ages", {"passengers": 1, "children_age": "10,12"})]:
         html = get(lst, params={**q, **extra})
         soup = BeautifulSoup(html, "lxml")
+        print(f"--- {tag}", [(i.get("name"), i.get("value")) for i in soup.find_all("input")
+                              if i.get("name") in ("passengers", "children_age", "childrenAge", "deti")])
         for a in soup.select("ul[data-category-target=productsListing] article")[:3]:
-            h = a.select_one("h2 a[href]")
-            print("  CARD", _t(a.select_one("h2"))[:50], h["href"] if h else None, "|", _t(a.select_one("footer"))[:160])
-        hrefs = sorted({x["href"] for x in soup.find_all(href=True) if re.search(r"dospel|deti|vek=|osob|passeng", x["href"])})
-        print("  ECHO HREFS", hrefs[:10])
-        for el in soup.find_all(string=re.compile(r"dospel|Dospel|detí|Deti", re.I))[:10]:
-            par = el.parent
-            print("  TXT", par.name, par.get("class"), _t(par)[:150])
-        for inp in soup.find_all(["input", "select"]):
-            if inp.get("name") and re.search(r"pass|dosp|det|vek|child|adult|osob", inp["name"], re.I):
-                print("  INPUT", inp.name, inp.get("name"), inp.get("value"), inp.get("type"))
+            print("  CARD", _t(a.select_one("h2"))[:50], "|", _t(a.select_one("footer"))[:160])
+        for m in list(re.finditer(r"passengers", html))[:6]:
+            print("  CTX", repr(html[max(0, m.start() - 150):m.end() + 150]))
 
 
 def _t(el):
     return re.sub(r"\s+", " ", el.get_text(" ", strip=True)) if el else ""
 
 
-def tip():
-    print("=================== TIP")
-    html = get("https://tiptravel.sk/dovolenka/lanzarote/barcelo-playa-blanca/")
-    for m in list(re.finditer(r"terminy-ceny|terminu/\?MainProductID=|AdultsCount|ChildrenAges|ChildAge", html))[:8]:
-        print("  CTX", repr(html[max(0, m.start() - 250):m.end() + 250]))
-
-
 if __name__ == "__main__":
-    for fn in (cedok, satur, tip):
+    for fn in (satur,):
         try:
             fn()
         except Exception as e:
