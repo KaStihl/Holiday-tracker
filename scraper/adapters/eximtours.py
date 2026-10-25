@@ -1,21 +1,20 @@
-"""Exim Tours – dates and prices are rendered by JavaScript, so only search links for a human."""
+"""Exim Tours – search link only: the Slovak Exim Tours brand is gone.
 
-from urllib.parse import urlencode
+Checked 2026-10-25 from GitHub runners: every eximtours.sk URL, robots.txt included, answers 301 to the
+kartago.sk home page (query dropped). Exim Tours' terms now come from Kartago Tours (DERTOUR SK), so its
+offers are delivered by kartago.py; scraping it twice would only duplicate them.
+"""
+
+from adapters import dertour
 
 NAME = "Exim Tours"
 HOME = "https://www.eximtours.sk"
 DEEPLINK_ONLY = True
 
-AIRPORTS = "483|3789"  # Bratislava + Vienna ids of the Fischer/Kartago/Exim platform (seen on fischer.sk)
-
 
 def deeplinks(cfg):
-    nights = "|".join(str(n) for n in range(cfg["nights_min"], cfg["nights_max"] + 1))
-    q = {"tt": 1, "to": AIRPORTS, "dd": cfg["date_from"].isoformat(), "rd": cfg["date_to"].isoformat(),
-         "nn": nights, "ac1": cfg["adults"], "kc1": len(cfg["children_ages"]), "m": 5}
-    label = f"Letecky z Bratislavy/Viedne, AI, júl–aug, {cfg['nights_min']}–{cfg['nights_max']} nocí, 1+2"
-    return [{"transport": "flight", "label": label + " (vek detí doplniť)",
-             "url": f"{HOME}/vysledky-vyhledavani?{urlencode(q)}"}]
+    d = dertour.deeplinks("https://www.kartago.sk", "/vysledky-vyhladavania", cfg)[0]
+    return [dict(d, label="Exim Tours je teraz súčasť Kartago Tours – " + d["label"])]
 
 
 def search(cfg):

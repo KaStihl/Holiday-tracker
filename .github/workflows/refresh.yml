@@ -57,6 +57,7 @@ jobs:
         if: github.event_name == 'push' && contains(github.event.head_commit.message, '[probe]')
         continue-on-error: true
         run: |
+          time python scraper/run.py kartago fischer eximtours
           python scraper/probe_js.py
 
       - name: Upload probe dumps (temporary)

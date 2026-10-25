@@ -1,22 +1,20 @@
-"""Fischer – search results need JavaScript, so only search links for a human."""
+"""Fischer (fischer.sk) – offers from the JSON search API the results page itself calls; see dertour.py.
 
-from urllib.parse import urlencode
+Exact prices for 1 adult + 2 children (ages from config). Only FISCHER's own products (dataSource 256,
+ATCOM_Fischer); the rest of the shared DERTOUR inventory comes through kartago.py.
+History: until 2026-10-25 search links only, because the HTML pages fill terms and prices client-side.
+"""
+
+from adapters import dertour
 
 NAME = "Fischer"
 HOME = "https://www.fischer.sk"
-DEEPLINK_ONLY = True
-
-AIRPORTS = "483|3789"  # Bratislava + Vienna ids of the Fischer/Kartago/Exim platform (seen on fischer.sk)
+PATH = "/vysledky-vyhledavani"
 
 
 def deeplinks(cfg):
-    nights = "|".join(str(n) for n in range(cfg["nights_min"], cfg["nights_max"] + 1))
-    q = {"tt": 1, "to": AIRPORTS, "dd": cfg["date_from"].isoformat(), "rd": cfg["date_to"].isoformat(),
-         "nn": nights, "ac1": cfg["adults"], "kc1": len(cfg["children_ages"]), "m": 5}
-    label = f"Letecky z Bratislavy/Viedne, AI, júl–aug, {cfg['nights_min']}–{cfg['nights_max']} nocí, 1+2"
-    return [{"transport": "flight", "label": label + " (vek detí doplniť)",
-             "url": f"{HOME}/vysledky-vyhledavani?{urlencode(q)}"}]
+    return dertour.deeplinks(HOME, PATH, cfg)
 
 
 def search(cfg):
-    return []
+    return dertour.search("fischer", HOME, cfg, fischer=True)
