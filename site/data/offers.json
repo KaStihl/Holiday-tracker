@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-25T07:41:08Z",
+ "generated_at": "2026-10-25T07:53:10Z",
  "criteria": {
   "adults": 1,
   "children_ages": [
@@ -62,7 +62,7 @@
    "status": "ok",
    "count": 169,
    "error": null,
-   "duration_s": 234.6
+   "duration_s": 262.0
   },
   {
    "id": "cedok",
@@ -71,7 +71,7 @@
    "status": "ok",
    "count": 640,
    "error": null,
-   "duration_s": 123.2
+   "duration_s": 129.0
   },
   {
    "id": "tiptravel",
@@ -80,7 +80,7 @@
    "status": "empty",
    "count": 0,
    "error": null,
-   "duration_s": 3.9
+   "duration_s": 4.3
   },
   {
    "id": "kartago",
@@ -595,7 +595,7 @@
      2151
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Magal Maradiso hotel by Aminess",
@@ -712,7 +712,7 @@
      1920
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Narcis",
@@ -829,7 +829,7 @@
      2058
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Sunny Baška Hotel (ex. Corinthia)",
@@ -906,7 +906,7 @@
      1977
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Elpida Village",
@@ -943,7 +943,7 @@
      2024
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Parco dei Principi",
@@ -980,7 +980,7 @@
      2037
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Angela Beach",
@@ -1017,7 +1017,7 @@
      2061
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Alkyon Beach",
@@ -1054,7 +1054,7 @@
      2104
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Club Belpinar",
@@ -1091,7 +1091,7 @@
      2105
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Q Aventura Park",
@@ -1128,7 +1128,7 @@
      2133
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Avena Resort & Spa Hotel",
@@ -1165,7 +1165,7 @@
      2187
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel El Mehdi Beach Resort",
@@ -1322,7 +1322,7 @@
      1994
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Horizon Beach",
@@ -1359,7 +1359,7 @@
      2192
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Side Crown Serenity",
@@ -1396,7 +1396,7 @@
      2251
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Crystal World Of Colours Comfort Collection",
@@ -1433,7 +1433,7 @@
      2263
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Side Crown Palace",
@@ -1470,7 +1470,7 @@
      2289
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Marina",
@@ -1627,7 +1627,7 @@
      2208
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Cavo D´Oro",
@@ -1664,7 +1664,7 @@
      2209
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Donat",
@@ -1744,7 +1744,7 @@
      2055
     ]
    ],
-   "price_change": -330
+   "price_change": 0
   },
   {
    "hotel": "Fafa Grand Blue Resort",
@@ -1784,7 +1784,7 @@
      2196
     ]
    ],
-   "price_change": -351
+   "price_change": 0
   },
   {
    "hotel": "Hotel Casa Fora Beach Resort",
@@ -1821,7 +1821,7 @@
      2299
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Mobilné domčeky Aminess Style Avalona Camping Resort",
@@ -1941,7 +1941,7 @@
      2148
     ]
    ],
-   "price_change": -945
+   "price_change": 0
   },
   {
    "hotel": "Hotel Maspalomas Oasis Club",
@@ -2221,7 +2221,7 @@
      2322
     ]
    ],
-   "price_change": -378
+   "price_change": 0
   },
   {
    "hotel": "Hotel Serena Holiday Resort",
@@ -2258,7 +2258,7 @@
      2339
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Sol Marbella Estepona Atalaya Park",
@@ -2298,7 +2298,7 @@
      2394
     ]
    ],
-   "price_change": -813
+   "price_change": 0
   },
   {
    "hotel": "Hotel Calypso",
@@ -2455,7 +2455,7 @@
      2173
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Alexander the Great Resort",
@@ -2492,7 +2492,7 @@
      2181
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Papi",
@@ -2572,7 +2572,7 @@
      2427
     ]
    ],
-   "price_change": -369
+   "price_change": 0
   },
   {
    "hotel": "Hotel Seaphoria",
@@ -2729,7 +2729,7 @@
      2281
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Delight Hotel & SPA",
@@ -2769,7 +2769,7 @@
      2304
     ]
    ],
-   "price_change": -378
+   "price_change": 0
   },
   {
    "hotel": "Hotel Merce",
@@ -2886,7 +2886,7 @@
      2435
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Xidas Garden",
@@ -2923,7 +2923,7 @@
      2473
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Aminess Younique Liburna hotel",
@@ -3000,7 +3000,7 @@
      2525
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Sunny Rabac by Valamar",
@@ -3477,7 +3477,7 @@
      2538
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Caribbean World Mahdia",
@@ -3637,7 +3637,7 @@
      2418
     ]
    ],
-   "price_change": -3
+   "price_change": 0
   },
   {
    "hotel": "Hotel Residence Costa Azzurra",
@@ -3717,7 +3717,7 @@
      2559
     ]
    ],
-   "price_change": -411
+   "price_change": 0
   },
   {
    "hotel": "Tossa Beach Center",
@@ -3833,7 +3833,7 @@
      1982
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel 4R Playa Park",
@@ -3910,7 +3910,7 @@
      2575
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Ilusion Calma",
@@ -3947,7 +3947,7 @@
      2643
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Villaggio Stromboli",
@@ -4027,7 +4027,7 @@
      2661
     ]
    ],
-   "price_change": -1077
+   "price_change": 0
   },
   {
    "hotel": "Hotel Ibersol Sorra d´Or",
@@ -4067,7 +4067,7 @@
      2091
     ]
    ],
-   "price_change": 37
+   "price_change": 0
   },
   {
    "hotel": "Hotel Lazuli and Resort",
@@ -4307,7 +4307,7 @@
      2584
     ]
    ],
-   "price_change": 2
+   "price_change": 0
   },
   {
    "hotel": "Hotel 4R Regina Gran",
@@ -4467,7 +4467,7 @@
      2829
     ]
    ],
-   "price_change": -1077
+   "price_change": 0
   },
   {
    "hotel": "Hotel Safir Marsa Matrouh Resort",
@@ -4623,7 +4623,7 @@
      1782
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Labranda Riviera Hotel and Spa",
@@ -4659,7 +4659,7 @@
      2054
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "San Borondon Hotel",
@@ -4699,7 +4699,7 @@
      2139
     ]
    ],
-   "price_change": -171
+   "price_change": 0
   },
   {
    "hotel": "Hotel Horizont",
@@ -4775,7 +4775,7 @@
      2322
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Robolla Beach Aparthotel",
@@ -4895,7 +4895,7 @@
      2841
     ]
    ],
-   "price_change": -462
+   "price_change": 0
   },
   {
    "hotel": "Sol Torremolinos Don Pablo",
@@ -4935,7 +4935,7 @@
      2859
     ]
    ],
-   "price_change": -1092
+   "price_change": 0
   },
   {
    "hotel": "Hotel Sole Mare",
@@ -5055,7 +5055,7 @@
      1695
     ]
    ],
-   "price_change": -171
+   "price_change": 0
   },
   {
    "hotel": "Hotel Windrose",
@@ -5095,7 +5095,7 @@
      1772
     ]
    ],
-   "price_change": -1
+   "price_change": 0
   },
   {
    "hotel": "Aqua Hotel Aquamarina & Spa",
@@ -5135,7 +5135,7 @@
      2138
     ]
    ],
-   "price_change": -1
+   "price_change": 0
   },
   {
    "hotel": "Sunprime Atlantic View",
@@ -5251,7 +5251,7 @@
      2358
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Cynthiana Beach",
@@ -5607,7 +5607,7 @@
      1581
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Relax Inn",
@@ -5643,7 +5643,7 @@
      1848
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Bajondillo Aptos",
@@ -5719,7 +5719,7 @@
      2170
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "La Casona Del Patio",
@@ -5759,7 +5759,7 @@
      2211
     ]
    ],
-   "price_change": -169
+   "price_change": 0
   },
   {
    "hotel": "Hotel Orazio Palace",
@@ -6115,7 +6115,7 @@
      1364
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Apartmánový dom Mario",
@@ -6311,7 +6311,7 @@
      1953
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Dražica",
@@ -6387,7 +6387,7 @@
      1992
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Biokovka",
@@ -6467,7 +6467,7 @@
      2146
     ]
    ],
-   "price_change": -172
+   "price_change": 0
   },
   {
    "hotel": "Mobilné domčeky Aminess Style Avalona Camping Resort",
@@ -6667,7 +6667,7 @@
      2988
     ]
    ],
-   "price_change": 141
+   "price_change": 0
   },
   {
    "hotel": "Hotel Niriides Beach",
@@ -7023,7 +7023,7 @@
      2028
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Nord Nuova Roma",
@@ -7139,7 +7139,7 @@
      2115
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Govino Bay Corfu",
@@ -7179,7 +7179,7 @@
      2145
     ]
    ],
-   "price_change": -1
+   "price_change": 0
   },
   {
    "hotel": "Hotel Santana",
@@ -7215,7 +7215,7 @@
      2196
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Argento Hotel",
@@ -7935,7 +7935,7 @@
      2109
     ]
    ],
-   "price_change": -1
+   "price_change": 0
   },
   {
    "hotel": "Liquid Hotel Apartments",
@@ -7971,7 +7971,7 @@
      2138
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Plaza Regency Hotel",
@@ -8091,7 +8091,7 @@
      2697
     ]
    ],
-   "price_change": 75
+   "price_change": 0
   },
   {
    "hotel": "Hotel Club Torre Marino",
@@ -8527,7 +8527,7 @@
      1680
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Best Delta Hotel",
@@ -9047,7 +9047,7 @@
      1902
     ]
    ],
-   "price_change": -2
+   "price_change": 0
   },
   {
    "hotel": "Oasis Beach Club",
@@ -9483,7 +9483,7 @@
      2834
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Radisson Individuals Marina Port Ghalib",
@@ -9959,7 +9959,7 @@
      1389
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel TJ Boutique Malta",
@@ -10035,7 +10035,7 @@
      2374
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Atarazanas Malaga",
@@ -10235,7 +10235,7 @@
      2796
     ]
    ],
-   "price_change": 74
+   "price_change": 0
   },
   {
    "hotel": "Hotel Barcelo Concorde Green Park Palace",
@@ -10591,7 +10591,7 @@
      2432
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Playas de Torrevieja",
@@ -10671,7 +10671,7 @@
      2588
     ]
    ],
-   "price_change": -1
+   "price_change": 0
   },
   {
    "hotel": "Hotel Osborne",
@@ -10707,7 +10707,7 @@
      2606
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Beverly Park & Spa",
@@ -10747,7 +10747,7 @@
      2614
     ]
    ],
-   "price_change": -2
+   "price_change": 0
   },
   {
    "hotel": "Hotel Ibersol Sorra d´Or",
@@ -10783,7 +10783,7 @@
      2739
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Futura Club Torre Rinalda",
@@ -11103,7 +11103,7 @@
      2286
     ]
    ],
-   "price_change": -2
+   "price_change": 0
   },
   {
    "hotel": "Neptuno Bungalows",
@@ -11183,7 +11183,7 @@
      2354
     ]
    ],
-   "price_change": -1
+   "price_change": 0
   },
   {
    "hotel": "CA Sand Dune Hotel",
@@ -11379,7 +11379,7 @@
      2590
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Bahía Blanca Gran Canaria",
@@ -11419,7 +11419,7 @@
      2631
     ]
    ],
-   "price_change": 67
+   "price_change": 0
   },
   {
    "hotel": "Hotel Horitzo by Pierre and Vacances",
@@ -11495,7 +11495,7 @@
      2676
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Cavo Maris Beach",
@@ -11535,7 +11535,7 @@
      2696
     ]
    ],
-   "price_change": -37
+   "price_change": 0
   },
   {
    "hotel": "Hotel Celal Sultan",
@@ -11571,7 +11571,7 @@
      2762
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Bluesun Alga",
@@ -11651,7 +11651,7 @@
      3051
     ]
    ],
-   "price_change": -501
+   "price_change": 0
   },
   {
    "hotel": "Hotel Fame Residence Goynuk",
@@ -11687,7 +11687,7 @@
      3156
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Sural Hotel",
@@ -11927,7 +11927,7 @@
      2534
     ]
    ],
-   "price_change": -1
+   "price_change": 0
   },
   {
    "hotel": "Hotel Anonymous Beach",
@@ -11963,7 +11963,7 @@
      2650
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel GHT Costa Brava",
@@ -12003,7 +12003,7 @@
      2756
     ]
    ],
-   "price_change": -1
+   "price_change": 0
   },
   {
    "hotel": "Hotel Sunberk Side",
@@ -12483,7 +12483,7 @@
      2786
     ]
    ],
-   "price_change": -1
+   "price_change": 0
   },
   {
    "hotel": "Paradise Bay Resort Hotel",
@@ -12519,7 +12519,7 @@
      2847
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Mercure Benidorm Hotel",
@@ -12559,7 +12559,7 @@
      2858
     ]
    ],
-   "price_change": -124
+   "price_change": 0
   },
   {
    "hotel": "Nafsika Livadi",
@@ -12599,7 +12599,7 @@
      2978
     ]
    ],
-   "price_change": -1
+   "price_change": 0
   },
   {
    "hotel": "Atrium",
@@ -13235,7 +13235,7 @@
      2560
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Liquid Hotel Apartments",
@@ -13915,7 +13915,7 @@
      3252
     ]
    ],
-   "price_change": -537
+   "price_change": 0
   },
   {
    "hotel": "Hotel Sol Palmanova",
@@ -14032,7 +14032,7 @@
      3312
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Pickalbatros - Makadi Resort Hughada",
@@ -14348,7 +14348,7 @@
      1629
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel TJ Boutique Malta",
@@ -14708,7 +14708,7 @@
      3192
     ]
    ],
-   "price_change": 224
+   "price_change": 0
   },
   {
    "hotel": "LIVVO Hotels Lago Taurito",
@@ -15068,7 +15068,7 @@
      1089
     ]
    ],
-   "price_change": -66
+   "price_change": 0
   },
   {
    "hotel": "Jantar Hotel & Spa",
@@ -15104,7 +15104,7 @@
      1134
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Radisson Resort Kolberg",
@@ -15144,7 +15144,7 @@
      1338
     ]
    ],
-   "price_change": -456
+   "price_change": 0
   },
   {
    "hotel": "Hotel Riosol",
@@ -15464,7 +15464,7 @@
      2944
     ]
    ],
-   "price_change": -16
+   "price_change": 0
   },
   {
    "hotel": "Hotel Faedra Beach Resort",
@@ -15504,7 +15504,7 @@
      2980
     ]
    ],
-   "price_change": 4
+   "price_change": 0
   },
   {
    "hotel": "Hotel Best Triton",
@@ -15620,7 +15620,7 @@
      3228
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Silver Beach",
@@ -16140,7 +16140,7 @@
      1074
     ]
    ],
-   "price_change": -261
+   "price_change": 0
   },
   {
    "hotel": "Hilton Swinoujscie Resort & Spa",
@@ -16176,7 +16176,7 @@
      1806
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Corfu Aquamarine (ex Corfu Residence)",
@@ -16372,7 +16372,7 @@
      2997
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Amadil Ocean Club",
@@ -16528,7 +16528,7 @@
      3502
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Sahara & Rab Sunny hotel",
@@ -16604,7 +16604,7 @@
      3544
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Jaz Neo Almazino",
@@ -17124,7 +17124,7 @@
      2974
     ]
    ],
-   "price_change": -2
+   "price_change": 0
   },
   {
    "hotel": "Hotel Bernat II",
@@ -17400,7 +17400,7 @@
      3550
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Saphir Hotel And Villas",
@@ -17436,7 +17436,7 @@
      3562
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Corali",
@@ -19352,7 +19352,7 @@
      3090
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Aminess Younique Gaia Green Villas",
@@ -19988,7 +19988,7 @@
      3792
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Veya Maradiso hotel by Aminess",
@@ -20544,7 +20544,7 @@
      3038
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Belussi Beach",
@@ -20620,7 +20620,7 @@
      3074
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Corallium Beach By Lopesan Hotels",
@@ -20736,7 +20736,7 @@
      3264
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Leda Beach Hotel",
@@ -20772,7 +20772,7 @@
      3270
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Playacalida SPA",
@@ -21408,7 +21408,7 @@
      3780
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "db San Antonio Hotel + Spa",
@@ -21444,7 +21444,7 @@
      3788
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Laguna Maradiso hotel by Aminess",
@@ -21960,7 +21960,7 @@
      3254
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Atzavara Hotel & Spa",
@@ -22000,7 +22000,7 @@
      3261
     ]
    ],
-   "price_change": -1
+   "price_change": 0
   },
   {
    "hotel": "Hotel Jardines de Nivaria",
@@ -22040,7 +22040,7 @@
      3267
     ]
    ],
-   "price_change": -171
+   "price_change": 0
   },
   {
    "hotel": "Hotel Jaz Sharks Bay",
@@ -22156,7 +22156,7 @@
      3972
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Seaden Sea Planet Resort And Spa",
@@ -22192,7 +22192,7 @@
      4002
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Fame Residence Goynuk",
@@ -22228,7 +22228,7 @@
      4028
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Seaden Sea World Resort And Spa",
@@ -22264,7 +22264,7 @@
      4044
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Jaz Elite Asteria Beach",
@@ -22464,7 +22464,7 @@
      3242
     ]
    ],
-   "price_change": -16
+   "price_change": 0
   },
   {
    "hotel": "LIVVO Corralejo Beach Hotel",
@@ -22660,7 +22660,7 @@
      3502
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Mistral Bay",
@@ -23420,7 +23420,7 @@
      3302
     ]
    ],
-   "price_change": -14
+   "price_change": 0
   },
   {
    "hotel": "Hotel Best Delta Hotel",
@@ -23576,7 +23576,7 @@
      3366
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hostal Cuba",
@@ -23616,7 +23616,7 @@
      3399
     ]
    ],
-   "price_change": 11
+   "price_change": 0
   },
   {
    "hotel": "Hotel Tasia Maris Oasis",
@@ -23692,7 +23692,7 @@
      3606
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Radisson Beach Resort",
@@ -23728,7 +23728,7 @@
      3668
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Alexander Veľký",
@@ -24288,7 +24288,7 @@
      3322
     ]
    ],
-   "price_change": -16
+   "price_change": 0
   },
   {
    "hotel": "Hotel Bitzaro",
@@ -24324,7 +24324,7 @@
      3330
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Horitzo by Pierre and Vacances",
@@ -24360,7 +24360,7 @@
      3342
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "BCL Levante Club and Spa Hotel (Adults recommended)",
@@ -24436,7 +24436,7 @@
      3368
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Alay - adults only",
@@ -24552,7 +24552,7 @@
      3528
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Iliada Beach Hotel",
@@ -24592,7 +24592,7 @@
      3544
     ]
    ],
-   "price_change": 74
+   "price_change": 0
   },
   {
    "hotel": "Hotel Las Palmeras Affiliated by FERGUS",
@@ -24668,7 +24668,7 @@
      4113
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Mangia's Himera Resort",
@@ -24704,7 +24704,7 @@
      4119
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Gemma Resort",
@@ -24984,7 +24984,7 @@
      3135
     ]
    ],
-   "price_change": -15
+   "price_change": 0
   },
   {
    "hotel": "Hotel Catalonia Excelsior",
@@ -25180,7 +25180,7 @@
      3351
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Letsos",
@@ -25300,7 +25300,7 @@
      3488
     ]
    ],
-   "price_change": 137
+   "price_change": 0
   },
   {
    "hotel": "Europe Villa Cortes",
@@ -25340,7 +25340,7 @@
      3525
     ]
    ],
-   "price_change": -1
+   "price_change": 0
   },
   {
    "hotel": "NissiBlu Beach Resort",
@@ -25376,7 +25376,7 @@
      3570
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "DoubleTree by Hilton Malta",
@@ -25412,7 +25412,7 @@
      3579
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Stamatia",
@@ -25488,7 +25488,7 @@
      3636
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Lordos Beach Hotel & Spa",
@@ -25524,7 +25524,7 @@
      3728
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Apartmány Zaton Holiday Resort",
@@ -25764,7 +25764,7 @@
      4176
     ]
    ],
-   "price_change": 87
+   "price_change": 0
   },
   {
    "hotel": "Hotel Elite World Marmaris",
@@ -26044,7 +26044,7 @@
      3440
     ]
    ],
-   "price_change": -169
+   "price_change": 0
   },
   {
    "hotel": "Hotel Innside Costablanca - Adults recommended",
@@ -26124,7 +26124,7 @@
      3462
     ]
    ],
-   "price_change": 98
+   "price_change": 0
   },
   {
    "hotel": "Hotel Cordial Mogan Playa",
@@ -26200,7 +26200,7 @@
      3489
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Cavo Maris Beach",
@@ -26476,7 +26476,7 @@
      3544
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel GHT Costa Brava",
@@ -26516,7 +26516,7 @@
      3552
     ]
    ],
-   "price_change": -15
+   "price_change": 0
   },
   {
    "hotel": "Apartmánový dom Mario",
@@ -26596,7 +26596,7 @@
      3578
     ]
    ],
-   "price_change": -14
+   "price_change": 0
   },
   {
    "hotel": "Hotel Ilunion Fuengirola",
@@ -26632,7 +26632,7 @@
      3604
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Asterias Beach",
@@ -26668,7 +26668,7 @@
      3645
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Sunrise Beach",
@@ -26704,7 +26704,7 @@
      3885
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Residence Costa Azzurra",
@@ -27104,7 +27104,7 @@
      3592
     ]
    ],
-   "price_change": -16
+   "price_change": 0
   },
   {
    "hotel": "San Borondon Hotel",
@@ -27220,7 +27220,7 @@
      3896
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotelový komplex Imperial",
@@ -27776,7 +27776,7 @@
      4428
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Porto Giardino",
@@ -27812,7 +27812,7 @@
      4458
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Mirage Studios",
@@ -27968,7 +27968,7 @@
      3687
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Barcelo Malaga",
@@ -28048,7 +28048,7 @@
      3807
     ]
    ],
-   "price_change": -177
+   "price_change": 0
   },
   {
    "hotel": "Hotel Cynthiana Beach",
@@ -28084,7 +28084,7 @@
      3972
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel GH Baia di Tempsa",
@@ -28480,7 +28480,7 @@
      4020
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Bernat II",
@@ -28520,7 +28520,7 @@
      4023
     ]
    ],
-   "price_change": -15
+   "price_change": 0
   },
   {
    "hotel": "Hotel Club Torre Marino",
@@ -28720,7 +28720,7 @@
      3550
     ]
    ],
-   "price_change": -2
+   "price_change": 0
   },
   {
    "hotel": "Labranda Riviera Hotel and Spa",
@@ -28880,7 +28880,7 @@
      3842
     ]
    ],
-   "price_change": -1
+   "price_change": 0
   },
   {
    "hotel": "Hotel Belussi Beach",
@@ -28956,7 +28956,7 @@
      4080
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Hedera",
@@ -29192,7 +29192,7 @@
      3922
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Alexander The Great Beach",
@@ -29592,7 +29592,7 @@
      3936
     ]
    ],
-   "price_change": -2
+   "price_change": 0
   },
   {
    "hotel": "Hotel Bitzaro",
@@ -29872,7 +29872,7 @@
      4107
     ]
    ],
-   "price_change": -1
+   "price_change": 0
   },
   {
    "hotel": "Radisson Blu Resort & Spa Malta Golden Sands",
@@ -29908,7 +29908,7 @@
      4116
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "SeaView Hotel",
@@ -30704,7 +30704,7 @@
      4443
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel The Royal Apollonia",
@@ -31144,7 +31144,7 @@
      4214
     ]
    ],
-   "price_change": -16
+   "price_change": 0
   },
   {
    "hotel": "Salobre Hotel Resort & Serenity",
@@ -31584,7 +31584,7 @@
      4386
     ]
    ],
-   "price_change": -16
+   "price_change": 0
   },
   {
    "hotel": "Hotel GHT Costa Brava",
@@ -31744,7 +31744,7 @@
      4443
     ]
    ],
-   "price_change": -15
+   "price_change": 0
   },
   {
    "hotel": "Hotel Catalonia Excelsior",
@@ -31784,7 +31784,7 @@
      4264
     ]
    ],
-   "price_change": -5
+   "price_change": 0
   },
   {
    "hotel": "Argento Hotel",
@@ -31864,7 +31864,7 @@
      4395
     ]
    ],
-   "price_change": 137
+   "price_change": 0
   },
   {
    "hotel": "Roca Nivaria Gran Hotel",
@@ -31900,7 +31900,7 @@
      4406
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "BCL Levante Club and Spa Hotel (Adults recommended)",
