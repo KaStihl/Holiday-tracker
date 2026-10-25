@@ -1,38 +1,26 @@
-"""TEMPORARY: Koala allowed routes. Uses common.get (robots enforced)."""
-import re, sys, json
+"""TEMPORARY: find Koala SPA data endpoints in index.js / constants.js. Uses common.get (robots enforced)."""
+import re, sys
 sys.path.insert(0, "scraper")
 import common
-from common import get, RobotsDisallowed
-from adapters import tiptravel
+from common import get
 
-def show(url, n=3000, params=None):
-    try:
-        t = get(url, params=params)
-    except RobotsDisallowed:
-        print("ROBOTS-DISALLOWED", url, params); return ""
-    except Exception as e:
-        print("ERR", url, repr(e)[:300]); return ""
-    print(f"----- {url} {params} len={len(t)}"); print(t[:n]); return t
-
-sm = get("https://koala.sk/sitemap.xml")
-locs = re.findall(r"<loc>([^<]+)</loc>", sm)
-hotels = [l for l in locs if re.match(r"https://koala.sk/dovolenka/[^/]+/[^/]+$", l)]
-print("NLOCS", len(locs), "hotel-like", len(hotels)); print("\n".join(locs[60:360:3]))
-for dfrom, dto in [("01.11.2026", "31.10.2027"), ("01.07.2027", "31.08.2027")]:
-    for ap in ("2", None):
-        q = {"ProductTypeIDs": "401", "DateFrom": dfrom, "DateTo": dto, "TransportationTypeID": "201",
-             "Sort": "n", "Page": 1, "PageSize": 100, **({"AirportID": ap} if ap else {})}
-        u = "https://koala.sk/search.json"
-        from urllib.parse import urlencode
-        print("ALLOWED", common.allowed(u + "?" + urlencode(q)))
-        t = show(u, 1500, q)
-        r = tiptravel.parse_response(t) if t else {}
-        print("itemsCount", r.get("itemsCount"), "keys", list(r)[:20])
-        for it in (r.get("items") or [])[:5]:
-            print(json.dumps(it, ensure_ascii=False)[:800])
-        dates = sorted({(it.get("dateFrom") or "")[:7] for it in r.get("items") or []})
-        print("months", dates)
-h = show(hotels[0] if hotels else "https://koala.sk/dovolenka/albansko/fafa-premium-resort", 800)
-print("HOTEL prices", re.findall(r"[\d\s.]{3,}\s?€", h)[:20], "terms-ish", re.findall(r"\d{1,2}\.\d{1,2}\.\d{4}", h)[:20])
-js = show("https://koala.sk/index.js", 0)
-print("JS endpoints", sorted(set(re.findall(r'["\'](/[A-Za-z0-9_./-]*(?:\.json|\.ashx|api/[A-Za-z0-9_/-]*))', js)))[:60])
+for name in ("constants.js", "index.js"):
+    js = get("https://koala.sk/" + name)
+    print(f"===== {name} len={len(js)}")
+    pats = [r"fetch\(", r"axios", r"XMLHttpRequest", r"/api/", r"graphql", r"\.json", r"\.ashx", r"search", r"baseUrl|apiUrl|API_URL|endpoint",
+            r"https?://[a-z0-9.-]+"]
+    for p in pats:
+        hits = [m.start() for m in re.finditer(p, js)]
+        print(f"--- /{p}/ hits={len(hits)}")
+        seen = set()
+        for i in hits[:400]:
+            ctx = js[max(0, i - 90): i + 110].replace("\n", " ")
+            key = ctx[60:150]
+            if key in seen: continue
+            seen.add(key)
+            if len(seen) > 12: break
+            print("   ", ctx)
+    urls = sorted(set(re.findall(r"https?://[a-z0-9.-]+[^\s\"'`)]{0,80}", js)))
+    print("ABS URLS", urls[:80])
+    strs = sorted(set(re.findall(r"[\"'`](/[A-Za-z][A-Za-z0-9_./{}$-]{2,80})[\"'`?]", js)))
+    print("PATH STRINGS", len(strs)); print("\n".join(strs[:300]))
