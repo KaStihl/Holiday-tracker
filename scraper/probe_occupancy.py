@@ -62,72 +62,115 @@ def with_params(url, drop=(), **add):
     return urlunsplit(p._replace(query=urlencode(q + list(add.items()))))
 
 
+def rsc(html):
+    """Concatenated React Server Components flight payload (self.__next_f.push([1,"..."]))."""
+    out = []
+    for m in re.finditer(r'self\.__next_f\.push\(\[1,("(?:[^"\\]|\\.)*")\]\)', html):
+        try:
+            out.append(json.loads(m[1]))
+        except ValueError:
+            pass
+    return "".join(out)
+
+
+def cedok_report(tag, html):
+    soup = BeautifulSoup(html, "lxml")
+    flight = rsc(html)
+    print(f"--- cedok {tag}: {len(html)} bytes, rsc {len(flight)} chars")
+    seen = set()
+    for m in re.finditer(r'"participants":\{[^{}]*\}', flight):
+        if m[0] in seen:
+            continue
+        seen.add(m[0])
+        print("  PARTICIPANTS", m[0], "| after:", flight[m.end():m.end() + 700])
+    keys = set()
+    for a in soup.find_all(href=True):
+        for k, v in parse_qsl(urlsplit(a["href"]).query):
+            if "particip" in k:
+                keys.add((k, v))
+    print("  HREF participant keys", sorted(keys)[:20])
+    for m in list(re.finditer(r"childrenBirthDates|birthDate|childAge|childrenAges", flight))[:8]:
+        print("  CTX", flight[max(0, m.start() - 200):m.end() + 200].replace("\n", " "))
+    for m in list(re.finditer(r'"(error|notFound|digest)"', flight))[:3]:
+        print("  ERR", flight[max(0, m.start() - 100):m.end() + 200])
+
+
 def cedok():
     print("=================== CEDOK")
-    cands = [o for o in OFFERS if o["source"] == "cedok" and o["board"] in ("AI", "UAI")][:2]
-    for o in cands:
-        url = o["url"]
-        print(f"OFFER {o['hotel']} {o['date_from']} {o['nights']}n price_total(x3)={o['price_total']}")
-        variants = [("orig", url),
-                    ("adults1", with_params(url, drop=("participants[0][adults]",), **{"participants[0][adults]": 1}))]
-        if o is cands[0]:
-            variants += [
-                ("childrenBirthDates", with_params(url, drop=("participants[0][adults]",), **{
-                    "participants[0][adults]": 1, "participants[0][childrenBirthDates][0]": "2017-01-15",
-                    "participants[0][childrenBirthDates][1]": "2015-01-15"})),
-                ("children_birthDate", with_params(url, drop=("participants[0][adults]",), **{
-                    "participants[0][adults]": 1, "participants[0][children][0][birthDate]": "2017-01-15",
-                    "participants[0][children][1][birthDate]": "2015-01-15"})),
-            ]
-        for tag, u in variants:
-            try:
-                html = get(u)
-            except Exception as e:
-                print(f"--- {tag}: {type(e).__name__} {str(e)[:200]}")
-                continue
-            soup = html_report(f"cedok {tag}", html)
-            nd = soup.find("script", id="__NEXT_DATA__")
-            if not nd:
-                print("  no __NEXT_DATA__")
-                continue
-            d = json.loads(nd.string)
-            print("  NEXT page", d.get("page"), "query", json.dumps(d.get("query"), ensure_ascii=False)[:600])
-            pp = d.get("props", {}).get("pageProps", {})
-            print("  pageProps keys", list(pp)[:30])
-            for q in (pp.get("initialQueryState") or {}).get("queries", [])[:20]:
-                print("  QUERY", json.dumps(q.get("queryKey"), ensure_ascii=False)[:700])
-            for p, v in walk(pp)[:60]:
-                print(f"  KEY {p} = {v}")
-            prices = re.findall(r'"price":(\d+)', nd.string)[:10]
-            print("  first prices", prices)
+    o = next(o for o in OFFERS if o["source"] == "cedok" and o["board"] in ("AI", "UAI"))
+    url = o["url"]
+    print(f"OFFER {o['hotel']} {o['date_from']} {o['nights']}n price_total(x3)={o['price_total']}")
+    A = "participants[0][adults]"
+    P = "participants[0]"
+    variants = {
+        "cbd_iso_idx": {f"{P}[childrenBirthDates][0]": "2017-01-15", f"{P}[childrenBirthDates][1]": "2015-01-15"},
+        "cbd_sk_idx": {f"{P}[childrenBirthDates][0]": "15.01.2017", f"{P}[childrenBirthDates][1]": "15.01.2015"},
+        "cbd_iso_csv": {f"{P}[childrenBirthDates]": "2017-01-15,2015-01-15"},
+        "cbd_sk_csv": {f"{P}[childrenBirthDates]": "15.01.2017,15.01.2015"},
+        "children_csv": {f"{P}[children]": "2017-01-15,2015-01-15"},
+        "children_idx_sk": {f"{P}[children][0]": "15.01.2017", f"{P}[children][1]": "15.01.2015"},
+        "childrenAges": {f"{P}[childrenAges]": "10,12"},
+        "childrenN_cbd": {f"{P}[childrenNumber]": "2", f"{P}[childrenBirthDates][0]": "2017-01-15",
+                          f"{P}[childrenBirthDates][1]": "2015-01-15"},
+    }
+    for tag, extra in variants.items():
+        u = with_params(url, drop=(A,), **{A: 1}, **extra)
+        try:
+            cedok_report(tag, get(u))
+        except Exception as e:
+            print(f"--- cedok {tag}: {type(e).__name__} {str(e)[:200]}")
+
+
+def satur_report(tag, html):
+    soup = BeautifulSoup(html, "lxml")
+    m = re.search(r'"children_age":"[^"]*","passengers":"[^"]*","adults":\d+,"children":\d+', html)
+    print(f"--- satur {tag}: {len(html)} bytes; dataLayer: {m[0] if m else None}")
+    for el in soup.select("[class*=term], [class*=Term], [data-price], [class*=price]")[:12]:
+        print("  EL", el.name, el.get("class"), _t(el)[:200])
+    for a in soup.select("ul[data-category-target=productsListing] article")[:4]:
+        print("  CARD", _t(a.select_one("h2"))[:60], "|", _t(a.select_one("footer"))[:200])
+
+
+def _t(el):
+    return re.sub(r"\s+", " ", el.get_text(" ", strip=True)) if el else ""
 
 
 def satur():
     print("=================== SATUR")
     o = next(o for o in OFFERS if o["source"] == "satur" and o["board"] in ("AI", "UAI") and o["transport"] == "flight")
-    print(f"OFFER {o['hotel']} {o['url']} {o['date_from']} {o['nights']}n x3={o['price_total']}")
-    for tag, u in [("orig", o["url"]),
-                   ("dospeli", with_params(o["url"], dospeli=1, deti=2, vek="10,12"))]:
+    print(f"OFFER {o['hotel']} {o['url']} {o['date_from']} {o['date_to']} {o['nights']}n x3={o['price_total']}")
+    d1 = "{2}.{1}.{0}".format(*o["date_from"].split("-"))
+    d2 = "{2}.{1}.{0}".format(*o["date_to"].split("-"))
+    base = o["url"].split("?")[0]
+    for tag, u in [
+        ("form_get", f"{base}?" + urlencode({"date": f"{d1} - {d2}", "passengers": "18,10,12", "numberOfRooms": 1,
+                                             "length": o["nights"], "food": 3, "transport": 3})),
+        ("form_get_ajaxless", f"{base}?" + urlencode({"termin": f"{d1}-{d2}", "osoby": "18,10,12"})),
+    ]:
         try:
-            html = get(u)
+            satur_report(tag, get(u))
         except Exception as e:
-            print(f"--- {tag}: {type(e).__name__} {str(e)[:200]}")
-            continue
-        soup = html_report(f"satur {tag}", html)
-        for m in list(re.finditer(r"\d[\d\s]{2,6}\s*€", soup.get_text(" ")))[:15]:
-            print("  PRICE", repr(soup.get_text(" ")[max(0, m.start() - 80):m.end()]))
+            print(f"--- satur {tag}: {type(e).__name__} {str(e)[:200]}")
+    lst = "https://www.satur.sk/dovolenka/letecky/z-bratislavy/all-inclusive"
+    q = {"termin": "01.07.2027-31.08.2027", "dlzka-pobytu": 7}
+    for tag, extra in [("list_plain", {}), ("list_passengers", {"passengers": "18,10,12"}),
+                       ("list_osoby", {"dospeli": 1, "deti": "10,12"})]:
+        try:
+            satur_report(tag, get(lst, params={**q, **extra}))
+        except Exception as e:
+            print(f"--- satur {tag}: {type(e).__name__} {str(e)[:200]}")
 
 
 def tip():
     print("=================== TIP")
-    for tag, u in [("detail", "https://tiptravel.sk/dovolenka/lanzarote/barcelo-playa-blanca/"),
-                   ("detail_occ", "https://tiptravel.sk/dovolenka/lanzarote/barcelo-playa-blanca/?AdultsCount=1&ChildrenCount=2&ChildrenAges=10,12")]:
-        try:
-            html = get(u)
-        except Exception as e:
-            print(f"--- {tag}: {type(e).__name__} {str(e)[:200]}")
-            continue
-        html_report(f"tip {tag}", html)
+    html = get("https://tiptravel.sk/dovolenka/lanzarote/barcelo-playa-blanca/")
+    soup = BeautifulSoup(html, "lxml")
+    for s in soup.find_all("select")[:20]:
+        print("  SELECT", s.get("name"), s.get("id"), s.get("class"), [o.get("value") for o in s.find_all("option")][:15])
+    for m in list(re.finditer(r"\d[\d\s]{2,6}\s*€", soup.get_text(" ")))[:10]:
+        print("  PRICE", repr(soup.get_text(" ")[max(0, m.start() - 100):m.end()]))
+    for m in list(re.finditer(r"(search\.json|termin|terms?\.json|\.json\?)[^\"']{0,200}", html))[:10]:
+        print("  JSONREF", m[0][:250])
 
 
 if __name__ == "__main__":
