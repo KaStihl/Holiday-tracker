@@ -5,6 +5,9 @@ Checked 2026-10-24: robots.txt disallows /objednavka, /tpls/, /partner, /e/, /o/
 terms / text-and-data-mining page is linked from the site. exotika.tiptravel.sk timed out from GitHub runners.
 Prices are per person for the default occupancy (2 adults; the endpoint ignored AdultsCount/ChildrenAges),
 so the party price is per-person x 3, labelled "orientačne" like satur.py.
+Exact 1+2 prices (checked 2026-10-25): the detail page (/dovolenka/<dest>/<hotel>/) ignores AdultsCount/ChildrenAges
+query params (its persons popup is filled client-side) and the price calculation (calculationUrl) lives under
+/objednavka, which robots.txt disallows -> no exact_price hook; revisit once 2027 terms are online.
 On 2026-10-24 TIP had no Jul–Aug 2027 terms yet (site still on "LETO 2026"), so expect 'empty' for a while.
 """
 

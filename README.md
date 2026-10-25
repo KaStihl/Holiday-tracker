@@ -23,7 +23,7 @@ budget ~3 000 €, preferované All Inclusive.
 | TIP travel | sťahované, keď zverejnia leto 2027 |
 | Invia, Kartago, Fischer, Exim, Blue Style, Seneca, Koala, Firo | len odkazy (zákaz sťahovania / robots.txt / JavaScript) |
 
-Ceny zo Satur, Čedok a TIP sú **orientačné** (cena za osobu pri 2 dospelých × 3) – vždy overte u cestovky.
+Ceny zo Satur, Čedok a TIP sú **orientačné** (cena za osobu pri 2 dospelých × 3) – vždy overte u cestovky. Výnimka: pri ~35 najlepších AI/UAI ponukách Čedoku tracker zisťuje z detailu ponuky **presnú cenu pre 1 dospelého + 2 deti** (odznak „presná cena 1+2“, v e-maile ✓, v dátach `price_exact: true` a pôvodný odhad v `price_approx`).
 
 ## E-maily
 Po každom behu, keď pribudne nová AI ponuka do budgetu alebo niečo zlacnie o ≥ 50 €, workflow vytvorí

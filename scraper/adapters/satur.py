@@ -106,7 +106,11 @@ def _dates(s):
 def to_offer(c, transport, pets, party):
     """Card -> offer dict. Satur shows per-person prices (for 2 adults sharing a room); the party price is
     approximated as per-person x party size – child discounts or a single-adult surcharge only show in the
-    booking form, so the real price for 1 adult + 2 kids can differ either way."""
+    booking form, so the real price for 1 adult + 2 kids can differ either way.
+    Checked 2026-10-25: neither listings nor /produkt/ pages take the party server-side (?passengers=1|3|18,10,12,
+    ?date=…&passengers=… from the product form, ?dospeli=…: still "2 dospelí", group price = 2 x per person; dospeli
+    is the adults-only club facet). The 1+2 prices come only from /ajax, which robots.txt disallows -> stays
+    approximate (no exact_price hook)."""
     d1, d2 = _dates(c["dates"])
     if not (d1 and c["price_person"]):
         return None
