@@ -96,81 +96,49 @@ def cedok_report(tag, html):
 
 
 def cedok():
-    print("=================== CEDOK")
+    print("=================== CEDOK fixture")
+    from adapters import cedok as c
+    from config import CONFIG
     o = next(o for o in OFFERS if o["source"] == "cedok" and o["board"] in ("AI", "UAI"))
-    url = o["url"]
-    print(f"OFFER {o['hotel']} {o['date_from']} {o['nights']}n price_total(x3)={o['price_total']}")
-    A = "participants[0][adults]"
-    P = "participants[0]"
-    variants = {
-        "cbd_iso_idx": {f"{P}[childrenBirthDates][0]": "2017-01-15", f"{P}[childrenBirthDates][1]": "2015-01-15"},
-        "cbd_sk_idx": {f"{P}[childrenBirthDates][0]": "15.01.2017", f"{P}[childrenBirthDates][1]": "15.01.2015"},
-        "cbd_iso_csv": {f"{P}[childrenBirthDates]": "2017-01-15,2015-01-15"},
-        "cbd_sk_csv": {f"{P}[childrenBirthDates]": "15.01.2017,15.01.2015"},
-        "children_csv": {f"{P}[children]": "2017-01-15,2015-01-15"},
-        "children_idx_sk": {f"{P}[children][0]": "15.01.2017", f"{P}[children][1]": "15.01.2015"},
-        "childrenAges": {f"{P}[childrenAges]": "10,12"},
-        "childrenN_cbd": {f"{P}[childrenNumber]": "2", f"{P}[childrenBirthDates][0]": "2017-01-15",
-                          f"{P}[childrenBirthDates][1]": "2015-01-15"},
-    }
-    for tag, extra in variants.items():
-        u = with_params(url, drop=(A,), **{A: 1}, **extra)
-        try:
-            cedok_report(tag, get(u))
-        except Exception as e:
-            print(f"--- cedok {tag}: {type(e).__name__} {str(e)[:200]}")
+    html = get(c.occupancy_url(o["url"], CONFIG))
+    flight = c.rsc_payload(html)
+    print("VARIANTS", c.parse_detail(html)[:5], "offer", o["date_from"], o["date_to"], o["price_total"])
+    m = c._PARTY_RE.search(flight)
+    if m:
+        seg = flight[max(0, m.start() - 2500):m.end() + 1200]
+        print("SEGMENT_JSON", json.dumps(seg, ensure_ascii=False))
+        print("HTMLHEAD", json.dumps(html[:300], ensure_ascii=False))
 
 
-def satur_report(tag, html):
-    soup = BeautifulSoup(html, "lxml")
-    m = re.search(r'"children_age":"[^"]*","passengers":"[^"]*","adults":\d+,"children":\d+', html)
-    print(f"--- satur {tag}: {len(html)} bytes; dataLayer: {m[0] if m else None}")
-    for el in soup.select("[class*=term], [class*=Term], [data-price], [class*=price]")[:12]:
-        print("  EL", el.name, el.get("class"), _t(el)[:200])
-    for a in soup.select("ul[data-category-target=productsListing] article")[:4]:
-        print("  CARD", _t(a.select_one("h2"))[:60], "|", _t(a.select_one("footer"))[:200])
+def satur():
+    print("=================== SATUR")
+    lst = "https://www.satur.sk/dovolenka/letecky/z-bratislavy/all-inclusive"
+    q = {"termin": "01.07.2027-31.08.2027", "dlzka-pobytu": 7}
+    for tag, extra in [("list_dospeli_deti_vek", {"dospeli": 1, "deti": 2, "vek": "10,12"})]:
+        html = get(lst, params={**q, **extra})
+        soup = BeautifulSoup(html, "lxml")
+        for a in soup.select("ul[data-category-target=productsListing] article")[:3]:
+            h = a.select_one("h2 a[href]")
+            print("  CARD", _t(a.select_one("h2"))[:50], h["href"] if h else None, "|", _t(a.select_one("footer"))[:160])
+        hrefs = sorted({x["href"] for x in soup.find_all(href=True) if re.search(r"dospel|deti|vek=|osob|passeng", x["href"])})
+        print("  ECHO HREFS", hrefs[:10])
+        for el in soup.find_all(string=re.compile(r"dospel|Dospel|detí|Deti", re.I))[:10]:
+            par = el.parent
+            print("  TXT", par.name, par.get("class"), _t(par)[:150])
+        for inp in soup.find_all(["input", "select"]):
+            if inp.get("name") and re.search(r"pass|dosp|det|vek|child|adult|osob", inp["name"], re.I):
+                print("  INPUT", inp.name, inp.get("name"), inp.get("value"), inp.get("type"))
 
 
 def _t(el):
     return re.sub(r"\s+", " ", el.get_text(" ", strip=True)) if el else ""
 
 
-def satur():
-    print("=================== SATUR")
-    o = next(o for o in OFFERS if o["source"] == "satur" and o["board"] in ("AI", "UAI") and o["transport"] == "flight")
-    print(f"OFFER {o['hotel']} {o['url']} {o['date_from']} {o['date_to']} {o['nights']}n x3={o['price_total']}")
-    d1 = "{2}.{1}.{0}".format(*o["date_from"].split("-"))
-    d2 = "{2}.{1}.{0}".format(*o["date_to"].split("-"))
-    base = o["url"].split("?")[0]
-    for tag, u in [
-        ("form_get", f"{base}?" + urlencode({"date": f"{d1} - {d2}", "passengers": "18,10,12", "numberOfRooms": 1,
-                                             "length": o["nights"], "food": 3, "transport": 3})),
-        ("form_get_ajaxless", f"{base}?" + urlencode({"termin": f"{d1}-{d2}", "osoby": "18,10,12"})),
-    ]:
-        try:
-            satur_report(tag, get(u))
-        except Exception as e:
-            print(f"--- satur {tag}: {type(e).__name__} {str(e)[:200]}")
-    lst = "https://www.satur.sk/dovolenka/letecky/z-bratislavy/all-inclusive"
-    q = {"termin": "01.07.2027-31.08.2027", "dlzka-pobytu": 7}
-    for tag, extra in [("list_plain", {}), ("list_passengers", {"passengers": "18,10,12"}),
-                       ("list_osoby", {"dospeli": 1, "deti": "10,12"})]:
-        try:
-            satur_report(tag, get(lst, params={**q, **extra}))
-        except Exception as e:
-            print(f"--- satur {tag}: {type(e).__name__} {str(e)[:200]}")
-
-
 def tip():
     print("=================== TIP")
     html = get("https://tiptravel.sk/dovolenka/lanzarote/barcelo-playa-blanca/")
-    soup = BeautifulSoup(html, "lxml")
-    for s in soup.find_all("select")[:20]:
-        print("  SELECT", s.get("name"), s.get("id"), s.get("class"), [o.get("value") for o in s.find_all("option")][:15])
-    for m in list(re.finditer(r"\d[\d\s]{2,6}\s*€", soup.get_text(" ")))[:10]:
-        print("  PRICE", repr(soup.get_text(" ")[max(0, m.start() - 100):m.end()]))
-    for m in list(re.finditer(r"(search\.json|termin|terms?\.json|\.json\?)[^\"']{0,200}", html))[:10]:
-        print("  JSONREF", m[0][:250])
+    for m in list(re.finditer(r"terminy-ceny|terminu/\?MainProductID=|AdultsCount|ChildrenAges|ChildAge", html))[:8]:
+        print("  CTX", repr(html[max(0, m.start() - 250):m.end() + 250]))
 
 
 if __name__ == "__main__":

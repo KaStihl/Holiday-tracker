@@ -25,6 +25,7 @@ HISTORY = DATA / "history.json"
 
 HISTORY_POINTS = 90
 HISTORY_KEEP_DAYS = 60
+EXACT_BOARDS = ("AI", "UAI")
 BOARD_SCORE = {"UAI": 1.0, "AI": 0.95, "FB": 0.6, "HB": 0.45, "BB": 0.25, "RO": 0.1, None: 0.2}
 
 
@@ -67,6 +68,7 @@ def normalise(raw, source, source_name, cfg):
         return None
     for k in ("stars", "rating", "region", "place", "departure", "discount_label", "discount_pct", "pets_allowed"):
         o.setdefault(k, None)
+    o["price_exact"] = o.get("price_exact") is True
     o["id"] = offer_id(source, o["hotel"], o["date_from"], nights, o["transport"], o["departure"])
     return o
 
@@ -88,6 +90,40 @@ def score(o, cfg):
     return round(100 * s)
 
 
+def refine_exact(offers, mods, cfg):
+    """Ask adapters with an exact_price(offer, cfg) hook for the real 1 adult + 2 children total of their best
+    AI/UAI offers (top mod.EXACT_MAX by score). Offers the site doesn't confirm keep the x3 approximation."""
+    for name, mod in mods.items():
+        hook = getattr(mod, "exact_price", None)
+        if not hook:
+            continue
+        todo = [o for o in offers if o["source"] == name and not o["price_exact"] and o["board"] in EXACT_BOARDS]
+        todo = sorted(todo, key=lambda o: (-score(o, cfg), o["price_total"]))[:getattr(mod, "EXACT_MAX", 35)]
+        done = failed = 0
+        for o in todo:
+            try:
+                res = hook(o, cfg)
+            except Exception as e:
+                failed += 1
+                print(f"[{name}] exact price {o['hotel']}: {type(e).__name__} {str(e)[:120]}")
+                if failed >= 5 and not done:
+                    print(f"[{name}] exact prices: giving up after {failed} failures")
+                    break
+                continue
+            if not res or not res.get("price_total"):
+                continue
+            o["price_approx"] = o["price_total"]
+            o.update(res)
+            o["price_total"], o["price_exact"] = int(res["price_total"]), True
+            po = o.get("price_original")
+            o["price_original"] = int(po) if isinstance(po, (int, float)) and po > o["price_total"] else None
+            o["discount_pct"] = round(100 * (1 - o["price_total"] / o["price_original"])) if o["price_original"] else None
+            done += 1
+        print(f"[{name}] exact 1+2 prices: {done}/{len(todo)} confirmed")
+    # an exact price above the cap no longer matches the criteria
+    return [o for o in offers if o["price_total"] <= cfg["price_cap"]]
+
+
 def load(path, default):
     try:
         return json.loads(path.read_text(encoding="utf-8"))
@@ -97,9 +133,19 @@ def load(path, default):
 
 def merge_history(offers, today):
     hist = load(HISTORY, {})
-    prev_price = {o["id"]: o["price_total"] for o in load(OFFERS, {}).get("offers", [])}
+    prev = {o["id"]: o for o in load(OFFERS, {}).get("offers", [])}
+    prev_price = {}
     for o in offers:
         h = hist.setdefault(o["id"], {"first_seen": today, "points": []})
+        exact = bool(o.get("price_exact"))
+        if bool(h.get("exact")) != exact:
+            # x3 approximation <-> exact party price is not a price change: start a new series
+            h["points"] = []
+        else:
+            p = prev.get(o["id"])
+            if p and bool(p.get("price_exact")) == exact:
+                prev_price[o["id"]] = p["price_total"]
+        h["exact"] = exact
         pts = [p for p in h["points"] if p[0] != today] + [[today, o["price_total"]]]
         h["points"], h["last_seen"] = pts[-HISTORY_POINTS:], today
         o["first_seen"], o["last_seen"] = h["first_seen"], today
@@ -112,7 +158,7 @@ def merge_history(offers, today):
 
 def main(only=None):
     cfg = CONFIG
-    sources, deeplinks, offers = [], [], {}
+    sources, deeplinks, offers, mods = [], [], {}, {}
     for name in ADAPTERS:
         if only and name not in only:
             continue
@@ -127,6 +173,7 @@ def main(only=None):
             sources.append(info)
             continue
         t0 = time.time()
+        mods[name] = mod
         try:
             raw = mod.search(cfg)
             clean = [n for n in (normalise(r, name, mod.NAME, cfg) for r in raw) if n]
@@ -143,7 +190,11 @@ def main(only=None):
         sources.append(info)
 
     today = datetime.now(timezone.utc).date().isoformat()
-    result = sorted(offers.values(), key=lambda o: (-score(o, cfg), o["price_total"]))
+    t0 = time.time()
+    exact_src = {n: m for n, m in mods.items() if any(s["id"] == n and s["status"] == "ok" for s in sources)}
+    result = refine_exact(list(offers.values()), exact_src, cfg)
+    print(f"exact prices took {time.time() - t0:.0f} s")
+    result = sorted(result, key=lambda o: (-score(o, cfg), o["price_total"]))
     for o in result:
         o["score"] = score(o, cfg)
     hist = merge_history(result, today)

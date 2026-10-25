@@ -228,6 +228,7 @@ input[type="range"] { accent-color: var(--accent); min-height: 30px; }
 .price-orig { color: var(--muted); font-size: .88rem; white-space: nowrap; }
 .disc-badge:empty { display: none; }
 .disc-badge { background: var(--disc-bg); color: var(--disc); font-size: .76rem; font-weight: 700; padding: 2px 7px; border-radius: 6px; white-space: nowrap; }
+.exact-badge { background: var(--good-bg); color: var(--good); font-size: .76rem; font-weight: 700; padding: 2px 7px; border-radius: 6px; white-space: nowrap; }
 .price-total { font-size: 1.7rem; font-weight: 700; line-height: 1.1; }
 .price-trend { display: flex; align-items: center; gap: 6px; font-size: .82rem; min-height: 26px; }
 .trend-down { color: var(--good); font-weight: 600; }

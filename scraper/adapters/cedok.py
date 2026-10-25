@@ -6,11 +6,19 @@ Checked 2026-10-24: robots.txt only disallows /api*, /booking*, /reservation*, /
 Length filter: durationMin/durationMax in days (nights + 1). Children in the URL: none of ~15 participants[0][...]
 variants was picked up (children=N answers 500), so we ask for 2 adults and show per-person price x 3, labelled
 "orientačne" like satur.py. Each page lists the cheapest matching term per hotel.
+
+Exact party prices (checked 2026-10-25): the hotel/term detail page /dovolena/<country>/<region>/<hotel>,<ID>/?id=…
+(server-rendered React Server Components payload, robots allows /dovolena/) honours
+participants[0][adults]=1&participants[0][children][0]=DD.MM.YYYY&participants[0][children][1]=DD.MM.YYYY and
+embeds the priced variant as "date":{"range":{start,end}} … "participants":{"adultNumber":1,"childrenNumber":2,
+"childrenBirthDates":[…]},"totalPrice":N. exact_price() fetches that for a shortlist chosen by run.py and only
+accepts it when the dates and the party in the payload match the offer (otherwise the offer stays approximate).
 """
 
 import json
 import re
-from urllib.parse import parse_qs, urlencode, urlsplit
+from datetime import date
+from urllib.parse import parse_qs, parse_qsl, urlencode, urlsplit, urlunsplit
 
 from bs4 import BeautifulSoup
 
@@ -27,6 +35,8 @@ AIRPORTS = {"bratislava": "BTS", "vieden": "VIE", "viede": "VIE", "kosice": "KSC
 # showed the cheapest stay, 7 nights; separate ranges give real 7, 10–11 and 14 night terms.
 DURATIONS = [((8, 10), 3), ((11, 12), 2), ((15, 15), 2)]
 ADULTS = 2  # see module docstring
+EXACT_MAX = 35  # detail pages (~1 MB each) fetched per run for exact 1 adult + 2 children prices
+APPROX_NOTE = re.compile(r"\s*\(cena za os\. × 3, orientačne\)|Cena za os\. × 3 \(orientačne\)")
 
 
 def _query(cfg, page=1, adults=ADULTS, days=None):
@@ -96,7 +106,7 @@ def to_offer(r, links, party, adults=ADULTS):
     orig = (orig / 100 if exact else orig / 100 / max(len(people) or adults, 1) * party) if orig > r["price"] else None
     promo = next((p["title"] for p in r.get("promotions", []) if "minute" in p.get("value", "").lower()), None)
     if exact:
-        label = promo
+        label = promo  # run.py marks it price_exact
     else:
         label = f"{promo} (cena za os. × 3, orientačne)" if promo or orig else "Cena za os. × 3 (orientačne)"
     stars = c.get("hotelRating")
@@ -116,8 +126,89 @@ def to_offer(r, links, party, adults=ADULTS):
         "board": norm_board((hotel.get("meal") or {}).get("title")), "transport": "flight", "departure": dep,
         "date_from": d1, "date_to": d2, "nights": nights - 1 if nights else None,
         "price_total": round(total), "price_original": round(orig) if orig else None,
-        "discount_label": label, "pets_allowed": None,
+        "discount_label": label, "pets_allowed": None, **({"price_exact": True} if exact else {}),
     }
+
+
+# --- exact 1 adult + 2 children price from the detail page -------------------------------------------------
+
+def occupancy_url(url, cfg):
+    """The offer's detail URL re-asked for the configured party (birth dates as DD.MM.YYYY, the site's format)."""
+    parts = urlsplit(url)
+    q = [(k, v) for k, v in parse_qsl(parts.query, keep_blank_values=True) if not k.startswith("participants[")]
+    q.append(("participants[0][adults]", str(cfg["adults"])))
+    for i, bd in enumerate(cfg["children_birthdates"]):
+        y, m, d = bd.split("-")
+        q.append((f"participants[0][children][{i}]", f"{d}.{m}.{y}"))
+    return urlunsplit(parts._replace(query=urlencode(q)))
+
+
+def rsc_payload(html):
+    """Concatenated React Server Components payload: every self.__next_f.push([1,"…"]) string, decoded."""
+    out = []
+    for m in re.finditer(r'self\.__next_f\.push\(\[1,("(?:[^"\\]|\\.)*")\]\)', html):
+        try:
+            out.append(json.loads(m[1]))
+        except ValueError:
+            pass
+    return "".join(out)
+
+
+_PARTY_RE = re.compile(r'"participants":(\{[^{}]*\}),"totalPrice":(\d+(?:\.\d+)?)')
+_RANGE_RE = re.compile(r'"range":\{"start":"(\d{4}-\d\d-\d\d)","end":"(\d{4}-\d\d-\d\d)"\}')
+
+
+def parse_detail(html):
+    """Priced variants on a detail page: [{start, end, adults, children, birthdates, total}]."""
+    flight = rsc_payload(html)
+    out, seen = [], set()
+    for m in _PARTY_RE.finditer(flight):
+        rng = list(_RANGE_RE.finditer(flight, max(0, m.start() - 2000), m.start()))
+        try:
+            p = json.loads(m[1])
+        except ValueError:
+            continue
+        v = {"start": rng[-1][1] if rng else None, "end": rng[-1][2] if rng else None,
+             "adults": p.get("adultNumber"), "children": p.get("childrenNumber"),
+             "birthdates": p.get("childrenBirthDates") or [], "total": float(m[2])}
+        key = tuple((k, str(x)) for k, x in v.items())
+        if key not in seen:
+            seen.add(key)
+            out.append(v)
+    return out
+
+
+def _age(born, on):
+    return on.year - born.year - ((on.month, on.day) < (born.month, born.day))
+
+
+def pick_exact(variants, offer, cfg):
+    """Total for the offer's own term and exactly the configured party, else None (never a guess)."""
+    d1 = date.fromisoformat(offer["date_from"])
+    for v in variants:
+        if (v["start"], v["end"]) != (offer["date_from"], offer["date_to"]):
+            continue
+        if v["adults"] != cfg["adults"] or v["children"] != len(cfg["children_ages"]):
+            continue
+        try:
+            ages = sorted(_age(date.fromisoformat(b[:10]), d1) for b in v["birthdates"])
+        except ValueError:
+            continue
+        if ages == sorted(cfg["children_ages"]) and v["total"] > 0:
+            return round(v["total"])
+    return None
+
+
+def exact_price(offer, cfg):
+    """run.py hook: {'price_total': …} for 1 adult + 2 children, or None when the page doesn't confirm it."""
+    url = occupancy_url(offer["url"], cfg)
+    variants = parse_detail(get(url))
+    total = pick_exact(variants, offer, cfg)
+    if total is None:
+        print(f"[cedok] exact {offer['hotel']} {offer['date_from']}: no matching variant in {variants[:3]}")
+        return None
+    return {"price_total": total, "price_original": None, "url": url,
+            "discount_label": APPROX_NOTE.sub("", offer.get("discount_label") or "").strip() or None}
 
 
 def search(cfg):

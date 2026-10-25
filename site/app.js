@@ -181,6 +181,7 @@
       date_from: str(o.date_from), date_to: str(o.date_to), nights: num(o.nights),
       price_total: price, price_original: num(o.price_original),
       discount_pct: num(o.discount_pct), discount_label: o.discount_label ? str(o.discount_label) : null,
+      price_exact: o.price_exact === true,
       pets_allowed: o.pets_allowed === true ? true : o.pets_allowed === false ? false : null,
       image: safeUrl(o.image), url: safeUrl(o.url),
       score: num(o.score),
@@ -499,7 +500,15 @@
     if (dp > 0 || o.discount_label) badge.textContent = (dp > 0 ? "−" + dp + " %" : "") + (o.discount_label ? (dp > 0 ? " · " : "") + o.discount_label : "");
 
     node.querySelector(".price-total").textContent = eur(o.price_total);
-    node.querySelector(".price-total").setAttribute("title", "Cena za 1 dospelého + 2 deti");
+    node.querySelector(".price-total").setAttribute("title", o.price_exact
+      ? "Presná cena za 1 dospelého + 2 deti (10 a 12 r.) podľa cestovky"
+      : "Cena za 1 dospelého + 2 deti" + (o.source === "satur" || o.source === "cedok" || o.source === "tiptravel"
+        ? " – orientačne: cena za osobu pri 2 dospelých × 3" : ""));
+    if (o.price_exact) {
+      var ex = el("span", "exact-badge", "presná cena 1+2");
+      ex.title = "Cestovka vypočítala cenu priamo pre 1 dospelého + 2 deti";
+      node.querySelector(".price-row").appendChild(ex);
+    }
 
     var trend = node.querySelector(".price-trend");
     var pc = o.price_change;
