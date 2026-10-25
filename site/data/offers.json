@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-25T09:15:50Z",
+ "generated_at": "2026-10-25T09:52:17Z",
  "criteria": {
   "adults": 1,
   "children_ages": [
@@ -62,7 +62,7 @@
    "status": "ok",
    "count": 169,
    "error": null,
-   "duration_s": 192.2
+   "duration_s": 211.9
   },
   {
    "id": "cedok",
@@ -71,7 +71,7 @@
    "status": "ok",
    "count": 640,
    "error": null,
-   "duration_s": 118.7
+   "duration_s": 135.2
   },
   {
    "id": "tiptravel",
@@ -80,7 +80,7 @@
    "status": "empty",
    "count": 0,
    "error": null,
-   "duration_s": 4.1
+   "duration_s": 4.2
   },
   {
    "id": "kartago",
@@ -23696,7 +23696,7 @@
      3606
     ]
    ],
-   "price_change": 75
+   "price_change": 0
   },
   {
    "hotel": "Radisson Beach Resort",
