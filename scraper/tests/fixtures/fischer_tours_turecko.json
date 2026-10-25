@@ -1,0 +1,1013 @@
+{
+ "settings": {
+  "resultType": "tours"
+ },
+ "toursCount": 232,
+ "tours": [
+  {
+   "detailUrl": "/turecko/turecka-riviera/side-kumkoy/kemer/dosinia-luxury-resort?DS=256&GIATA=647647&D=63260%7C63288%7C63448%7C64152%7C64153%7C64154%7C64157%7C211801%7C211814%7C212113&HID=8486&MT=5&MMT=5&DI=AU&RCS=DR01&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-30&DD=2027-08-23&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=AYT90046&DPR=FISCHER+SK+ATCOM&PC=11278293%2F2%2F2791%2F7&IFC=210522222%2F654880&OFC=210520673%2F654879",
+   "termsHash": "hotelDetailFilterStart",
+   "filter": "DS=256&GIATA=647647&D=63260%7C63288%7C63448%7C64152%7C64153%7C64154%7C64157%7C211801%7C211814%7C212113&HID=8486&MT=5&MMT=5&DI=AU&RCS=DR01&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-30&DD=2027-08-23&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=AYT90046&DPR=FISCHER+SK+ATCOM&PC=11278293%2F2%2F2791%2F7&IFC=210522222%2F654880&OFC=210520673%2F654879",
+   "priceIsCurrent": false,
+   "hotel": {
+    "id": 8486,
+    "giata": "647647",
+    "name": "Dosinia Luxury Resort",
+    "images": [
+     {
+      "smallImagePath": "https://img.fischer.sk/hotels/150/turecko/turecka-riviera/beldibi/dosinia-luxury-resort/0-hotel-1.jpg",
+      "previewImagePath": "https://img.fischer.sk/hotels/720/turecko/turecka-riviera/beldibi/dosinia-luxury-resort/0-hotel-1.jpg",
+      "previewLargeImagePath": null,
+      "maxSizeImagePath": "https://img.fischer.sk/hotels/turecko/turecka-riviera/beldibi/dosinia-luxury-resort/0-hotel-1.jpg",
+      "alternativeText": "Hotel",
+      "description": null,
+      "alignment": null,
+      "position": 0,
+      "isAi": false
+     }
+    ],
+    "breadcrumbs": {
+     "country": "Turecko",
+     "countryDetail": "/turecko",
+     "destination": "Turecká riviéra",
+     "destinationDetail": "/turecko/turecka-riviera",
+     "area": "Beldibi",
+     "areaDetail": "/turecko/turecka-riviera/beldibi"
+    },
+    "review": null,
+    "starsCount": 5.0,
+    "mapMarkerId": "256_647647_8486",
+    "badgeId": 549,
+    "rating": {
+     "starCount": 5.0,
+     "isStar": true
+    },
+    "countryId": "TR",
+    "trustYou": {
+     "score": 4.5,
+     "reviewsCount": 72,
+     "scoreDescription": "Excelentné"
+    },
+    "isPlatinum": false
+   },
+   "dataSource": 256,
+   "tour": {
+    "anotherTermsCount": 0,
+    "daysCount": 8,
+    "nightsCount": 7,
+    "transportType": 1,
+    "rooms": [
+     {
+      "meal": "All Inclusive Ultra",
+      "name": "Dvojlôžková izba",
+      "adults": [
+       {
+        "refId": 1,
+        "price": 1024.0,
+        "priceAlternative": 0.0,
+        "age": 30
+       }
+      ],
+      "children": [
+       {
+        "refId": 3,
+        "price": 1024.0,
+        "priceAlternative": 0.0,
+        "age": 12
+       },
+       {
+        "refId": 2,
+        "price": 369.0,
+        "priceAlternative": 0.0,
+        "age": 10
+       }
+      ],
+      "discount": {
+       "amount": 1020.0,
+       "name": "Zľava"
+      },
+      "priceDetail": {
+       "price": 2417.0,
+       "pricePerPerson": 1024.0,
+       "items": [],
+       "loyaltyDiscountDescription": null,
+       "loyaltyDiscountItems": []
+      },
+      "price": 2417.0,
+      "mealId": 5
+     }
+    ],
+    "price": {
+     "deposit": 0.0,
+     "discount": 1020.0,
+     "adultPrice": 1024.0,
+     "total": 2417.0,
+     "currencyCode": "EUR",
+     "lowestPrice": null,
+     "discountPill": ""
+    },
+    "priceAlternative": {
+     "deposit": 0.0,
+     "discount": 0.0,
+     "adultPrice": 0.0,
+     "total": 0.0,
+     "currencyCode": "EUR",
+     "lowestPrice": null,
+     "discountPill": null
+    },
+    "date": {
+     "from": "2027-08-23",
+     "to": "2027-08-30"
+    },
+    "flight": {
+     "departure": {
+      "segments": [
+       {
+        "airport": {
+         "from": "Bratislava",
+         "fromId": 483,
+         "fromIATA": "BTS",
+         "to": "Antalya",
+         "toIATA": "AYT",
+         "toId": 0
+        },
+        "date": {
+         "from": "2027-08-23",
+         "to": "2027-08-23"
+        },
+        "airlineName": "Smartwings Slovensko",
+        "flightNumber": "6D6142",
+        "airlineCode": "6D",
+        "note": null,
+        "flightCode": "",
+        "flightName": null,
+        "flightType": ""
+       }
+      ],
+      "duration": 0,
+      "bookingClass": null
+     },
+     "arrival": {
+      "segments": [
+       {
+        "airport": {
+         "from": "Antalya",
+         "fromId": 238,
+         "fromIATA": "AYT",
+         "to": "Bratislava",
+         "toIATA": "BTS",
+         "toId": 0
+        },
+        "date": {
+         "from": "2027-08-30",
+         "to": "2027-08-30"
+        },
+        "airlineName": "Smartwings Slovensko",
+        "flightNumber": "6D6143",
+        "airlineCode": "6D",
+        "note": null,
+        "flightCode": "",
+        "flightName": null,
+        "flightType": ""
+       }
+      ],
+      "duration": 0,
+      "bookingClass": null
+     },
+     "note": {
+      "text": "",
+      "transferNote": "",
+      "luggageNotes": [
+       {
+        "luggageInfo": "Batožina v cene / os.: 1× odbavená (23 kg) a 1× príručná (55×40×23 cm)",
+        "showMoreLinkURL": "",
+        "showMoreLinkText": "Zobraziť viac"
+       }
+      ]
+     }
+    },
+    "online": true,
+    "tags": [
+     "AF",
+     "SF"
+    ],
+    "tourNumber": "DR01",
+    "tourOperator": "DERTOUR CZ a. s. (majiteľ obchodnej značky FISCHER)",
+    "tourNote": "",
+    "customRow": null,
+    "isOnline": true,
+    "isFirstMinute": false,
+    "isLastMinute": false,
+    "isTopTerm": false,
+    "isRelease": false,
+    "nevdamaTourDetail": "",
+    "skipassIncluded": 0
+   },
+   "brandLogo": 1
+  },
+  {
+   "detailUrl": "/turecko/turecka-riviera/side-kumkoy/alara/lycus-beach?DS=256&GIATA=95001&D=63260%7C63288%7C63448%7C64152%7C64153%7C64154%7C64157%7C211801%7C211814%7C212113&HID=145660&MT=5&MMT=5&DI=AI&RCS=DR01&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-30&DD=2027-08-23&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=AYT19010&DPR=FISCHER+SK+ATCOM&PC=14761778%2F2%2F2791%2F7&IFC=210522222%2F654880&OFC=210520673%2F654879",
+   "termsHash": "hotelDetailFilterStart",
+   "filter": "DS=256&GIATA=95001&D=63260%7C63288%7C63448%7C64152%7C64153%7C64154%7C64157%7C211801%7C211814%7C212113&HID=145660&MT=5&MMT=5&DI=AI&RCS=DR01&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-30&DD=2027-08-23&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=AYT19010&DPR=FISCHER+SK+ATCOM&PC=14761778%2F2%2F2791%2F7&IFC=210522222%2F654880&OFC=210520673%2F654879",
+   "priceIsCurrent": false,
+   "hotel": {
+    "id": 145660,
+    "giata": "95001",
+    "name": "Sentido Lycus Beach",
+    "images": [
+     {
+      "smallImagePath": "https://img.fischer.sk/hotels/150/turecko/turecka-riviera/okurcular/sentido-lycus-beach/1357/0-hotel-180.jpg",
+      "previewImagePath": "https://img.fischer.sk/hotels/720/turecko/turecka-riviera/okurcular/sentido-lycus-beach/1357/0-hotel-180.jpg",
+      "previewLargeImagePath": null,
+      "maxSizeImagePath": "https://img.fischer.sk/hotels/turecko/turecka-riviera/okurcular/sentido-lycus-beach/1357/0-hotel-180.jpg",
+      "alternativeText": "Hotel Sentido Lycus Beach dovolenka",
+      "description": null,
+      "alignment": null,
+      "position": 0,
+      "isAi": false
+     }
+    ],
+    "breadcrumbs": {
+     "country": "Turecko",
+     "countryDetail": "/turecko",
+     "destination": "Turecká riviéra",
+     "destinationDetail": "/turecko/turecka-riviera",
+     "area": "Okurcalar",
+     "areaDetail": "/turecko/turecka-riviera/okurcular"
+    },
+    "review": null,
+    "starsCount": 5.0,
+    "mapMarkerId": "256_95001_145660",
+    "badgeId": 549,
+    "rating": {
+     "starCount": 5.0,
+     "isStar": true
+    },
+    "countryId": "TR",
+    "trustYou": {
+     "score": 4.3,
+     "reviewsCount": 986,
+     "scoreDescription": "Veľmi dobré"
+    },
+    "isPlatinum": false
+   },
+   "dataSource": 256,
+   "tour": {
+    "anotherTermsCount": 0,
+    "daysCount": 8,
+    "nightsCount": 7,
+    "transportType": 1,
+    "rooms": [
+     {
+      "meal": "All Inclusive",
+      "name": "Dvojlôžková izba",
+      "adults": [
+       {
+        "refId": 1,
+        "price": 972.0,
+        "priceAlternative": 0.0,
+        "age": 30
+       }
+      ],
+      "children": [
+       {
+        "refId": 3,
+        "price": 972.0,
+        "priceAlternative": 0.0,
+        "age": 12
+       },
+       {
+        "refId": 2,
+        "price": 388.0,
+        "priceAlternative": 0.0,
+        "age": 10
+       }
+      ],
+      "discount": {
+       "amount": 912.0,
+       "name": "Zľava"
+      },
+      "priceDetail": {
+       "price": 2332.0,
+       "pricePerPerson": 972.0,
+       "items": [],
+       "loyaltyDiscountDescription": null,
+       "loyaltyDiscountItems": []
+      },
+      "price": 2332.0,
+      "mealId": 5
+     }
+    ],
+    "price": {
+     "deposit": 0.0,
+     "discount": 912.0,
+     "adultPrice": 972.0,
+     "total": 2332.0,
+     "currencyCode": "EUR",
+     "lowestPrice": null,
+     "discountPill": ""
+    },
+    "priceAlternative": {
+     "deposit": 0.0,
+     "discount": 0.0,
+     "adultPrice": 0.0,
+     "total": 0.0,
+     "currencyCode": "EUR",
+     "lowestPrice": null,
+     "discountPill": null
+    },
+    "date": {
+     "from": "2027-08-23",
+     "to": "2027-08-30"
+    },
+    "flight": {
+     "departure": {
+      "segments": [
+       {
+        "airport": {
+         "from": "Bratislava",
+         "fromId": 483,
+         "fromIATA": "BTS",
+         "to": "Antalya",
+         "toIATA": "AYT",
+         "toId": 0
+        },
+        "date": {
+         "from": "2027-08-23",
+         "to": "2027-08-23"
+        },
+        "airlineName": "Smartwings Slovensko",
+        "flightNumber": "6D6142",
+        "airlineCode": "6D",
+        "note": null,
+        "flightCode": "",
+        "flightName": null,
+        "flightType": ""
+       }
+      ],
+      "duration": 0,
+      "bookingClass": null
+     },
+     "arrival": {
+      "segments": [
+       {
+        "airport": {
+         "from": "Antalya",
+         "fromId": 238,
+         "fromIATA": "AYT",
+         "to": "Bratislava",
+         "toIATA": "BTS",
+         "toId": 0
+        },
+        "date": {
+         "from": "2027-08-30",
+         "to": "2027-08-30"
+        },
+        "airlineName": "Smartwings Slovensko",
+        "flightNumber": "6D6143",
+        "airlineCode": "6D",
+        "note": null,
+        "flightCode": "",
+        "flightName": null,
+        "flightType": ""
+       }
+      ],
+      "duration": 0,
+      "bookingClass": null
+     },
+     "note": {
+      "text": "",
+      "transferNote": "",
+      "luggageNotes": [
+       {
+        "luggageInfo": "Batožina v cene / os.: 1× odbavená (23 kg) a 1× príručná (55×40×23 cm)",
+        "showMoreLinkURL": "",
+        "showMoreLinkText": "Zobraziť viac"
+       }
+      ]
+     }
+    },
+    "online": true,
+    "tags": [
+     "AF",
+     "SF"
+    ],
+    "tourNumber": "DR01",
+    "tourOperator": "DERTOUR CZ a. s. (majiteľ obchodnej značky FISCHER)",
+    "tourNote": "",
+    "customRow": null,
+    "isOnline": true,
+    "isFirstMinute": false,
+    "isLastMinute": false,
+    "isTopTerm": false,
+    "isRelease": false,
+    "nevdamaTourDetail": "",
+    "skipassIncluded": 0
+   },
+   "brandLogo": 1
+  },
+  {
+   "detailUrl": "/turecko/egejska-riviera-kusadasi/ozdere/notion-kesre-beach-a-spa?DS=256&GIATA=412213&D=63260%7C63288%7C63448%7C64152%7C64153%7C64154%7C64157%7C211801%7C211814%7C212113&HID=71&MT=5&MMT=5&DI=AI&RCS=DR01&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-07-08&DD=2027-07-01&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=ADB90008&DPR=FISCHER+SK+ATCOM&PC=48101031%2F2%2F2738%2F7&IFC=208045799%2F644760&OFC=208044249%2F644759",
+   "termsHash": "hotelDetailFilterStart",
+   "filter": "DS=256&GIATA=412213&D=63260%7C63288%7C63448%7C64152%7C64153%7C64154%7C64157%7C211801%7C211814%7C212113&HID=71&MT=5&MMT=5&DI=AI&RCS=DR01&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-07-08&DD=2027-07-01&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=ADB90008&DPR=FISCHER+SK+ATCOM&PC=48101031%2F2%2F2738%2F7&IFC=208045799%2F644760&OFC=208044249%2F644759",
+   "priceIsCurrent": false,
+   "hotel": {
+    "id": 71,
+    "giata": "412213",
+    "name": "Notion Kesre Beach & SPA",
+    "images": [
+     {
+      "smallImagePath": "https://img.fischer.sk/hotels/150/turecko/egejska-riviera-kusadasi/ozdere/notion-kesre-beach-a-spa/168492_ergb.jpg",
+      "previewImagePath": "https://img.fischer.sk/hotels/720/turecko/egejska-riviera-kusadasi/ozdere/notion-kesre-beach-a-spa/168492_ergb.jpg",
+      "previewLargeImagePath": null,
+      "maxSizeImagePath": "https://img.fischer.sk/hotels/turecko/egejska-riviera-kusadasi/ozdere/notion-kesre-beach-a-spa/168492_ergb.jpg",
+      "alternativeText": "Areál",
+      "description": null,
+      "alignment": null,
+      "position": 0,
+      "isAi": false
+     }
+    ],
+    "breadcrumbs": {
+     "country": "Turecko",
+     "countryDetail": "/turecko",
+     "destination": "Egejská riviéra - Kusadasi",
+     "destinationDetail": "/turecko/egejska-riviera-kusadasi",
+     "area": "Özdere",
+     "areaDetail": "/turecko/egejska-riviera-kusadasi/ozdere"
+    },
+    "review": null,
+    "starsCount": 4.0,
+    "mapMarkerId": "256_412213_71",
+    "badgeId": 0,
+    "rating": {
+     "starCount": 4.0,
+     "isStar": true
+    },
+    "countryId": "TR",
+    "trustYou": {
+     "score": 4.8,
+     "reviewsCount": 922,
+     "scoreDescription": "Excelentné"
+    },
+    "isPlatinum": false
+   },
+   "dataSource": 256,
+   "tour": {
+    "anotherTermsCount": 0,
+    "daysCount": 8,
+    "nightsCount": 7,
+    "transportType": 1,
+    "rooms": [
+     {
+      "meal": "All Inclusive",
+      "name": "Dvojlôžková izba , Lateral Sea View ",
+      "adults": [
+       {
+        "refId": 1,
+        "price": 1075.0,
+        "priceAlternative": 0.0,
+        "age": 30
+       }
+      ],
+      "children": [
+       {
+        "refId": 3,
+        "price": 1075.0,
+        "priceAlternative": 0.0,
+        "age": 12
+       },
+       {
+        "refId": 2,
+        "price": 359.0,
+        "priceAlternative": 0.0,
+        "age": 10
+       }
+      ],
+      "discount": {
+       "amount": 1056.0,
+       "name": "Zľava"
+      },
+      "priceDetail": {
+       "price": 2509.0,
+       "pricePerPerson": 1075.0,
+       "items": [],
+       "loyaltyDiscountDescription": null,
+       "loyaltyDiscountItems": []
+      },
+      "price": 2509.0,
+      "mealId": 5
+     }
+    ],
+    "price": {
+     "deposit": 0.0,
+     "discount": 1056.0,
+     "adultPrice": 1075.0,
+     "total": 2509.0,
+     "currencyCode": "EUR",
+     "lowestPrice": null,
+     "discountPill": ""
+    },
+    "priceAlternative": {
+     "deposit": 0.0,
+     "discount": 0.0,
+     "adultPrice": 0.0,
+     "total": 0.0,
+     "currencyCode": "EUR",
+     "lowestPrice": null,
+     "discountPill": null
+    },
+    "date": {
+     "from": "2027-07-01",
+     "to": "2027-07-08"
+    },
+    "flight": {
+     "departure": {
+      "segments": [
+       {
+        "airport": {
+         "from": "Bratislava",
+         "fromId": 483,
+         "fromIATA": "BTS",
+         "to": "Izmir, Adnan Menderes",
+         "toIATA": "ADB",
+         "toId": 0
+        },
+        "date": {
+         "from": "2027-07-01",
+         "to": "2027-07-01"
+        },
+        "airlineName": "Smartwings Slovensko",
+        "flightNumber": "6D6136",
+        "airlineCode": "6D",
+        "note": null,
+        "flightCode": "",
+        "flightName": "Boeing 737-800",
+        "flightType": ""
+       }
+      ],
+      "duration": 0,
+      "bookingClass": null
+     },
+     "arrival": {
+      "segments": [
+       {
+        "airport": {
+         "from": "Izmir, Adnan Menderes",
+         "fromId": 38,
+         "fromIATA": "ADB",
+         "to": "Bratislava",
+         "toIATA": "BTS",
+         "toId": 0
+        },
+        "date": {
+         "from": "2027-07-08",
+         "to": "2027-07-08"
+        },
+        "airlineName": "Smartwings Slovensko",
+        "flightNumber": "6D6137",
+        "airlineCode": "6D",
+        "note": null,
+        "flightCode": "",
+        "flightName": "Boeing 737-800",
+        "flightType": ""
+       }
+      ],
+      "duration": 0,
+      "bookingClass": null
+     },
+     "note": {
+      "text": "",
+      "transferNote": "",
+      "luggageNotes": [
+       {
+        "luggageInfo": "Batožina v cene / os.: 1× odbavená (23 kg) a 1× príručná (55×40×23 cm)",
+        "showMoreLinkURL": "",
+        "showMoreLinkText": "Zobraziť viac"
+       }
+      ]
+     }
+    },
+    "online": true,
+    "tags": [
+     "AF",
+     "SF"
+    ],
+    "tourNumber": "DR01",
+    "tourOperator": "DERTOUR CZ a. s. (majiteľ obchodnej značky FISCHER)",
+    "tourNote": "",
+    "customRow": null,
+    "isOnline": true,
+    "isFirstMinute": false,
+    "isLastMinute": false,
+    "isTopTerm": false,
+    "isRelease": false,
+    "nevdamaTourDetail": "",
+    "skipassIncluded": 0
+   },
+   "brandLogo": 1
+  },
+  {
+   "detailUrl": "/turecko/turecka-riviera/side-kumkoy/side-colakli/monachus?DS=65536&GIATA=17616&D=63260%7C63288%7C63448%7C64152%7C64153%7C64154%7C64157%7C211801%7C211814%7C212113&HID=8529&MT=5&MMT=5&DI=AI&RCS=DR01&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-30&DD=2027-08-23&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=AYT14071&DPR=KARTAGO-SK-ATCOM&PC=12156572%2F2%2F2791%2F7&IFC=210522222%2F654880&OFC=210520673%2F654879",
+   "termsHash": "hotelDetailFilterStart",
+   "filter": "DS=65536&GIATA=17616&D=63260%7C63288%7C63448%7C64152%7C64153%7C64154%7C64157%7C211801%7C211814%7C212113&HID=8529&MT=5&MMT=5&DI=AI&RCS=DR01&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-30&DD=2027-08-23&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=AYT14071&DPR=KARTAGO-SK-ATCOM&PC=12156572%2F2%2F2791%2F7&IFC=210522222%2F654880&OFC=210520673%2F654879",
+   "priceIsCurrent": false,
+   "hotel": {
+    "id": 8529,
+    "giata": "17616",
+    "name": "Monachus Hotel & Spa",
+    "images": [
+     {
+      "smallImagePath": "https://img.fischer.sk/hotels/150/turecko/turecka-riviera/colakli/monachus-hotel-a-spa/0-hotel.jpg",
+      "previewImagePath": "https://img.fischer.sk/hotels/720/turecko/turecka-riviera/colakli/monachus-hotel-a-spa/0-hotel.jpg",
+      "previewLargeImagePath": null,
+      "maxSizeImagePath": "https://img.fischer.sk/hotels/turecko/turecka-riviera/colakli/monachus-hotel-a-spa/0-hotel.jpg",
+      "alternativeText": "Hotel",
+      "description": null,
+      "alignment": null,
+      "position": 0,
+      "isAi": false
+     }
+    ],
+    "breadcrumbs": {
+     "country": "Turecko",
+     "countryDetail": "/turecko",
+     "destination": "Turecká riviéra",
+     "destinationDetail": "/turecko/turecka-riviera",
+     "area": "Colakli",
+     "areaDetail": "/turecko/turecka-riviera/colakli"
+    },
+    "review": null,
+    "starsCount": 4.0,
+    "mapMarkerId": "65536_17616_8529",
+    "badgeId": 549,
+    "rating": {
+     "starCount": 4.0,
+     "isStar": true
+    },
+    "countryId": "TR",
+    "trustYou": {
+     "score": 4.9,
+     "reviewsCount": 650,
+     "scoreDescription": "Excelentné"
+    },
+    "isPlatinum": false
+   },
+   "dataSource": 65536,
+   "tour": {
+    "anotherTermsCount": 0,
+    "daysCount": 8,
+    "nightsCount": 7,
+    "transportType": 1,
+    "rooms": [
+     {
+      "meal": "All Inclusive",
+      "name": "Dvojlôžková izba",
+      "adults": [
+       {
+        "refId": 1,
+        "price": 1047.0,
+        "priceAlternative": 0.0,
+        "age": 30
+       }
+      ],
+      "children": [
+       {
+        "refId": 3,
+        "price": 1047.0,
+        "priceAlternative": 0.0,
+        "age": 12
+       },
+       {
+        "refId": 2,
+        "price": 369.0,
+        "priceAlternative": 0.0,
+        "age": 10
+       }
+      ],
+      "discount": {
+       "amount": 716.0,
+       "name": "Zľava"
+      },
+      "priceDetail": {
+       "price": 2463.0,
+       "pricePerPerson": 1047.0,
+       "items": [],
+       "loyaltyDiscountDescription": null,
+       "loyaltyDiscountItems": []
+      },
+      "price": 2463.0,
+      "mealId": 5
+     }
+    ],
+    "price": {
+     "deposit": 0.0,
+     "discount": 716.0,
+     "adultPrice": 1047.0,
+     "total": 2463.0,
+     "currencyCode": "EUR",
+     "lowestPrice": null,
+     "discountPill": ""
+    },
+    "priceAlternative": {
+     "deposit": 0.0,
+     "discount": 0.0,
+     "adultPrice": 0.0,
+     "total": 0.0,
+     "currencyCode": "EUR",
+     "lowestPrice": null,
+     "discountPill": null
+    },
+    "date": {
+     "from": "2027-08-23",
+     "to": "2027-08-30"
+    },
+    "flight": {
+     "departure": {
+      "segments": [
+       {
+        "airport": {
+         "from": "Bratislava",
+         "fromId": 483,
+         "fromIATA": "BTS",
+         "to": "Antalya",
+         "toIATA": "AYT",
+         "toId": 0
+        },
+        "date": {
+         "from": "2027-08-23",
+         "to": "2027-08-23"
+        },
+        "airlineName": "Smartwings Slovensko",
+        "flightNumber": "6D6142",
+        "airlineCode": "6D",
+        "note": null,
+        "flightCode": "",
+        "flightName": null,
+        "flightType": ""
+       }
+      ],
+      "duration": 0,
+      "bookingClass": null
+     },
+     "arrival": {
+      "segments": [
+       {
+        "airport": {
+         "from": "Antalya",
+         "fromId": 238,
+         "fromIATA": "AYT",
+         "to": "Bratislava",
+         "toIATA": "BTS",
+         "toId": 0
+        },
+        "date": {
+         "from": "2027-08-30",
+         "to": "2027-08-30"
+        },
+        "airlineName": "Smartwings Slovensko",
+        "flightNumber": "6D6143",
+        "airlineCode": "6D",
+        "note": null,
+        "flightCode": "",
+        "flightName": null,
+        "flightType": ""
+       }
+      ],
+      "duration": 0,
+      "bookingClass": null
+     },
+     "note": {
+      "text": "",
+      "transferNote": "",
+      "luggageNotes": [
+       {
+        "luggageInfo": "Batožina v cene / os.: 1× odbavená (23 kg) a 1× príručná (55×40×23 cm)",
+        "showMoreLinkURL": "",
+        "showMoreLinkText": "Zobraziť viac"
+       }
+      ]
+     }
+    },
+    "online": true,
+    "tags": [
+     "AF",
+     "SF"
+    ],
+    "tourNumber": "DR01",
+    "tourOperator": "DERTOUR SK a. s. (majiteľ obchodnej značky KARTAGO tours)",
+    "tourNote": "",
+    "customRow": null,
+    "isOnline": true,
+    "isFirstMinute": false,
+    "isLastMinute": false,
+    "isTopTerm": false,
+    "isRelease": false,
+    "nevdamaTourDetail": "",
+    "skipassIncluded": 0
+   },
+   "brandLogo": 65536
+  },
+  {
+   "detailUrl": "/turecko/turecka-riviera/goynuk/kilikya-palace?DS=65536&GIATA=15437&D=63260%7C63288%7C63448%7C64152%7C64153%7C64154%7C64157%7C211801%7C211814%7C212113&HID=8517&MT=5&MMT=5&DI=AU&RCS=DR02&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-30&DD=2027-08-23&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=AYT90076&DPR=KARTAGO-SK-ATCOM&PC=11588534%2F2%2F2791%2F7&IFC=210522222%2F654880&OFC=210520673%2F654879",
+   "termsHash": "hotelDetailFilterStart",
+   "filter": "DS=65536&GIATA=15437&D=63260%7C63288%7C63448%7C64152%7C64153%7C64154%7C64157%7C211801%7C211814%7C212113&HID=8517&MT=5&MMT=5&DI=AU&RCS=DR02&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-30&DD=2027-08-23&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=AYT90076&DPR=KARTAGO-SK-ATCOM&PC=11588534%2F2%2F2791%2F7&IFC=210522222%2F654880&OFC=210520673%2F654879",
+   "priceIsCurrent": false,
+   "hotel": {
+    "id": 8517,
+    "giata": "15437",
+    "name": "Kilikya Palace",
+    "images": [
+     {
+      "smallImagePath": "https://img.fischer.sk/hotels/150/turecko/turecka-riviera/goynuk/kilikya-palace-goynuk/0-hotel.jpg",
+      "previewImagePath": "https://img.fischer.sk/hotels/720/turecko/turecka-riviera/goynuk/kilikya-palace-goynuk/0-hotel.jpg",
+      "previewLargeImagePath": null,
+      "maxSizeImagePath": "https://img.fischer.sk/hotels/turecko/turecka-riviera/goynuk/kilikya-palace-goynuk/0-hotel.jpg",
+      "alternativeText": "Hotel",
+      "description": null,
+      "alignment": null,
+      "position": 0,
+      "isAi": false
+     }
+    ],
+    "breadcrumbs": {
+     "country": "Turecko",
+     "countryDetail": "/turecko",
+     "destination": "Turecká riviéra",
+     "destinationDetail": "/turecko/turecka-riviera",
+     "area": "Göynük",
+     "areaDetail": "/turecko/turecka-riviera/goynuk"
+    },
+    "review": null,
+    "starsCount": 5.0,
+    "mapMarkerId": "65536_15437_8517",
+    "badgeId": 549,
+    "rating": {
+     "starCount": 5.0,
+     "isStar": true
+    },
+    "countryId": "TR",
+    "trustYou": {
+     "score": 4.9,
+     "reviewsCount": 3048,
+     "scoreDescription": "Excelentné"
+    },
+    "isPlatinum": false
+   },
+   "dataSource": 65536,
+   "tour": {
+    "anotherTermsCount": 0,
+    "daysCount": 8,
+    "nightsCount": 7,
+    "transportType": 1,
+    "rooms": [
+     {
+      "meal": "All Inclusive Ultra",
+      "name": "Dvojlôžková izba , Promo",
+      "adults": [
+       {
+        "refId": 1,
+        "price": 1227.0,
+        "priceAlternative": 0.0,
+        "age": 30
+       }
+      ],
+      "children": [
+       {
+        "refId": 3,
+        "price": 1227.0,
+        "priceAlternative": 0.0,
+        "age": 12
+       },
+       {
+        "refId": 2,
+        "price": 369.0,
+        "priceAlternative": 0.0,
+        "age": 10
+       }
+      ],
+      "discount": {
+       "amount": 1120.0,
+       "name": "Zľava"
+      },
+      "priceDetail": {
+       "price": 2823.0,
+       "pricePerPerson": 1227.0,
+       "items": [],
+       "loyaltyDiscountDescription": null,
+       "loyaltyDiscountItems": []
+      },
+      "price": 2823.0,
+      "mealId": 5
+     }
+    ],
+    "price": {
+     "deposit": 0.0,
+     "discount": 1120.0,
+     "adultPrice": 1227.0,
+     "total": 2823.0,
+     "currencyCode": "EUR",
+     "lowestPrice": null,
+     "discountPill": ""
+    },
+    "priceAlternative": {
+     "deposit": 0.0,
+     "discount": 0.0,
+     "adultPrice": 0.0,
+     "total": 0.0,
+     "currencyCode": "EUR",
+     "lowestPrice": null,
+     "discountPill": null
+    },
+    "date": {
+     "from": "2027-08-23",
+     "to": "2027-08-30"
+    },
+    "flight": {
+     "departure": {
+      "segments": [
+       {
+        "airport": {
+         "from": "Bratislava",
+         "fromId": 483,
+         "fromIATA": "BTS",
+         "to": "Antalya",
+         "toIATA": "AYT",
+         "toId": 0
+        },
+        "date": {
+         "from": "2027-08-23",
+         "to": "2027-08-23"
+        },
+        "airlineName": "Smartwings Slovensko",
+        "flightNumber": "6D6142",
+        "airlineCode": "6D",
+        "note": null,
+        "flightCode": "",
+        "flightName": null,
+        "flightType": ""
+       }
+      ],
+      "duration": 0,
+      "bookingClass": null
+     },
+     "arrival": {
+      "segments": [
+       {
+        "airport": {
+         "from": "Antalya",
+         "fromId": 238,
+         "fromIATA": "AYT",
+         "to": "Bratislava",
+         "toIATA": "BTS",
+         "toId": 0
+        },
+        "date": {
+         "from": "2027-08-30",
+         "to": "2027-08-30"
+        },
+        "airlineName": "Smartwings Slovensko",
+        "flightNumber": "6D6143",
+        "airlineCode": "6D",
+        "note": null,
+        "flightCode": "",
+        "flightName": null,
+        "flightType": ""
+       }
+      ],
+      "duration": 0,
+      "bookingClass": null
+     },
+     "note": {
+      "text": "",
+      "transferNote": "",
+      "luggageNotes": [
+       {
+        "luggageInfo": "Batožina v cene / os.: 1× odbavená (23 kg) a 1× príručná (55×40×23 cm)",
+        "showMoreLinkURL": "",
+        "showMoreLinkText": "Zobraziť viac"
+       }
+      ]
+     }
+    },
+    "online": true,
+    "tags": [
+     "AF",
+     "SF"
+    ],
+    "tourNumber": "DR02",
+    "tourOperator": "DERTOUR SK a. s. (majiteľ obchodnej značky KARTAGO tours)",
+    "tourNote": "",
+    "customRow": null,
+    "isOnline": true,
+    "isFirstMinute": false,
+    "isLastMinute": false,
+    "isTopTerm": false,
+    "isRelease": false,
+    "nevdamaTourDetail": "",
+    "skipassIncluded": 0
+   },
+   "brandLogo": 65536
+  }
+ ]
+}
