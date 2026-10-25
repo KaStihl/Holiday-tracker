@@ -1,6 +1,6 @@
 # Scrapes travel agencies twice a day, rebuilds the single-file dovolenka.html (open it locally, no hosting),
-# commits it with site/data/*.json and sends an e-mail digest when something changed
-# (new AI offers within budget, price drops).
+# commits it with site/data/*.json and once a week (Monday morning) sends an e-mail digest:
+# top offers now + new AI offers within budget and price drops since the previous digest.
 #
 # Why twice a day: first-minute prices move at most a few times a day; more runs would only add load
 # on the agencies' sites. 04:17 and 16:17 UTC = ~06:17 / 18:17 Bratislava in summer, 05:17 / 17:17 in winter.
@@ -17,7 +17,7 @@ on:
   workflow_dispatch:
     inputs:
       full_digest:
-        description: "Poslať kompletný prehľad (nie len zmeny)"
+        description: "Poslať týždenný prehľad hneď (nie až v pondelok)"
         type: boolean
         default: false
   push:
@@ -54,32 +54,30 @@ jobs:
 
       - name: Scrape travel agencies
         run: |
-          cp site/data/offers.json "$RUNNER_TEMP/prev.json" || echo '{}' > "$RUNNER_TEMP/prev.json"
           python scraper/run.py
           python scraper/build_html.py
 
-      - name: Build e-mail digest
+      - name: Build weekly e-mail digest
         id: digest
-        env:
-          GH_TOKEN: ${{ github.token }}
         run: |
-          # First digest ever (no "dovolenka" issue yet) or a manual full run: summary instead of changes.
-          prev="$RUNNER_TEMP/prev.json"
-          if [ "${{ inputs.full_digest }}" = "true" ] || [ -z "$(gh issue list --label dovolenka --state all --limit 1 --json number -q '.[].number' 2>/dev/null)" ]; then
-            prev=/dev/null
-          fi
-          python scraper/notify.py "$prev" site/data/offers.json "$RUNNER_TEMP/digest.md"
-          if [ -s "$RUNNER_TEMP/digest.md" ]; then
+          # Weekly: the first run on a Monday (Bratislava time) whose snapshot is older than today,
+          # so the evening run doesn't send a second one. GitHub may start scheduled runs hours late.
+          today=$(TZ=Europe/Bratislava date +%F)
+          last=$(python -c "import json;print((json.load(open('site/data/digest_snapshot.json')).get('sent') or '')[:10])" 2>/dev/null || true)
+          if [ "${{ inputs.full_digest }}" = "true" ] || { [ "$(TZ=Europe/Bratislava date +%u)" = "1" ] && [ "$last" != "$today" ]; }; then
+            python scraper/notify.py site/data/digest_snapshot.json site/data/offers.json "$RUNNER_TEMP/digest.md" "$today"
             echo "title=$(head -n1 "$RUNNER_TEMP/digest.md")" >> "$GITHUB_OUTPUT"
             tail -n +2 "$RUNNER_TEMP/digest.md" > "$RUNNER_TEMP/body.md"
             echo "send=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "no digest today (weekly, Monday)"
           fi
 
       - name: Commit refreshed data
         run: |
           git config user.name "dovolenka-bot"
           git config user.email "dovolenka-bot@users.noreply.github.com"
-          git add site/data/offers.json site/data/history.json dovolenka.html
+          git add site/data/offers.json site/data/history.json site/data/digest_snapshot.json dovolenka.html
           if git diff --cached --quiet; then echo "no changes"; exit 0; fi
           git commit -m "Refresh offers $(date -u +%Y-%m-%dT%H:%MZ)"
           # -X theirs: if an overlapping run pushed data meanwhile, keep this (newer) run's generated files

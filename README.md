@@ -26,15 +26,16 @@ budget ~3 000 €, preferované All Inclusive.
 Ceny zo Satur, Čedok a TIP sú **orientačné** (cena za osobu pri 2 dospelých × 3) – vždy overte u cestovky. Výnimka: pri ~35 najlepších AI/UAI ponukách Čedoku tracker zisťuje z detailu ponuky **presnú cenu pre 1 dospelého + 2 deti** (odznak „presná cena 1+2“, v e-maile ✓, v dátach `price_exact: true` a pôvodný odhad v `price_approx`).
 
 ## E-maily
-Po každom behu, keď pribudne nová AI ponuka do budgetu alebo niečo zlacnie o ≥ 50 €, workflow vytvorí
-**GitHub issue** so štítkom `dovolenka` – GitHub ho pošle e-mailom vlastníkovi repozitára
+**Raz týždenne, v pondelok ráno** príde súhrn: top 10 ponúk All Inclusive do budgetu, nové ponuky a
+zlacnenia o ≥ 50 € od minulého súhrnu. Workflow ho vytvorí ako **GitHub issue** so štítkom `dovolenka`
+(starší sa zatvorí) – GitHub ho pošle e-mailom vlastníkovi repozitára
 (Watch → All activity, a e-mailové notifikácie zapnuté v GitHub Settings → Notifications).
 
 Voliteľne aj priamy e-mail cez SMTP: v Settings → Secrets and variables → Actions pridajte
 `MAIL_USERNAME` (napr. Gmail adresa), `MAIL_PASSWORD` (Gmail app password) a voliteľne `MAIL_TO`.
 E-mail má `dovolenka.html` v prílohe.
 
-Ručne: Actions → Refresh → Run workflow (zaškrtnite „Poslať kompletný prehľad“).
+Ručne hneď: Actions → Refresh → Run workflow (zaškrtnite „Poslať týždenný prehľad hneď“).
 
 ## Lokálne
 ```bash

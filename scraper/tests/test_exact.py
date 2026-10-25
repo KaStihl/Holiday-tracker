@@ -112,9 +112,10 @@ def _n(id, price, exact=False):
 
 def test_digest_ignores_switch_to_exact_and_says_which_are_exact():
     prev = {"offers": [_n("a", 2600), _n("b", 2600)]}
-    assert notify.digest(prev, {"offers": [_n("a", 2100, exact=True), _n("b", 2600)]}, 3000) is None
-    title, body = notify.digest({"offers": [_n("x", 1)]}, {"offers": [_n("a", 2100, exact=True), _n("b", 2600)]}, 3000)
-    assert "2100 €** ✓" not in body and "**2 100 €** ✓" in body
-    assert "✓ = presná cena 1+2" in body and "(1 z 2 vyššie; Čedok)" in body
+    title, _ = notify.digest(prev, {"offers": [_n("a", 2100, exact=True), _n("b", 2600)]}, 3000)
+    assert "zlacnenie" not in title
+    _, body = notify.digest({"offers": [_n("x", 1)]}, {"offers": [_n("a", 2100, exact=True), _n("b", 2600)]}, 3000)
+    assert "2100 €** ✓" not in body and "**2\u00a0100\u00a0€** ✓" in body
+    assert "✓ = presná cena 1+2 priamo od cestovky (Čedok)" in body
     _, body = notify.digest({}, {"offers": [_n("b", 2600)]}, 3000)
-    assert "orientačne cena × 3" in body and "✓" not in body
+    assert "orientačne cena za osobu" in body and "✓" not in body

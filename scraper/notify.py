@@ -1,11 +1,10 @@
-"""Build an e-mail digest of what changed since the previous run.
+"""Build the weekly e-mail digest: best offers now + what changed since the last digest.
 
-    python scraper/notify.py PREVIOUS_offers.json site/data/offers.json OUT.md
+    python scraper/notify.py site/data/digest_snapshot.json site/data/offers.json OUT.md [YYYY-MM-DD]
 
-Writes OUT.md (Markdown, Slovak) only when there is something worth an e-mail:
-new All Inclusive offers within budget, or price drops of at least DROP_EUR on offers near budget.
-The workflow turns OUT.md into a GitHub issue (GitHub e-mails the repo owner) and, if SMTP secrets
-are set, also sends it as a plain e-mail.
+Writes OUT.md (first line = title, then Markdown, Slovak) and refreshes the snapshot, so next week's
+digest compares against this one. The workflow runs it once a week (Monday morning) and turns OUT.md
+into a GitHub issue (GitHub e-mails the repo owner) and, if SMTP secrets are set, a plain e-mail.
 """
 
 import json
@@ -17,7 +16,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from config import CONFIG  # noqa: E402
 
 DROP_EUR = 50
-MAX_ROWS = 15
+MAX_ROWS = 10
+TOP = 10
 SITE = "https://github.com/KaStihl/Holiday-tracker/blob/main/dovolenka.html"
 
 
@@ -49,54 +49,62 @@ def row(o, extra=""):
 
 
 def digest(prev, cur, budget):
-    """Returns (title, markdown) or None when nothing is worth sending."""
+    """Returns (title, markdown). prev is the snapshot of the previous digest ({} on the first one)."""
     old = {o["id"]: o for o in prev.get("offers", [])}
     offers = cur.get("offers", [])
     first_run = not old
-    new = [o for o in offers if o["id"] not in old and o.get("board") in ("AI", "UAI") and o["price_total"] <= budget]
+    ai = [o for o in offers if o.get("board") in ("AI", "UAI") and o["price_total"] <= budget]
+    new = [] if first_run else [o for o in ai if o["id"] not in old]
     # a switch between the x3 approximation and the exact party price is not a price drop
     drops = [o for o in offers if o["id"] in old and o["price_total"] <= budget * 1.1
              and bool(o.get("price_exact")) == bool(old[o["id"]].get("price_exact"))
              and old[o["id"]]["price_total"] - o["price_total"] >= DROP_EUR]
-    if not new and not drops:
-        return None
+    top = sorted(ai, key=lambda o: (-o.get("score", 0), o["price_total"]))[:TOP]
     new.sort(key=lambda o: (-o.get("score", 0), o["price_total"]))
     drops.sort(key=lambda o: o["price_total"] - old[o["id"]]["price_total"])
-    parts = []
+
+    parts = [f"### ⭐ Top {len(top)} ponúk All Inclusive do {eur(budget)} ({len(ai)} spolu)", ""]
+    parts += [row(o) for o in top] or ["Zatiaľ žiadna."]
     if drops:
-        parts += [f"### 📉 Zlacnené o {DROP_EUR} € a viac ({len(drops)})", ""]
+        parts += ["", f"### 📉 Zlacnené za týždeň o {DROP_EUR} € a viac ({len(drops)})", ""]
         parts += [row(o, f" (−{eur(old[o['id']]['price_total'] - o['price_total'])})") for o in drops[:MAX_ROWS]]
     if new:
-        label = "Najlepšie ponuky All Inclusive do budgetu" if first_run else "Nové ponuky All Inclusive do budgetu"
-        parts += ["", f"### 🆕 {label} ({len(new)})", ""] + [row(o) for o in new[:MAX_ROWS]]
+        parts += ["", f"### 🆕 Nové za týždeň ({len(new)})", ""] + [row(o) for o in new[:MAX_ROWS]]
+    if not first_run and not drops and not new:
+        parts += ["", "Za týždeň nepribudlo nič nové do budgetu a nič výrazne nezlacnelo."]
     if max(len(new), len(drops)) > MAX_ROWS:
-        parts += ["", f"…a ďalšie – všetky sú v dovolenka.html."]
-    shown = drops[:MAX_ROWS] + new[:MAX_ROWS]
-    n_exact = sum(bool(o.get("price_exact")) for o in shown)
-    exact_src = sorted({o["source_name"] for o in offers if o.get("price_exact")})
-    if n_exact:
-        note = (f"Ceny sú za 1 dospelého + 2 deti. ✓ = presná cena 1+2 priamo od cestovky ({n_exact} z {len(shown)} "
-                f"vyššie; {', '.join(exact_src)}). Ostatné sú orientačne cena za osobu pri 2 dospelých × 3 – "
-                "pred rezerváciou overte u cestovky.")
+        parts += ["", "…a ďalšie – všetky sú v dovolenka.html."]
+
+    shown = top + drops[:MAX_ROWS] + new[:MAX_ROWS]
+    exact_src = sorted({o["source_name"] for o in shown if o.get("price_exact")})
+    if exact_src:
+        note = (f"Ceny sú za 1 dospelého + 2 deti. ✓ = presná cena 1+2 priamo od cestovky ({', '.join(exact_src)}). "
+                "Ostatné sú orientačne cena za osobu pri 2 dospelých × 3 – pred rezerváciou overte u cestovky.")
     else:
-        note = ("Ceny sú za 1 dospelého + 2 deti. Satur, Čedok a TIP uvádzajú len cenu za osobu pri 2 dospelých, "
-                "preto je to orientačne cena × 3 – pred rezerváciou overte u cestovky.")
+        note = ("Ceny sú za 1 dospelého + 2 deti, orientačne cena za osobu pri 2 dospelých × 3 – "
+                "pred rezerváciou overte u cestovky.")
     parts += ["", "---", note,
               "", f"📄 Všetky ponuky: [dovolenka.html]({SITE}) – stiahnite (Download raw file) a otvorte v prehliadači."]
-    bits = ([f"{len(drops)}× zlacnenie"] if drops else []) + ([f"{len(new)}× nová AI do {budget} €"] if new else [])
-    title = ("Dovolenka: prvý prehľad – " if first_run else "Dovolenka: ") + ", ".join(bits)
-    return title, "\n".join(parts)
+
+    bits = [f"od {eur(min(o['price_total'] for o in ai))}"] if ai else ["bez ponúk do budgetu"]
+    bits += ([f"{len(new)}× nová"] if new else []) + ([f"{len(drops)}× zlacnenie"] if drops else [])
+    return "Dovolenka – týždenný prehľad: " + ", ".join(bits), "\n".join(parts)
 
 
-def main(prev_path, cur_path, out_path):
-    res = digest(load(prev_path), load(cur_path), CONFIG["budget"])
-    if not res:
-        print("nothing to notify")
-        return
-    title, body = res
+def snapshot(cur, sent=None):
+    """Only what next week's comparison needs, to keep the committed file small."""
+    keep = ("id", "price_total", "price_exact")
+    return {"generated_at": cur.get("generated_at"), "sent": sent,
+            "offers": [{k: o.get(k) for k in keep} for o in cur.get("offers", [])]}
+
+
+def main(snap_path, cur_path, out_path, sent=None):
+    cur = load(cur_path)
+    title, body = digest(load(snap_path), cur, CONFIG["budget"])
     Path(out_path).write_text(title + "\n" + body + "\n", encoding="utf-8")
+    Path(snap_path).write_text(json.dumps(snapshot(cur, sent), separators=(",", ":")), encoding="utf-8")
     print(title)
 
 
 if __name__ == "__main__":
-    main(*sys.argv[1:4])
+    main(*sys.argv[1:5])
