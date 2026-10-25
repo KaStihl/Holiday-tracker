@@ -52,7 +52,26 @@ jobs:
       - name: Unit tests
         run: python -m pytest -q scraper/tests
 
+      # TEMPORARY (JS probe): dumps go to a short-lived artifact, never to git
+      - name: JS probe (temporary)
+        if: github.event_name == 'push' && contains(github.event.head_commit.message, '[probe]')
+        continue-on-error: true
+        run: |
+          pip install playwright==1.55.0 pypdf==5.1.0
+          python -m playwright install --with-deps chromium
+          python scraper/probe_js.py
+
+      - name: Upload probe dumps (temporary)
+        if: github.event_name == 'push' && contains(github.event.head_commit.message, '[probe]')
+        uses: actions/upload-artifact@v4
+        with:
+          name: probe-dumps
+          path: scraper/debug/
+          retention-days: 2
+          if-no-files-found: ignore
+
       - name: Scrape travel agencies
+        if: github.event_name != 'push' || !contains(github.event.head_commit.message, '[probe]')
         run: |
           python scraper/run.py
           python scraper/build_html.py
