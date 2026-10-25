@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-25T07:53:10Z",
+ "generated_at": "2026-10-25T09:15:50Z",
  "criteria": {
   "adults": 1,
   "children_ages": [
@@ -62,7 +62,7 @@
    "status": "ok",
    "count": 169,
    "error": null,
-   "duration_s": 262.0
+   "duration_s": 192.2
   },
   {
    "id": "cedok",
@@ -71,7 +71,7 @@
    "status": "ok",
    "count": 640,
    "error": null,
-   "duration_s": 129.0
+   "duration_s": 118.7
   },
   {
    "id": "tiptravel",
@@ -80,7 +80,7 @@
    "status": "empty",
    "count": 0,
    "error": null,
-   "duration_s": 4.3
+   "duration_s": 4.1
   },
   {
    "id": "kartago",
@@ -20231,46 +20231,6 @@
    "price_change": 0
   },
   {
-   "hotel": "Hotel Pernera Beach",
-   "url": "https://www.satur.sk/produkt/pernera-beach?strava=all-inclusive&doprava=letecky&odlet=BTS",
-   "image": "https://www.satur.sk/media/cache/500x333/tour/2183/530902_652d90db8b1b4.jpeg",
-   "stars": 4.0,
-   "rating": 9.0,
-   "country": "Cyprus",
-   "country_code": "CY",
-   "region": "Južný Cyprus",
-   "place": "Protaras",
-   "board": "AI",
-   "transport": "flight",
-   "departure": "BTS",
-   "date_from": "2027-07-18",
-   "date_to": "2027-07-25",
-   "nights": 7,
-   "price_total": 4377,
-   "price_original": 6255,
-   "discount_label": "Zľava (cena za os. × 3, orientačne)",
-   "pets_allowed": null,
-   "source": "satur",
-   "source_name": "Satur.sk",
-   "discount_pct": 30,
-   "price_exact": false,
-   "id": "satur:8a3c3dbe5f52",
-   "score": 50,
-   "first_seen": "2026-10-24",
-   "last_seen": "2026-10-25",
-   "price_history": [
-    [
-     "2026-10-24",
-     4377
-    ],
-    [
-     "2026-10-25",
-     4377
-    ]
-   ],
-   "price_change": 0
-  },
-  {
    "hotel": "Hotel Oleander",
    "url": "https://www.satur.sk/produkt/oleander?strava=all-inclusive&doprava=letecky&odlet=BTS",
    "image": "https://www.satur.sk/media/cache/500x333/tour/275/527629_652d97cad82e1.jpeg",
@@ -20295,6 +20255,46 @@
    "discount_pct": 30,
    "price_exact": false,
    "id": "satur:2e743aed2e96",
+   "score": 50,
+   "first_seen": "2026-10-24",
+   "last_seen": "2026-10-25",
+   "price_history": [
+    [
+     "2026-10-24",
+     4377
+    ],
+    [
+     "2026-10-25",
+     4377
+    ]
+   ],
+   "price_change": 0
+  },
+  {
+   "hotel": "Hotel Pernera Beach",
+   "url": "https://www.satur.sk/produkt/pernera-beach?strava=all-inclusive&doprava=letecky&odlet=BTS",
+   "image": "https://www.satur.sk/media/cache/500x333/tour/2183/530902_652d90db8b1b4.jpeg",
+   "stars": 4.0,
+   "rating": 9.0,
+   "country": "Cyprus",
+   "country_code": "CY",
+   "region": "Južný Cyprus",
+   "place": "Protaras",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "BTS",
+   "date_from": "2027-07-18",
+   "date_to": "2027-07-25",
+   "nights": 7,
+   "price_total": 4377,
+   "price_original": 6255,
+   "discount_label": "Zľava (cena za os. × 3, orientačne)",
+   "pets_allowed": null,
+   "source": "satur",
+   "source_name": "Satur.sk",
+   "discount_pct": 30,
+   "price_exact": false,
+   "id": "satur:8a3c3dbe5f52",
    "score": 50,
    "first_seen": "2026-10-24",
    "last_seen": "2026-10-25",
@@ -23660,7 +23660,7 @@
   },
   {
    "hotel": "Hotel Tasia Maris Sands",
-   "url": "https://www.cedok.sk/dovolena/cyprus/ayia-napa/hotel-tasia-maris-sands,ACYLCABS7O/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgpBQ1lMQ0FCUzdPKAQ6BEtMMjBCBgiAhY7jBkoGCID6suMGUAJiBQoDQlRTagUKA0xDQXIICgZEUDMwMDN6BQoDTENBggEFCgNCVFOKAQgKBkRQMzAwM5IBBgiAhY7jBpoBBgiA%252BrLjBqIBDAoKUk1ETDAwMDBCMKoBAwoBSOIBDgoMVHJhdmVsRnVzaW9u6gEOCgxUcmF2ZWxGdXNpb27yAQUKA09UUw%253D%253D&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
+   "url": "https://www.cedok.sk/dovolena/cyprus/ayia-napa/hotel-tasia-maris-sands,ACYLCABS7O/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgpBQ1lMQ0FCUzdPKAQ6BEtMMjBCBgiA%252BrLjBkoGCIDv1%252BMGUAJiBQoDQlRTagUKA0xDQXIICgZEUDMwMDN6BQoDTENBggEFCgNCVFOKAQgKBkRQMzAwM5IBBgiA%252BrLjBpoBBgiA79fjBqIBDAoKUk1ETDAwMDBCMKoBAwoBSOIBDgoMVHJhdmVsRnVzaW9u6gEOCgxUcmF2ZWxGdXNpb27yAQUKA09UUw%253D%253D&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
    "image": "https://s.content4travel.com/pim-cdk/acylcabs7o_0_a57c32f4d5.jpg",
    "stars": 4.0,
    "rating": 8.8,
@@ -23671,8 +23671,8 @@
    "board": "HB",
    "transport": "flight",
    "departure": "BTS",
-   "date_from": "2027-08-17",
-   "date_to": "2027-08-24",
+   "date_from": "2027-08-24",
+   "date_to": "2027-08-31",
    "nights": 7,
    "price_total": 3606,
    "price_original": null,
@@ -23682,17 +23682,21 @@
    "source_name": "Čedok",
    "discount_pct": null,
    "price_exact": false,
-   "id": "cedok:9da9f3a13ff2",
+   "id": "cedok:54a82b888c36",
    "score": 45,
-   "first_seen": "2026-10-25",
+   "first_seen": "2026-10-24",
    "last_seen": "2026-10-25",
    "price_history": [
+    [
+     "2026-10-24",
+     3531
+    ],
     [
      "2026-10-25",
      3606
     ]
    ],
-   "price_change": 0
+   "price_change": 75
   },
   {
    "hotel": "Radisson Beach Resort",
