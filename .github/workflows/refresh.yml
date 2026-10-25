@@ -52,7 +52,25 @@ jobs:
       - name: Unit tests
         run: python -m pytest -q scraper/tests
 
+      # TEMPORARY (occupancy probe): dumps go to a short-lived artifact, never to git
+      - name: Occupancy probe (temporary)
+        if: github.event_name == 'push'
+        continue-on-error: true
+        env:
+          DOVOLENKA_DUMP: "1"
+        run: python scraper/probe_occupancy.py
+
+      - name: Upload probe dumps (temporary)
+        if: github.event_name == 'push'
+        uses: actions/upload-artifact@v4
+        with:
+          name: probe-dumps
+          path: scraper/debug/
+          retention-days: 2
+          if-no-files-found: ignore
+
       - name: Scrape travel agencies
+        if: github.event_name != 'push' || !contains(github.event.head_commit.message, '[probe]')
         run: |
           cp site/data/offers.json "$RUNNER_TEMP/prev.json" || echo '{}' > "$RUNNER_TEMP/prev.json"
           python scraper/run.py
