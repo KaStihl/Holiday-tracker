@@ -1,30 +1,22 @@
-"""TEMPORARY: Koala tree.json (the SPA's catalogue file). Every fetch goes through common.get (robots enforced)."""
+"""TEMPORARY: Koala tree.json dictionary + a compressed copy of the file (for a trimmed test fixture).
+Every fetch goes through common.get (robots enforced; koala.redred.sk/robots.txt is 404)."""
+import base64
+import gzip
 import re
 import sys
 
 sys.path.insert(0, "scraper")
-import common  # noqa: E402
-from common import RobotsDisallowed, get  # noqa: E402
-
-try:
-    print("REDRED robots.txt:", repr(get("https://koala.redred.sk/robots.txt", retries=0)[:1500]))
-except Exception as e:
-    print("REDRED robots.txt ERR", repr(e)[:200])
-TREE = "https://koala.redred.sk/json/encoded/tree.json"
-print("allowed tree", common.allowed(TREE))
+from common import get  # noqa: E402
 
 js = get("https://koala.sk/index.js")
-for pat in [r"decode_json", r"this\.dayCount", r"/dovolenka/\$\{", r"tree\.json", r"searchHotels\(e=\{\}"]:
-    hits = [m.start() for m in re.finditer(pat, js)]
-    print(f"=== /{pat}/ {len(hits)}")
-    for i in hits[:3]:
-        print("   >>", js[max(0, i - 700): i + 900].replace("\n", " "))
-
-try:
-    t = get(TREE, retries=0)
-    print("TREE len", len(t), repr(t[:600]))
-    print("TREE tail", repr(t[-300:]))
-except RobotsDisallowed:
-    print("TREE disallowed by robots")
-except Exception as e:
-    print("TREE ERR", repr(e)[:200])
+for mod in ("1220:", "4869:", "5946:", "4995:", "3311:"):
+    i = js.find("}," + mod)
+    print(f"=== module {mod} at {i}")
+    if i >= 0:
+        print(js[i + 2: i + 2 + 3500])
+t = get("https://koala.redred.sk/json/encoded/tree.json", retries=0)
+blob = base64.b64encode(gzip.compress(t.encode("utf-8"))).decode()
+print("TREE b64gz len", len(blob))
+for k in range(0, len(blob), 3000):
+    print("B64|" + blob[k:k + 3000])
+print("F nonempty count", len(re.findall(r'"F":\[\{', t)))
