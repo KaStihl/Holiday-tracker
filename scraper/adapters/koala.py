@@ -109,7 +109,7 @@ def fits(term, cfg):
 
 
 def to_offer(hotel, names, top_url, term, cfg):
-    if hotel.get("category") != CATEGORY_SEASIDE or hotel.get("type") not in (None, "hotel"):
+    if hotel.get("category") != CATEGORY_SEASIDE or hotel.get("type") == "bez ubytovania":
         return None
     transport = TRANSPORT.get(term.get("transportationId"))
     if not transport or not term.get("price") or not term.get("date"):
@@ -119,8 +119,10 @@ def to_offer(hotel, names, top_url, term, cfg):
     party = cfg["adults"] + len(cfg["children_ages"])
     d1, d2 = _ymd(term["date"][0]), _ymd(term["date"][1])
     pp = int(term["price"])
+    # The site shows "Cena za osobu" = price and, next to it, "zľava N%" (only when N < 50). Whether price is
+    # before or after that discount is not stated, so no original price is derived from it.
     disc = term.get("discount") or 0
-    orig = round(pp / (1 - disc / 100)) if 0 < disc < 100 else None
+    disc = disc if 0 < disc < 50 else None
     frm = str(term.get("transportationFrom") or "").lower()
     dep = next((c for k, c in AIRPORTS.items() if k in frm), None) if transport == "flight" else None
     country = names[0] if names else None
@@ -135,8 +137,8 @@ def to_offer(hotel, names, top_url, term, cfg):
         "board": norm_board(term.get("service")), "transport": transport, "departure": dep,
         "date_from": d1.isoformat(), "date_to": d2.isoformat(),
         "nights": (term.get("dayCount") or ((d2 - d1).days + 1)) - 1,
-        "price_total": pp * party, "price_original": orig * party if orig else None,
-        "discount_label": "Zľava (cena za os. × 3, orientačne)" if orig else "Cena za os. × 3 (orientačne)",
+        "price_total": pp * party, "price_original": None, "discount_pct": disc,
+        "discount_label": f"Zľava {disc} % (cena za os. × 3, orientačne)" if disc else "Cena za os. × 3 (orientačne)",
         "pets_allowed": None,
     }
 
