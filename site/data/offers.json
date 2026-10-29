@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-29T11:02:29Z",
+ "generated_at": "2026-10-29T21:16:33Z",
  "criteria": {
   "adults": 1,
   "children_ages": [
@@ -60,9 +60,9 @@
    "name": "Satur.sk",
    "home": "https://www.satur.sk",
    "status": "ok",
-   "count": 176,
+   "count": 174,
    "error": null,
-   "duration_s": 200.1
+   "duration_s": 210.5
   },
   {
    "id": "cedok",
@@ -71,7 +71,7 @@
    "status": "ok",
    "count": 637,
    "error": null,
-   "duration_s": 120.2
+   "duration_s": 124.2
   },
   {
    "id": "tiptravel",
@@ -80,16 +80,16 @@
    "status": "empty",
    "count": 0,
    "error": null,
-   "duration_s": 3.9
+   "duration_s": 4.1
   },
   {
    "id": "kartago",
    "name": "Kartago Tours",
    "home": "https://www.kartago.sk",
    "status": "ok",
-   "count": 586,
+   "count": 582,
    "error": null,
-   "duration_s": 68.7
+   "duration_s": 63.5
   },
   {
    "id": "fischer",
@@ -98,7 +98,7 @@
    "status": "ok",
    "count": 502,
    "error": null,
-   "duration_s": 72.1
+   "duration_s": 62.2
   },
   {
    "id": "eximtours",
@@ -123,7 +123,7 @@
    "status": "empty",
    "count": 0,
    "error": null,
-   "duration_s": 2.3
+   "duration_s": 2.4
   },
   {
    "id": "firotour",
@@ -3452,7 +3452,7 @@
      1977
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Tiva Del Mar",
@@ -3488,7 +3488,7 @@
      1977
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Imperial Resort",
@@ -6580,7 +6580,7 @@
      1976
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "NESSEBAR BEACH",
@@ -6616,7 +6616,7 @@
      1976
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Perla Plaza",
@@ -7172,7 +7172,7 @@
      2079
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "MOONLIGHT",
@@ -7208,7 +7208,7 @@
      2079
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Ilyssion",
@@ -11586,14 +11586,14 @@
    "date_from": "2027-08-23",
    "date_to": "2027-08-30",
    "nights": 7,
-   "price_total": 2517,
+   "price_total": 2553,
    "price_original": 4113,
    "discount_label": null,
    "pets_allowed": null,
    "price_exact": true,
    "source": "kartago",
    "source_name": "Kartago Tours",
-   "discount_pct": 39,
+   "discount_pct": 38,
    "id": "kartago:6ca7fee83636",
    "score": 92,
    "first_seen": "2026-10-25",
@@ -11617,10 +11617,10 @@
     ],
     [
      "2026-10-29",
-     2517
+     2553
     ]
    ],
-   "price_change": 0
+   "price_change": 36
   },
   {
    "hotel": "Megasaray Resort Side",
@@ -11638,14 +11638,14 @@
    "date_from": "2027-08-23",
    "date_to": "2027-08-30",
    "nights": 7,
-   "price_total": 2517,
+   "price_total": 2553,
    "price_original": 4113,
    "discount_label": null,
    "pets_allowed": null,
    "price_exact": true,
    "source": "fischer",
    "source_name": "Fischer",
-   "discount_pct": 39,
+   "discount_pct": 38,
    "id": "fischer:3281ba8742f0",
    "score": 92,
    "first_seen": "2026-10-25",
@@ -11669,10 +11669,10 @@
     ],
     [
      "2026-10-29",
-     2517
+     2553
     ]
    ],
-   "price_change": 0
+   "price_change": 36
   },
   {
    "hotel": "Vita Park",
@@ -13335,110 +13335,6 @@
    "price_change": 0
   },
   {
-   "hotel": "Planos Beach",
-   "url": "https://www.kartago.sk/grecko/zakynthos/tsilivi/planos-beach?DS=65536&GIATA=76825&D=63209%7C63214%7C63219%7C63220%7C63262%7C63266%7C63281%7C63283%7C63285%7C63290%7C63297%7C63311%7C63314%7C63316%7C63319%7C63324%7C63327%7C63333%7C63335%7C63336%7C63341%7C63352%7C63357%7C63362%7C63364%7C63383%7C63384%7C63387%7C63388%7C63390%7C63399%7C63402%7C63408%7C63409%7C63424%7C63427%7C63428%7C63430%7C63431%7C63437%7C63439%7C63442%7C63463%7C63471%7C63472%7C64431%7C64432%7C64433%7C64434%7C64435%7C64436%7C64437%7C64438%7C64440%7C64441%7C64442%7C74677&HID=142118&MT=5&MMT=5&DI=AI&RCS=TR01&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-30&DD=2027-08-23&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=ZTH90017&DPR=KARTAGO-SK-ATCOM&PC=14367545%2F2%2F2791%2F7&IFC=209450128%2F649263&OFC=209448670%2F649262",
-   "image": "https://img.kartago.sk/hotels/720/recko/zakynthos/tsilivi/planos-beach/bazen-2-2.jpg",
-   "stars": 4.0,
-   "rating": 9.6,
-   "country": "Grécko",
-   "country_code": "GR",
-   "region": "Zakynthos",
-   "place": "Tsilivi",
-   "board": "AI",
-   "transport": "flight",
-   "departure": "BTS",
-   "date_from": "2027-08-23",
-   "date_to": "2027-08-30",
-   "nights": 7,
-   "price_total": 2353,
-   "price_original": 3069,
-   "discount_label": null,
-   "pets_allowed": null,
-   "price_exact": true,
-   "source": "kartago",
-   "source_name": "Kartago Tours",
-   "discount_pct": 23,
-   "id": "kartago:1ed985eca719",
-   "score": 91,
-   "first_seen": "2026-10-25",
-   "last_seen": "2026-10-29",
-   "price_history": [
-    [
-     "2026-10-25",
-     2353
-    ],
-    [
-     "2026-10-26",
-     2353
-    ],
-    [
-     "2026-10-27",
-     2353
-    ],
-    [
-     "2026-10-28",
-     2353
-    ],
-    [
-     "2026-10-29",
-     2353
-    ]
-   ],
-   "price_change": 0
-  },
-  {
-   "hotel": "Planos Beach",
-   "url": "https://www.fischer.sk/grecko/zakynthos/tsilivi/planos-beach?DS=256&GIATA=76825&D=63209%7C63214%7C63219%7C63220%7C63262%7C63266%7C63281%7C63283%7C63285%7C63290%7C63297%7C63311%7C63314%7C63316%7C63319%7C63324%7C63327%7C63333%7C63335%7C63336%7C63341%7C63352%7C63357%7C63362%7C63364%7C63383%7C63384%7C63387%7C63388%7C63390%7C63399%7C63402%7C63408%7C63409%7C63424%7C63427%7C63428%7C63430%7C63431%7C63437%7C63439%7C63442%7C63463%7C63471%7C63472%7C64431%7C64432%7C64433%7C64434%7C64435%7C64436%7C64437%7C64438%7C64440%7C64441%7C64442%7C74677&HID=142118&MT=5&MMT=5&DI=AI&RCS=TR01&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-30&DD=2027-08-23&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=ZTH90017&DPR=FISCHER+SK+ATCOM&PC=32690838%2F2%2F2791%2F7&IFC=209450128%2F649263&OFC=209448670%2F649262",
-   "image": "https://img.fischer.sk/hotels/720/recko/zakynthos/tsilivi/planos-beach/bazen-2-2.jpg",
-   "stars": 4.0,
-   "rating": 9.6,
-   "country": "Grécko",
-   "country_code": "GR",
-   "region": "Zakynthos",
-   "place": "Tsilivi",
-   "board": "AI",
-   "transport": "flight",
-   "departure": "BTS",
-   "date_from": "2027-08-23",
-   "date_to": "2027-08-30",
-   "nights": 7,
-   "price_total": 2353,
-   "price_original": 3069,
-   "discount_label": null,
-   "pets_allowed": null,
-   "price_exact": true,
-   "source": "fischer",
-   "source_name": "Fischer",
-   "discount_pct": 23,
-   "id": "fischer:3e3b366f3bcd",
-   "score": 91,
-   "first_seen": "2026-10-25",
-   "last_seen": "2026-10-29",
-   "price_history": [
-    [
-     "2026-10-25",
-     2353
-    ],
-    [
-     "2026-10-26",
-     2353
-    ],
-    [
-     "2026-10-27",
-     2353
-    ],
-    [
-     "2026-10-28",
-     2353
-    ],
-    [
-     "2026-10-29",
-     2353
-    ]
-   ],
-   "price_change": 0
-  },
-  {
    "hotel": "Poseidon Playa",
    "url": "https://www.kartago.sk/spanielsko/costa-blanca/benidorm/poseidon-playa?DS=65536&GIATA=2314&D=63213%7C63216%7C63226%7C63231%7C63241%7C63242%7C63243%7C63244%7C63245%7C63267%7C63272%7C63284%7C63312%7C63313%7C63334%7C63349%7C63350%7C63354%7C63360%7C63455%7C64430%7C74459%7C74460%7C74461%7C74462%7C74463%7C74464%7C74465%7C77806%7C211764&HID=145094&MT=5&MMT=5&DI=AM&RCS=DR01&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-18&DD=2027-08-11&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=ALC90004&DPR=KARTAGO-SK-ATCOM&PC=216994062%2F2%2F2779%2F7&IFC=215624831%2F672232&OFC=215624824%2F672231",
    "image": "https://img.kartago.sk/hotels/720/spanelsko/costa-blanca/benidorm/hotel-poseidon-playa/Hotel-s-bazenem-2x.jpg",
@@ -14934,8 +14830,8 @@
    "date_from": "2027-08-24",
    "date_to": "2027-08-31",
    "nights": 7,
-   "price_total": 2303,
-   "price_original": 3019,
+   "price_total": 2307,
+   "price_original": 3023,
    "discount_label": null,
    "pets_allowed": null,
    "price_exact": true,
@@ -14965,10 +14861,10 @@
     ],
     [
      "2026-10-29",
-     2303
+     2307
     ]
    ],
-   "price_change": 0
+   "price_change": 4
   },
   {
    "hotel": "Blue Water",
@@ -14986,8 +14882,8 @@
    "date_from": "2027-08-24",
    "date_to": "2027-08-31",
    "nights": 7,
-   "price_total": 2303,
-   "price_original": 3019,
+   "price_total": 2307,
+   "price_original": 3023,
    "discount_label": null,
    "pets_allowed": null,
    "price_exact": true,
@@ -15017,10 +14913,10 @@
     ],
     [
      "2026-10-29",
-     2303
+     2307
     ]
    ],
-   "price_change": 0
+   "price_change": 4
   },
   {
    "hotel": "Angela Beach",
@@ -15179,110 +15075,6 @@
    "price_change": 0
   },
   {
-   "hotel": "Ninos Grand Beach Hotel & Resort",
-   "url": "https://www.kartago.sk/grecko/zapadne-grecko/preveza/ninos-grand-beach-hotel-a-resort?DS=65536&GIATA=1380693&D=63209%7C63214%7C63219%7C63220%7C63262%7C63266%7C63281%7C63283%7C63285%7C63290%7C63297%7C63311%7C63314%7C63316%7C63319%7C63324%7C63327%7C63333%7C63335%7C63336%7C63341%7C63352%7C63357%7C63362%7C63364%7C63383%7C63384%7C63387%7C63388%7C63390%7C63399%7C63402%7C63408%7C63409%7C63424%7C63427%7C63428%7C63430%7C63431%7C63437%7C63439%7C63442%7C63463%7C63471%7C63472%7C64431%7C64432%7C64433%7C64434%7C64435%7C64436%7C64437%7C64438%7C64440%7C64441%7C64442%7C74677&HID=145234&MT=5&MMT=5&DI=AI&RCS=DR03&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-31&DD=2027-08-24&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=PVK90022&DPR=KARTAGO-SK-ATCOM&PC=12995286%2F2%2F2792%2F7&IFC=209236684%2F648375&OFC=209235134%2F648374",
-   "image": "https://img.kartago.sk/hotels/720/recko/lefkada/preveza/ninos-grand-beach-hotel-a-resort/1692/drone-_3-179-180.jpg",
-   "stars": 4.0,
-   "rating": null,
-   "country": "Grécko",
-   "country_code": "GR",
-   "region": "Lefkada",
-   "place": "Preveza",
-   "board": "AI",
-   "transport": "flight",
-   "departure": "BTS",
-   "date_from": "2027-08-24",
-   "date_to": "2027-08-31",
-   "nights": 7,
-   "price_total": 2313,
-   "price_original": 3029,
-   "discount_label": null,
-   "pets_allowed": null,
-   "price_exact": true,
-   "source": "kartago",
-   "source_name": "Kartago Tours",
-   "discount_pct": 24,
-   "id": "kartago:096ad726a218",
-   "score": 90,
-   "first_seen": "2026-10-25",
-   "last_seen": "2026-10-29",
-   "price_history": [
-    [
-     "2026-10-25",
-     2313
-    ],
-    [
-     "2026-10-26",
-     2313
-    ],
-    [
-     "2026-10-27",
-     2313
-    ],
-    [
-     "2026-10-28",
-     2313
-    ],
-    [
-     "2026-10-29",
-     2313
-    ]
-   ],
-   "price_change": 0
-  },
-  {
-   "hotel": "Ninos Grand Beach Hotel & Resort",
-   "url": "https://www.fischer.sk/grecko/lefkada/vassiliki/ninos-grand-beach-hotel-a-resort?DS=256&GIATA=1380693&D=63209%7C63214%7C63219%7C63220%7C63262%7C63266%7C63281%7C63283%7C63285%7C63290%7C63297%7C63311%7C63314%7C63316%7C63319%7C63324%7C63327%7C63333%7C63335%7C63336%7C63341%7C63352%7C63357%7C63362%7C63364%7C63383%7C63384%7C63387%7C63388%7C63390%7C63399%7C63402%7C63408%7C63409%7C63424%7C63427%7C63428%7C63430%7C63431%7C63437%7C63439%7C63442%7C63463%7C63471%7C63472%7C64431%7C64432%7C64433%7C64434%7C64435%7C64436%7C64437%7C64438%7C64440%7C64441%7C64442%7C74677&HID=145234&MT=5&MMT=5&DI=AI&RCS=DR03&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-31&DD=2027-08-24&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=PVK90022&DPR=FISCHER+SK+ATCOM&PC=12996123%2F2%2F2792%2F7&IFC=209236684%2F648375&OFC=209235134%2F648374",
-   "image": "https://img.fischer.sk/hotels/720/recko/lefkada/preveza/ninos-grand-beach-hotel-a-resort/1692/drone-_3-179-180.jpg",
-   "stars": 4.0,
-   "rating": null,
-   "country": "Grécko",
-   "country_code": "GR",
-   "region": "Lefkada",
-   "place": "Preveza",
-   "board": "AI",
-   "transport": "flight",
-   "departure": "BTS",
-   "date_from": "2027-08-24",
-   "date_to": "2027-08-31",
-   "nights": 7,
-   "price_total": 2313,
-   "price_original": 3029,
-   "discount_label": null,
-   "pets_allowed": null,
-   "price_exact": true,
-   "source": "fischer",
-   "source_name": "Fischer",
-   "discount_pct": 24,
-   "id": "fischer:185c58c87c6e",
-   "score": 90,
-   "first_seen": "2026-10-25",
-   "last_seen": "2026-10-29",
-   "price_history": [
-    [
-     "2026-10-25",
-     2313
-    ],
-    [
-     "2026-10-26",
-     2313
-    ],
-    [
-     "2026-10-27",
-     2313
-    ],
-    [
-     "2026-10-28",
-     2313
-    ],
-    [
-     "2026-10-29",
-     2313
-    ]
-   ],
-   "price_change": 0
-  },
-  {
    "hotel": "Amour Holiday Resort",
    "url": "https://www.kartago.sk/grecko/korfu/sidari/amour-holiday-resort?DS=65536&GIATA=539341&D=63209%7C63214%7C63219%7C63220%7C63262%7C63266%7C63281%7C63283%7C63285%7C63290%7C63297%7C63311%7C63314%7C63316%7C63319%7C63324%7C63327%7C63333%7C63335%7C63336%7C63341%7C63352%7C63357%7C63362%7C63364%7C63383%7C63384%7C63387%7C63388%7C63390%7C63399%7C63402%7C63408%7C63409%7C63424%7C63427%7C63428%7C63430%7C63431%7C63437%7C63439%7C63442%7C63463%7C63471%7C63472%7C64431%7C64432%7C64433%7C64434%7C64435%7C64436%7C64437%7C64438%7C64440%7C64441%7C64442%7C74677&HID=144430&MT=5&MMT=5&DI=AI&RCS=FR02&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-30&DD=2027-08-23&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=CFU90010&DPR=KARTAGO-SK-ATCOM&PC=100724248%2F2%2F2791%2F7&IFC=208805848%2F647018&OFC=208804388%2F647017",
    "image": "https://img.kartago.sk/hotels/720/recko/korfu/sidari/amour-holiday-resort/uvodni-foto-179.jpg",
@@ -15385,6 +15177,110 @@
     ]
    ],
    "price_change": 0
+  },
+  {
+   "hotel": "Ninos Grand Beach Hotel & Resort",
+   "url": "https://www.kartago.sk/grecko/zapadne-grecko/preveza/ninos-grand-beach-hotel-a-resort?DS=65536&GIATA=1380693&D=63209%7C63214%7C63219%7C63220%7C63262%7C63266%7C63281%7C63283%7C63285%7C63290%7C63297%7C63311%7C63314%7C63316%7C63319%7C63324%7C63327%7C63333%7C63335%7C63336%7C63341%7C63352%7C63357%7C63362%7C63364%7C63383%7C63384%7C63387%7C63388%7C63390%7C63399%7C63402%7C63408%7C63409%7C63424%7C63427%7C63428%7C63430%7C63431%7C63437%7C63439%7C63442%7C63463%7C63471%7C63472%7C64431%7C64432%7C64433%7C64434%7C64435%7C64436%7C64437%7C64438%7C64440%7C64441%7C64442%7C74677&HID=145234&MT=5&MMT=5&DI=AI&RCS=DR03&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-31&DD=2027-08-24&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=PVK90022&DPR=KARTAGO-SK-ATCOM&PC=12995286%2F2%2F2792%2F7&IFC=209236684%2F648375&OFC=209235134%2F648374",
+   "image": "https://img.kartago.sk/hotels/720/recko/lefkada/preveza/ninos-grand-beach-hotel-a-resort/1692/drone-_3-179-180.jpg",
+   "stars": 4.0,
+   "rating": null,
+   "country": "Grécko",
+   "country_code": "GR",
+   "region": "Lefkada",
+   "place": "Preveza",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "BTS",
+   "date_from": "2027-08-24",
+   "date_to": "2027-08-31",
+   "nights": 7,
+   "price_total": 2317,
+   "price_original": 3033,
+   "discount_label": null,
+   "pets_allowed": null,
+   "price_exact": true,
+   "source": "kartago",
+   "source_name": "Kartago Tours",
+   "discount_pct": 24,
+   "id": "kartago:096ad726a218",
+   "score": 90,
+   "first_seen": "2026-10-25",
+   "last_seen": "2026-10-29",
+   "price_history": [
+    [
+     "2026-10-25",
+     2313
+    ],
+    [
+     "2026-10-26",
+     2313
+    ],
+    [
+     "2026-10-27",
+     2313
+    ],
+    [
+     "2026-10-28",
+     2313
+    ],
+    [
+     "2026-10-29",
+     2317
+    ]
+   ],
+   "price_change": 4
+  },
+  {
+   "hotel": "Ninos Grand Beach Hotel & Resort",
+   "url": "https://www.fischer.sk/grecko/lefkada/vassiliki/ninos-grand-beach-hotel-a-resort?DS=256&GIATA=1380693&D=63209%7C63214%7C63219%7C63220%7C63262%7C63266%7C63281%7C63283%7C63285%7C63290%7C63297%7C63311%7C63314%7C63316%7C63319%7C63324%7C63327%7C63333%7C63335%7C63336%7C63341%7C63352%7C63357%7C63362%7C63364%7C63383%7C63384%7C63387%7C63388%7C63390%7C63399%7C63402%7C63408%7C63409%7C63424%7C63427%7C63428%7C63430%7C63431%7C63437%7C63439%7C63442%7C63463%7C63471%7C63472%7C64431%7C64432%7C64433%7C64434%7C64435%7C64436%7C64437%7C64438%7C64440%7C64441%7C64442%7C74677&HID=145234&MT=5&MMT=5&DI=AI&RCS=DR03&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-31&DD=2027-08-24&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=PVK90022&DPR=FISCHER+SK+ATCOM&PC=12996123%2F2%2F2792%2F7&IFC=209236684%2F648375&OFC=209235134%2F648374",
+   "image": "https://img.fischer.sk/hotels/720/recko/lefkada/preveza/ninos-grand-beach-hotel-a-resort/1692/drone-_3-179-180.jpg",
+   "stars": 4.0,
+   "rating": null,
+   "country": "Grécko",
+   "country_code": "GR",
+   "region": "Lefkada",
+   "place": "Preveza",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "BTS",
+   "date_from": "2027-08-24",
+   "date_to": "2027-08-31",
+   "nights": 7,
+   "price_total": 2317,
+   "price_original": 3033,
+   "discount_label": null,
+   "pets_allowed": null,
+   "price_exact": true,
+   "source": "fischer",
+   "source_name": "Fischer",
+   "discount_pct": 24,
+   "id": "fischer:185c58c87c6e",
+   "score": 90,
+   "first_seen": "2026-10-25",
+   "last_seen": "2026-10-29",
+   "price_history": [
+    [
+     "2026-10-25",
+     2313
+    ],
+    [
+     "2026-10-26",
+     2313
+    ],
+    [
+     "2026-10-27",
+     2313
+    ],
+    [
+     "2026-10-28",
+     2313
+    ],
+    [
+     "2026-10-29",
+     2317
+    ]
+   ],
+   "price_change": 4
   },
   {
    "hotel": "Alua Helios Bay",
@@ -15793,6 +15689,54 @@
     ],
     [
      "2026-10-28",
+     2449
+    ],
+    [
+     "2026-10-29",
+     2449
+    ]
+   ],
+   "price_change": 0
+  },
+  {
+   "hotel": "Rethymno Village",
+   "url": "https://www.fischer.sk/grecko/kreta-heraklion/rethymnon/rethymno-village?DS=256&GIATA=1014&D=63209%7C63214%7C63219%7C63220%7C63262%7C63266%7C63281%7C63283%7C63285%7C63290%7C63297%7C63311%7C63314%7C63316%7C63319%7C63324%7C63327%7C63333%7C63335%7C63336%7C63341%7C63352%7C63357%7C63362%7C63364%7C63383%7C63384%7C63387%7C63388%7C63390%7C63399%7C63402%7C63408%7C63409%7C63424%7C63427%7C63428%7C63430%7C63431%7C63437%7C63439%7C63442%7C63463%7C63471%7C63472%7C64431%7C64432%7C64433%7C64434%7C64435%7C64436%7C64437%7C64438%7C64440%7C64441%7C64442%7C74677&HID=146109&MT=5&MMT=5&DI=AI&RCS=DR02&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-07-10&DD=2027-07-03&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=HER71052&DPR=FISCHER+SK+ATCOM&PC=11439665%2F2%2F2740%2F7&IFC=209132867%2F647985&OFC=209131405%2F647984",
+   "image": "https://img.fischer.sk/hotels/720/recko/kreta/adelianos-kampos/rethymno-village-adelianos-kampos/Outdoor-46-Nx.jpg",
+   "stars": 3.0,
+   "rating": 9.0,
+   "country": "Grécko",
+   "country_code": "GR",
+   "region": "Kréta",
+   "place": "Adelianos Kampos",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "BTS",
+   "date_from": "2027-07-03",
+   "date_to": "2027-07-10",
+   "nights": 7,
+   "price_total": 2449,
+   "price_original": 3386,
+   "discount_label": null,
+   "pets_allowed": null,
+   "price_exact": true,
+   "source": "fischer",
+   "source_name": "Fischer",
+   "discount_pct": 28,
+   "id": "fischer:98cd6f77bf2b",
+   "score": 90,
+   "first_seen": "2026-10-25",
+   "last_seen": "2026-10-29",
+   "price_history": [
+    [
+     "2026-10-25",
+     2449
+    ],
+    [
+     "2026-10-26",
+     2449
+    ],
+    [
+     "2026-10-27",
      2449
     ],
     [
@@ -17051,6 +16995,78 @@
    "price_change": 0
   },
   {
+   "hotel": "Planos Beach",
+   "url": "https://www.kartago.sk/grecko/zakynthos/tsilivi/planos-beach?DS=65536&GIATA=76825&D=63209%7C63214%7C63219%7C63220%7C63262%7C63266%7C63281%7C63283%7C63285%7C63290%7C63297%7C63311%7C63314%7C63316%7C63319%7C63324%7C63327%7C63333%7C63335%7C63336%7C63341%7C63352%7C63357%7C63362%7C63364%7C63383%7C63384%7C63387%7C63388%7C63390%7C63399%7C63402%7C63408%7C63409%7C63424%7C63427%7C63428%7C63430%7C63431%7C63437%7C63439%7C63442%7C63463%7C63471%7C63472%7C64431%7C64432%7C64433%7C64434%7C64435%7C64436%7C64437%7C64438%7C64440%7C64441%7C64442%7C74677&HID=142118&MT=5&MMT=5&DI=AI&RCS=TR01&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-16&DD=2027-08-09&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=ZTH90017&DPR=KARTAGO-SK-ATCOM&PC=14367545%2F2%2F2777%2F7&IFC=209448184%2F649259&OFC=209446726%2F649258",
+   "image": "https://img.kartago.sk/hotels/720/recko/zakynthos/tsilivi/planos-beach/bazen-2-2.jpg",
+   "stars": 4.0,
+   "rating": 9.6,
+   "country": "Grécko",
+   "country_code": "GR",
+   "region": "Zakynthos",
+   "place": "Tsilivi",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "BTS",
+   "date_from": "2027-08-09",
+   "date_to": "2027-08-16",
+   "nights": 7,
+   "price_total": 2425,
+   "price_original": 3141,
+   "discount_label": null,
+   "pets_allowed": null,
+   "price_exact": true,
+   "source": "kartago",
+   "source_name": "Kartago Tours",
+   "discount_pct": 23,
+   "id": "kartago:85b2c219953b",
+   "score": 89,
+   "first_seen": "2026-10-29",
+   "last_seen": "2026-10-29",
+   "price_history": [
+    [
+     "2026-10-29",
+     2425
+    ]
+   ],
+   "price_change": null
+  },
+  {
+   "hotel": "Planos Beach",
+   "url": "https://www.fischer.sk/grecko/zakynthos/tsilivi/planos-beach?DS=256&GIATA=76825&D=63209%7C63214%7C63219%7C63220%7C63262%7C63266%7C63281%7C63283%7C63285%7C63290%7C63297%7C63311%7C63314%7C63316%7C63319%7C63324%7C63327%7C63333%7C63335%7C63336%7C63341%7C63352%7C63357%7C63362%7C63364%7C63383%7C63384%7C63387%7C63388%7C63390%7C63399%7C63402%7C63408%7C63409%7C63424%7C63427%7C63428%7C63430%7C63431%7C63437%7C63439%7C63442%7C63463%7C63471%7C63472%7C64431%7C64432%7C64433%7C64434%7C64435%7C64436%7C64437%7C64438%7C64440%7C64441%7C64442%7C74677&HID=142118&MT=5&MMT=5&DI=AI&RCS=TR01&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-16&DD=2027-08-09&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=ZTH90017&DPR=FISCHER+SK+ATCOM&PC=32690838%2F2%2F2777%2F7&IFC=209448184%2F649259&OFC=209446726%2F649258",
+   "image": "https://img.fischer.sk/hotels/720/recko/zakynthos/tsilivi/planos-beach/bazen-2-2.jpg",
+   "stars": 4.0,
+   "rating": 9.6,
+   "country": "Grécko",
+   "country_code": "GR",
+   "region": "Zakynthos",
+   "place": "Tsilivi",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "BTS",
+   "date_from": "2027-08-09",
+   "date_to": "2027-08-16",
+   "nights": 7,
+   "price_total": 2425,
+   "price_original": 3141,
+   "discount_label": null,
+   "pets_allowed": null,
+   "price_exact": true,
+   "source": "fischer",
+   "source_name": "Fischer",
+   "discount_pct": 23,
+   "id": "fischer:46e5fb9d1670",
+   "score": 89,
+   "first_seen": "2026-10-29",
+   "last_seen": "2026-10-29",
+   "price_history": [
+    [
+     "2026-10-29",
+     2425
+    ]
+   ],
+   "price_change": null
+  },
+  {
    "hotel": "Poggio di Tropea",
    "url": "https://www.kartago.sk/taliansko/kalabria/tropea/poggio-di-tropea?DS=65536&GIATA=41489&D=63212%7C63215%7C63229%7C63255%7C63271%7C63287%7C63296%7C63298%7C63329%7C63330%7C63339%7C63356%7C63376%7C63391%7C63406%7C63410%7C63425%7C63426%7C63429%7C63436%7C63444%7C63453%7C63454%7C63456%7C63457%7C63459%7C63537%7C63539%7C64427%7C64428%7C219502%7C219503&HID=4908&MT=5&MMT=5&DI=AL&RCS=AP01&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-30&DD=2027-08-23&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=SUF10004&DPR=KARTAGO-SK-ATCOM&PC=212511814%2F2%2F2791%2F7&IFC=215633027%2F672360&OFC=215633020%2F672359",
    "image": "https://img.kartago.sk/hotels/720/italie/kalabrie/tropea/poggio-di-tropea/Screenshot-2025-10-03-114338.jpg",
@@ -17240,7 +17256,7 @@
      2478
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Calimera Hane Garden",
@@ -17640,7 +17656,7 @@
      2547
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Laur Hotels",
@@ -23819,7 +23835,7 @@
      1986
     ]
    ],
-   "price_change": -171
+   "price_change": 0
   },
   {
    "hotel": "Hotel Talea Beach",
@@ -26232,14 +26248,14 @@
    "date_from": "2027-07-02",
    "date_to": "2027-07-09",
    "nights": 7,
-   "price_total": 2438,
-   "price_original": 3226,
+   "price_total": 2434,
+   "price_original": 3224,
    "discount_label": null,
    "pets_allowed": null,
    "price_exact": true,
    "source": "kartago",
    "source_name": "Kartago Tours",
-   "discount_pct": 24,
+   "discount_pct": 25,
    "id": "kartago:3ba247698519",
    "score": 84,
    "first_seen": "2026-10-25",
@@ -26263,10 +26279,10 @@
     ],
     [
      "2026-10-29",
-     2438
+     2434
     ]
    ],
-   "price_change": 0
+   "price_change": -4
   },
   {
    "hotel": "Royal Nozha Beach",
@@ -26562,7 +26578,7 @@
      2585
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Burgas Beach",
@@ -26598,7 +26614,7 @@
      2585
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Sol Nessebar Bay & Mare",
@@ -27478,7 +27494,7 @@
      2076
     ]
    ],
-   "price_change": -885
+   "price_change": 0
   },
   {
    "hotel": "Hotel Casa Fora Beach Resort",
@@ -27583,7 +27599,7 @@
      2307
     ]
    ],
-   "price_change": 3
+   "price_change": 0
   },
   {
    "hotel": "Africa Jade Thalasso Korba",
@@ -27619,7 +27635,7 @@
      2543
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Minamark Beach Resort",
@@ -29111,7 +29127,7 @@
      2169
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "AMH Hotel Durres",
@@ -29147,7 +29163,7 @@
      2190
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Martiness",
@@ -29183,7 +29199,7 @@
      2289
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Marianna Palace",
@@ -32795,7 +32811,7 @@
      2409
     ]
    ],
-   "price_change": -705
+   "price_change": 0
   },
   {
    "hotel": "Hotel Avenida",
@@ -32810,10 +32826,10 @@
    "board": "AI",
    "transport": "flight",
    "departure": "BTS",
-   "date_from": "2027-07-07",
-   "date_to": "2027-07-14",
+   "date_from": "2027-07-05",
+   "date_to": "2027-07-12",
    "nights": 7,
-   "price_total": 2430,
+   "price_total": 2451,
    "price_original": null,
    "discount_label": "Cena za os. × 3 (orientačne)",
    "pets_allowed": null,
@@ -32821,29 +32837,25 @@
    "source_name": "Satur.sk",
    "discount_pct": null,
    "price_exact": false,
-   "id": "satur:069110acff50",
+   "id": "satur:34bbebb6e0f4",
    "score": 80,
-   "first_seen": "2026-10-24",
+   "first_seen": "2026-10-26",
    "last_seen": "2026-10-29",
    "price_history": [
     [
-     "2026-10-24",
-     2796
+     "2026-10-26",
+     4440
     ],
     [
-     "2026-10-25",
-     2427
-    ],
-    [
-     "2026-10-28",
-     2814
+     "2026-10-27",
+     2952
     ],
     [
      "2026-10-29",
-     2430
+     2451
     ]
    ],
-   "price_change": -384
+   "price_change": -501
   },
   {
    "hotel": "Mahdia Palace",
@@ -35040,7 +35052,7 @@
      2325
     ]
    ],
-   "price_change": -357
+   "price_change": 0
   },
   {
    "hotel": "Valamar Atrium Baška Residence",
@@ -36575,6 +36587,98 @@
    "price_change": 0
   },
   {
+   "hotel": "Sirena",
+   "url": "https://www.kartago.sk/hotely/bulharsko/burgas/nesebar/sirena?DS=2&GIATA=255217&D=63483%7C63484%7C63485%7C63486&HID=146065&MT=5&MMT=5&DI=GT06-AI&RCS=RMSDLRSVB0&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-08-18%7C2027-09-15&RD=2027-09-01&DD=2027-08-25&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=3789&TT=1&PID=ABGBOJ6696&DPR=OTSCKF&PC=7-2027-08-25&IFC=1-BOJVIE-9911-BOJ-DT01-09-12-00-K-EW-9756-DUS-DT01-09-12-00-K-EW&OFC=1-VIEBOJ-2755-VIE-DT25-08-08-25-X-EW-2790-STR-DT25-08-08-25-X-EW",
+   "image": "https://img.kartago.sk/hotels/720/bulharsko/oblast-burgas/slunecne-pobrezi/sirena/Sirena1-2048x1367x.jpg",
+   "stars": 3.0,
+   "rating": 8.8,
+   "country": "Bulharsko",
+   "country_code": "BG",
+   "region": "Burgas",
+   "place": "Slnečné pobrežie",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-08-25",
+   "date_to": "2027-09-01",
+   "nights": 7,
+   "price_total": 2400,
+   "price_original": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "price_exact": true,
+   "source": "kartago",
+   "source_name": "Kartago Tours",
+   "discount_pct": null,
+   "id": "kartago:c74b7cd9332a",
+   "score": 78,
+   "first_seen": "2026-10-25",
+   "last_seen": "2026-10-29",
+   "price_history": [
+    [
+     "2026-10-25",
+     2573
+    ],
+    [
+     "2026-10-26",
+     2573
+    ],
+    [
+     "2026-10-27",
+     2573
+    ],
+    [
+     "2026-10-28",
+     2435
+    ],
+    [
+     "2026-10-29",
+     2400
+    ]
+   ],
+   "price_change": -35
+  },
+  {
+   "hotel": "Sineva Park",
+   "url": "https://www.kartago.sk/hotely/bulharsko/burgas/sv-vlas/sineva-park?DS=2&GIATA=247332&D=63483%7C63484%7C63485%7C63486&HID=141032&MT=5&MMT=5&DI=GT06-AI&RCS=RMSD0000AE&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-08-18%7C2027-09-15&RD=2027-09-01&DD=2027-08-25&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=3789&TT=1&PID=AMTSBG0J4W&DPR=OTSCKF&PC=7-2027-08-25&IFC=1-BOJVIE-9911-BOJ-DT01-09-12-00-K-EW-9756-DUS-DT01-09-12-00-K-EW&OFC=1-VIEBOJ-2755-VIE-DT25-08-08-25-X-EW-2790-STR-DT25-08-08-25-X-EW",
+   "image": "https://img.kartago.sk/hotels/720/bulharsko/oblast-burgas/sv-vlas/sineva-park/dsc_0496.jpg",
+   "stars": 4.0,
+   "rating": 9.2,
+   "country": "Bulharsko",
+   "country_code": "BG",
+   "region": "Burgas",
+   "place": "Sveti Vlas",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-08-25",
+   "date_to": "2027-09-01",
+   "nights": 7,
+   "price_total": 2407,
+   "price_original": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "price_exact": true,
+   "source": "kartago",
+   "source_name": "Kartago Tours",
+   "discount_pct": null,
+   "id": "kartago:da43df93b094",
+   "score": 78,
+   "first_seen": "2026-10-28",
+   "last_seen": "2026-10-29",
+   "price_history": [
+    [
+     "2026-10-28",
+     2442
+    ],
+    [
+     "2026-10-29",
+     2407
+    ]
+   ],
+   "price_change": -35
+  },
+  {
    "hotel": "Royal G Deluxe",
    "url": "https://www.satur.sk/produkt/royal-g-deluxe?strava=all-inclusive&doprava=letecky&odlet=BTS",
    "image": "https://www.satur.sk/media/cache/500x333/tour/393041/e0276853-ffea-4c50-8baa-b8dafb427557-11zon_6ad1c38dcd353.jpeg",
@@ -36628,7 +36732,7 @@
      2496
     ]
    ],
-   "price_change": -351
+   "price_change": 0
   },
   {
    "hotel": "Amarina Jannah Resort & Aquapark",
@@ -36924,7 +37028,7 @@
      2827
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Sousse Palace",
@@ -36960,7 +37064,7 @@
      2827
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "GEMMA RESORT",
@@ -38327,10 +38431,10 @@
    "price_change": 0
   },
   {
-   "hotel": "Sirena",
-   "url": "https://www.kartago.sk/hotely/bulharsko/burgas/nesebar/sirena?DS=2&GIATA=255217&D=63483%7C63484%7C63485%7C63486&HID=146065&MT=5&MMT=5&DI=GT06-AI&RCS=RMSDLRSVB0&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-08-18%7C2027-09-15&RD=2027-09-01&DD=2027-08-25&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=3789&TT=1&PID=ABGBOJ6696&DPR=OTSCKF&PC=7-2027-08-25&IFC=1-BOJVIE-9911-BOJ-DT01-09-12-00-K-EW-9754-DUS-DT01-09-12-00-K-EW&OFC=1-VIEBOJ-2755-VIE-DT25-08-08-25-T-EW-2790-STR-DT25-08-08-25-T-EW",
-   "image": "https://img.kartago.sk/hotels/720/bulharsko/oblast-burgas/slunecne-pobrezi/sirena/Sirena1-2048x1367x.jpg",
-   "stars": 3.0,
+   "hotel": "Hotel Mena Palace",
+   "url": "https://www.kartago.sk/hotely/bulharsko/burgas/slnecne-pobrezie/hotel-mena-palace?DS=2&GIATA=39498&D=63483%7C63484%7C63485%7C63486&HID=141738&MT=5&MMT=5&DI=GT06-AI&RCS=2416795&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-08-18%7C2027-09-15&RD=2027-09-01&DD=2027-08-25&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=3789&TT=1&PID=132440&DPR=DERDMC&PC=7-2027-08-25&IFC=1-BOJVIE-9911-BOJ-DT01-09-12-00-K-EW-9756-DUS-DT01-09-12-00-K-EW&OFC=1-VIEBOJ-2755-VIE-DT25-08-08-25-X-EW-2790-STR-DT25-08-08-25-X-EW",
+   "image": "https://img.kartago.sk/hotels/720/bulharsko/oblast-burgas/slunecne-pobrezi/mena-palace/amtsbg2izm_924702_4.jpg",
+   "stars": 4.0,
    "rating": 8.8,
    "country": "Bulharsko",
    "country_code": "BG",
@@ -38342,7 +38446,7 @@
    "date_from": "2027-08-25",
    "date_to": "2027-09-01",
    "nights": 7,
-   "price_total": 2435,
+   "price_total": 2410,
    "price_original": null,
    "discount_label": null,
    "pets_allowed": null,
@@ -38350,33 +38454,21 @@
    "source": "kartago",
    "source_name": "Kartago Tours",
    "discount_pct": null,
-   "id": "kartago:c74b7cd9332a",
+   "id": "kartago:0354e40f6c0e",
    "score": 77,
-   "first_seen": "2026-10-25",
+   "first_seen": "2026-10-28",
    "last_seen": "2026-10-29",
    "price_history": [
     [
-     "2026-10-25",
-     2573
-    ],
-    [
-     "2026-10-26",
-     2573
-    ],
-    [
-     "2026-10-27",
-     2573
-    ],
-    [
      "2026-10-28",
-     2435
+     2444
     ],
     [
      "2026-10-29",
-     2435
+     2410
     ]
    ],
-   "price_change": 0
+   "price_change": -34
   },
   {
    "hotel": "Bluesun hotel Elaphusa",
@@ -38423,51 +38515,11 @@
    "price_change": 0
   },
   {
-   "hotel": "Sineva Park",
-   "url": "https://www.kartago.sk/hotely/bulharsko/burgas/sv-vlas/sineva-park?DS=2&GIATA=247332&D=63483%7C63484%7C63485%7C63486&HID=141032&MT=5&MMT=5&DI=GT06-AI&RCS=RMSD0000AE&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-08-18%7C2027-09-15&RD=2027-09-01&DD=2027-08-25&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=3789&TT=1&PID=AMTSBG0J4W&DPR=OTSCKF&PC=7-2027-08-25&IFC=1-BOJVIE-9911-BOJ-DT01-09-12-00-K-EW-9754-DUS-DT01-09-12-00-K-EW&OFC=1-VIEBOJ-2755-VIE-DT25-08-08-25-T-EW-2790-STR-DT25-08-08-25-T-EW",
-   "image": "https://img.kartago.sk/hotels/720/bulharsko/oblast-burgas/sv-vlas/sineva-park/dsc_0496.jpg",
+   "hotel": "Hrizantema Hotel & Casino",
+   "url": "https://www.kartago.sk/hotely/bulharsko/burgas/slnecne-pobrezie/hrizantema?DS=2&GIATA=203&D=63483%7C63484%7C63485%7C63486&HID=2110&MT=5&MMT=5&DI=GT06-AI&RCS=620&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-08-18%7C2027-09-15&RD=2027-09-01&DD=2027-08-25&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=3789&TT=1&PID=132163&DPR=DERDMC&PC=7-2027-08-25&IFC=1-BOJVIE-9911-BOJ-DT01-09-12-00-K-EW-9756-DUS-DT01-09-12-00-K-EW&OFC=1-VIEBOJ-2755-VIE-DT25-08-08-25-X-EW-2790-STR-DT25-08-08-25-X-EW",
+   "image": "https://img.kartago.sk/hotels/720/bulharsko/oblast-burgas/slunecne-pobrezi/hrizantema/_nik4582.jpg",
    "stars": 4.0,
-   "rating": 9.2,
-   "country": "Bulharsko",
-   "country_code": "BG",
-   "region": "Burgas",
-   "place": "Sveti Vlas",
-   "board": "AI",
-   "transport": "flight",
-   "departure": "VIE",
-   "date_from": "2027-08-25",
-   "date_to": "2027-09-01",
-   "nights": 7,
-   "price_total": 2442,
-   "price_original": null,
-   "discount_label": null,
-   "pets_allowed": null,
-   "price_exact": true,
-   "source": "kartago",
-   "source_name": "Kartago Tours",
-   "discount_pct": null,
-   "id": "kartago:da43df93b094",
-   "score": 77,
-   "first_seen": "2026-10-28",
-   "last_seen": "2026-10-29",
-   "price_history": [
-    [
-     "2026-10-28",
-     2442
-    ],
-    [
-     "2026-10-29",
-     2442
-    ]
-   ],
-   "price_change": 0
-  },
-  {
-   "hotel": "Hotel Mena Palace",
-   "url": "https://www.kartago.sk/hotely/bulharsko/burgas/slnecne-pobrezie/hotel-mena-palace?DS=2&GIATA=39498&D=63483%7C63484%7C63485%7C63486&HID=141738&MT=5&MMT=5&DI=GT06-AI&RCS=2416795&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-08-18%7C2027-09-15&RD=2027-09-01&DD=2027-08-25&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=3789&TT=1&PID=132440&DPR=DERDMC&PC=7-2027-08-25&IFC=1-BOJVIE-9911-BOJ-DT01-09-12-00-K-EW-9754-DUS-DT01-09-12-00-K-EW&OFC=1-VIEBOJ-2755-VIE-DT25-08-08-25-T-EW-2790-STR-DT25-08-08-25-T-EW",
-   "image": "https://img.kartago.sk/hotels/720/bulharsko/oblast-burgas/slunecne-pobrezi/mena-palace/amtsbg2izm_924702_4.jpg",
-   "stars": 4.0,
-   "rating": 8.8,
+   "rating": 9.0,
    "country": "Bulharsko",
    "country_code": "BG",
    "region": "Burgas",
@@ -38478,7 +38530,7 @@
    "date_from": "2027-08-25",
    "date_to": "2027-09-01",
    "nights": 7,
-   "price_total": 2444,
+   "price_total": 2446,
    "price_original": null,
    "discount_label": null,
    "pets_allowed": null,
@@ -38486,21 +38538,33 @@
    "source": "kartago",
    "source_name": "Kartago Tours",
    "discount_pct": null,
-   "id": "kartago:0354e40f6c0e",
+   "id": "kartago:84fbf32635bf",
    "score": 77,
-   "first_seen": "2026-10-28",
+   "first_seen": "2026-10-25",
    "last_seen": "2026-10-29",
    "price_history": [
     [
+     "2026-10-25",
+     2619
+    ],
+    [
+     "2026-10-26",
+     2619
+    ],
+    [
+     "2026-10-27",
+     2619
+    ],
+    [
      "2026-10-28",
-     2444
+     2481
     ],
     [
      "2026-10-29",
-     2444
+     2446
     ]
    ],
-   "price_change": 0
+   "price_change": -35
   },
   {
    "hotel": "Hotel Residence Costa Azzurra",
@@ -39235,46 +39299,6 @@
    "price_change": 0
   },
   {
-   "hotel": "Sultan Bay El Gouna",
-   "url": "https://www.kartago.sk/egypt/hurghada/el-gouna/sultan-bay-el-gouna?DS=65536&GIATA=5701&D=64419%7C64420%7C64421%7C64422%7C64423%7C64424%7C64425%7C64426&HID=144178&MT=5&MMT=5&DI=AI&RCS=DR01&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-31&DD=2027-08-24&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=HRG16006&DPR=KARTAGO-SK-ATCOM&PC=56391416%2F2%2F2792%2F7&IFC=208384125%2F645380&OFC=208382577%2F645379",
-   "image": "https://img.kartago.sk/hotels/720/egypt/oblast-hurghada/el-gouna/sultan-bay-el-gouna/overview.jpg",
-   "stars": 4.0,
-   "rating": 10.0,
-   "country": "Egypt",
-   "country_code": "EG",
-   "region": "Hurghada",
-   "place": "El Gouna",
-   "board": "AI",
-   "transport": "flight",
-   "departure": "BTS",
-   "date_from": "2027-08-24",
-   "date_to": "2027-08-31",
-   "nights": 7,
-   "price_total": 2924,
-   "price_original": 3882,
-   "discount_label": null,
-   "pets_allowed": null,
-   "price_exact": true,
-   "source": "kartago",
-   "source_name": "Kartago Tours",
-   "discount_pct": 25,
-   "id": "kartago:8a38195ecae7",
-   "score": 77,
-   "first_seen": "2026-10-28",
-   "last_seen": "2026-10-29",
-   "price_history": [
-    [
-     "2026-10-28",
-     2924
-    ],
-    [
-     "2026-10-29",
-     2924
-    ]
-   ],
-   "price_change": 0
-  },
-  {
    "hotel": "Sunrise Alora Aqua Park Resort",
    "url": "https://www.kartago.sk/egypt/hurghada/hurghada/sunrise-alora-aqua-park-resort?DS=65536&GIATA=411448&D=64419%7C64420%7C64421%7C64422%7C64423%7C64424%7C64425%7C64426&HID=246467&MT=5&MMT=5&DI=AI&RCS=DR01&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-31&DD=2027-08-24&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=HRG90070&DPR=KARTAGO-SK-ATCOM&PC=158050840%2F2%2F2792%2F7&IFC=208384125%2F645380&OFC=208382577%2F645379",
    "image": "https://img.kartago.sk/hotels/720/egypt/oblast-hurghada/hurghada/sunrise-alora-aqua-park-resort-hurghada/Pool-Overview-8.jpg",
@@ -39360,7 +39384,7 @@
      2953
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Iberostar Selection Royal El Mansour",
@@ -39623,103 +39647,11 @@
    "price_change": 0
   },
   {
-   "hotel": "Leda Beach Hotel",
-   "url": "https://www.cedok.sk/dovolena/turecko/turecka-riviera-side/leda-beach-hotel,AMTSTR0XDA/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgpBTVRTVFIwWERBKAQ6BEtMMjBCBgiAmJbhBkoGCICNu%252BEGUAJiBQoDVklFagUKA0FZVHIICgZEUDUwMTd6BQoDQVlUggEFCgNWSUWKAQgKBkRQNTAxN5IBBgiAmJbhBpoBBgiAjbvhBqIBDAoKUk1TRERCMDAwMKoBAwoBSOIBDgoMVHJhdmVsRnVzaW9u6gEOCgxUcmF2ZWxGdXNpb27yAQUKA09UUw%253D%253D&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
-   "image": "https://s.content4travel.com/pim-cdk/prof_5047ba8e3e.jpg",
-   "stars": 2.0,
-   "rating": 7.0,
-   "country": "Turecko",
-   "country_code": "TR",
-   "region": "Turecká riviéra - Side",
-   "place": null,
-   "board": "HB",
-   "transport": "flight",
-   "departure": "VIE",
-   "date_from": "2027-07-01",
-   "date_to": "2027-07-08",
-   "nights": 7,
-   "price_total": 1980,
-   "price_original": null,
-   "discount_label": "Cena za os. × 3 (orientačne)",
-   "pets_allowed": null,
-   "source": "cedok",
-   "source_name": "Čedok",
-   "discount_pct": null,
-   "price_exact": false,
-   "id": "cedok:852b1c3b6471",
-   "score": 76,
-   "first_seen": "2026-10-25",
-   "last_seen": "2026-10-29",
-   "price_history": [
-    [
-     "2026-10-25",
-     1982
-    ],
-    [
-     "2026-10-26",
-     1982
-    ],
-    [
-     "2026-10-27",
-     1980
-    ],
-    [
-     "2026-10-28",
-     1980
-    ],
-    [
-     "2026-10-29",
-     1980
-    ]
-   ],
-   "price_change": 0
-  },
-  {
-   "hotel": "Dunes d'Or Ocean Club",
-   "url": "https://www.satur.sk/produkt/labranda-les-dunes-dor?strava=all-inclusive&doprava=letecky&odlet=BTS",
-   "image": "https://www.satur.sk/media/cache/500x333/tour/101622/bazen2_68ef65b97cf7d.jpeg",
+   "hotel": "Trakia Plaza Hotel and Apartments",
+   "url": "https://www.kartago.sk/hotely/bulharsko/burgas/slnecne-pobrezie/trakia-plaza-hotel-and-apartments?DS=2&GIATA=1080928&D=63483%7C63484%7C63485%7C63486&HID=150157&MT=5&MMT=5&DI=GT06-AI&RCS=RMSDSC00B0&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-08-18%7C2027-09-15&RD=2027-09-01&DD=2027-08-25&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=3789&TT=1&PID=ABGVARERPS&DPR=OTSCKF&PC=7-2027-08-25&IFC=1-BOJVIE-9911-BOJ-DT01-09-12-00-K-EW-9756-DUS-DT01-09-12-00-K-EW&OFC=1-VIEBOJ-2755-VIE-DT25-08-08-25-X-EW-2790-STR-DT25-08-08-25-X-EW",
+   "image": "https://img.kartago.sk/hotels/720/bulharsko/oblast-burgas/slunecne-pobrezi/trakia-plaza-hotel-and-apartments/abgvarerps_999240_4.jpg",
    "stars": 4.0,
-   "rating": null,
-   "country": "Maroko",
-   "country_code": "MA",
-   "region": null,
-   "place": "Agadir",
-   "board": "AI",
-   "transport": "flight",
-   "departure": "BTS",
-   "date_from": "2027-08-23",
-   "date_to": "2027-08-30",
-   "nights": 7,
-   "price_total": 2283,
-   "price_original": null,
-   "discount_label": "Cena za os. × 3 (orientačne)",
-   "pets_allowed": null,
-   "source": "satur",
-   "source_name": "Satur.sk",
-   "discount_pct": null,
-   "price_exact": false,
-   "id": "satur:3244adbae7a6",
-   "score": 76,
-   "first_seen": "2026-10-28",
-   "last_seen": "2026-10-29",
-   "price_history": [
-    [
-     "2026-10-28",
-     2544
-    ],
-    [
-     "2026-10-29",
-     2283
-    ]
-   ],
-   "price_change": -261
-  },
-  {
-   "hotel": "Hrizantema Hotel & Casino",
-   "url": "https://www.kartago.sk/hotely/bulharsko/burgas/slnecne-pobrezie/hrizantema?DS=2&GIATA=203&D=63483%7C63484%7C63485%7C63486&HID=2110&MT=5&MMT=5&DI=GT06-AI&RCS=620&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-08-18%7C2027-09-15&RD=2027-09-01&DD=2027-08-25&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=3789&TT=1&PID=132163&DPR=DERDMC&PC=7-2027-08-25&IFC=1-BOJVIE-9911-BOJ-DT01-09-12-00-K-EW-9754-DUS-DT01-09-12-00-K-EW&OFC=1-VIEBOJ-2755-VIE-DT25-08-08-25-T-EW-2790-STR-DT25-08-08-25-T-EW",
-   "image": "https://img.kartago.sk/hotels/720/bulharsko/oblast-burgas/slunecne-pobrezi/hrizantema/_nik4582.jpg",
-   "stars": 4.0,
-   "rating": 9.0,
+   "rating": 8.2,
    "country": "Bulharsko",
    "country_code": "BG",
    "region": "Burgas",
@@ -39730,7 +39662,7 @@
    "date_from": "2027-08-25",
    "date_to": "2027-09-01",
    "nights": 7,
-   "price_total": 2481,
+   "price_total": 2456,
    "price_original": null,
    "discount_label": null,
    "pets_allowed": null,
@@ -39738,33 +39670,33 @@
    "source": "kartago",
    "source_name": "Kartago Tours",
    "discount_pct": null,
-   "id": "kartago:84fbf32635bf",
+   "id": "kartago:519f8b729a97",
    "score": 76,
    "first_seen": "2026-10-25",
    "last_seen": "2026-10-29",
    "price_history": [
     [
      "2026-10-25",
-     2619
+     2629
     ],
     [
      "2026-10-26",
-     2619
+     2629
     ],
     [
      "2026-10-27",
-     2619
+     2629
     ],
     [
      "2026-10-28",
-     2481
+     2491
     ],
     [
      "2026-10-29",
-     2481
+     2456
     ]
    ],
-   "price_change": 0
+   "price_change": -35
   },
   {
    "hotel": "Hotel 4R Playa Park",
@@ -39929,7 +39861,7 @@
      2580
     ]
    ],
-   "price_change": -390
+   "price_change": 0
   },
   {
    "hotel": "Villa Espana",
@@ -39965,7 +39897,7 @@
      2637
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Villaggio Stromboli",
@@ -40057,7 +39989,7 @@
      2669
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Concorde Moreen Beach Resort & Spa",
@@ -40428,11 +40360,11 @@
    "price_change": 0
   },
   {
-   "hotel": "Trakia Plaza Hotel and Apartments",
-   "url": "https://www.kartago.sk/hotely/bulharsko/burgas/slnecne-pobrezie/trakia-plaza-hotel-and-apartments?DS=2&GIATA=1080928&D=63483%7C63484%7C63485%7C63486&HID=150157&MT=5&MMT=5&DI=GT06-AI&RCS=RMSDSC00B0&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-08-18%7C2027-09-15&RD=2027-09-01&DD=2027-08-25&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=3789&TT=1&PID=ABGVARERPS&DPR=OTSCKF&PC=7-2027-08-25&IFC=1-BOJVIE-9911-BOJ-DT01-09-12-00-K-EW-9754-DUS-DT01-09-12-00-K-EW&OFC=1-VIEBOJ-2755-VIE-DT25-08-08-25-T-EW-2790-STR-DT25-08-08-25-T-EW",
-   "image": "https://img.kartago.sk/hotels/720/bulharsko/oblast-burgas/slunecne-pobrezi/trakia-plaza-hotel-and-apartments/abgvarerps_999240_4.jpg",
+   "hotel": "Golden Dune",
+   "url": "https://www.kartago.sk/hotely/bulharsko/burgas/slnecne-pobrezie/kavkaz?DS=2&GIATA=29450&D=63483%7C63484%7C63485%7C63486&HID=139845&MT=5&MMT=5&DI=GT06-AI&RCS=RMSD0000AE&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-08-18%7C2027-09-15&RD=2027-09-01&DD=2027-08-25&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=3789&TT=1&PID=AMTSBG1UYW&DPR=OTSCKF&PC=7-2027-08-25&IFC=1-BOJVIE-9911-BOJ-DT01-09-12-00-K-EW-9756-DUS-DT01-09-12-00-K-EW&OFC=1-VIEBOJ-2755-VIE-DT25-08-08-25-X-EW-2790-STR-DT25-08-08-25-X-EW",
+   "image": "https://img.kartago.sk/hotels/720/bulharsko/oblast-burgas/slunecne-pobrezi/golden-dune/3923/p_20180521_125307_59523-180.jpg",
    "stars": 4.0,
-   "rating": 8.2,
+   "rating": 8.4,
    "country": "Bulharsko",
    "country_code": "BG",
    "region": "Burgas",
@@ -40443,7 +40375,7 @@
    "date_from": "2027-08-25",
    "date_to": "2027-09-01",
    "nights": 7,
-   "price_total": 2491,
+   "price_total": 2519,
    "price_original": null,
    "discount_label": null,
    "pets_allowed": null,
@@ -40451,33 +40383,25 @@
    "source": "kartago",
    "source_name": "Kartago Tours",
    "discount_pct": null,
-   "id": "kartago:519f8b729a97",
+   "id": "kartago:00063312901a",
    "score": 75,
-   "first_seen": "2026-10-25",
+   "first_seen": "2026-10-27",
    "last_seen": "2026-10-29",
    "price_history": [
     [
-     "2026-10-25",
-     2629
-    ],
-    [
-     "2026-10-26",
-     2629
-    ],
-    [
      "2026-10-27",
-     2629
+     2691
     ],
     [
      "2026-10-28",
-     2491
+     2553
     ],
     [
      "2026-10-29",
-     2491
+     2519
     ]
    ],
-   "price_change": 0
+   "price_change": -34
   },
   {
    "hotel": "Paradise Bay Resort",
@@ -40513,7 +40437,7 @@
      2653
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Lazuli and Resort",
@@ -41364,6 +41288,42 @@
    "price_change": 0
   },
   {
+   "hotel": "Leda Beach Hotel",
+   "url": "https://www.cedok.sk/dovolena/turecko/turecka-riviera-side/leda-beach-hotel,AMTSTR0XDA/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgpBTVRTVFIwWERBKAQ6BEtMMjBCBgiAx7DhBkoGCIC81eEGUAJiBQoDVklFagUKA0FZVHIICgZEUDMwMjh6BQoDQVlUggEFCgNWSUWKAQgKBkRQMzAyOJIBBgiAx7DhBpoBBgiAvNXhBqIBDAoKUk1TRERCMDAwMKoBAwoBSOIBDgoMVHJhdmVsRnVzaW9u6gEOCgxUcmF2ZWxGdXNpb27yAQUKA09UUw%253D%253D&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
+   "image": "https://s.content4travel.com/pim-cdk/prof_5047ba8e3e.jpg",
+   "stars": 2.0,
+   "rating": 7.0,
+   "country": "Turecko",
+   "country_code": "TR",
+   "region": "Turecká riviéra - Side",
+   "place": null,
+   "board": "HB",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-07-06",
+   "date_to": "2027-07-13",
+   "nights": 7,
+   "price_total": 2194,
+   "price_original": null,
+   "discount_label": "Cena za os. × 3 (orientačne)",
+   "pets_allowed": null,
+   "source": "cedok",
+   "source_name": "Čedok",
+   "discount_pct": null,
+   "price_exact": false,
+   "id": "cedok:2848d6337e83",
+   "score": 74,
+   "first_seen": "2026-10-29",
+   "last_seen": "2026-10-29",
+   "price_history": [
+    [
+     "2026-10-29",
+     2194
+    ]
+   ],
+   "price_change": null
+  },
+  {
    "hotel": "Zaton (mobilné domčeky)",
    "url": "https://www.satur.sk/produkt/zaton-mobilne-domceky",
    "image": "https://www.satur.sk/media/cache/500x333/tour/6466/293742_652d9523a6e4c.jpeg",
@@ -41421,7 +41381,7 @@
   },
   {
    "hotel": "Zefir",
-   "url": "https://www.kartago.sk/hotely/bulharsko/burgas/slnecne-pobrezie/zefir?DS=2&GIATA=220&D=63483%7C63484%7C63485%7C63486&HID=10492&MT=5&MMT=5&DI=GT06-AI&RCS=RMSDSCSTA0&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-08-18%7C2027-09-15&RD=2027-09-01&DD=2027-08-25&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=3789&TT=1&PID=ABGBOJ4DY4&DPR=OTSCKF&PC=7-2027-08-25&IFC=1-BOJVIE-9911-BOJ-DT01-09-12-00-K-EW-9754-DUS-DT01-09-12-00-K-EW&OFC=1-VIEBOJ-2755-VIE-DT25-08-08-25-T-EW-2790-STR-DT25-08-08-25-T-EW",
+   "url": "https://www.kartago.sk/hotely/bulharsko/burgas/slnecne-pobrezie/zefir?DS=2&GIATA=220&D=63483%7C63484%7C63485%7C63486&HID=10492&MT=5&MMT=5&DI=GT06-AI&RCS=RMSDSCSTA0&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-08-18%7C2027-09-15&RD=2027-09-01&DD=2027-08-25&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=3789&TT=1&PID=ABGBOJ4DY4&DPR=OTSCKF&PC=7-2027-08-25&IFC=1-BOJVIE-9911-BOJ-DT01-09-12-00-K-EW-9756-DUS-DT01-09-12-00-K-EW&OFC=1-VIEBOJ-2755-VIE-DT25-08-08-25-X-EW-2790-STR-DT25-08-08-25-X-EW",
    "image": "https://img.kartago.sk/hotels/720/bulharsko/oblast-burgas/slunecne-pobrezi/zefir-beach/image-upscaled.jpeg",
    "stars": 3.0,
    "rating": 7.6,
@@ -41435,7 +41395,7 @@
    "date_from": "2027-08-25",
    "date_to": "2027-09-01",
    "nights": 7,
-   "price_total": 2542,
+   "price_total": 2508,
    "price_original": null,
    "discount_label": null,
    "pets_allowed": null,
@@ -41454,54 +41414,10 @@
     ],
     [
      "2026-10-29",
-     2542
+     2508
     ]
    ],
-   "price_change": 0
-  },
-  {
-   "hotel": "Golden Dune",
-   "url": "https://www.kartago.sk/hotely/bulharsko/burgas/slnecne-pobrezie/kavkaz?DS=2&GIATA=29450&D=63483%7C63484%7C63485%7C63486&HID=139845&MT=5&MMT=5&DI=GT06-AI&RCS=RMSD0000AE&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-08-18%7C2027-09-15&RD=2027-09-01&DD=2027-08-25&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=3789&TT=1&PID=AMTSBG1UYW&DPR=OTSCKF&PC=7-2027-08-25&IFC=1-BOJVIE-9911-BOJ-DT01-09-12-00-K-EW-9754-DUS-DT01-09-12-00-K-EW&OFC=1-VIEBOJ-2755-VIE-DT25-08-08-25-T-EW-2790-STR-DT25-08-08-25-T-EW",
-   "image": "https://img.kartago.sk/hotels/720/bulharsko/oblast-burgas/slunecne-pobrezi/golden-dune/3923/p_20180521_125307_59523-180.jpg",
-   "stars": 4.0,
-   "rating": 8.4,
-   "country": "Bulharsko",
-   "country_code": "BG",
-   "region": "Burgas",
-   "place": "Slnečné pobrežie",
-   "board": "AI",
-   "transport": "flight",
-   "departure": "VIE",
-   "date_from": "2027-08-25",
-   "date_to": "2027-09-01",
-   "nights": 7,
-   "price_total": 2553,
-   "price_original": null,
-   "discount_label": null,
-   "pets_allowed": null,
-   "price_exact": true,
-   "source": "kartago",
-   "source_name": "Kartago Tours",
-   "discount_pct": null,
-   "id": "kartago:00063312901a",
-   "score": 74,
-   "first_seen": "2026-10-27",
-   "last_seen": "2026-10-29",
-   "price_history": [
-    [
-     "2026-10-27",
-     2691
-    ],
-    [
-     "2026-10-28",
-     2553
-    ],
-    [
-     "2026-10-29",
-     2553
-    ]
-   ],
-   "price_change": 0
+   "price_change": -34
   },
   {
    "hotel": "Hotel 4R Regina Gran",
@@ -41649,7 +41565,7 @@
      2736
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Fantazia Resort",
@@ -41953,7 +41869,7 @@
      2833
     ]
    ],
-   "price_change": 3
+   "price_change": 0
   },
   {
    "hotel": "Hotel Safir Marsa Matrouh Resort",
@@ -42493,47 +42409,7 @@
      2850
     ]
    ],
-   "price_change": -471
-  },
-  {
-   "hotel": "Porto Giardino",
-   "url": "https://www.satur.sk/produkt/porto-giardino-resort?strava=all-inclusive&doprava=letecky&odlet=BTS",
-   "image": "https://www.satur.sk/media/cache/500x333/tour/69986e65249eb.jpeg",
-   "stars": 4.0,
-   "rating": null,
-   "country": "Taliansko",
-   "country_code": "IT",
-   "region": null,
-   "place": "Apúlia",
-   "board": "AI",
-   "transport": "flight",
-   "departure": "BTS",
-   "date_from": "2027-07-06",
-   "date_to": "2027-07-13",
-   "nights": 7,
-   "price_total": 2877,
-   "price_original": null,
-   "discount_label": "Cena za os. × 3 (orientačne)",
-   "pets_allowed": null,
-   "source": "satur",
-   "source_name": "Satur.sk",
-   "discount_pct": null,
-   "price_exact": false,
-   "id": "satur:ebc4de853746",
-   "score": 72,
-   "first_seen": "2026-10-24",
-   "last_seen": "2026-10-29",
-   "price_history": [
-    [
-     "2026-10-24",
-     3069
-    ],
-    [
-     "2026-10-29",
-     2877
-    ]
-   ],
-   "price_change": -192
+   "price_change": 0
   },
   {
    "hotel": "Futura Club Torre Rinalda",
@@ -42589,7 +42465,7 @@
      2925
     ]
    ],
-   "price_change": -84
+   "price_change": 0
   },
   {
    "hotel": "Hotel Sole Mare",
@@ -42809,11 +42685,11 @@
      1650
     ]
    ],
-   "price_change": -24
+   "price_change": 0
   },
   {
    "hotel": "Parque Vacacional Eden",
-   "url": "https://www.cedok.sk/dovolena/kanarske-ostrovy/tenerife/parque-vacacional-eden,AMTSES0F98/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgpBTVRTRVMwRjk4KAQ6BEtMMjBCBgiA94TiBkoGCIDsqeIGUAJiBQoDVklFagUKA1RGU3IICgZEUDUwMDJ6BQoDVEZTggEFCgNWSUWKAQgKBkRQNTAwMpIBBgiA94TiBpoBBgiA7KniBqIBDAoKU1RTUDAwMDBBMKoBAwoBRuIBCQoHQW1hZGV1c%252BoBCQoHQW1hZGV1c%252FIBBQoDT1RT&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
+   "url": "https://www.cedok.sk/dovolena/kanarske-ostrovy/tenerife/parque-vacacional-eden,AMTSES0F98/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgpBTVRTRVMwRjk4KAQ6BEtMMjBCBgiA7KniBkoGCIDhzuIGUAJiBQoDVklFagUKA1RGU3IICgZEUDUwMDJ6BQoDVEZTggEFCgNWSUWKAQgKBkRQNTAwMpIBBgiA7KniBpoBBgiA4c7iBqIBDAoKU1RTUDAwMDBBMKoBAwoBRuIBCQoHQW1hZGV1c%252BoBCQoHQW1hZGV1c%252FIBBQoDT1RT&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
    "image": "https://s.content4travel.com/pim-cdk/amtses0f98_0_1d313607d4.jpg",
    "stars": 4.0,
    "rating": 6.8,
@@ -42824,10 +42700,10 @@
    "board": "BB",
    "transport": "flight",
    "departure": "VIE",
-   "date_from": "2027-07-22",
-   "date_to": "2027-07-29",
+   "date_from": "2027-07-29",
+   "date_to": "2027-08-05",
    "nights": 7,
-   "price_total": 1702,
+   "price_total": 1834,
    "price_original": null,
    "discount_label": "Cena za os. × 3 (orientačne)",
    "pets_allowed": null,
@@ -42835,17 +42711,37 @@
    "source_name": "Čedok",
    "discount_pct": null,
    "price_exact": false,
-   "id": "cedok:5c1fde558b66",
+   "id": "cedok:a3a2e33134ed",
    "score": 71,
-   "first_seen": "2026-10-29",
+   "first_seen": "2026-10-24",
    "last_seen": "2026-10-29",
    "price_history": [
     [
+     "2026-10-24",
+     1866
+    ],
+    [
+     "2026-10-25",
+     1695
+    ],
+    [
+     "2026-10-26",
+     1695
+    ],
+    [
+     "2026-10-27",
+     1695
+    ],
+    [
+     "2026-10-28",
+     1868
+    ],
+    [
      "2026-10-29",
-     1702
+     1834
     ]
    ],
-   "price_change": null
+   "price_change": -34
   },
   {
    "hotel": "Hotel Gillieru",
@@ -42949,7 +42845,7 @@
      2121
     ]
    ],
-   "price_change": -35
+   "price_change": 0
   },
   {
    "hotel": "Aqua Hotel Aquamarina & Spa",
@@ -43041,99 +42937,7 @@
      2229
     ]
    ],
-   "price_change": null
-  },
-  {
-   "hotel": "Leda Beach Hotel",
-   "url": "https://www.cedok.sk/dovolena/turecko/turecka-riviera-side/leda-beach-hotel,AMTSTR0XDA/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgpBTVRTVFIwWERBKAQ6BEtMMjBCBgiAmJbhBkoGCID2yuEGUAJiBQoDVklFagUKA0FZVHIICgZEUDUwMjN6BQoDQVlUggEFCgNWSUWKAQgKBkRQNTAyM5IBBgiAmJbhBpoBBgiA9srhBqIBDAoKUk1TRERCMDAwMKoBAwoBSOIBDgoMVHJhdmVsRnVzaW9u6gEOCgxUcmF2ZWxGdXNpb27yAQUKA09UUw%253D%253D&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
-   "image": "https://s.content4travel.com/pim-cdk/prof_5047ba8e3e.jpg",
-   "stars": 2.0,
-   "rating": 7.0,
-   "country": "Turecko",
-   "country_code": "TR",
-   "region": "Turecká riviéra - Side",
-   "place": null,
-   "board": "HB",
-   "transport": "flight",
-   "departure": "VIE",
-   "date_from": "2027-07-01",
-   "date_to": "2027-07-11",
-   "nights": 10,
-   "price_total": 2358,
-   "price_original": null,
-   "discount_label": "Cena za os. × 3 (orientačne)",
-   "pets_allowed": null,
-   "source": "cedok",
-   "source_name": "Čedok",
-   "discount_pct": null,
-   "price_exact": false,
-   "id": "cedok:67aced76f9db",
-   "score": 71,
-   "first_seen": "2026-10-25",
-   "last_seen": "2026-10-29",
-   "price_history": [
-    [
-     "2026-10-25",
-     2358
-    ],
-    [
-     "2026-10-26",
-     2358
-    ],
-    [
-     "2026-10-27",
-     2358
-    ],
-    [
-     "2026-10-28",
-     2358
-    ],
-    [
-     "2026-10-29",
-     2358
-    ]
-   ],
    "price_change": 0
-  },
-  {
-   "hotel": "Iberostar Waves Founty Beach",
-   "url": "https://www.satur.sk/produkt/iberostar-founty-beach?strava=all-inclusive&doprava=letecky&odlet=BTS",
-   "image": "https://www.satur.sk/media/cache/500x333/tour/3183/pool3_68dfed6c18567.jpeg",
-   "stars": 5.0,
-   "rating": null,
-   "country": "Maroko",
-   "country_code": "MA",
-   "region": null,
-   "place": "Agadir",
-   "board": "AI",
-   "transport": "flight",
-   "departure": "BTS",
-   "date_from": "2027-07-02",
-   "date_to": "2027-07-09",
-   "nights": 7,
-   "price_total": 2640,
-   "price_original": null,
-   "discount_label": "Cena za os. × 3 (orientačne)",
-   "pets_allowed": null,
-   "source": "satur",
-   "source_name": "Satur.sk",
-   "discount_pct": null,
-   "price_exact": false,
-   "id": "satur:13e176e1d965",
-   "score": 71,
-   "first_seen": "2026-10-28",
-   "last_seen": "2026-10-29",
-   "price_history": [
-    [
-     "2026-10-28",
-     3414
-    ],
-    [
-     "2026-10-29",
-     2640
-    ]
-   ],
-   "price_change": -774
   },
   {
    "hotel": "Semiramis Village Hotel",
@@ -43345,7 +43149,7 @@
      2907
     ]
    ],
-   "price_change": -645
+   "price_change": 0
   },
   {
    "hotel": "Hotel Royal Brayka Beach Resort",
@@ -43801,7 +43605,7 @@
      1593
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Relax Inn",
@@ -44313,7 +44117,7 @@
      2892
     ]
    ],
-   "price_change": -153
+   "price_change": 0
   },
   {
    "hotel": "Hotel GHT Oasis Tossa",
@@ -44417,7 +44221,7 @@
      2934
     ]
    ],
-   "price_change": -315
+   "price_change": 0
   },
   {
    "hotel": "Hotel Ilusion Moreyo",
@@ -47785,7 +47589,7 @@
      3265
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Grand Sapphire Resort",
@@ -47821,11 +47625,11 @@
      3265
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Gallion Hotel",
-   "url": "https://www.cedok.sk/dovolena/turecko/turecka-riviera-alanya/gallion-hotel,ATRAYT9O7C/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgpBVFJBWVQ5TzdDKAQ6BEtMMjBCBgiAmJbhBkoGCICNu%252BEGUAJiBQoDVklFagUKA0FZVHIICgZEUDUwMTd6BQoDQVlUggEFCgNWSUWKAQgKBkRQNTAxN5IBBgiAmJbhBpoBBgiAjbvhBqIBDAoKUk1TRERCMDBCMKoBAwoBVeIBDgoMVHJhdmVsRnVzaW9u6gEOCgxUcmF2ZWxGdXNpb27yAQUKA09UUw%253D%253D&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
+   "url": "https://www.cedok.sk/dovolena/turecko/turecka-riviera-alanya/gallion-hotel,ATRAYT9O7C/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgpBVFJBWVQ5TzdDKAQ6BEtMMjBCBgiA%252BrLjBkoGCIDv1%252BMGUAJiBQoDVklFagUKA0FZVHIICgZEUDMwMjh6BQoDQVlUggEFCgNWSUWKAQgKBkRQMzAyOJIBBgiA%252BrLjBpoBBgiA79fjBqIBDAoKUk1TRERCMDBCMKoBAwoBVeIBDgoMVHJhdmVsRnVzaW9u6gEOCgxUcmF2ZWxGdXNpb27yAQUKA09UUw%253D%253D&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
    "image": "https://s.content4travel.com/pim-cdk/1_59fda80066.jpg",
    "stars": 3.0,
    "rating": null,
@@ -47836,10 +47640,10 @@
    "board": "RO",
    "transport": "flight",
    "departure": "VIE",
-   "date_from": "2027-07-01",
-   "date_to": "2027-07-08",
+   "date_from": "2027-08-24",
+   "date_to": "2027-08-31",
    "nights": 7,
-   "price_total": 1804,
+   "price_total": 1854,
    "price_original": null,
    "discount_label": "Cena za os. × 3 (orientačne)",
    "pets_allowed": null,
@@ -47847,37 +47651,17 @@
    "source_name": "Čedok",
    "discount_pct": null,
    "price_exact": false,
-   "id": "cedok:71afd447dca4",
+   "id": "cedok:1b038bf8b375",
    "score": 68,
-   "first_seen": "2026-10-24",
+   "first_seen": "2026-10-29",
    "last_seen": "2026-10-29",
    "price_history": [
     [
-     "2026-10-24",
-     1804
-    ],
-    [
-     "2026-10-25",
-     1804
-    ],
-    [
-     "2026-10-26",
-     1804
-    ],
-    [
-     "2026-10-27",
-     1804
-    ],
-    [
-     "2026-10-28",
-     1804
-    ],
-    [
      "2026-10-29",
-     1804
+     1854
     ]
    ],
-   "price_change": 0
+   "price_change": null
   },
   {
    "hotel": "Hotel Nord Nuova Roma",
@@ -47985,7 +47769,7 @@
      2072
     ]
    ],
-   "price_change": 44
+   "price_change": 0
   },
   {
    "hotel": "Liquid Hotel Apartments",
@@ -48037,7 +47821,7 @@
      2100
     ]
    ],
-   "price_change": 38
+   "price_change": 0
   },
   {
    "hotel": "Hugo's Boutique Hotel",
@@ -48173,7 +47957,7 @@
      2235
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Argento Hotel",
@@ -48286,62 +48070,6 @@
     ]
    ],
    "price_change": 0
-  },
-  {
-   "hotel": "Hotel Aktea Beach Village",
-   "url": "https://www.cedok.sk/dovolena/cyprus/ayia-napa/hotel-aktea-beach-village,AMTSCY1ZA4/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgpBTVRTQ1kxWkE0KAQ6BEtMMjBCBgiA%252BrLjBkoGCIDv1%252BMGUAJiBQoDQlRTagUKA0xDQXIICgZEUDMwMDN6BQoDTENBggEFCgNCVFOKAQgKBkRQMzAwM5IBBgiA%252BrLjBpoBBgiA79fjBqIBDAoKU1RTRDAwMDAwRaoBAwoBSOIBDgoMVHJhdmVsRnVzaW9u6gEOCgxUcmF2ZWxGdXNpb27yAQUKA09UUw%253D%253D&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
-   "image": "https://s.content4travel.com/pim-cdk/amtscy1za4_0_a659cc699f.jpg",
-   "stars": 4.0,
-   "rating": 9.2,
-   "country": "Cyprus",
-   "country_code": "CY",
-   "region": "Ayia Napa",
-   "place": null,
-   "board": "HB",
-   "transport": "flight",
-   "departure": "BTS",
-   "date_from": "2027-08-24",
-   "date_to": "2027-08-31",
-   "nights": 7,
-   "price_total": 2658,
-   "price_original": null,
-   "discount_label": "Cena za os. × 3 (orientačne)",
-   "pets_allowed": null,
-   "source": "cedok",
-   "source_name": "Čedok",
-   "discount_pct": null,
-   "price_exact": false,
-   "id": "cedok:42ad47a96bd7",
-   "score": 68,
-   "first_seen": "2026-10-24",
-   "last_seen": "2026-10-29",
-   "price_history": [
-    [
-     "2026-10-24",
-     2622
-    ],
-    [
-     "2026-10-25",
-     2697
-    ],
-    [
-     "2026-10-26",
-     2670
-    ],
-    [
-     "2026-10-27",
-     2622
-    ],
-    [
-     "2026-10-28",
-     2622
-    ],
-    [
-     "2026-10-29",
-     2658
-    ]
-   ],
-   "price_change": 36
   },
   {
    "hotel": "Poseidon Beach",
@@ -49901,7 +49629,7 @@
      2068
     ]
    ],
-   "price_change": 175
+   "price_change": 0
   },
   {
    "hotel": "Club Cala Blanca",
@@ -49937,7 +49665,7 @@
      2139
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Plaza Regency Hotel",
@@ -50108,6 +49836,98 @@
    "price_change": 0
   },
   {
+   "hotel": "Leda Beach Hotel",
+   "url": "https://www.cedok.sk/dovolena/turecko/turecka-riviera-side/leda-beach-hotel,AMTSTR0XDA/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgpBTVRTVFIwWERBKAQ6BEtMMjBCBgiApKvhBkoGCICC4OEGUAJiBQoDVklFagUKA0FZVHIICgZEUDIwMzV6BQoDQVlUggEFCgNWSUWKAQgKBkRQMjAzNZIBBgiApKvhBpoBBgiAguDhBqIBDAoKUk1TRERCMDAwMKoBAwoBSOIBDgoMVHJhdmVsRnVzaW9u6gEOCgxUcmF2ZWxGdXNpb27yAQUKA09UUw%253D%253D&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
+   "image": "https://s.content4travel.com/pim-cdk/prof_5047ba8e3e.jpg",
+   "stars": 2.0,
+   "rating": 7.0,
+   "country": "Turecko",
+   "country_code": "TR",
+   "region": "Turecká riviéra - Side",
+   "place": null,
+   "board": "HB",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-07-05",
+   "date_to": "2027-07-15",
+   "nights": 10,
+   "price_total": 2606,
+   "price_original": null,
+   "discount_label": "Cena za os. × 3 (orientačne)",
+   "pets_allowed": null,
+   "source": "cedok",
+   "source_name": "Čedok",
+   "discount_pct": null,
+   "price_exact": false,
+   "id": "cedok:7ae7ff08a92c",
+   "score": 67,
+   "first_seen": "2026-10-29",
+   "last_seen": "2026-10-29",
+   "price_history": [
+    [
+     "2026-10-29",
+     2606
+    ]
+   ],
+   "price_change": null
+  },
+  {
+   "hotel": "Hotel Aktea Beach Village",
+   "url": "https://www.cedok.sk/dovolena/cyprus/ayia-napa/hotel-aktea-beach-village,AMTSCY1ZA4/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgpBTVRTQ1kxWkE0KAQ6BEtMMjBCBgiA%252BrLjBkoGCIDv1%252BMGUAJiBQoDQlRTagUKA0xDQXIICgZEUDMwMDN6BQoDTENBggEFCgNCVFOKAQgKBkRQMzAwM5IBBgiA%252BrLjBpoBBgiA79fjBqIBDAoKU1RTRDAwMDAwMKoBAwoBSOIBDgoMVHJhdmVsRnVzaW9u6gEOCgxUcmF2ZWxGdXNpb27yAQUKA09UUw%253D%253D&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
+   "image": "https://s.content4travel.com/pim-cdk/amtscy1za4_0_a659cc699f.jpg",
+   "stars": 4.0,
+   "rating": 9.2,
+   "country": "Cyprus",
+   "country_code": "CY",
+   "region": "Ayia Napa",
+   "place": null,
+   "board": "HB",
+   "transport": "flight",
+   "departure": "BTS",
+   "date_from": "2027-08-24",
+   "date_to": "2027-08-31",
+   "nights": 7,
+   "price_total": 2706,
+   "price_original": null,
+   "discount_label": "Cena za os. × 3 (orientačne)",
+   "pets_allowed": null,
+   "source": "cedok",
+   "source_name": "Čedok",
+   "discount_pct": null,
+   "price_exact": false,
+   "id": "cedok:42ad47a96bd7",
+   "score": 67,
+   "first_seen": "2026-10-24",
+   "last_seen": "2026-10-29",
+   "price_history": [
+    [
+     "2026-10-24",
+     2622
+    ],
+    [
+     "2026-10-25",
+     2697
+    ],
+    [
+     "2026-10-26",
+     2670
+    ],
+    [
+     "2026-10-27",
+     2622
+    ],
+    [
+     "2026-10-28",
+     2622
+    ],
+    [
+     "2026-10-29",
+     2706
+    ]
+   ],
+   "price_change": 48
+  },
+  {
    "hotel": "Apartmány Koversada",
    "url": "https://www.satur.sk/produkt/apartments-koversada",
    "image": "https://www.satur.sk/media/cache/500x333/tour/327668/M13-025-00069-11zon_661e4af911e13.jpeg",
@@ -50205,7 +50025,7 @@
      2946
     ]
    ],
-   "price_change": -18
+   "price_change": 0
   },
   {
    "hotel": "Titanic Palace Resort",
@@ -51385,7 +51205,7 @@
      2178
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Gallion Hotel",
@@ -53577,7 +53397,7 @@
      1936
     ]
    ],
-   "price_change": 2
+   "price_change": 0
   },
   {
    "hotel": "Las Casitas de Corralejo",
@@ -53617,7 +53437,7 @@
      1986
     ]
    ],
-   "price_change": -2
+   "price_change": 0
   },
   {
    "hotel": "Oasis Beach Club",
@@ -53783,54 +53603,6 @@
     [
      "2026-10-29",
      2384
-    ]
-   ],
-   "price_change": 0
-  },
-  {
-   "hotel": "Hotel Roger de Flor Seleqtta",
-   "url": "https://www.cedok.sk/dovolena/spanielsko/costa-brava/hotel-roger-de-flor-seleqtta,AESBCB8IIC/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgpBRVNCQ0I4SUlDKAQ6BEtMMjBCBgiAu5vhBkoGCICwwOEGUAJiBQoDVklFagUKA0JDTnIICgZEUDYwNDZ6BQoDQkNOggEFCgNWSUWKAQgKBkRQNjA0NpIBBgiAu5vhBpoBBgiAsMDhBqIBDAoKUk1TRERCMDBCMKoBAwoBRuIBCQoHQW1hZGV1c%252BoBCQoHQW1hZGV1c%252FIBBQoDT1RT&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
-   "image": "https://s.content4travel.com/pim-cdk/AESBCB8IIC_1703692_a4cf3a328b.jpg",
-   "stars": 4.0,
-   "rating": 7.5,
-   "country": "Španielsko",
-   "country_code": "ES",
-   "region": "Costa Brava",
-   "place": null,
-   "board": "BB",
-   "transport": "flight",
-   "departure": "VIE",
-   "date_from": "2027-07-02",
-   "date_to": "2027-07-09",
-   "nights": 7,
-   "price_total": 2456,
-   "price_original": null,
-   "discount_label": "Cena za os. × 3 (orientačne)",
-   "pets_allowed": null,
-   "source": "cedok",
-   "source_name": "Čedok",
-   "discount_pct": null,
-   "price_exact": false,
-   "id": "cedok:09f529d7f9b3",
-   "score": 65,
-   "first_seen": "2026-10-24",
-   "last_seen": "2026-10-29",
-   "price_history": [
-    [
-     "2026-10-24",
-     2456
-    ],
-    [
-     "2026-10-25",
-     2456
-    ],
-    [
-     "2026-10-28",
-     2456
-    ],
-    [
-     "2026-10-29",
-     2456
     ]
    ],
    "price_change": 0
@@ -54025,7 +53797,7 @@
      2578
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Vantaris Garden",
@@ -54133,7 +53905,7 @@
      2796
     ]
    ],
-   "price_change": 38
+   "price_change": 0
   },
   {
    "hotel": "Hotel Chryssi Akti",
@@ -55332,54 +55104,6 @@
    "price_change": 0
   },
   {
-   "hotel": "The V Luxury Resort",
-   "url": "https://www.fischer.sk/egypt/egypt-hurghada/sahl-hasheesh/the-v-luxury-resort?DS=256&GIATA=1371606&D=64419%7C64420%7C64421%7C64422%7C64423%7C64424%7C64425%7C64426&HID=147499&MT=5&MMT=5&DI=AU&RCS=DR05&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-07-13&DD=2027-07-06&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=HRG90049&DPR=FISCHER+SK+ATCOM&PC=31208809%2F2%2F2743%2F7&IFC=208376900%2F645366&OFC=208375352%2F645365",
-   "image": "https://img.fischer.sk/hotels/720/egypt/oblast-hurghada/the-v-luxury-resort/0u2a1618_13-1x.jpg",
-   "stars": 5.0,
-   "rating": 9.8,
-   "country": "Egypt",
-   "country_code": "EG",
-   "region": "Hurghada",
-   "place": "Sahl Hasheesh",
-   "board": "UAI",
-   "transport": "flight",
-   "departure": "BTS",
-   "date_from": "2027-07-06",
-   "date_to": "2027-07-13",
-   "nights": 7,
-   "price_total": 3280,
-   "price_original": 4442,
-   "discount_label": null,
-   "pets_allowed": null,
-   "price_exact": true,
-   "source": "fischer",
-   "source_name": "Fischer",
-   "discount_pct": 26,
-   "id": "fischer:2693810ce427",
-   "score": 65,
-   "first_seen": "2026-10-25",
-   "last_seen": "2026-10-29",
-   "price_history": [
-    [
-     "2026-10-25",
-     3280
-    ],
-    [
-     "2026-10-26",
-     3280
-    ],
-    [
-     "2026-10-28",
-     3280
-    ],
-    [
-     "2026-10-29",
-     3280
-    ]
-   ],
-   "price_change": 0
-  },
-  {
    "hotel": "Hotel Dream World Palace",
    "url": "https://www.cedok.sk/dovolena/turecko/turecka-riviera-side/hotel-dream-world-palace,AYT2DRE/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgdBWVQyRFJFKAQ6BEcyMTBCBgiAyOrhBkoGCIC9j%252BIGUAJiBQoDQlRTagUKA0FZVHIDCgExegUKA0FZVIIBBQoDQlRTigEDCgExkgEGCIDI6uEGmgEGCIC9j%252BIGogEFCgNEQkyqAQMKAUHiAQkKB1Jlc2FiZWXqAQkKB1Jlc2FiZWXyAQkKB1Jlc2FiZWU%253D&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
    "image": "https://s.content4travel.com/pim-cdk/ayt2dre_0_a996403ac4.jpg",
@@ -56497,7 +56221,7 @@
      2428
     ]
    ],
-   "price_change": -36
+   "price_change": 0
   },
   {
    "hotel": "Hotel Al Manthia",
@@ -56551,6 +56275,46 @@
     [
      "2026-10-29",
      2432
+    ]
+   ],
+   "price_change": 0
+  },
+  {
+   "hotel": "Hotel Roger de Flor Seleqtta",
+   "url": "https://www.cedok.sk/dovolena/spanielsko/costa-brava/hotel-roger-de-flor-seleqtta,AESBCB8IIC/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgpBRVNCQ0I4SUlDKAQ6BEtMMjBCBgiApKvhBkoGCICZ0OEGUAJiBQoDVklFagUKA0JDTnIICgZEUDIwNDB6BQoDQkNOggEFCgNWSUWKAQgKBkRQMjA0MJIBBgiApKvhBpoBBgiAmdDhBqIBDAoKUk1TRERCMDBCMKoBAwoBRuIBCQoHQW1hZGV1c%252BoBCQoHQW1hZGV1c%252FIBBQoDT1RT&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
+   "image": "https://s.content4travel.com/pim-cdk/AESBCB8IIC_1703692_a4cf3a328b.jpg",
+   "stars": 4.0,
+   "rating": 7.5,
+   "country": "Španielsko",
+   "country_code": "ES",
+   "region": "Costa Brava",
+   "place": null,
+   "board": "BB",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-07-05",
+   "date_to": "2027-07-12",
+   "nights": 7,
+   "price_total": 2534,
+   "price_original": null,
+   "discount_label": "Cena za os. × 3 (orientačne)",
+   "pets_allowed": null,
+   "source": "cedok",
+   "source_name": "Čedok",
+   "discount_pct": null,
+   "price_exact": false,
+   "id": "cedok:27bef2b40f49",
+   "score": 64,
+   "first_seen": "2026-10-27",
+   "last_seen": "2026-10-29",
+   "price_history": [
+    [
+     "2026-10-27",
+     2534
+    ],
+    [
+     "2026-10-29",
+     2534
     ]
    ],
    "price_change": 0
@@ -56713,7 +56477,7 @@
      2758
     ]
    ],
-   "price_change": 37
+   "price_change": 0
   },
   {
    "hotel": "Sentido Naga Bay",
@@ -58024,6 +57788,110 @@
    "price_change": 0
   },
   {
+   "hotel": "XANADU MAKADI BAY",
+   "url": "https://www.kartago.sk/egypt/hurghada/makadi-bay/xanadu-makadi-bay?DS=65536&GIATA=1311753&D=64419%7C64420%7C64421%7C64422%7C64423%7C64424%7C64425%7C64426&HID=143982&MT=5&MMT=5&DI=AU&RCS=DR02&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-31&DD=2027-08-24&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=HRG00500&DPR=KARTAGO-SK-ATCOM&PC=7219087%2F2%2F2792%2F7&IFC=208384125%2F645380&OFC=208382577%2F645379",
+   "image": "https://img.kartago.sk/hotels/720/egypt/oblast-hurghada/makadi-bay/xanadu-makadi-bay/Xanadu-Makadi-Bayx-upraveno.jpg",
+   "stars": 5.0,
+   "rating": 9.6,
+   "country": "Egypt",
+   "country_code": "EG",
+   "region": "Hurghada",
+   "place": "Makadi Bay",
+   "board": "UAI",
+   "transport": "flight",
+   "departure": "BTS",
+   "date_from": "2027-08-24",
+   "date_to": "2027-08-31",
+   "nights": 7,
+   "price_total": 3292,
+   "price_original": 4342,
+   "discount_label": null,
+   "pets_allowed": null,
+   "price_exact": true,
+   "source": "kartago",
+   "source_name": "Kartago Tours",
+   "discount_pct": 24,
+   "id": "kartago:eec791773247",
+   "score": 64,
+   "first_seen": "2026-10-25",
+   "last_seen": "2026-10-29",
+   "price_history": [
+    [
+     "2026-10-25",
+     3292
+    ],
+    [
+     "2026-10-26",
+     3292
+    ],
+    [
+     "2026-10-27",
+     3292
+    ],
+    [
+     "2026-10-28",
+     3292
+    ],
+    [
+     "2026-10-29",
+     3292
+    ]
+   ],
+   "price_change": 0
+  },
+  {
+   "hotel": "Xanadu Makadi Bay",
+   "url": "https://www.fischer.sk/egypt/egypt-hurghada/makadi-bay/xanadu-makadi-bay?DS=256&GIATA=1311753&D=64419%7C64420%7C64421%7C64422%7C64423%7C64424%7C64425%7C64426&HID=143982&MT=5&MMT=5&DI=AU&RCS=DR02&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-31&DD=2027-08-24&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=HRG00500&DPR=FISCHER+SK+ATCOM&PC=7277253%2F2%2F2792%2F7&IFC=208384125%2F645380&OFC=208382577%2F645379",
+   "image": "https://img.fischer.sk/hotels/720/egypt/oblast-hurghada/makadi-bay/xanadu-makadi-bay/Xanadu-Makadi-Bayx-upraveno.jpg",
+   "stars": 5.0,
+   "rating": 9.6,
+   "country": "Egypt",
+   "country_code": "EG",
+   "region": "Hurghada",
+   "place": "Makadi Bay",
+   "board": "UAI",
+   "transport": "flight",
+   "departure": "BTS",
+   "date_from": "2027-08-24",
+   "date_to": "2027-08-31",
+   "nights": 7,
+   "price_total": 3292,
+   "price_original": 4342,
+   "discount_label": null,
+   "pets_allowed": null,
+   "price_exact": true,
+   "source": "fischer",
+   "source_name": "Fischer",
+   "discount_pct": 24,
+   "id": "fischer:591ffdaba43f",
+   "score": 64,
+   "first_seen": "2026-10-25",
+   "last_seen": "2026-10-29",
+   "price_history": [
+    [
+     "2026-10-25",
+     3292
+    ],
+    [
+     "2026-10-26",
+     3292
+    ],
+    [
+     "2026-10-27",
+     3292
+    ],
+    [
+     "2026-10-28",
+     3292
+    ],
+    [
+     "2026-10-29",
+     3292
+    ]
+   ],
+   "price_change": 0
+  },
+  {
    "hotel": "Playalinda Aquapark & Spa",
    "url": "https://www.kartago.sk/spanielsko/costa-almeria/roquetas-de-mar/playalinda-aquapark-a-spa?DS=65536&GIATA=19170&D=63213%7C63216%7C63226%7C63231%7C63241%7C63242%7C63243%7C63244%7C63245%7C63267%7C63272%7C63284%7C63312%7C63313%7C63334%7C63349%7C63350%7C63354%7C63360%7C63455%7C64430%7C74459%7C74460%7C74461%7C74462%7C74463%7C74464%7C74465%7C77806%7C211764&HID=86635&MT=5&MMT=5&DI=AM&RCS=DR01&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-30&DD=2027-08-23&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=LEI90011&DPR=KARTAGO-SK-ATCOM&PC=11626172%2F2%2F2791%2F7&IFC=209511887%2F649609&OFC=209510335%2F649608",
    "image": "https://img.kartago.sk/hotels/720/spanelsko/costa-almeria/roquetas-de-mar/playalinda-aquapark-a-spa/6116/264012-180-180.jpg",
@@ -59129,7 +58997,7 @@
      2306
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Cerviola",
@@ -59425,7 +59293,7 @@
      2598
     ]
    ],
-   "price_change": 3
+   "price_change": 0
   },
   {
    "hotel": "Hotel Osborne",
@@ -60264,54 +60132,6 @@
    "price_change": 0
   },
   {
-   "hotel": "Pickalbatros Palace Port Ghalib",
-   "url": "https://www.kartago.sk/egypt/marsa-alam/marsa-alam/pickalbatros-palace-port-ghalib?DS=65536&GIATA=136534&D=64419%7C64420%7C64421%7C64422%7C64423%7C64424%7C64425%7C64426&HID=28952&MT=5&MMT=5&DI=AI&RCS=DR01&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-29&DD=2027-08-22&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=RMF90014&DPR=KARTAGO-SK-ATCOM&PC=16625232%2F2%2F2790%2F7&IFC=208784879%2F646810&OFC=208783331%2F646809",
-   "image": "https://img.kartago.sk/hotels/720/egypt/oblast-marsa-alam/marsa-alam/pickalbatros-palace-port-ghalib/270952-15.jpg",
-   "stars": 5.0,
-   "rating": 9.8,
-   "country": "Egypt",
-   "country_code": "EG",
-   "region": "Marsa Alam",
-   "place": "Marsa Alam",
-   "board": "AI",
-   "transport": "flight",
-   "departure": "BTS",
-   "date_from": "2027-08-22",
-   "date_to": "2027-08-29",
-   "nights": 7,
-   "price_total": 3296,
-   "price_original": 4334,
-   "discount_label": null,
-   "pets_allowed": null,
-   "price_exact": true,
-   "source": "kartago",
-   "source_name": "Kartago Tours",
-   "discount_pct": 24,
-   "id": "kartago:3431ebb3dd15",
-   "score": 63,
-   "first_seen": "2026-10-25",
-   "last_seen": "2026-10-29",
-   "price_history": [
-    [
-     "2026-10-25",
-     3296
-    ],
-    [
-     "2026-10-26",
-     3296
-    ],
-    [
-     "2026-10-28",
-     3296
-    ],
-    [
-     "2026-10-29",
-     3296
-    ]
-   ],
-   "price_change": 0
-  },
-  {
    "hotel": "White Olive Premium Laganas",
    "url": "https://www.kartago.sk/grecko/zakynthos/laganas/white-olive-premium-laganas?DS=65536&GIATA=536237&D=63209%7C63214%7C63219%7C63220%7C63262%7C63266%7C63281%7C63283%7C63285%7C63290%7C63297%7C63311%7C63314%7C63316%7C63319%7C63324%7C63327%7C63333%7C63335%7C63336%7C63341%7C63352%7C63357%7C63362%7C63364%7C63383%7C63384%7C63387%7C63388%7C63390%7C63399%7C63402%7C63408%7C63409%7C63424%7C63427%7C63428%7C63430%7C63431%7C63437%7C63439%7C63442%7C63463%7C63471%7C63472%7C64431%7C64432%7C64433%7C64434%7C64435%7C64436%7C64437%7C64438%7C64440%7C64441%7C64442%7C74677&HID=9865&MT=5&MMT=5&DI=AI&RCS=DR03&NN=10&MNN=10%7C11%7C12%7C13%7C14&NNM=10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-19&DD=2027-08-09&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=ZTH90011&DPR=KARTAGO-SK-ATCOM&PC=12674720%2F2%2F2777%2F10&IFC=209466234%2F649353&OFC=209446726%2F649352",
    "image": "https://img.kartago.sk/hotels/720/recko/zakynthos/laganas/white-olive-premium-laganas/hotelovy-areal.jpg",
@@ -60744,20 +60564,20 @@
    "price_change": 0
   },
   {
-   "hotel": "Hotel Crystal De Luxe Comfort Collection",
-   "url": "https://www.cedok.sk/dovolena/turecko/turecka-riviera-kemer/hotel-crystal-de-luxe-comfort-collection,AYT2UXE/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgdBWVQyVVhFKAQ6BEcyMTBCBgiAsMDhBkoGCICl5eEGUAJiBQoDQlRTagUKA0FZVHIDCgEyegUKA0FZVIIBBQoDQlRTigEDCgEykgEGCICwwOEGmgEGCICl5eEGogEFCgNER1aqAQMKAUHiAQkKB1Jlc2FiZWXqAQkKB1Jlc2FiZWXyAQkKB1Jlc2FiZWU%253D&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
-   "image": "https://s.content4travel.com/pim-cdk/ayt2uxe_0_dbbf3cd63c.jpg",
+   "hotel": "Hotel Crystal Family Comfort Collection",
+   "url": "https://www.cedok.sk/dovolena/turecko/turecka-riviera-belek/hotel-crystal-family-comfort-collection,AYT2FAM/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgdBWVQyRkFNKAQ6BEcyMDBCBgiA7p3jBkoGCIDjwuMGUAJiBQoDQlRTagUKA0FZVHIDCgEyegUKA0FZVIIBBQoDQlRTigEDCgEykgEGCIDuneMGmgEGCIDjwuMGogEFCgNEQkyqAQMKAUHiAQkKB1Jlc2FiZWXqAQkKB1Jlc2FiZWXyAQkKB1Jlc2FiZWU%253D&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
+   "image": "https://s.content4travel.com/pim-cdk/crystal_family_general_2_2b3063e83f8383900cd4a8cd3a09bbe9_Resize1920_10d91caba5.jpg",
    "stars": 5.0,
-   "rating": 8.5,
+   "rating": 8.2,
    "country": "Turecko",
    "country_code": "TR",
-   "region": "Turecká riviéra - Kemer",
+   "region": "Turecká riviéra - Belek",
    "place": null,
    "board": "UAI",
    "transport": "flight",
    "departure": "BTS",
-   "date_from": "2027-07-09",
-   "date_to": "2027-07-16",
+   "date_from": "2027-08-20",
+   "date_to": "2027-08-27",
    "nights": 7,
    "price_total": 3458,
    "price_original": 4376,
@@ -60767,7 +60587,7 @@
    "source_name": "Čedok",
    "discount_pct": 21,
    "price_exact": false,
-   "id": "cedok:0ef5e579328c",
+   "id": "cedok:c741cf0fb983",
    "score": 63,
    "first_seen": "2026-10-24",
    "last_seen": "2026-10-29",
@@ -60800,20 +60620,20 @@
    "price_change": 0
   },
   {
-   "hotel": "Hotel Crystal Family Comfort Collection",
-   "url": "https://www.cedok.sk/dovolena/turecko/turecka-riviera-belek/hotel-crystal-family-comfort-collection,AYT2FAM/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgdBWVQyRkFNKAQ6BEcyMDBCBgiA7p3jBkoGCIDjwuMGUAJiBQoDQlRTagUKA0FZVHIDCgEyegUKA0FZVIIBBQoDQlRTigEDCgEykgEGCIDuneMGmgEGCIDjwuMGogEFCgNEQkyqAQMKAUHiAQkKB1Jlc2FiZWXqAQkKB1Jlc2FiZWXyAQkKB1Jlc2FiZWU%253D&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
-   "image": "https://s.content4travel.com/pim-cdk/crystal_family_general_2_2b3063e83f8383900cd4a8cd3a09bbe9_Resize1920_10d91caba5.jpg",
+   "hotel": "Hotel Crystal De Luxe Comfort Collection",
+   "url": "https://www.cedok.sk/dovolena/turecko/turecka-riviera-kemer/hotel-crystal-de-luxe-comfort-collection,AYT2UXE/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgdBWVQyVVhFKAQ6BEcyMTBCBgiAsMDhBkoGCICl5eEGUAJiBQoDQlRTagUKA0FZVHIDCgEyegUKA0FZVIIBBQoDQlRTigEDCgEykgEGCICwwOEGmgEGCICl5eEGogEFCgNER1aqAQMKAUHiAQkKB1Jlc2FiZWXqAQkKB1Jlc2FiZWXyAQkKB1Jlc2FiZWU%253D&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
+   "image": "https://s.content4travel.com/pim-cdk/ayt2uxe_0_dbbf3cd63c.jpg",
    "stars": 5.0,
-   "rating": 8.2,
+   "rating": 8.5,
    "country": "Turecko",
    "country_code": "TR",
-   "region": "Turecká riviéra - Belek",
+   "region": "Turecká riviéra - Kemer",
    "place": null,
    "board": "UAI",
    "transport": "flight",
    "departure": "BTS",
-   "date_from": "2027-08-20",
-   "date_to": "2027-08-27",
+   "date_from": "2027-07-09",
+   "date_to": "2027-07-16",
    "nights": 7,
    "price_total": 3458,
    "price_original": 4376,
@@ -60823,7 +60643,7 @@
    "source_name": "Čedok",
    "discount_pct": 21,
    "price_exact": false,
-   "id": "cedok:c741cf0fb983",
+   "id": "cedok:0ef5e579328c",
    "score": 63,
    "first_seen": "2026-10-24",
    "last_seen": "2026-10-29",
@@ -60993,7 +60813,7 @@
      2151
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "La Milagrosa Hotel and Apartments",
@@ -61093,7 +60913,7 @@
      2286
     ]
    ],
-   "price_change": 2
+   "price_change": 0
   },
   {
    "hotel": "Theoni Apartments",
@@ -61129,7 +60949,7 @@
      2307
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Roussas Štúdiá A Apartmány",
@@ -61437,7 +61257,7 @@
      2595
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Horitzo by Pierre and Vacances",
@@ -61497,7 +61317,7 @@
   },
   {
    "hotel": "Antik Hotel Istanbul",
-   "url": "https://www.cedok.sk/dovolena/turecko/istanbul/antik-hotel-istanbul,AMTSTR1310/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgpBTVRTVFIxMzEwKAQ6BEtMMjBCBgiA39rhBkoGCIDU%252F%252BEGUAJiBQoDVklFagUKA0lTVHIICgZEUDQwMDJ6BQoDSVNUggEFCgNWSUWKAQgKBkRQNDAwMpIBBgiA39rhBpoBBgiA1P%252FhBqIBDAoKUk1TRERCMDAwMKoBAwoBRuIBCQoHQW1hZGV1c%252BoBCQoHQW1hZGV1c%252FIBBQoDT1RT&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
+   "url": "https://www.cedok.sk/dovolena/turecko/istanbul/antik-hotel-istanbul,AMTSTR1310/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgpBTVRTVFIxMzEwKAQ6BEtMMjBCBgiAsfrhBkoGCICmn%252BIGUAJiBQoDVklFagUKA0lTVHIICgZEUDMwMDR6BQoDSVNUggEFCgNWSUWKAQgKBkRQMzAwNJIBBgiAsfrhBpoBBgiApp%252FiBqIBDAoKUk1TRERCMDAwMKoBAwoBRuIBCQoHQW1hZGV1c%252BoBCQoHQW1hZGV1c%252FIBBQoDT1RT&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
    "image": "https://s.content4travel.com/pim-cdk/Image_Converter_7a1b8d2df6.jpg",
    "stars": 4.0,
    "rating": 8.3,
@@ -61508,8 +61328,8 @@
    "board": "BB",
    "transport": "flight",
    "departure": "VIE",
-   "date_from": "2027-07-14",
-   "date_to": "2027-07-21",
+   "date_from": "2027-07-20",
+   "date_to": "2027-07-27",
    "nights": 7,
    "price_total": 2678,
    "price_original": null,
@@ -61519,21 +61339,13 @@
    "source_name": "Čedok",
    "discount_pct": null,
    "price_exact": false,
-   "id": "cedok:6416162849eb",
+   "id": "cedok:5f7fa8597746",
    "score": 62,
-   "first_seen": "2026-10-25",
+   "first_seen": "2026-10-28",
    "last_seen": "2026-10-29",
    "price_history": [
     [
-     "2026-10-25",
-     2676
-    ],
-    [
-     "2026-10-26",
-     2676
-    ],
-    [
-     "2026-10-27",
+     "2026-10-28",
      2674
     ],
     [
@@ -61596,54 +61408,6 @@
    "price_change": 0
   },
   {
-   "hotel": "Leda Beach Hotel",
-   "url": "https://www.cedok.sk/dovolena/turecko/turecka-riviera-side/leda-beach-hotel,AMTSTR0XDA/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgpBTVRTVFIwWERBKAQ6BEtMMjBCBgiAmJbhBkoGCICC4OEGUAJiBQoDVklFagUKA0FZVHIICgZEUDUwMzF6BQoDQVlUggEFCgNWSUWKAQgKBkRQNTAzMZIBBgiAmJbhBpoBBgiAguDhBqIBDAoKUk1TRERCMDAwMKoBAwoBSOIBDgoMVHJhdmVsRnVzaW9u6gEOCgxUcmF2ZWxGdXNpb27yAQUKA09UUw%253D%253D&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
-   "image": "https://s.content4travel.com/pim-cdk/prof_5047ba8e3e.jpg",
-   "stars": 2.0,
-   "rating": 7.0,
-   "country": "Turecko",
-   "country_code": "TR",
-   "region": "Turecká riviéra - Side",
-   "place": null,
-   "board": "HB",
-   "transport": "flight",
-   "departure": "VIE",
-   "date_from": "2027-07-01",
-   "date_to": "2027-07-15",
-   "nights": 14,
-   "price_total": 2844,
-   "price_original": null,
-   "discount_label": "Cena za os. × 3 (orientačne)",
-   "pets_allowed": null,
-   "source": "cedok",
-   "source_name": "Čedok",
-   "discount_pct": null,
-   "price_exact": false,
-   "id": "cedok:69797911ba74",
-   "score": 62,
-   "first_seen": "2026-10-26",
-   "last_seen": "2026-10-29",
-   "price_history": [
-    [
-     "2026-10-26",
-     2846
-    ],
-    [
-     "2026-10-27",
-     2844
-    ],
-    [
-     "2026-10-28",
-     2844
-    ],
-    [
-     "2026-10-29",
-     2844
-    ]
-   ],
-   "price_change": 0
-  },
-  {
    "hotel": "Hotel Bluesun Alga",
    "url": "https://www.satur.sk/produkt/bluesun-alga?doprava=vlastna",
    "image": "https://www.satur.sk/media/cache/500x333/tour/4139/5_664219bd1929c.jpeg",
@@ -61700,42 +61464,6 @@
    "price_change": 0
   },
   {
-   "hotel": "Villa del Mar",
-   "url": "https://www.satur.sk/produkt/villa-del-mar--321636?strava=all-inclusive&doprava=letecky&odlet=BTS",
-   "image": "https://www.satur.sk/media/cache/500x333/tour/321636/Titlka_699c32df6cb04.jpeg",
-   "stars": 4.0,
-   "rating": null,
-   "country": "Španielsko",
-   "country_code": "ES",
-   "region": "Valencia",
-   "place": "Alicante",
-   "board": "AI",
-   "transport": "flight",
-   "departure": "BTS",
-   "date_from": "2027-07-05",
-   "date_to": "2027-07-12",
-   "nights": 7,
-   "price_total": 3027,
-   "price_original": null,
-   "discount_label": "Cena za os. × 3 (orientačne)",
-   "pets_allowed": null,
-   "source": "satur",
-   "source_name": "Satur.sk",
-   "discount_pct": null,
-   "price_exact": false,
-   "id": "satur:eb2fbd7bf3cf",
-   "score": 62,
-   "first_seen": "2026-10-29",
-   "last_seen": "2026-10-29",
-   "price_history": [
-    [
-     "2026-10-29",
-     3027
-    ]
-   ],
-   "price_change": null
-  },
-  {
    "hotel": "db Seabank Resort + Spa",
    "url": "https://www.kartago.sk/hotely/malta/ostrov-malta/mellieha/db-seabank-resort-spa?DS=2&GIATA=1841&D=63580%7C63581%7C63582&HID=3335&MT=5&MMT=5&DI=GT06-AI&RCS=RMSDQUILB0&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-07-08&DD=2027-07-01&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=3789&TT=1&PID=AMTSMT22IE&DPR=OTSCKF&PC=7-2027-07-01&IFC=0-MLAVIE-514-DT08-07-09-25-R&OFC=0-VIEMLA-515-DT01-07-12-35-R",
    "image": "https://img.kartago.sk/hotels/720/malta/ostrov-malta/mellieha/db-seabank-resort-a-spa/11.jpg",
@@ -61785,7 +61513,7 @@
      3051
     ]
    ],
-   "price_change": -48
+   "price_change": 0
   },
   {
    "hotel": "Hotel Fame Residence Goynuk",
@@ -62917,51 +62645,7 @@
      2560
     ]
    ],
-   "price_change": null
-  },
-  {
-   "hotel": "Parque Vacacional Eden",
-   "url": "https://www.cedok.sk/dovolena/kanarske-ostrovy/tenerife/parque-vacacional-eden,AMTSES0F98/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgpBTVRTRVMwRjk4KAQ6BEtMMjBCBgiA94TiBkoGCIDhzuIGUAJiBQoDVklFagUKA1RGU3IICgZEUDUwMTN6BQoDVEZTggEFCgNWSUWKAQgKBkRQNTAxM5IBBgiA94TiBpoBBgiA4c7iBqIBDAoKU1RTUDAwMDBBMKoBAwoBRuIBCQoHQW1hZGV1c%252BoBCQoHQW1hZGV1c%252FIBBQoDT1RT&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
-   "image": "https://s.content4travel.com/pim-cdk/amtses0f98_0_1d313607d4.jpg",
-   "stars": 4.0,
-   "rating": 6.8,
-   "country": "Španielsko",
-   "country_code": "ES",
-   "region": "Tenerife",
-   "place": null,
-   "board": "BB",
-   "transport": "flight",
-   "departure": "VIE",
-   "date_from": "2027-07-22",
-   "date_to": "2027-08-05",
-   "nights": 14,
-   "price_total": 2616,
-   "price_original": null,
-   "discount_label": "Cena za os. × 3 (orientačne)",
-   "pets_allowed": null,
-   "source": "cedok",
-   "source_name": "Čedok",
-   "discount_pct": null,
-   "price_exact": false,
-   "id": "cedok:7ae3f9b00a7b",
-   "score": 61,
-   "first_seen": "2026-10-25",
-   "last_seen": "2026-10-29",
-   "price_history": [
-    [
-     "2026-10-25",
-     2694
-    ],
-    [
-     "2026-10-28",
-     2678
-    ],
-    [
-     "2026-10-29",
-     2616
-    ]
-   ],
-   "price_change": -62
+   "price_change": 0
   },
   {
    "hotel": "Hotel GHT Costa Brava",
@@ -63101,7 +62785,7 @@
      3075
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Riva Marina Resort",
@@ -63137,7 +62821,7 @@
      3077
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Maspalomas Oasis Club",
@@ -63193,7 +62877,7 @@
      3086
     ]
    ],
-   "price_change": 114
+   "price_change": 0
   },
   {
    "hotel": "Hotel Donat",
@@ -64272,58 +63956,6 @@
    "price_change": 0
   },
   {
-   "hotel": "Vantaris Palace",
-   "url": "https://www.fischer.sk/grecko/kreta-heraklion/georgioupolis/vantaris-palace?DS=256&GIATA=23587&D=63209%7C63214%7C63219%7C63220%7C63262%7C63266%7C63281%7C63283%7C63285%7C63290%7C63297%7C63311%7C63314%7C63316%7C63319%7C63324%7C63327%7C63333%7C63335%7C63336%7C63341%7C63352%7C63357%7C63362%7C63364%7C63383%7C63384%7C63387%7C63388%7C63390%7C63399%7C63402%7C63408%7C63409%7C63424%7C63427%7C63428%7C63430%7C63431%7C63437%7C63439%7C63442%7C63463%7C63471%7C63472%7C64431%7C64432%7C64433%7C64434%7C64435%7C64436%7C64437%7C64438%7C64440%7C64441%7C64442%7C74677&HID=1063&MT=5&MMT=5&DI=AI&RCS=DR02&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-07-10&DD=2027-07-03&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=HER71046&DPR=FISCHER+SK+ATCOM&PC=11440193%2F2%2F2740%2F7&IFC=209132867%2F647985&OFC=209131405%2F647984",
-   "image": "https://img.fischer.sk/hotels/720/recko/kreta/kavros/vantaris-palace/1_vandpall_23_409.jpg",
-   "stars": 4.0,
-   "rating": 9.6,
-   "country": "Grécko",
-   "country_code": "GR",
-   "region": "Kréta",
-   "place": "Kavros",
-   "board": "AI",
-   "transport": "flight",
-   "departure": "BTS",
-   "date_from": "2027-07-03",
-   "date_to": "2027-07-10",
-   "nights": 7,
-   "price_total": 3621,
-   "price_original": 4863,
-   "discount_label": null,
-   "pets_allowed": null,
-   "price_exact": true,
-   "source": "fischer",
-   "source_name": "Fischer",
-   "discount_pct": 26,
-   "id": "fischer:7a91001cd0c6",
-   "score": 61,
-   "first_seen": "2026-10-25",
-   "last_seen": "2026-10-29",
-   "price_history": [
-    [
-     "2026-10-25",
-     3621
-    ],
-    [
-     "2026-10-26",
-     3621
-    ],
-    [
-     "2026-10-27",
-     3621
-    ],
-    [
-     "2026-10-28",
-     3621
-    ],
-    [
-     "2026-10-29",
-     3621
-    ]
-   ],
-   "price_change": 0
-  },
-  {
    "hotel": "Hotel Stamatia",
    "url": "https://www.satur.sk/produkt/stamatia?strava=all-inclusive&doprava=letecky&odlet=BTS",
    "image": "https://www.satur.sk/media/cache/500x333/tour/4118/342867_652518343a6ac.jpeg",
@@ -64453,7 +64085,7 @@
      2512
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Aqua Hotel Promenade & Spa",
@@ -64613,7 +64245,7 @@
      2754
     ]
    ],
-   "price_change": 114
+   "price_change": 0
   },
   {
    "hotel": "GHT Neptuno Tossa a Venus Spa",
@@ -66061,7 +65693,7 @@
   },
   {
    "hotel": "Hotel Aggelos Family",
-   "url": "https://www.cedok.sk/dovolena/grecko/korfu/hotel-aggelos-family,AGRCFU87MU/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgpBR1JDRlU4N01VKAQ6BEtMMjBCBgiAyaTiBkoGCICn2eIGUAJiBQoDQlRTagUKA0NGVXIICgZEUDQwMTd6BQoDQ0ZVggEFCgNCVFOKAQgKBkRQNDAxN5IBBgiAyaTiBpoBBgiAp9niBqIBDAoKU1RTRDAwMDAwMKoBAwoBVeIBCQoHQW1hZGV1c%252BoBCQoHQW1hZGV1c%252FIBBQoDT1RT&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
+   "url": "https://www.cedok.sk/dovolena/grecko/korfu/hotel-aggelos-family,AGRCFU87MU/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgpBR1JDRlU4N01VKAQ6BEtMMjBCBgiAkOniBkoGCIDuneMGUAJiBQoDQlRTagUKA0NGVXIICgZEUDMwNTJ6BQoDQ0ZVggEFCgNCVFOKAQgKBkRQMzA1MpIBBgiAkOniBpoBBgiA7p3jBqIBDAoKU1RTRDAwMDAwMKoBAwoBVeIBCQoHQW1hZGV1c%252BoBCQoHQW1hZGV1c%252FIBBQoDT1RT&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
    "image": "https://s.content4travel.com/pim-cdk/DSC_0416_0f699e7974.jpg",
    "stars": 2.0,
    "rating": null,
@@ -66072,10 +65704,10 @@
    "board": "RO",
    "transport": "flight",
    "departure": "BTS",
-   "date_from": "2027-07-28",
-   "date_to": "2027-08-07",
+   "date_from": "2027-08-10",
+   "date_to": "2027-08-20",
    "nights": 10,
-   "price_total": 2444,
+   "price_total": 2445,
    "price_original": null,
    "discount_label": "Cena za os. × 3 (orientačne)",
    "pets_allowed": null,
@@ -66083,37 +65715,17 @@
    "source_name": "Čedok",
    "discount_pct": null,
    "price_exact": false,
-   "id": "cedok:e08b4d438355",
+   "id": "cedok:c6b093570b60",
    "score": 59,
-   "first_seen": "2026-10-24",
+   "first_seen": "2026-10-29",
    "last_seen": "2026-10-29",
    "price_history": [
     [
-     "2026-10-24",
-     2445
-    ],
-    [
-     "2026-10-25",
-     2445
-    ],
-    [
-     "2026-10-26",
-     2444
-    ],
-    [
-     "2026-10-27",
-     2444
-    ],
-    [
-     "2026-10-28",
-     2444
-    ],
-    [
      "2026-10-29",
-     2444
+     2445
     ]
    ],
-   "price_change": 0
+   "price_change": null
   },
   {
    "hotel": "Roussas Štúdiá A Apartmány",
@@ -66217,7 +65829,7 @@
      2559
     ]
    ],
-   "price_change": 114
+   "price_change": 0
   },
   {
    "hotel": "Penzión Limni",
@@ -66328,6 +65940,42 @@
    "price_change": 0
   },
   {
+   "hotel": "Parque Vacacional Eden",
+   "url": "https://www.cedok.sk/dovolena/kanarske-ostrovy/tenerife/parque-vacacional-eden,AMTSES0F98/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgpBTVRTRVMwRjk4KAQ6BEtMMjBCBgiAmJbhBkoGCICC4OEGUAJiBQoDVklFagUKA1RGU3IICgZEUDUwMTN6BQoDVEZTggEFCgNWSUWKAQgKBkRQNTAxM5IBBgiAmJbhBpoBBgiAguDhBqIBDAoKU1RTUDAwMDBBMKoBAwoBRuIBCQoHQW1hZGV1c%252BoBCQoHQW1hZGV1c%252FIBBQoDT1RT&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
+   "image": "https://s.content4travel.com/pim-cdk/amtses0f98_0_1d313607d4.jpg",
+   "stars": 4.0,
+   "rating": 6.8,
+   "country": "Španielsko",
+   "country_code": "ES",
+   "region": "Tenerife",
+   "place": null,
+   "board": "BB",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-07-01",
+   "date_to": "2027-07-15",
+   "nights": 14,
+   "price_total": 2754,
+   "price_original": null,
+   "discount_label": "Cena za os. × 3 (orientačne)",
+   "pets_allowed": null,
+   "source": "cedok",
+   "source_name": "Čedok",
+   "discount_pct": null,
+   "price_exact": false,
+   "id": "cedok:26b2e3304c06",
+   "score": 59,
+   "first_seen": "2026-10-29",
+   "last_seen": "2026-10-29",
+   "price_history": [
+    [
+     "2026-10-29",
+     2754
+    ]
+   ],
+   "price_change": null
+  },
+  {
    "hotel": "Hotel Windrose",
    "url": "https://www.cedok.sk/dovolena/taliansko/rim/hotel-windrose,AITROMHW2G/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgpBSVRST01IVzJHKAQ6BEtMMjBCBgiA4ojjBkoGCIDM0uMGUAJiBQoDQlRTagUKA0ZDT3IICgZEUDIwNDV6BQoDRkNPggEFCgNCVFOKAQgKBkRQMjA0NZIBBgiA4ojjBpoBBgiAzNLjBqIBDAoKUk1TRERCMDAwMKoBAwoBVeIBDgoMVHJhdmVsRnVzaW9u6gEOCgxUcmF2ZWxGdXNpb27yAQUKA09UUw%253D%253D&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
    "image": "https://s.content4travel.com/pim-cdk/aitromhw2g_0_af2963741f.jpg",
@@ -66381,7 +66029,7 @@
      2762
     ]
    ],
-   "price_change": -49
+   "price_change": 0
   },
   {
    "hotel": "Gloria Palace Amadores Thalasso & Hotel",
@@ -66417,7 +66065,7 @@
      2817
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Barcelo Malaga",
@@ -66509,7 +66157,7 @@
      2920
     ]
    ],
-   "price_change": 72
+   "price_change": 0
   },
   {
    "hotel": "Hotel Nostos Beach Boutique",
@@ -66705,7 +66353,7 @@
      3210
     ]
    ],
-   "price_change": -1074
+   "price_change": 0
   },
   {
    "hotel": "Royal Suite",
@@ -67155,110 +66803,6 @@
     [
      "2026-10-29",
      3568
-    ]
-   ],
-   "price_change": 0
-  },
-  {
-   "hotel": "Planos Beach",
-   "url": "https://www.kartago.sk/grecko/zakynthos/tsilivi/planos-beach?DS=65536&GIATA=76825&D=63209%7C63214%7C63219%7C63220%7C63262%7C63266%7C63281%7C63283%7C63285%7C63290%7C63297%7C63311%7C63314%7C63316%7C63319%7C63324%7C63327%7C63333%7C63335%7C63336%7C63341%7C63352%7C63357%7C63362%7C63364%7C63383%7C63384%7C63387%7C63388%7C63390%7C63399%7C63402%7C63408%7C63409%7C63424%7C63427%7C63428%7C63430%7C63431%7C63437%7C63439%7C63442%7C63463%7C63471%7C63472%7C64431%7C64432%7C64433%7C64434%7C64435%7C64436%7C64437%7C64438%7C64440%7C64441%7C64442%7C74677&HID=142118&MT=5&MMT=5&DI=AI&RCS=TR01&NN=14&MNN=10%7C11%7C12%7C13%7C14&NNM=10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-30&DD=2027-08-16&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=ZTH90017&DPR=KARTAGO-SK-ATCOM&PC=14367545%2F2%2F2784%2F14&IFC=209450128%2F649291&OFC=209447698%2F649290",
-   "image": "https://img.kartago.sk/hotels/720/recko/zakynthos/tsilivi/planos-beach/bazen-2-2.jpg",
-   "stars": 4.0,
-   "rating": 9.6,
-   "country": "Grécko",
-   "country_code": "GR",
-   "region": "Zakynthos",
-   "place": "Tsilivi",
-   "board": "AI",
-   "transport": "flight",
-   "departure": "BTS",
-   "date_from": "2027-08-16",
-   "date_to": "2027-08-30",
-   "nights": 14,
-   "price_total": 3599,
-   "price_original": 4315,
-   "discount_label": null,
-   "pets_allowed": null,
-   "price_exact": true,
-   "source": "kartago",
-   "source_name": "Kartago Tours",
-   "discount_pct": 17,
-   "id": "kartago:7708004586a6",
-   "score": 59,
-   "first_seen": "2026-10-25",
-   "last_seen": "2026-10-29",
-   "price_history": [
-    [
-     "2026-10-25",
-     3599
-    ],
-    [
-     "2026-10-26",
-     3599
-    ],
-    [
-     "2026-10-27",
-     3599
-    ],
-    [
-     "2026-10-28",
-     3599
-    ],
-    [
-     "2026-10-29",
-     3599
-    ]
-   ],
-   "price_change": 0
-  },
-  {
-   "hotel": "Planos Beach",
-   "url": "https://www.fischer.sk/grecko/zakynthos/tsilivi/planos-beach?DS=256&GIATA=76825&D=63209%7C63214%7C63219%7C63220%7C63262%7C63266%7C63281%7C63283%7C63285%7C63290%7C63297%7C63311%7C63314%7C63316%7C63319%7C63324%7C63327%7C63333%7C63335%7C63336%7C63341%7C63352%7C63357%7C63362%7C63364%7C63383%7C63384%7C63387%7C63388%7C63390%7C63399%7C63402%7C63408%7C63409%7C63424%7C63427%7C63428%7C63430%7C63431%7C63437%7C63439%7C63442%7C63463%7C63471%7C63472%7C64431%7C64432%7C64433%7C64434%7C64435%7C64436%7C64437%7C64438%7C64440%7C64441%7C64442%7C74677&HID=142118&MT=5&MMT=5&DI=AI&RCS=TR01&NN=14&MNN=10%7C11%7C12%7C13%7C14&NNM=10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-30&DD=2027-08-16&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=ZTH90017&DPR=FISCHER+SK+ATCOM&PC=32690838%2F2%2F2784%2F14&IFC=209450128%2F649291&OFC=209447698%2F649290",
-   "image": "https://img.fischer.sk/hotels/720/recko/zakynthos/tsilivi/planos-beach/bazen-2-2.jpg",
-   "stars": 4.0,
-   "rating": 9.6,
-   "country": "Grécko",
-   "country_code": "GR",
-   "region": "Zakynthos",
-   "place": "Tsilivi",
-   "board": "AI",
-   "transport": "flight",
-   "departure": "BTS",
-   "date_from": "2027-08-16",
-   "date_to": "2027-08-30",
-   "nights": 14,
-   "price_total": 3599,
-   "price_original": 4315,
-   "discount_label": null,
-   "pets_allowed": null,
-   "price_exact": true,
-   "source": "fischer",
-   "source_name": "Fischer",
-   "discount_pct": 17,
-   "id": "fischer:6ca1ce799109",
-   "score": 59,
-   "first_seen": "2026-10-25",
-   "last_seen": "2026-10-29",
-   "price_history": [
-    [
-     "2026-10-25",
-     3599
-    ],
-    [
-     "2026-10-26",
-     3599
-    ],
-    [
-     "2026-10-27",
-     3599
-    ],
-    [
-     "2026-10-28",
-     3599
-    ],
-    [
-     "2026-10-29",
-     3599
     ]
    ],
    "price_change": 0
@@ -68025,7 +67569,7 @@
      2616
     ]
    ],
-   "price_change": 114
+   "price_change": 0
   },
   {
    "hotel": "Parque Tropical",
@@ -68109,7 +67653,7 @@
      2858
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Ona Alborada",
@@ -68145,7 +67689,7 @@
      2865
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Cristina by Tigotan",
@@ -68329,7 +67873,7 @@
      3195
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "DoubleTree By Hilton Malta",
@@ -68365,7 +67909,7 @@
      3243
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Sol Palmanova",
@@ -68407,58 +67951,6 @@
     [
      "2026-10-29",
      3249
-    ]
-   ],
-   "price_change": 0
-  },
-  {
-   "hotel": "Best Benalmadena",
-   "url": "https://www.kartago.sk/hotely/spanielsko/andaluzia/benalmadena-costa/best-benalmadena?DS=2&GIATA=33209&D=63213%7C63216%7C63226%7C63231%7C63241%7C63242%7C63243%7C63244%7C63245%7C63267%7C63272%7C63284%7C63312%7C63313%7C63334%7C63349%7C63350%7C63354%7C63360%7C63455%7C64430%7C74459%7C74460%7C74461%7C74462%7C74463%7C74464%7C74465%7C77806%7C211764&HID=142&MT=5&MMT=5&DI=GT06-AI&RCS=RMSDDBLSA0&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-08-18%7C2027-09-15&RD=2027-09-01&DD=2027-08-25&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=3789&TT=1&PID=AMTSES0OBS&DPR=OTSCKF&PC=7-2027-08-25&IFC=1-AGPVIE-7537-AGP-DT01-09-10-25-L-EW-7754-HAM-DT01-09-10-25-L-EW&OFC=1-VIEAGP-9751-VIE-DT25-08-09-15-N-EW-9536-DUS-DT25-08-09-15-N-EW",
-   "image": "https://img.kartago.sk/hotels/720/spanelsko/andalusie/benalmadena-costa/best-benalmadena/8930/002-a-exterior_106323020-179.jpg",
-   "stars": 4.0,
-   "rating": 8.2,
-   "country": "Španielsko",
-   "country_code": "ES",
-   "region": "Andalúzia",
-   "place": "Benalmadena Costa",
-   "board": "AI",
-   "transport": "flight",
-   "departure": "VIE",
-   "date_from": "2027-08-25",
-   "date_to": "2027-09-01",
-   "nights": 7,
-   "price_total": 3264,
-   "price_original": null,
-   "discount_label": null,
-   "pets_allowed": null,
-   "price_exact": true,
-   "source": "kartago",
-   "source_name": "Kartago Tours",
-   "discount_pct": null,
-   "id": "kartago:c7e2140d1a4d",
-   "score": 58,
-   "first_seen": "2026-10-25",
-   "last_seen": "2026-10-29",
-   "price_history": [
-    [
-     "2026-10-25",
-     3264
-    ],
-    [
-     "2026-10-26",
-     3264
-    ],
-    [
-     "2026-10-27",
-     3264
-    ],
-    [
-     "2026-10-28",
-     3264
-    ],
-    [
-     "2026-10-29",
-     3264
     ]
    ],
    "price_change": 0
@@ -68744,8 +68236,8 @@
    "date_from": "2027-08-17",
    "date_to": "2027-08-31",
    "nights": 14,
-   "price_total": 3541,
-   "price_original": 4257,
+   "price_total": 3545,
+   "price_original": 4261,
    "discount_label": null,
    "pets_allowed": null,
    "price_exact": true,
@@ -68775,10 +68267,10 @@
     ],
     [
      "2026-10-29",
-     3541
+     3545
     ]
    ],
-   "price_change": 0
+   "price_change": 4
   },
   {
    "hotel": "Blue Water",
@@ -68796,8 +68288,8 @@
    "date_from": "2027-08-17",
    "date_to": "2027-08-31",
    "nights": 14,
-   "price_total": 3541,
-   "price_original": 4257,
+   "price_total": 3545,
+   "price_original": 4261,
    "discount_label": null,
    "pets_allowed": null,
    "price_exact": true,
@@ -68827,114 +68319,10 @@
     ],
     [
      "2026-10-29",
-     3541
+     3545
     ]
    ],
-   "price_change": 0
-  },
-  {
-   "hotel": "Ninos Grand Beach Hotel & Resort",
-   "url": "https://www.kartago.sk/grecko/zapadne-grecko/preveza/ninos-grand-beach-hotel-a-resort?DS=65536&GIATA=1380693&D=63209%7C63214%7C63219%7C63220%7C63262%7C63266%7C63281%7C63283%7C63285%7C63290%7C63297%7C63311%7C63314%7C63316%7C63319%7C63324%7C63327%7C63333%7C63335%7C63336%7C63341%7C63352%7C63357%7C63362%7C63364%7C63383%7C63384%7C63387%7C63388%7C63390%7C63399%7C63402%7C63408%7C63409%7C63424%7C63427%7C63428%7C63430%7C63431%7C63437%7C63439%7C63442%7C63463%7C63471%7C63472%7C64431%7C64432%7C64433%7C64434%7C64435%7C64436%7C64437%7C64438%7C64440%7C64441%7C64442%7C74677&HID=145234&MT=5&MMT=5&DI=AI&RCS=DR03&NN=14&MNN=10%7C11%7C12%7C13%7C14&NNM=10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-31&DD=2027-08-17&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=PVK90022&DPR=KARTAGO-SK-ATCOM&PC=12995286%2F2%2F2785%2F14&IFC=209236684%2F648407&OFC=209234102%2F648406",
-   "image": "https://img.kartago.sk/hotels/720/recko/lefkada/preveza/ninos-grand-beach-hotel-a-resort/1692/drone-_3-179-180.jpg",
-   "stars": 4.0,
-   "rating": null,
-   "country": "Grécko",
-   "country_code": "GR",
-   "region": "Lefkada",
-   "place": "Preveza",
-   "board": "AI",
-   "transport": "flight",
-   "departure": "BTS",
-   "date_from": "2027-08-17",
-   "date_to": "2027-08-31",
-   "nights": 14,
-   "price_total": 3593,
-   "price_original": 4309,
-   "discount_label": null,
-   "pets_allowed": null,
-   "price_exact": true,
-   "source": "kartago",
-   "source_name": "Kartago Tours",
-   "discount_pct": 17,
-   "id": "kartago:008c3f6b5a9e",
-   "score": 58,
-   "first_seen": "2026-10-25",
-   "last_seen": "2026-10-29",
-   "price_history": [
-    [
-     "2026-10-25",
-     3593
-    ],
-    [
-     "2026-10-26",
-     3593
-    ],
-    [
-     "2026-10-27",
-     3593
-    ],
-    [
-     "2026-10-28",
-     3593
-    ],
-    [
-     "2026-10-29",
-     3593
-    ]
-   ],
-   "price_change": 0
-  },
-  {
-   "hotel": "Ninos Grand Beach Hotel & Resort",
-   "url": "https://www.fischer.sk/grecko/lefkada/vassiliki/ninos-grand-beach-hotel-a-resort?DS=256&GIATA=1380693&D=63209%7C63214%7C63219%7C63220%7C63262%7C63266%7C63281%7C63283%7C63285%7C63290%7C63297%7C63311%7C63314%7C63316%7C63319%7C63324%7C63327%7C63333%7C63335%7C63336%7C63341%7C63352%7C63357%7C63362%7C63364%7C63383%7C63384%7C63387%7C63388%7C63390%7C63399%7C63402%7C63408%7C63409%7C63424%7C63427%7C63428%7C63430%7C63431%7C63437%7C63439%7C63442%7C63463%7C63471%7C63472%7C64431%7C64432%7C64433%7C64434%7C64435%7C64436%7C64437%7C64438%7C64440%7C64441%7C64442%7C74677&HID=145234&MT=5&MMT=5&DI=AI&RCS=DR03&NN=14&MNN=10%7C11%7C12%7C13%7C14&NNM=10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-31&DD=2027-08-17&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=PVK90022&DPR=FISCHER+SK+ATCOM&PC=12996123%2F2%2F2785%2F14&IFC=209236684%2F648407&OFC=209234102%2F648406",
-   "image": "https://img.fischer.sk/hotels/720/recko/lefkada/preveza/ninos-grand-beach-hotel-a-resort/1692/drone-_3-179-180.jpg",
-   "stars": 4.0,
-   "rating": null,
-   "country": "Grécko",
-   "country_code": "GR",
-   "region": "Lefkada",
-   "place": "Preveza",
-   "board": "AI",
-   "transport": "flight",
-   "departure": "BTS",
-   "date_from": "2027-08-17",
-   "date_to": "2027-08-31",
-   "nights": 14,
-   "price_total": 3593,
-   "price_original": 4309,
-   "discount_label": null,
-   "pets_allowed": null,
-   "price_exact": true,
-   "source": "fischer",
-   "source_name": "Fischer",
-   "discount_pct": 17,
-   "id": "fischer:931bda04477a",
-   "score": 58,
-   "first_seen": "2026-10-25",
-   "last_seen": "2026-10-29",
-   "price_history": [
-    [
-     "2026-10-25",
-     3593
-    ],
-    [
-     "2026-10-26",
-     3593
-    ],
-    [
-     "2026-10-27",
-     3593
-    ],
-    [
-     "2026-10-28",
-     3593
-    ],
-    [
-     "2026-10-29",
-     3593
-    ]
-   ],
-   "price_change": 0
+   "price_change": 4
   },
   {
    "hotel": "Hotel Pickalbatros - Makadi Resort Hughada",
@@ -68988,58 +68376,6 @@
     [
      "2026-10-29",
      3604
-    ]
-   ],
-   "price_change": 0
-  },
-  {
-   "hotel": "OYA Beach Resort",
-   "url": "https://www.kartago.sk/grecko/kreta/anissaras/serita-beach?DS=65536&GIATA=851&D=63209%7C63214%7C63219%7C63220%7C63262%7C63266%7C63281%7C63283%7C63285%7C63290%7C63297%7C63311%7C63314%7C63316%7C63319%7C63324%7C63327%7C63333%7C63335%7C63336%7C63341%7C63352%7C63357%7C63362%7C63364%7C63383%7C63384%7C63387%7C63388%7C63390%7C63399%7C63402%7C63408%7C63409%7C63424%7C63427%7C63428%7C63430%7C63431%7C63437%7C63439%7C63442%7C63463%7C63471%7C63472%7C64431%7C64432%7C64433%7C64434%7C64435%7C64436%7C64437%7C64438%7C64440%7C64441%7C64442%7C74677&HID=2683&MT=5&MMT=5&DI=AI&RCS=DR06&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-28&DD=2027-08-21&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=HER71065&DPR=KARTAGO-SK-ATCOM&PC=64135930%2F2%2F2789%2F7&IFC=209139690%2F647999&OFC=209138228%2F647998",
-   "image": "https://img.kartago.sk/hotels/720/recko/kreta/anissaras/oya-beach-resort/Oya-Beach-Relax-Pool-and-sundeck-2.jpg",
-   "stars": 5.0,
-   "rating": null,
-   "country": "Grécko",
-   "country_code": "GR",
-   "region": "Kréta",
-   "place": "Anissaras",
-   "board": "AI",
-   "transport": "flight",
-   "departure": "BTS",
-   "date_from": "2027-08-21",
-   "date_to": "2027-08-28",
-   "nights": 7,
-   "price_total": 3660,
-   "price_original": 4376,
-   "discount_label": null,
-   "pets_allowed": null,
-   "price_exact": true,
-   "source": "kartago",
-   "source_name": "Kartago Tours",
-   "discount_pct": 16,
-   "id": "kartago:a358c81246fc",
-   "score": 58,
-   "first_seen": "2026-10-25",
-   "last_seen": "2026-10-29",
-   "price_history": [
-    [
-     "2026-10-25",
-     3660
-    ],
-    [
-     "2026-10-26",
-     3660
-    ],
-    [
-     "2026-10-27",
-     3660
-    ],
-    [
-     "2026-10-28",
-     3660
-    ],
-    [
-     "2026-10-29",
-     3660
     ]
    ],
    "price_change": 0
@@ -69678,7 +69014,7 @@
      1827
     ]
    ],
-   "price_change": 3
+   "price_change": 0
   },
   {
    "hotel": "Hotel TJ Boutique Malta",
@@ -69778,7 +69114,7 @@
      2652
     ]
    ],
-   "price_change": 2
+   "price_change": 0
   },
   {
    "hotel": "Liquid Hotel Apartments",
@@ -70086,7 +69422,7 @@
      2974
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Silver Beach",
@@ -70234,7 +69570,7 @@
      3190
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "LIVVO Hotels Lago Taurito",
@@ -70270,7 +69606,7 @@
      3220
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "DoubleTree By Hilton Malta",
@@ -70326,7 +69662,7 @@
      3258
     ]
    ],
-   "price_change": -1134
+   "price_change": 0
   },
   {
    "hotel": "Hotel Cabot Cap de Mar",
@@ -70386,7 +69722,7 @@
   },
   {
    "hotel": "Estival Park Apartments",
-   "url": "https://www.kartago.sk/hotely/spanielsko/costa-dorada/la-pineda/estival-park-apartments?DS=2&GIATA=608755&D=63213%7C63216%7C63226%7C63231%7C63241%7C63242%7C63243%7C63244%7C63245%7C63267%7C63272%7C63284%7C63312%7C63313%7C63334%7C63349%7C63350%7C63354%7C63360%7C63455%7C64430%7C74459%7C74460%7C74461%7C74462%7C74463%7C74464%7C74465%7C77806%7C211764&HID=147890&MT=5&MMT=5&DI=GT06-AI&RCS=APSDT100A0&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-07-13&DD=2027-07-06&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=3789&TT=1&PID=AESBCDE4RW&DPR=OTSCKF&PC=7-2027-07-06&IFC=1-BCNVIE-9441-BCN-DT13-07-09-25-N-EW-9754-DUS-DT13-07-09-25-N-EW&OFC=1-VIEBCN-9751-VIE-DT06-07-09-15-L-EW-9444-DUS-DT06-07-09-15-L-EW",
+   "url": "https://www.kartago.sk/hotely/spanielsko/costa-dorada/la-pineda/estival-park-apartments?DS=2&GIATA=608755&D=63213%7C63216%7C63226%7C63231%7C63241%7C63242%7C63243%7C63244%7C63245%7C63267%7C63272%7C63284%7C63312%7C63313%7C63334%7C63349%7C63350%7C63354%7C63360%7C63455%7C64430%7C74459%7C74460%7C74461%7C74462%7C74463%7C74464%7C74465%7C77806%7C211764&HID=147890&MT=5&MMT=5&DI=GT06-AI&RCS=APSDT100A0&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-07-14&DD=2027-07-07&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=3789&TT=1&PID=AESBCDE4RW&DPR=OTSCKF&PC=7-2027-07-07&IFC=1-BCNVIE-9441-BCN-DT14-07-10-30-N-EW-9756-DUS-DT14-07-10-30-N-EW&OFC=1-VIEBCN-751-VIE-DT07-07-12-10-L-EW-522-CGN-DT07-07-12-10-L-EW",
    "image": "https://img.kartago.sk/hotels/720/spanelsko/costa-dorada/la-pineda/estival-park-apartments/001-RV-view-from-the-room-apartmentx.jpg",
    "stars": 4.0,
    "rating": 8.6,
@@ -70397,8 +69733,8 @@
    "board": "AI",
    "transport": "flight",
    "departure": "VIE",
-   "date_from": "2027-07-06",
-   "date_to": "2027-07-13",
+   "date_from": "2027-07-07",
+   "date_to": "2027-07-14",
    "nights": 7,
    "price_total": 3344,
    "price_original": null,
@@ -70408,7 +69744,7 @@
    "source": "kartago",
    "source_name": "Kartago Tours",
    "discount_pct": null,
-   "id": "kartago:f9e7dc1e8610",
+   "id": "kartago:8915070741e8",
    "score": 57,
    "first_seen": "2026-10-25",
    "last_seen": "2026-10-29",
@@ -70422,68 +69758,12 @@
      3344
     ],
     [
-     "2026-10-27",
-     3344
-    ],
-    [
      "2026-10-28",
      3344
     ],
     [
      "2026-10-29",
      3344
-    ]
-   ],
-   "price_change": 0
-  },
-  {
-   "hotel": "Sol Principe",
-   "url": "https://www.kartago.sk/hotely/spanielsko/andaluzia/torremolinos/sol-principe?DS=2&GIATA=2511&D=63213%7C63216%7C63226%7C63231%7C63241%7C63242%7C63243%7C63244%7C63245%7C63267%7C63272%7C63284%7C63312%7C63313%7C63334%7C63349%7C63350%7C63354%7C63360%7C63455%7C64430%7C74459%7C74460%7C74461%7C74462%7C74463%7C74464%7C74465%7C77806%7C211764&HID=180&MT=5&MMT=5&DI=GT06-AI&RCS=RMSD0000A0&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-08-18%7C2027-09-15&RD=2027-09-01&DD=2027-08-25&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=3789&TT=1&PID=AMTSES0O8C&DPR=OTSCKF&PC=7-2027-08-25&IFC=1-AGPVIE-7537-AGP-DT01-09-10-25-L-EW-7754-HAM-DT01-09-10-25-L-EW&OFC=1-VIEAGP-9751-VIE-DT25-08-09-15-N-EW-9536-DUS-DT25-08-09-15-N-EW",
-   "image": "https://img.kartago.sk/hotels/720/spanelsko/621/1877/sol-principe/16solprincipe-general-jpg.jpg",
-   "stars": 4.0,
-   "rating": 8.4,
-   "country": "Španielsko",
-   "country_code": "ES",
-   "region": "Andalúzia",
-   "place": "Torremolinos",
-   "board": "AI",
-   "transport": "flight",
-   "departure": "VIE",
-   "date_from": "2027-08-25",
-   "date_to": "2027-09-01",
-   "nights": 7,
-   "price_total": 3346,
-   "price_original": null,
-   "discount_label": null,
-   "pets_allowed": null,
-   "price_exact": true,
-   "source": "kartago",
-   "source_name": "Kartago Tours",
-   "discount_pct": null,
-   "id": "kartago:1e121788cdae",
-   "score": 57,
-   "first_seen": "2026-10-25",
-   "last_seen": "2026-10-29",
-   "price_history": [
-    [
-     "2026-10-25",
-     3346
-    ],
-    [
-     "2026-10-26",
-     3346
-    ],
-    [
-     "2026-10-27",
-     3346
-    ],
-    [
-     "2026-10-28",
-     3346
-    ],
-    [
-     "2026-10-29",
-     3346
     ]
    ],
    "price_change": 0
@@ -70595,6 +69875,110 @@
     ]
    ],
    "price_change": 0
+  },
+  {
+   "hotel": "Ninos Grand Beach Hotel & Resort",
+   "url": "https://www.kartago.sk/grecko/zapadne-grecko/preveza/ninos-grand-beach-hotel-a-resort?DS=65536&GIATA=1380693&D=63209%7C63214%7C63219%7C63220%7C63262%7C63266%7C63281%7C63283%7C63285%7C63290%7C63297%7C63311%7C63314%7C63316%7C63319%7C63324%7C63327%7C63333%7C63335%7C63336%7C63341%7C63352%7C63357%7C63362%7C63364%7C63383%7C63384%7C63387%7C63388%7C63390%7C63399%7C63402%7C63408%7C63409%7C63424%7C63427%7C63428%7C63430%7C63431%7C63437%7C63439%7C63442%7C63463%7C63471%7C63472%7C64431%7C64432%7C64433%7C64434%7C64435%7C64436%7C64437%7C64438%7C64440%7C64441%7C64442%7C74677&HID=145234&MT=5&MMT=5&DI=AI&RCS=DR03&NN=14&MNN=10%7C11%7C12%7C13%7C14&NNM=10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-31&DD=2027-08-17&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=PVK90022&DPR=KARTAGO-SK-ATCOM&PC=12995286%2F2%2F2785%2F14&IFC=209236684%2F648407&OFC=209234102%2F648406",
+   "image": "https://img.kartago.sk/hotels/720/recko/lefkada/preveza/ninos-grand-beach-hotel-a-resort/1692/drone-_3-179-180.jpg",
+   "stars": 4.0,
+   "rating": null,
+   "country": "Grécko",
+   "country_code": "GR",
+   "region": "Lefkada",
+   "place": "Preveza",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "BTS",
+   "date_from": "2027-08-17",
+   "date_to": "2027-08-31",
+   "nights": 14,
+   "price_total": 3597,
+   "price_original": 4313,
+   "discount_label": null,
+   "pets_allowed": null,
+   "price_exact": true,
+   "source": "kartago",
+   "source_name": "Kartago Tours",
+   "discount_pct": 17,
+   "id": "kartago:008c3f6b5a9e",
+   "score": 57,
+   "first_seen": "2026-10-25",
+   "last_seen": "2026-10-29",
+   "price_history": [
+    [
+     "2026-10-25",
+     3593
+    ],
+    [
+     "2026-10-26",
+     3593
+    ],
+    [
+     "2026-10-27",
+     3593
+    ],
+    [
+     "2026-10-28",
+     3593
+    ],
+    [
+     "2026-10-29",
+     3597
+    ]
+   ],
+   "price_change": 4
+  },
+  {
+   "hotel": "Ninos Grand Beach Hotel & Resort",
+   "url": "https://www.fischer.sk/grecko/lefkada/vassiliki/ninos-grand-beach-hotel-a-resort?DS=256&GIATA=1380693&D=63209%7C63214%7C63219%7C63220%7C63262%7C63266%7C63281%7C63283%7C63285%7C63290%7C63297%7C63311%7C63314%7C63316%7C63319%7C63324%7C63327%7C63333%7C63335%7C63336%7C63341%7C63352%7C63357%7C63362%7C63364%7C63383%7C63384%7C63387%7C63388%7C63390%7C63399%7C63402%7C63408%7C63409%7C63424%7C63427%7C63428%7C63430%7C63431%7C63437%7C63439%7C63442%7C63463%7C63471%7C63472%7C64431%7C64432%7C64433%7C64434%7C64435%7C64436%7C64437%7C64438%7C64440%7C64441%7C64442%7C74677&HID=145234&MT=5&MMT=5&DI=AI&RCS=DR03&NN=14&MNN=10%7C11%7C12%7C13%7C14&NNM=10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-31&DD=2027-08-17&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=PVK90022&DPR=FISCHER+SK+ATCOM&PC=12996123%2F2%2F2785%2F14&IFC=209236684%2F648407&OFC=209234102%2F648406",
+   "image": "https://img.fischer.sk/hotels/720/recko/lefkada/preveza/ninos-grand-beach-hotel-a-resort/1692/drone-_3-179-180.jpg",
+   "stars": 4.0,
+   "rating": null,
+   "country": "Grécko",
+   "country_code": "GR",
+   "region": "Lefkada",
+   "place": "Preveza",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "BTS",
+   "date_from": "2027-08-17",
+   "date_to": "2027-08-31",
+   "nights": 14,
+   "price_total": 3597,
+   "price_original": 4313,
+   "discount_label": null,
+   "pets_allowed": null,
+   "price_exact": true,
+   "source": "fischer",
+   "source_name": "Fischer",
+   "discount_pct": 17,
+   "id": "fischer:931bda04477a",
+   "score": 57,
+   "first_seen": "2026-10-25",
+   "last_seen": "2026-10-29",
+   "price_history": [
+    [
+     "2026-10-25",
+     3593
+    ],
+    [
+     "2026-10-26",
+     3593
+    ],
+    [
+     "2026-10-27",
+     3593
+    ],
+    [
+     "2026-10-28",
+     3593
+    ],
+    [
+     "2026-10-29",
+     3597
+    ]
+   ],
+   "price_change": 4
   },
   {
    "hotel": "Golden Odyssey",
@@ -70941,6 +70325,42 @@
    "price_change": 0
   },
   {
+   "hotel": "Atlantis Hotel",
+   "url": "https://www.satur.sk/produkt/atlantis-hotel--328455?strava=all-inclusive&doprava=letecky&odlet=BTS",
+   "image": "https://www.satur.sk/media/cache/500x333/tour/328455/Atlantis-building_6a20a09a25d3e.jpeg",
+   "stars": 4.0,
+   "rating": null,
+   "country": "Grécko",
+   "country_code": "GR",
+   "region": "Kos",
+   "place": "Lambi",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "BTS",
+   "date_from": "2027-07-03",
+   "date_to": "2027-07-10",
+   "nights": 7,
+   "price_total": 3867,
+   "price_original": 5526,
+   "discount_label": "Zľava (cena za os. × 3, orientačne)",
+   "pets_allowed": null,
+   "source": "satur",
+   "source_name": "Satur.sk",
+   "discount_pct": 30,
+   "price_exact": false,
+   "id": "satur:24edbc136dd1",
+   "score": 57,
+   "first_seen": "2026-10-29",
+   "last_seen": "2026-10-29",
+   "price_history": [
+    [
+     "2026-10-29",
+     3867
+    ]
+   ],
+   "price_change": null
+  },
+  {
    "hotel": "Hotel Thassos Grand Resort",
    "url": "https://www.satur.sk/produkt/thassos-grand-resort?strava=all-inclusive&doprava=letecky&odlet=BTS",
    "image": "https://www.satur.sk/media/cache/500x333/tour/5201/530944_652518f720266.jpeg",
@@ -71254,7 +70674,7 @@
      1128
     ]
    ],
-   "price_change": -6
+   "price_change": 0
   },
   {
    "hotel": "Radisson Resort Kolberg",
@@ -71350,7 +70770,7 @@
      2676
     ]
    ],
-   "price_change": 116
+   "price_change": 0
   },
   {
    "hotel": "Club Cala Blanca",
@@ -71398,7 +70818,7 @@
      2714
     ]
    ],
-   "price_change": 114
+   "price_change": 0
   },
   {
    "hotel": "Hotel Nord Nuova Roma",
@@ -71789,6 +71209,42 @@
    "price_change": 0
   },
   {
+   "hotel": "Iberostar Waves Founty Beach",
+   "url": "https://www.satur.sk/produkt/iberostar-founty-beach?strava=all-inclusive&doprava=letecky&odlet=BTS",
+   "image": "https://www.satur.sk/media/cache/500x333/tour/3183/pool3_68dfed6c18567.jpeg",
+   "stars": 5.0,
+   "rating": null,
+   "country": "Maroko",
+   "country_code": "MA",
+   "region": null,
+   "place": "Agadir",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "BTS",
+   "date_from": "2027-07-12",
+   "date_to": "2027-07-19",
+   "nights": 7,
+   "price_total": 3138,
+   "price_original": null,
+   "discount_label": "Cena za os. × 3 (orientačne)",
+   "pets_allowed": null,
+   "source": "satur",
+   "source_name": "Satur.sk",
+   "discount_pct": null,
+   "price_exact": false,
+   "id": "satur:e64b8ba5450b",
+   "score": 56,
+   "first_seen": "2026-10-29",
+   "last_seen": "2026-10-29",
+   "price_history": [
+    [
+     "2026-10-29",
+     3138
+    ]
+   ],
+   "price_change": null
+  },
+  {
    "hotel": "Hotel Papi",
    "url": "https://www.cedok.sk/dovolena/spanielsko/costa-brava/hotel-papi,GRO2PAP/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgdHUk8yUEFQKAQ6BEcyMDBCBgiAvY%252FiBkoGCICn2eIGUAJiBQoDQlRTagUKA0JDTnIDCgEyegUKA0JDToIBBQoDQlRTigEDCgEykgEGCIC9j%252BIGmgEGCICn2eIGogEFCgNEQkyqAQMKAUjiAQkKB1Jlc2FiZWXqAQkKB1Jlc2FiZWXyAQkKB1Jlc2FiZWU%253D&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
    "image": "https://s.content4travel.com/pim-cdk/gro2pap_1_36bb856636.jpg",
@@ -72002,7 +71458,7 @@
      3469
     ]
    ],
-   "price_change": 3
+   "price_change": 0
   },
   {
    "hotel": "Hotel Novotel Marsa Alam",
@@ -72225,6 +71681,50 @@
    "price_change": 0
   },
   {
+   "hotel": "Alykanas Beach",
+   "url": "https://www.fischer.sk/grecko/zakynthos/alykanas/alykanas-beach?DS=256&GIATA=227333&D=63209%7C63214%7C63219%7C63220%7C63262%7C63266%7C63281%7C63283%7C63285%7C63290%7C63297%7C63311%7C63314%7C63316%7C63319%7C63324%7C63327%7C63333%7C63335%7C63336%7C63341%7C63352%7C63357%7C63362%7C63364%7C63383%7C63384%7C63387%7C63388%7C63390%7C63399%7C63402%7C63408%7C63409%7C63424%7C63427%7C63428%7C63430%7C63431%7C63437%7C63439%7C63442%7C63463%7C63471%7C63472%7C64431%7C64432%7C64433%7C64434%7C64435%7C64436%7C64437%7C64438%7C64440%7C64441%7C64442%7C74677&HID=142533&MT=5&MMT=5&DI=AI&RCS=DR03&NN=14&MNN=10%7C11%7C12%7C13%7C14&NNM=10%7C11%7C12%7C13%7C14&DF=2027-08-12%7C2027-09-16&RD=2027-09-02&DD=2027-08-19&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=ZTH90001&DPR=FISCHER+SK+ATCOM&PC=13392691%2F2%2F2787%2F14&IFC=209468178%2F649423&OFC=209465748%2F649422",
+   "image": "https://img.fischer.sk/hotels/720/recko/zakynthos/alikanas/alykanas-beach/alykanas-beach-0.jpg",
+   "stars": 4.0,
+   "rating": 9.0,
+   "country": "Grécko",
+   "country_code": "GR",
+   "region": "Zakynthos",
+   "place": "Alikanas",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "BTS",
+   "date_from": "2027-08-19",
+   "date_to": "2027-09-02",
+   "nights": 14,
+   "price_total": 3721,
+   "price_original": 4437,
+   "discount_label": null,
+   "pets_allowed": null,
+   "price_exact": true,
+   "source": "fischer",
+   "source_name": "Fischer",
+   "discount_pct": 16,
+   "id": "fischer:21eb7238323a",
+   "score": 56,
+   "first_seen": "2026-10-25",
+   "last_seen": "2026-10-29",
+   "price_history": [
+    [
+     "2026-10-25",
+     3721
+    ],
+    [
+     "2026-10-26",
+     3721
+    ],
+    [
+     "2026-10-29",
+     3721
+    ]
+   ],
+   "price_change": 0
+  },
+  {
    "hotel": "Navarria Blue",
    "url": "https://www.kartago.sk/cyprus/juzny-cyprus/limassol/navarria?DS=65536&GIATA=5091&D=63540%7C63541%7C63542%7C63543&HID=129670&MT=5&MMT=5&DI=AI&RCS=DR01&NN=10&MNN=10%7C11%7C12%7C13%7C14&NNM=10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-26&DD=2027-08-16&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=LCA90015&DPR=KARTAGO-SK-ATCOM&PC=214168672%2F2%2F2784%2F10&IFC=213693501%2F664206&OFC=213673415%2F664205",
    "image": "https://img.kartago.sk/hotels/720/kypr/jizni-kypr/limassol/navarria-blue-kypr/Exterior_1200_processed-2.jpg",
@@ -72383,6 +71883,42 @@
     ]
    ],
    "price_change": 0
+  },
+  {
+   "hotel": "Planos Beach",
+   "url": "https://www.kartago.sk/grecko/zakynthos/tsilivi/planos-beach?DS=65536&GIATA=76825&D=63209%7C63214%7C63219%7C63220%7C63262%7C63266%7C63281%7C63283%7C63285%7C63290%7C63297%7C63311%7C63314%7C63316%7C63319%7C63324%7C63327%7C63333%7C63335%7C63336%7C63341%7C63352%7C63357%7C63362%7C63364%7C63383%7C63384%7C63387%7C63388%7C63390%7C63399%7C63402%7C63408%7C63409%7C63424%7C63427%7C63428%7C63430%7C63431%7C63437%7C63439%7C63442%7C63463%7C63471%7C63472%7C64431%7C64432%7C64433%7C64434%7C64435%7C64436%7C64437%7C64438%7C64440%7C64441%7C64442%7C74677&HID=142118&MT=5&MMT=5&DI=AI&RCS=TR01&NN=14&MNN=10%7C11%7C12%7C13%7C14&NNM=10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-09&DD=2027-07-26&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=ZTH90017&DPR=KARTAGO-SK-ATCOM&PC=14367545%2F2%2F2763%2F14&IFC=209447212%2F649285&OFC=209444782%2F649284",
+   "image": "https://img.kartago.sk/hotels/720/recko/zakynthos/tsilivi/planos-beach/bazen-2-2.jpg",
+   "stars": 4.0,
+   "rating": 9.6,
+   "country": "Grécko",
+   "country_code": "GR",
+   "region": "Zakynthos",
+   "place": "Tsilivi",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "BTS",
+   "date_from": "2027-07-26",
+   "date_to": "2027-08-09",
+   "nights": 14,
+   "price_total": 3760,
+   "price_original": 4492,
+   "discount_label": null,
+   "pets_allowed": null,
+   "price_exact": true,
+   "source": "kartago",
+   "source_name": "Kartago Tours",
+   "discount_pct": 16,
+   "id": "kartago:73e9dd569c0a",
+   "score": 56,
+   "first_seen": "2026-10-29",
+   "last_seen": "2026-10-29",
+   "price_history": [
+    [
+     "2026-10-29",
+     3760
+    ]
+   ],
+   "price_change": null
   },
   {
    "hotel": "Playazimbali",
@@ -72682,7 +72218,7 @@
      4067
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Grand Sapphire Resort",
@@ -72718,7 +72254,7 @@
      4067
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Arcanus Hotels Sorgun - All Inclusive",
@@ -72830,7 +72366,7 @@
      1392
     ]
    ],
-   "price_change": 57
+   "price_change": 0
   },
   {
    "hotel": "Mirage Studios",
@@ -72866,7 +72402,7 @@
      2684
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Pergola Hotel and Spa",
@@ -72906,7 +72442,7 @@
      2840
     ]
    ],
-   "price_change": -1
+   "price_change": 0
   },
   {
    "hotel": "Hotel Corfu Aquamarine (ex Corfu Residence)",
@@ -72942,7 +72478,7 @@
      2852
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Tent Calvia Beach",
@@ -72978,7 +72514,7 @@
      2932
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Catalonia del Mar",
@@ -73070,7 +72606,7 @@
      2996
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Amadil Ocean Club",
@@ -74338,7 +73874,7 @@
      3156
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Aminess Style Camping Atea Resort",
@@ -74562,7 +74098,7 @@
      3476
     ]
    ],
-   "price_change": 17
+   "price_change": 0
   },
   {
    "hotel": "Hotel Caprici",
@@ -74758,7 +74294,7 @@
      3575
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Corali",
@@ -76213,50 +75749,6 @@
    "price_change": 0
   },
   {
-   "hotel": "Hotel Cynthiana Beach",
-   "url": "https://www.cedok.sk/dovolena/cyprus/pafos/hotel-cynthiana-beach,AMTSCY1Z3G/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgpBTVRTQ1kxWjNHKAQ6BEtMMjBCBgiA1P%252FhBkoGCICytOIGUAJiBQoDVklFagUKA1BGT3IICgZEUDQwNzF6BQoDUEZPggEFCgNWSUWKAQgKBkRQNDA3MZIBBgiA1P%252FhBpoBBgiAsrTiBqIBDAoKUk1TRFRXU1ZCMKoBAwoBSOIBCQoHQW1hZGV1c%252BoBCQoHQW1hZGV1c%252FIBBQoDT1RT&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
-   "image": "https://s.content4travel.com/pim-cdk/amtscy1z3g_0_2eb6ad58e0.jpg",
-   "stars": 3.0,
-   "rating": 8.8,
-   "country": "Cyprus",
-   "country_code": "CY",
-   "region": "Pafos",
-   "place": null,
-   "board": "HB",
-   "transport": "flight",
-   "departure": "VIE",
-   "date_from": "2027-07-21",
-   "date_to": "2027-07-31",
-   "nights": 10,
-   "price_total": 3102,
-   "price_original": null,
-   "discount_label": "Cena za os. × 3 (orientačne)",
-   "pets_allowed": null,
-   "source": "cedok",
-   "source_name": "Čedok",
-   "discount_pct": null,
-   "price_exact": false,
-   "id": "cedok:74df76a7f419",
-   "score": 53,
-   "first_seen": "2026-10-24",
-   "last_seen": "2026-10-29",
-   "price_history": [
-    [
-     "2026-10-24",
-     3102
-    ],
-    [
-     "2026-10-25",
-     3102
-    ],
-    [
-     "2026-10-29",
-     3102
-    ]
-   ],
-   "price_change": 0
-  },
-  {
    "hotel": "Rezort Villas Rubin",
    "url": "https://www.satur.sk/produkt/villas-rubin-resort",
    "image": "https://www.satur.sk/media/cache/500x333/tour/3647/346999_652d981a0a67d.jpeg",
@@ -76311,50 +75803,6 @@
     ]
    ],
    "price_change": 0
-  },
-  {
-   "hotel": "Aeolos Beach Resort Korfu",
-   "url": "https://www.satur.sk/produkt/aeolos-beach-resort?strava=all-inclusive&doprava=letecky&odlet=BTS",
-   "image": "https://www.satur.sk/media/cache/500x333/tour/5054/beach-pools-8231_69c4061fdc097.jpeg",
-   "stars": 4.0,
-   "rating": null,
-   "country": "Grécko",
-   "country_code": "GR",
-   "region": "Korfu",
-   "place": "Perama",
-   "board": "AI",
-   "transport": "flight",
-   "departure": "BTS",
-   "date_from": "2027-07-02",
-   "date_to": "2027-07-09",
-   "nights": 7,
-   "price_total": 3576,
-   "price_original": null,
-   "discount_label": "Cena za os. × 3 (orientačne)",
-   "pets_allowed": null,
-   "source": "satur",
-   "source_name": "Satur.sk",
-   "discount_pct": null,
-   "price_exact": false,
-   "id": "satur:204a7f558fa2",
-   "score": 53,
-   "first_seen": "2026-10-24",
-   "last_seen": "2026-10-29",
-   "price_history": [
-    [
-     "2026-10-24",
-     4320
-    ],
-    [
-     "2026-10-25",
-     4320
-    ],
-    [
-     "2026-10-29",
-     3576
-    ]
-   ],
-   "price_change": -744
   },
   {
    "hotel": "Mirador Maspalomas by Dunas",
@@ -76569,11 +76017,11 @@
    "price_change": 0
   },
   {
-   "hotel": "Hotel Stella Di Mare Gardens",
-   "url": "https://www.cedok.sk/dovolena/egypt/hurghada/hotel-stella-di-mare-gardens,HRG2SGA/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgdIUkcyU0dBKAQ6BEcyMDBCBgiAu5vhBkoGCICwwOEGUAJiBQoDQlRTagUKA0hSR3IDCgExegUKA0hSR4IBBQoDQlRTigEDCgExkgEGCIC7m%252BEGmgEGCICwwOEGogEFCgNEQkyqAQMKAUHiAQkKB1Jlc2FiZWXqAQkKB1Jlc2FiZWXyAQkKB1Jlc2FiZWU%253D&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
-   "image": "https://s.content4travel.com/pim-cdk/hrg2sga_0_09304924d0.jpg",
-   "stars": 4.0,
-   "rating": 7.7,
+   "hotel": "Hotel Stella Di Mare Beach & Spa",
+   "url": "https://www.cedok.sk/dovolena/egypt/hurghada/hotel-stella-di-mare-beach-and-spa,HRG2STE/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgdIUkcyU1RFKAQ6BEcyMDBCBgiAu5vhBkoGCICwwOEGUAJiBQoDQlRTagUKA0hSR3IDCgExegUKA0hSR4IBBQoDQlRTigEDCgExkgEGCIC7m%252BEGmgEGCICwwOEGogEFCgNEQkyqAQMKAUHiAQkKB1Jlc2FiZWXqAQkKB1Jlc2FiZWXyAQkKB1Jlc2FiZWU%253D&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
+   "image": "https://s.content4travel.com/pim-cdk/hrg2ste_0_147b098d4d.jpg",
+   "stars": 5.0,
+   "rating": 8.0,
    "country": "Egypt",
    "country_code": "EG",
    "region": "Hurghada",
@@ -76592,7 +76040,7 @@
    "source_name": "Čedok",
    "discount_pct": 18,
    "price_exact": false,
-   "id": "cedok:56fdefb692d3",
+   "id": "cedok:6b113c76f6de",
    "score": 53,
    "first_seen": "2026-10-24",
    "last_seen": "2026-10-29",
@@ -76625,11 +76073,11 @@
    "price_change": 0
   },
   {
-   "hotel": "Hotel Stella Di Mare Beach & Spa",
-   "url": "https://www.cedok.sk/dovolena/egypt/hurghada/hotel-stella-di-mare-beach-and-spa,HRG2STE/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgdIUkcyU1RFKAQ6BEcyMDBCBgiAu5vhBkoGCICwwOEGUAJiBQoDQlRTagUKA0hSR3IDCgExegUKA0hSR4IBBQoDQlRTigEDCgExkgEGCIC7m%252BEGmgEGCICwwOEGogEFCgNEQkyqAQMKAUHiAQkKB1Jlc2FiZWXqAQkKB1Jlc2FiZWXyAQkKB1Jlc2FiZWU%253D&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
-   "image": "https://s.content4travel.com/pim-cdk/hrg2ste_0_147b098d4d.jpg",
-   "stars": 5.0,
-   "rating": 8.0,
+   "hotel": "Hotel Stella Di Mare Gardens",
+   "url": "https://www.cedok.sk/dovolena/egypt/hurghada/hotel-stella-di-mare-gardens,HRG2SGA/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgdIUkcyU0dBKAQ6BEcyMDBCBgiAu5vhBkoGCICwwOEGUAJiBQoDQlRTagUKA0hSR3IDCgExegUKA0hSR4IBBQoDQlRTigEDCgExkgEGCIC7m%252BEGmgEGCICwwOEGogEFCgNEQkyqAQMKAUHiAQkKB1Jlc2FiZWXqAQkKB1Jlc2FiZWXyAQkKB1Jlc2FiZWU%253D&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
+   "image": "https://s.content4travel.com/pim-cdk/hrg2sga_0_09304924d0.jpg",
+   "stars": 4.0,
+   "rating": 7.7,
    "country": "Egypt",
    "country_code": "EG",
    "region": "Hurghada",
@@ -76648,7 +76096,7 @@
    "source_name": "Čedok",
    "discount_pct": 18,
    "price_exact": false,
-   "id": "cedok:6b113c76f6de",
+   "id": "cedok:56fdefb692d3",
    "score": 53,
    "first_seen": "2026-10-24",
    "last_seen": "2026-10-29",
@@ -77757,8 +77205,52 @@
    "price_change": 0
   },
   {
+   "hotel": "Hotel Livvo Jandia Golf",
+   "url": "https://www.kartago.sk/hotely/spanielsko/fuerteventura/jandia/hotel-livvo-jandia-golf?DS=2&GIATA=64658&D=63213%7C63216%7C63226%7C63231%7C63241%7C63242%7C63243%7C63244%7C63245%7C63267%7C63272%7C63284%7C63312%7C63313%7C63334%7C63349%7C63350%7C63354%7C63360%7C63455%7C64430%7C74459%7C74460%7C74461%7C74462%7C74463%7C74464%7C74465%7C77806%7C211764&HID=234705&MT=5&MMT=5&DI=GT06-AI&RCS=FRSDIN00D0&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-07-16&DD=2027-07-08&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=3789&TT=1&PID=AESFUE4FCO&DPR=OTSCKF&PC=7-2027-07-08&IFC=1-FUEVIE-243-FUE-DT15-07-19-20-L-EW-752-CGN-DT15-07-19-20-L-EW&OFC=1-VIEFUE-753-VIE-DT08-07-08-10-G-EW-242-CGN-DT08-07-08-10-G-EW",
+   "image": "https://img.kartago.sk/hotels/720/spanelsko/fuerteventura/jandia/livvo-jandia-golf/30251847.jpg",
+   "stars": 4.0,
+   "rating": 8.8,
+   "country": "Španielsko",
+   "country_code": "ES",
+   "region": "Fuerteventura",
+   "place": "Jandía",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-07-08",
+   "date_to": "2027-07-16",
+   "nights": 7,
+   "price_total": 3674,
+   "price_original": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "price_exact": true,
+   "source": "kartago",
+   "source_name": "Kartago Tours",
+   "discount_pct": null,
+   "id": "kartago:1447bd5af427",
+   "score": 52,
+   "first_seen": "2026-10-27",
+   "last_seen": "2026-10-29",
+   "price_history": [
+    [
+     "2026-10-27",
+     3729
+    ],
+    [
+     "2026-10-28",
+     3729
+    ],
+    [
+     "2026-10-29",
+     3674
+    ]
+   ],
+   "price_change": -55
+  },
+  {
    "hotel": "Golden Donaire Beach",
-   "url": "https://www.kartago.sk/hotely/spanielsko/costa-dorada/la-pineda/golden-donaire-beach?DS=2&GIATA=35128&D=63213%7C63216%7C63226%7C63231%7C63241%7C63242%7C63243%7C63244%7C63245%7C63267%7C63272%7C63284%7C63312%7C63313%7C63334%7C63349%7C63350%7C63354%7C63360%7C63455%7C64430%7C74459%7C74460%7C74461%7C74462%7C74463%7C74464%7C74465%7C77806%7C211764&HID=146661&MT=5&MMT=5&DI=GT06-AI&RCS=RMSDIN00B0&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-08-17%7C2027-09-15&RD=2027-09-01&DD=2027-08-24&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=3789&TT=1&PID=AESBCD9VNA&DPR=OTSCKF&PC=7-2027-08-25&IFC=1-BCNVIE-9441-BCN-DT01-09-10-30-T-EW-9756-DUS-DT01-09-10-30-T-EW&OFC=1-VIEBCN-757-VIE-DT24-08-20-10-N-EW-520-CGN-DT24-08-20-10-N-EW",
+   "url": "https://www.kartago.sk/hotely/spanielsko/costa-dorada/la-pineda/golden-donaire-beach?DS=2&GIATA=35128&D=63213%7C63216%7C63226%7C63231%7C63241%7C63242%7C63243%7C63244%7C63245%7C63267%7C63272%7C63284%7C63312%7C63313%7C63334%7C63349%7C63350%7C63354%7C63360%7C63455%7C64430%7C74459%7C74460%7C74461%7C74462%7C74463%7C74464%7C74465%7C77806%7C211764&HID=146661&MT=5&MMT=5&DI=GT06-AI&RCS=RMSDIN00B0&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-08-17%7C2027-09-15&RD=2027-09-01&DD=2027-08-24&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=3789&TT=1&PID=AESBCD9VNA&DPR=OTSCKF&PC=7-2027-08-25&IFC=1-BCNVIE-9441-BCN-DT01-09-10-30-T-EW-9754-DUS-DT01-09-10-30-T-EW&OFC=1-VIEBCN-757-VIE-DT24-08-20-10-N-EW-520-CGN-DT24-08-20-10-N-EW",
    "image": "https://img.kartago.sk/hotels/720/spanelsko/costa-dorada/la-pineda/golden-donaire-beach/aesbcd9vna_833738_4.jpg",
    "stars": 4.0,
    "rating": 9.0,
@@ -78729,6 +78221,42 @@
    "price_change": 0
   },
   {
+   "hotel": "Hotel Cynthiana Beach",
+   "url": "https://www.cedok.sk/dovolena/cyprus/pafos/hotel-cynthiana-beach,AMTSCY1Z3G/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgpBTVRTQ1kxWjNHKAQ6BEtMMjBCBgiA6rXhBkoGCIDI6uEGUAJiBQoDVklFagUKA1BGT3IICgZEUDQwNzF6BQoDUEZPggEFCgNWSUWKAQgKBkRQNDA3MZIBBgiA6rXhBpoBBgiAyOrhBqIBDAoKUk1TRFRXU1ZCMKoBAwoBSOIBCQoHQW1hZGV1c%252BoBCQoHQW1hZGV1c%252FIBBQoDT1RT&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
+   "image": "https://s.content4travel.com/pim-cdk/amtscy1z3g_0_2eb6ad58e0.jpg",
+   "stars": 3.0,
+   "rating": 8.8,
+   "country": "Cyprus",
+   "country_code": "CY",
+   "region": "Pafos",
+   "place": null,
+   "board": "HB",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-07-07",
+   "date_to": "2027-07-17",
+   "nights": 10,
+   "price_total": 3249,
+   "price_original": null,
+   "discount_label": "Cena za os. × 3 (orientačne)",
+   "pets_allowed": null,
+   "source": "cedok",
+   "source_name": "Čedok",
+   "discount_pct": null,
+   "price_exact": false,
+   "id": "cedok:b79c06a5b76a",
+   "score": 51,
+   "first_seen": "2026-10-29",
+   "last_seen": "2026-10-29",
+   "price_history": [
+    [
+     "2026-10-29",
+     3249
+    ]
+   ],
+   "price_change": null
+  },
+  {
    "hotel": "Bluesun hotel Berulia",
    "url": "https://www.satur.sk/produkt/sentido-bluesun-berulia",
    "image": "https://www.satur.sk/media/cache/500x333/tour/5447/3_66421d882e1b9.jpeg",
@@ -78929,90 +78457,6 @@
    "price_change": 0
   },
   {
-   "hotel": "Porto Giardino",
-   "url": "https://www.satur.sk/produkt/porto-giardino-resort?strava=all-inclusive&doprava=letecky&odlet=BTS",
-   "image": "https://www.satur.sk/media/cache/500x333/tour/69986e65249eb.jpeg",
-   "stars": 4.0,
-   "rating": null,
-   "country": "Taliansko",
-   "country_code": "IT",
-   "region": null,
-   "place": "Apúlia",
-   "board": "AI",
-   "transport": "flight",
-   "departure": "BTS",
-   "date_from": "2027-07-04",
-   "date_to": "2027-07-14",
-   "nights": 10,
-   "price_total": 3702,
-   "price_original": null,
-   "discount_label": "Cena za os. × 3 (orientačne)",
-   "pets_allowed": null,
-   "source": "satur",
-   "source_name": "Satur.sk",
-   "discount_pct": null,
-   "price_exact": false,
-   "id": "satur:4d8111d74311",
-   "score": 51,
-   "first_seen": "2026-10-24",
-   "last_seen": "2026-10-29",
-   "price_history": [
-    [
-     "2026-10-24",
-     3894
-    ],
-    [
-     "2026-10-29",
-     3702
-    ]
-   ],
-   "price_change": -192
-  },
-  {
-   "hotel": "Hotel Livvo Jandia Golf",
-   "url": "https://www.kartago.sk/hotely/spanielsko/fuerteventura/jandia/hotel-livvo-jandia-golf?DS=2&GIATA=64658&D=63213%7C63216%7C63226%7C63231%7C63241%7C63242%7C63243%7C63244%7C63245%7C63267%7C63272%7C63284%7C63312%7C63313%7C63334%7C63349%7C63350%7C63354%7C63360%7C63455%7C64430%7C74459%7C74460%7C74461%7C74462%7C74463%7C74464%7C74465%7C77806%7C211764&HID=234705&MT=5&MMT=5&DI=GT06-AI&RCS=FRSDIN00D0&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-07-16&DD=2027-07-08&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=3789&TT=1&PID=AESFUE4FCO&DPR=OTSCKF&PC=7-2027-07-08&IFC=1-FUEVIE-243-FUE-DT15-07-19-20-L-EW-752-CGN-DT15-07-19-20-L-EW&OFC=1-VIEFUE-753-VIE-DT08-07-08-10-G-EW-242-CGN-DT08-07-08-10-G-EW",
-   "image": "https://img.kartago.sk/hotels/720/spanelsko/fuerteventura/jandia/livvo-jandia-golf/30251847.jpg",
-   "stars": 4.0,
-   "rating": 8.8,
-   "country": "Španielsko",
-   "country_code": "ES",
-   "region": "Fuerteventura",
-   "place": "Jandía",
-   "board": "AI",
-   "transport": "flight",
-   "departure": "VIE",
-   "date_from": "2027-07-08",
-   "date_to": "2027-07-16",
-   "nights": 7,
-   "price_total": 3729,
-   "price_original": null,
-   "discount_label": null,
-   "pets_allowed": null,
-   "price_exact": true,
-   "source": "kartago",
-   "source_name": "Kartago Tours",
-   "discount_pct": null,
-   "id": "kartago:1447bd5af427",
-   "score": 51,
-   "first_seen": "2026-10-27",
-   "last_seen": "2026-10-29",
-   "price_history": [
-    [
-     "2026-10-27",
-     3729
-    ],
-    [
-     "2026-10-28",
-     3729
-    ],
-    [
-     "2026-10-29",
-     3729
-    ]
-   ],
-   "price_change": 0
-  },
-  {
    "hotel": "Aktea Beach Village",
    "url": "https://www.kartago.sk/hotely/cyprus/juzny-cyprus/ayia-napa/aktea-beach-village?DS=2&GIATA=32921&D=63540%7C63541%7C63542%7C63543&HID=761&MT=5&MMT=5&DI=GT06-AI&RCS=STSD00000E&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-07-15&DD=2027-07-07&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=3789&TT=1&PID=AMTSCY1ZA4&DPR=OTSCKF&PC=7-2027-07-08&IFC=1-LCAVIE-9903-LCA-DT15-07-11-55-T-EW-9754-DUS-DT15-07-11-55-T-EW&OFC=1-VIELCA-9755-VIE-DT07-07-19-05-W-EW-9902-DUS-DT07-07-19-05-W-EW",
    "image": "https://img.kartago.sk/hotels/720/kypr/jizni-kypr/ayia-napa/aktea-beach-village-kypr/bird-view-jpg.jpg",
@@ -79046,7 +78490,7 @@
      3768
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Akti Beach Hotel and Village Resort",
@@ -79793,6 +79237,42 @@
    "price_change": 0
   },
   {
+   "hotel": "Leda Beach Hotel",
+   "url": "https://www.cedok.sk/dovolena/turecko/turecka-riviera-side/leda-beach-hotel,AMTSTR0XDA/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgpBTVRTVFIwWERBKAQ6BEtMMjBCBgiAx7DhBkoGCICx%252BuEGUAJiBQoDVklFagUKA0FZVHIICgZEUDMwMzV6BQoDQVlUggEFCgNWSUWKAQgKBkRQMzAzNZIBBgiAx7DhBpoBBgiAsfrhBqIBDAoKUk1TRERCMDAwMKoBAwoBSOIBDgoMVHJhdmVsRnVzaW9u6gEOCgxUcmF2ZWxGdXNpb27yAQUKA09UUw%253D%253D&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
+   "image": "https://s.content4travel.com/pim-cdk/prof_5047ba8e3e.jpg",
+   "stars": 2.0,
+   "rating": 7.0,
+   "country": "Turecko",
+   "country_code": "TR",
+   "region": "Turecká riviéra - Side",
+   "place": null,
+   "board": "HB",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-07-06",
+   "date_to": "2027-07-20",
+   "nights": 14,
+   "price_total": 3198,
+   "price_original": null,
+   "discount_label": "Cena za os. × 3 (orientačne)",
+   "pets_allowed": null,
+   "source": "cedok",
+   "source_name": "Čedok",
+   "discount_pct": null,
+   "price_exact": false,
+   "id": "cedok:276fd62fdf17",
+   "score": 50,
+   "first_seen": "2026-10-29",
+   "last_seen": "2026-10-29",
+   "price_history": [
+    [
+     "2026-10-29",
+     3198
+    ]
+   ],
+   "price_change": null
+  },
+  {
    "hotel": "Delfinia Hotel",
    "url": "https://www.cedok.sk/dovolena/grecko/korfu/delfinia-hotel,AMTSGR0MIM/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgpBTVRTR1IwTUlNKAQ6BEtMMjBCBgiA6rXhBkoGCIDf2uEGUAJiBQoDQlRTagUKA0NGVXIICgZEUDQwMDZ6BQoDQ0ZVggEFCgNCVFOKAQgKBkRQNDAwNpIBBgiA6rXhBpoBBgiA39rhBqIBDAoKUk1TRDAwR1YwMKoBAwoBSOIBCQoHQW1hZGV1c%252BoBCQoHQW1hZGV1c%252FIBBQoDT1RT&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
    "image": "https://s.content4travel.com/pim-cdk/amtsgr0mim_0_20390cb29b.jpg",
@@ -79882,7 +79362,7 @@
      3230
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Playacalida SPA",
@@ -79939,6 +79419,46 @@
     ]
    ],
    "price_change": 0
+  },
+  {
+   "hotel": "Dunes d'Or Ocean Club",
+   "url": "https://www.satur.sk/produkt/labranda-les-dunes-dor?strava=all-inclusive&doprava=letecky&odlet=BTS",
+   "image": "https://www.satur.sk/media/cache/500x333/tour/101622/bazen2_68ef65b97cf7d.jpeg",
+   "stars": 4.0,
+   "rating": null,
+   "country": "Maroko",
+   "country_code": "MA",
+   "region": null,
+   "place": "Agadir",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "BTS",
+   "date_from": "2027-08-23",
+   "date_to": "2027-08-30",
+   "nights": 7,
+   "price_total": 3396,
+   "price_original": null,
+   "discount_label": "Cena za os. × 3 (orientačne)",
+   "pets_allowed": null,
+   "source": "satur",
+   "source_name": "Satur.sk",
+   "discount_pct": null,
+   "price_exact": false,
+   "id": "satur:3244adbae7a6",
+   "score": 50,
+   "first_seen": "2026-10-28",
+   "last_seen": "2026-10-29",
+   "price_history": [
+    [
+     "2026-10-28",
+     2544
+    ],
+    [
+     "2026-10-29",
+     3396
+    ]
+   ],
+   "price_change": 1113
   },
   {
    "hotel": "Hotel Best Siroco",
@@ -80172,7 +79692,7 @@
    "date_from": "2027-07-06",
    "date_to": "2027-07-13",
    "nights": 7,
-   "price_total": 3787,
+   "price_total": 3788,
    "price_original": null,
    "discount_label": null,
    "pets_allowed": null,
@@ -80203,10 +79723,10 @@
     ],
     [
      "2026-10-29",
-     3787
+     3788
     ]
    ],
-   "price_change": 0
+   "price_change": 1
   },
   {
    "hotel": "Montebello Resort",
@@ -80350,7 +79870,7 @@
      3826
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Jaz Makadina",
@@ -80818,7 +80338,7 @@
      2990
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Captain's Studios Apartments",
@@ -81126,7 +80646,7 @@
      3184
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel 4R Playa Park",
@@ -82110,7 +81630,7 @@
      3008
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Faedra Beach Resort",
@@ -82146,7 +81666,7 @@
      3093
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel GHT Miratge Adults Only",
@@ -82230,7 +81750,7 @@
      3135
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Jaz Sharm Dreams Hotel",
@@ -82604,7 +82124,7 @@
    "date_from": "2027-08-24",
    "date_to": "2027-09-01",
    "nights": 7,
-   "price_total": 3902,
+   "price_total": 3906,
    "price_original": null,
    "discount_label": null,
    "pets_allowed": null,
@@ -82635,10 +82155,10 @@
     ],
     [
      "2026-10-29",
-     3902
+     3906
     ]
    ],
-   "price_change": 0
+   "price_change": 4
   },
   {
    "hotel": "Laguna Maradiso hotel by Aminess",
@@ -83586,7 +83106,7 @@
      3153
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Kempinski San Lawrenz Resort",
@@ -83680,58 +83200,6 @@
     [
      "2026-10-29",
      3274
-    ]
-   ],
-   "price_change": 0
-  },
-  {
-   "hotel": "Hotel Aktea Beach Village",
-   "url": "https://www.cedok.sk/dovolena/cyprus/ayia-napa/hotel-aktea-beach-village,AMTSCY1ZA4/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgpBTVRTQ1kxWkE0KAQ6BEtMMjBCBgiAkaPjBkoGCIDv1%252BMGUAJiBQoDQlRTagUKA0xDQXIICgZEUDcwMDV6BQoDTENBggEFCgNCVFOKAQgKBkRQNzAwNZIBBgiAkaPjBpoBBgiA79fjBqIBDAoKU1RTRDAwMDAwRaoBAwoBSOIBDgoMVHJhdmVsRnVzaW9u6gEOCgxUcmF2ZWxGdXNpb27yAQUKA09UUw%253D%253D&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
-   "image": "https://s.content4travel.com/pim-cdk/amtscy1za4_0_a659cc699f.jpg",
-   "stars": 4.0,
-   "rating": 9.2,
-   "country": "Cyprus",
-   "country_code": "CY",
-   "region": "Ayia Napa",
-   "place": null,
-   "board": "HB",
-   "transport": "flight",
-   "departure": "BTS",
-   "date_from": "2027-08-21",
-   "date_to": "2027-08-31",
-   "nights": 10,
-   "price_total": 3514,
-   "price_original": null,
-   "discount_label": "Cena za os. × 3 (orientačne)",
-   "pets_allowed": null,
-   "source": "cedok",
-   "source_name": "Čedok",
-   "discount_pct": null,
-   "price_exact": false,
-   "id": "cedok:0d2089909fcf",
-   "score": 47,
-   "first_seen": "2026-10-24",
-   "last_seen": "2026-10-29",
-   "price_history": [
-    [
-     "2026-10-24",
-     3441
-    ],
-    [
-     "2026-10-25",
-     3441
-    ],
-    [
-     "2026-10-27",
-     3514
-    ],
-    [
-     "2026-10-28",
-     3514
-    ],
-    [
-     "2026-10-29",
-     3514
     ]
    ],
    "price_change": 0
@@ -83930,7 +83398,7 @@
      3896
     ]
    ],
-   "price_change": 20
+   "price_change": 0
   },
   {
    "hotel": "AKEAH Broncemar",
@@ -83986,7 +83454,7 @@
   },
   {
    "hotel": "Abora Buenaventura by Lopesan Hotels",
-   "url": "https://www.kartago.sk/hotely/spanielsko/gran-canaria/playa-del-ingles/abora-buenaventura-by-lopesan-hotels?DS=2&GIATA=2719&D=63213%7C63216%7C63226%7C63231%7C63241%7C63242%7C63243%7C63244%7C63245%7C63267%7C63272%7C63284%7C63312%7C63313%7C63334%7C63349%7C63350%7C63354%7C63360%7C63455%7C64430%7C74459%7C74460%7C74461%7C74462%7C74463%7C74464%7C74465%7C77806%7C211764&HID=144242&MT=5&MMT=5&DI=GT06-AI&RCS=RMSDSC00A0&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-31&DD=2027-08-23&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=3789&TT=1&PID=AMTSES0QRO&DPR=OTSCKF&PC=7-2027-08-24&IFC=1-LPAVIE-269-LPA-DT31-08-10-55-Q-EW-756-CGN-DT31-08-10-55-Q-EW&OFC=1-VIELPA-757-VIE-DT23-08-20-10-L-EW-268-CGN-DT23-08-20-10-L-EW",
+   "url": "https://www.kartago.sk/hotely/spanielsko/gran-canaria/playa-del-ingles/abora-buenaventura-by-lopesan-hotels?DS=2&GIATA=2719&D=63213%7C63216%7C63226%7C63231%7C63241%7C63242%7C63243%7C63244%7C63245%7C63267%7C63272%7C63284%7C63312%7C63313%7C63334%7C63349%7C63350%7C63354%7C63360%7C63455%7C64430%7C74459%7C74460%7C74461%7C74462%7C74463%7C74464%7C74465%7C77806%7C211764&HID=144242&MT=5&MMT=5&DI=GT06-AI&RCS=RMSDSC00A0&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-08-16%7C2027-09-15&RD=2027-09-01&DD=2027-08-23&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=3789&TT=1&PID=AMTSES0QRO&DPR=OTSCKF&PC=7-2027-08-24&IFC=1-LPAVIE-9543-LPA-DT31-08-16-25-Q-EW-9750-DUS-DT31-08-16-25-Q-EW&OFC=1-VIELPA-757-VIE-DT23-08-20-10-L-EW-268-CGN-DT23-08-20-10-L-EW",
    "image": "https://img.kartago.sk/hotels/720/spanelsko/gran-canaria/playa-del-ingles/abora-buenaventura-by-lopesan-hotels/ISLAND-POOL-1.jpg",
    "stars": 4.0,
    "rating": 8.6,
@@ -83998,7 +83466,7 @@
    "transport": "flight",
    "departure": "VIE",
    "date_from": "2027-08-23",
-   "date_to": "2027-08-31",
+   "date_to": "2027-09-01",
    "nights": 7,
    "price_total": 3964,
    "price_original": null,
@@ -84762,7 +84230,7 @@
      3354
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Europalace",
@@ -84810,7 +84278,7 @@
      3354
     ]
    ],
-   "price_change": 4
+   "price_change": 0
   },
   {
    "hotel": "Salobre Hotel Resort & Serenity",
@@ -84846,7 +84314,7 @@
      3363
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Vantaris Luxury Beach Resort",
@@ -84954,7 +84422,7 @@
      3464
     ]
    ],
-   "price_change": 38
+   "price_change": 0
   },
   {
    "hotel": "Hotel Mistral Bay",
@@ -85070,7 +84538,7 @@
   },
   {
    "hotel": "Los Olivos",
-   "url": "https://www.kartago.sk/hotely/spanielsko/tenerife/costa-adeje/los-olivos-7-14?DS=2&GIATA=62450&D=63213%7C63216%7C63226%7C63231%7C63241%7C63242%7C63243%7C63244%7C63245%7C63267%7C63272%7C63284%7C63312%7C63313%7C63334%7C63349%7C63350%7C63354%7C63360%7C63455%7C64430%7C74459%7C74460%7C74461%7C74462%7C74463%7C74464%7C74465%7C77806%7C211764&HID=4699&MT=5&MMT=5&DI=GT06-AI&RCS=JS000000A0&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-08-17%7C2027-09-15&RD=2027-09-01&DD=2027-08-24&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=3789&TT=1&PID=AMTSES0FIW&DPR=OTSCKF&PC=7-2027-08-24&IFC=1-TFSVIE-9559-TFS-DT31-08-16-40-K-EW-9750-DUS-DT31-08-16-40-K-EW&OFC=1-VIETFS-753-VIE-DT24-08-08-40-X-EW-252-CGN-DT24-08-08-40-X-EW",
+   "url": "https://www.kartago.sk/hotely/spanielsko/tenerife/costa-adeje/los-olivos-7-14?DS=2&GIATA=62450&D=63213%7C63216%7C63226%7C63231%7C63241%7C63242%7C63243%7C63244%7C63245%7C63267%7C63272%7C63284%7C63312%7C63313%7C63334%7C63349%7C63350%7C63354%7C63360%7C63455%7C64430%7C74459%7C74460%7C74461%7C74462%7C74463%7C74464%7C74465%7C77806%7C211764&HID=4699&MT=5&MMT=5&DI=GT06-AI&RCS=JS000000A0&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-08-17%7C2027-09-15&RD=2027-09-01&DD=2027-08-24&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=3789&TT=1&PID=AMTSES0FIW&DPR=OTSCKF&PC=7-2027-08-24&IFC=1-TFSVIE-253-TFS-DT31-08-18-10-K-EW-752-CGN-DT31-08-18-10-K-EW&OFC=1-VIETFS-753-VIE-DT24-08-08-40-X-EW-252-CGN-DT24-08-08-40-X-EW",
    "image": "https://img.kartago.sk/hotels/720/spanelsko/tenerife/costa-adeje/los-olivos/bazen.jpg",
    "stars": 3.0,
    "rating": 7.8,
@@ -85158,7 +84626,43 @@
      4002
     ]
    ],
-   "price_change": -84
+   "price_change": 0
+  },
+  {
+   "hotel": "Abora Interclub Atlantic by Lopesan Hotels",
+   "url": "https://www.kartago.sk/hotely/spanielsko/gran-canaria/san-agustin/abora-interclub-by-lopesan-hotels?DS=2&GIATA=5177&D=63213%7C63216%7C63226%7C63231%7C63241%7C63242%7C63243%7C63244%7C63245%7C63267%7C63272%7C63284%7C63312%7C63313%7C63334%7C63349%7C63350%7C63354%7C63360%7C63455%7C64430%7C74459%7C74460%7C74461%7C74462%7C74463%7C74464%7C74465%7C77806%7C211764&HID=143391&MT=5&MMT=5&DI=GT06-AI&RCS=SU00SC00A0&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-07-09&DD=2027-07-01&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=3789&TT=1&PID=AMTSES0R3W&DPR=OTSCKF&PC=7-2027-07-01&IFC=1-LPAVIE-269-LPA-DT08-07-17-45-G-EW-752-CGN-DT08-07-17-45-G-EW&OFC=1-VIELPA-753-VIE-DT01-07-08-10-G-EW-268-CGN-DT01-07-08-10-G-EW",
+   "image": "https://img.kartago.sk/hotels/720/spanelsko/gran-canaria/san-agustin/abora-interclub/LAGO-POOL-7.jpg",
+   "stars": 4.0,
+   "rating": 9.2,
+   "country": "Španielsko",
+   "country_code": "ES",
+   "region": "Gran Canaria",
+   "place": "San Agustin",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-07-01",
+   "date_to": "2027-07-09",
+   "nights": 7,
+   "price_total": 4014,
+   "price_original": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "price_exact": true,
+   "source": "kartago",
+   "source_name": "Kartago Tours",
+   "discount_pct": null,
+   "id": "kartago:2b105b0a5f15",
+   "score": 46,
+   "first_seen": "2026-10-29",
+   "last_seen": "2026-10-29",
+   "price_history": [
+    [
+     "2026-10-29",
+     4014
+    ]
+   ],
+   "price_change": null
   },
   {
    "hotel": "Hotel Maspalomas Oasis Club",
@@ -85298,7 +84802,7 @@
      4106
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Sural Hotel",
@@ -86250,7 +85754,7 @@
      3297
     ]
    ],
-   "price_change": 114
+   "price_change": 0
   },
   {
    "hotel": "Hotel Beverly Park & Spa",
@@ -86450,7 +85954,7 @@
      3376
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Europe Villa Cortes",
@@ -86486,7 +85990,7 @@
      3418
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Iliada Beach Hotel",
@@ -86578,7 +86082,59 @@
      3568
     ]
    ],
-   "price_change": null
+   "price_change": 0
+  },
+  {
+   "hotel": "Hotel Aktea Beach Village",
+   "url": "https://www.cedok.sk/dovolena/cyprus/ayia-napa/hotel-aktea-beach-village,AMTSCY1ZA4/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgpBTVRTQ1kxWkE0KAQ6BEtMMjBCBgiAkaPjBkoGCIDv1%252BMGUAJiBQoDQlRTagUKA0xDQXIICgZEUDcwMDV6BQoDTENBggEFCgNCVFOKAQgKBkRQNzAwNZIBBgiAkaPjBpoBBgiA79fjBqIBDAoKU1RTRDAwMDAwMKoBAwoBSOIBDgoMVHJhdmVsRnVzaW9u6gEOCgxUcmF2ZWxGdXNpb27yAQUKA09UUw%253D%253D&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
+   "image": "https://s.content4travel.com/pim-cdk/amtscy1za4_0_a659cc699f.jpg",
+   "stars": 4.0,
+   "rating": 9.2,
+   "country": "Cyprus",
+   "country_code": "CY",
+   "region": "Ayia Napa",
+   "place": null,
+   "board": "HB",
+   "transport": "flight",
+   "departure": "BTS",
+   "date_from": "2027-08-21",
+   "date_to": "2027-08-31",
+   "nights": 10,
+   "price_total": 3584,
+   "price_original": null,
+   "discount_label": "Cena za os. × 3 (orientačne)",
+   "pets_allowed": null,
+   "source": "cedok",
+   "source_name": "Čedok",
+   "discount_pct": null,
+   "price_exact": false,
+   "id": "cedok:0d2089909fcf",
+   "score": 45,
+   "first_seen": "2026-10-24",
+   "last_seen": "2026-10-29",
+   "price_history": [
+    [
+     "2026-10-24",
+     3441
+    ],
+    [
+     "2026-10-25",
+     3441
+    ],
+    [
+     "2026-10-27",
+     3514
+    ],
+    [
+     "2026-10-28",
+     3514
+    ],
+    [
+     "2026-10-29",
+     3584
+    ]
+   ],
+   "price_change": 70
   },
   {
    "hotel": "Radisson Beach Resort",
@@ -86630,7 +86186,7 @@
      3628
     ]
    ],
-   "price_change": 37
+   "price_change": 0
   },
   {
    "hotel": "Jaz Fanara Resort & Residence",
@@ -86676,58 +86232,6 @@
     [
      "2026-10-29",
      3814
-    ]
-   ],
-   "price_change": 0
-  },
-  {
-   "hotel": "Hotel LIVVO Valle Taurito",
-   "url": "https://www.kartago.sk/hotely/spanielsko/gran-canaria/playa-taurito/the-valle-taurito?DS=2&GIATA=201331&D=63213%7C63216%7C63226%7C63231%7C63241%7C63242%7C63243%7C63244%7C63245%7C63267%7C63272%7C63284%7C63312%7C63313%7C63334%7C63349%7C63350%7C63354%7C63360%7C63455%7C64430%7C74459%7C74460%7C74461%7C74462%7C74463%7C74464%7C74465%7C77806%7C211764&HID=1810&MT=5&MMT=5&DI=GT06-AI&RCS=RMSDINLSD0&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-07-16&DD=2027-07-08&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=3789&TT=1&PID=AMTSES0QR0&DPR=OTSCKF&PC=7-2027-07-08&IFC=1-LPAVIE-269-LPA-DT15-07-17-45-G-EW-752-CGN-DT15-07-17-45-G-EW&OFC=1-VIELPA-753-VIE-DT08-07-08-10-G-EW-268-CGN-DT08-07-08-10-G-EW",
-   "image": "https://img.kartago.sk/hotels/720/spanelsko/gran-canaria/playa-taurito/livvo-valle-taurito/valle-taurito-pool-1.jpg",
-   "stars": 4.0,
-   "rating": 7.8,
-   "country": "Španielsko",
-   "country_code": "ES",
-   "region": "Gran Canaria",
-   "place": "Playa Taurito",
-   "board": "AI",
-   "transport": "flight",
-   "departure": "VIE",
-   "date_from": "2027-07-08",
-   "date_to": "2027-07-16",
-   "nights": 7,
-   "price_total": 4024,
-   "price_original": null,
-   "discount_label": null,
-   "pets_allowed": null,
-   "price_exact": true,
-   "source": "kartago",
-   "source_name": "Kartago Tours",
-   "discount_pct": null,
-   "id": "kartago:ebfc00146c78",
-   "score": 45,
-   "first_seen": "2026-10-25",
-   "last_seen": "2026-10-29",
-   "price_history": [
-    [
-     "2026-10-25",
-     4024
-    ],
-    [
-     "2026-10-26",
-     4024
-    ],
-    [
-     "2026-10-27",
-     4024
-    ],
-    [
-     "2026-10-28",
-     4024
-    ],
-    [
-     "2026-10-29",
-     4024
     ]
    ],
    "price_change": 0
@@ -87497,54 +87001,6 @@
    "price_change": 0
   },
   {
-   "hotel": "Hotel Roger de Flor Seleqtta",
-   "url": "https://www.cedok.sk/dovolena/spanielsko/costa-brava/hotel-roger-de-flor-seleqtta,AESBCB8IIC/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgpBRVNCQ0I4SUlDKAQ6BEtMMjBCBgiAgabhBkoGCIDf2uEGUAJiBQoDVklFagUKA0JDTnIICgZEUDEwMzV6BQoDQkNOggEFCgNWSUWKAQgKBkRQMTAzNZIBBgiAgabhBpoBBgiA39rhBqIBDAoKUk1TRERCMDBCMKoBAwoBRuIBCQoHQW1hZGV1c%252BoBCQoHQW1hZGV1c%252FIBBQoDT1RT&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
-   "image": "https://s.content4travel.com/pim-cdk/AESBCB8IIC_1703692_a4cf3a328b.jpg",
-   "stars": 4.0,
-   "rating": 7.5,
-   "country": "Španielsko",
-   "country_code": "ES",
-   "region": "Costa Brava",
-   "place": null,
-   "board": "BB",
-   "transport": "flight",
-   "departure": "VIE",
-   "date_from": "2027-07-04",
-   "date_to": "2027-07-14",
-   "nights": 10,
-   "price_total": 3321,
-   "price_original": null,
-   "discount_label": "Cena za os. × 3 (orientačne)",
-   "pets_allowed": null,
-   "source": "cedok",
-   "source_name": "Čedok",
-   "discount_pct": null,
-   "price_exact": false,
-   "id": "cedok:e9b51e59f942",
-   "score": 44,
-   "first_seen": "2026-10-24",
-   "last_seen": "2026-10-29",
-   "price_history": [
-    [
-     "2026-10-24",
-     3338
-    ],
-    [
-     "2026-10-25",
-     3322
-    ],
-    [
-     "2026-10-28",
-     3321
-    ],
-    [
-     "2026-10-29",
-     3321
-    ]
-   ],
-   "price_change": 0
-  },
-  {
    "hotel": "Hotel Bitzaro",
    "url": "https://www.cedok.sk/dovolena/grecko/zakynthos/hotel-bitzaro,AGRZTHEWEK/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgpBR1JaVEhFV0VLKAQ6BEtMMjBCBgiAmdDhBkoGCICO9eEGUAJiBQoDVklFagUKA1pUSHIICgZEUDIwMTJ6BQoDWlRIggEFCgNWSUWKAQgKBkRQMjAxMpIBBgiAmdDhBpoBBgiAjvXhBqIBDAoKUk1TRDAwQ1YwMKoBAwoBRuIBCQoHQW1hZGV1c%252BoBCQoHQW1hZGV1c%252FIBBQoDT1RT&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
    "image": "https://s.content4travel.com/pim-cdk/agrzthewek_0_db4eba7465.jpg",
@@ -87994,7 +87450,7 @@
      4110
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Gemma Resort",
@@ -88086,7 +87542,7 @@
      4195
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Resort Funtana",
@@ -88174,7 +87630,7 @@
      4224
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Louis Paphos Breeze",
@@ -88706,7 +88162,7 @@
      3267
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Sol Barbacán",
@@ -88758,7 +88214,7 @@
      3268
     ]
    ],
-   "price_change": 112
+   "price_change": 0
   },
   {
    "hotel": "Hotel Mayflower",
@@ -89066,7 +88522,7 @@
      3405
     ]
    ],
-   "price_change": 73
+   "price_change": 0
   },
   {
    "hotel": "NissiBlu Beach Resort",
@@ -89118,7 +88574,7 @@
      3531
     ]
    ],
-   "price_change": 36
+   "price_change": 0
   },
   {
    "hotel": "Hotel Ibersol Sorra d´Or",
@@ -89326,7 +88782,7 @@
      3688
     ]
    ],
-   "price_change": 36
+   "price_change": 0
   },
   {
    "hotel": "Apartmány Zaton Holiday Resort",
@@ -90093,6 +89549,50 @@
    "price_change": 0
   },
   {
+   "hotel": "Hotel Roger de Flor Seleqtta",
+   "url": "https://www.cedok.sk/dovolena/spanielsko/costa-brava/hotel-roger-de-flor-seleqtta,AESBCB8IIC/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgpBRVNCQ0I4SUlDKAQ6BEtMMjBCBgiAsMDhBkoGCICO9eEGUAJiBQoDVklFagUKA0JDTnIICgZEUDYwNDl6BQoDQkNOggEFCgNWSUWKAQgKBkRQNjA0OZIBBgiAsMDhBpoBBgiAjvXhBqIBDAoKUk1TRERCMDBCMKoBAwoBRuIBCQoHQW1hZGV1c%252BoBCQoHQW1hZGV1c%252FIBBQoDT1RT&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
+   "image": "https://s.content4travel.com/pim-cdk/AESBCB8IIC_1703692_a4cf3a328b.jpg",
+   "stars": 4.0,
+   "rating": 7.5,
+   "country": "Španielsko",
+   "country_code": "ES",
+   "region": "Costa Brava",
+   "place": null,
+   "board": "BB",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-07-09",
+   "date_to": "2027-07-19",
+   "nights": 10,
+   "price_total": 3422,
+   "price_original": null,
+   "discount_label": "Cena za os. × 3 (orientačne)",
+   "pets_allowed": null,
+   "source": "cedok",
+   "source_name": "Čedok",
+   "discount_pct": null,
+   "price_exact": false,
+   "id": "cedok:e51ec8f90bb4",
+   "score": 42,
+   "first_seen": "2026-10-26",
+   "last_seen": "2026-10-29",
+   "price_history": [
+    [
+     "2026-10-26",
+     3423
+    ],
+    [
+     "2026-10-27",
+     3422
+    ],
+    [
+     "2026-10-29",
+     3422
+    ]
+   ],
+   "price_change": 0
+  },
+  {
    "hotel": "Hotel Bahía Blanca Gran Canaria",
    "url": "https://www.cedok.sk/dovolena/kanarske-ostrovy/gran-canaria/hotel-bahia-blanca-gran-canaria,AESLPA5TG0/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgpBRVNMUEE1VEcwKAQ6BEtMMjBCBgiAvY%252FiBkoGCICbxOIGUAJiBQoDVklFagUKA0xQQXIICgZEUDcwMTF6BQoDTFBBggEFCgNWSUWKAQgKBkRQNzAxMZIBBgiAvY%252FiBpoBBgiAm8TiBqIBDAoKQVBTUERCU1ZBMKoBAwoBRuIBCQoHQW1hZGV1c%252BoBCQoHQW1hZGV1c%252FIBBQoDT1RT&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
    "image": "https://s.content4travel.com/pim-cdk/aeslpa5tg0_0_7ca4fd6bc0.jpg",
@@ -90134,7 +89634,63 @@
      3465
     ]
    ],
-   "price_change": 3
+   "price_change": 0
+  },
+  {
+   "hotel": "Hotel Cavo Maris Beach",
+   "url": "https://www.cedok.sk/dovolena/cyprus/protaras/hotel-cavo-maris-beach,LCA2CAV/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgdMQ0EyQ0FWKAQ6BDgwMkFCBgiAkaPjBkoGCIDv1%252BMGUAJiBQoDQlRTagUKA0xDQXIICgZEUDcwMDV6BQoDTENBggEFCgNCVFOKAQgKBkRQNzAwNZIBBgiAkaPjBpoBBgiA79fjBqIBBQoDREhTqgEDCgFG4gEOCgxUcmF2ZWxGdXNpb27qAQ4KDFRyYXZlbEZ1c2lvbvIBCQoHUmVzYWJlZQ%253D%253D&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
+   "image": "https://s.content4travel.com/pim-cdk/amtscy1yvg_2_650654836c.jpg",
+   "stars": 4.0,
+   "rating": null,
+   "country": "Cyprus",
+   "country_code": "CY",
+   "region": "Protaras",
+   "place": null,
+   "board": "BB",
+   "transport": "flight",
+   "departure": "BTS",
+   "date_from": "2027-08-21",
+   "date_to": "2027-08-31",
+   "nights": 10,
+   "price_total": 3502,
+   "price_original": null,
+   "discount_label": "Cena za os. × 3 (orientačne)",
+   "pets_allowed": null,
+   "source": "cedok",
+   "source_name": "Čedok",
+   "discount_pct": null,
+   "price_exact": false,
+   "id": "cedok:df81b0fdf404",
+   "score": 42,
+   "first_seen": "2026-10-24",
+   "last_seen": "2026-10-29",
+   "price_history": [
+    [
+     "2026-10-24",
+     3504
+    ],
+    [
+     "2026-10-25",
+     3504
+    ],
+    [
+     "2026-10-26",
+     3579
+    ],
+    [
+     "2026-10-27",
+     3578
+    ],
+    [
+     "2026-10-28",
+     3578
+    ],
+    [
+     "2026-10-29",
+     3502
+    ]
+   ],
+   "price_change": -76
   },
   {
    "hotel": "Hotel Stamatia",
@@ -90190,7 +89746,7 @@
      3696
     ]
    ],
-   "price_change": -162
+   "price_change": 0
   },
   {
    "hotel": "Hotel Sunrise Beach",
@@ -90226,7 +89782,7 @@
      3846
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Vrissaki Beach Hotel",
@@ -90262,7 +89818,7 @@
      4301
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Belconti Resort",
@@ -90478,7 +90034,7 @@
      3496
     ]
    ],
-   "price_change": 56
+   "price_change": 0
   },
   {
    "hotel": "Sunprime Atlantic View",
@@ -90562,7 +90118,7 @@
      3524
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel H10 Imperial Tarraco",
@@ -90889,62 +90445,6 @@
    "price_change": 0
   },
   {
-   "hotel": "Hotel Cavo Maris Beach",
-   "url": "https://www.cedok.sk/dovolena/cyprus/protaras/hotel-cavo-maris-beach,LCA2CAV/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgdMQ0EyQ0FWKAQ6BDgwMkFCBgiAkaPjBkoGCIDv1%252BMGUAJiBQoDQlRTagUKA0xDQXIICgZEUDcwMDV6BQoDTENBggEFCgNCVFOKAQgKBkRQNzAwNZIBBgiAkaPjBpoBBgiA79fjBqIBBQoDREhTqgEDCgFG4gEOCgxUcmF2ZWxGdXNpb27qAQ4KDFRyYXZlbEZ1c2lvbvIBCQoHUmVzYWJlZQ%253D%253D&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
-   "image": "https://s.content4travel.com/pim-cdk/amtscy1yvg_2_650654836c.jpg",
-   "stars": 4.0,
-   "rating": null,
-   "country": "Cyprus",
-   "country_code": "CY",
-   "region": "Protaras",
-   "place": null,
-   "board": "BB",
-   "transport": "flight",
-   "departure": "BTS",
-   "date_from": "2027-08-21",
-   "date_to": "2027-08-31",
-   "nights": 10,
-   "price_total": 3578,
-   "price_original": null,
-   "discount_label": "Cena za os. × 3 (orientačne)",
-   "pets_allowed": null,
-   "source": "cedok",
-   "source_name": "Čedok",
-   "discount_pct": null,
-   "price_exact": false,
-   "id": "cedok:df81b0fdf404",
-   "score": 41,
-   "first_seen": "2026-10-24",
-   "last_seen": "2026-10-29",
-   "price_history": [
-    [
-     "2026-10-24",
-     3504
-    ],
-    [
-     "2026-10-25",
-     3504
-    ],
-    [
-     "2026-10-26",
-     3579
-    ],
-    [
-     "2026-10-27",
-     3578
-    ],
-    [
-     "2026-10-28",
-     3578
-    ],
-    [
-     "2026-10-29",
-     3578
-    ]
-   ],
-   "price_change": 0
-  },
-  {
    "hotel": "Hotel Ilunion Fuengirola",
    "url": "https://www.cedok.sk/dovolena/spanielsko/andaluzia/hotel-ilunion-fuengirola,AMTSES2C7U/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgpBTVRTRVMyQzdVKAQ6BEtMMjBCBgiA6rXhBkoGCIDf2uEGUAJiBQoDQlRTagUKA0FHUHIICgZEUDQwMTB6BQoDQUdQggEFCgNCVFOKAQgKBkRQNDAxMJIBBgiA6rXhBpoBBgiA39rhBqIBDAoKUk1TRDAwU1ZBMKoBAwoBRuIBDgoMVHJhdmVsRnVzaW9u6gEOCgxUcmF2ZWxGdXNpb27yAQUKA09UUw%253D%253D&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
    "image": "https://s.content4travel.com/pim-cdk/AMTSES2C7U_799636_4faa0119be.jpg",
@@ -91018,7 +90518,7 @@
      3602
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Lopesan Villa Del Conde Resort & Thalasso",
@@ -91106,7 +90606,7 @@
      3644
     ]
    ],
-   "price_change": -1
+   "price_change": 0
   },
   {
    "hotel": "Hotel Residence Costa Azzurra",
@@ -91306,7 +90806,7 @@
      4317
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Golden Coast Beach Hotel",
@@ -91446,7 +90946,7 @@
      4381
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Roussas Štúdiá A Apartmány",
@@ -92082,7 +91582,7 @@
      4222
     ]
    ],
-   "price_change": 112
+   "price_change": 0
   },
   {
    "hotel": "Riva Marina Resort",
@@ -92118,7 +91618,7 @@
      4333
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Sole Mare",
@@ -92262,7 +91762,7 @@
      4462
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Oasis Beach Club",
@@ -92298,7 +91798,7 @@
      3272
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Club Cala Blanca",
@@ -92506,7 +92006,7 @@
      3642
     ]
    ],
-   "price_change": 112
+   "price_change": 0
   },
   {
    "hotel": "LIVVO Corralejo Beach Hotel",
@@ -92598,7 +92098,7 @@
      3669
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel GHT Oasis Tossa",
@@ -92698,7 +92198,7 @@
      4282
     ]
    ],
-   "price_change": 114
+   "price_change": 0
   },
   {
    "hotel": "Jaz Belvedere Hotel",
@@ -92755,6 +92255,42 @@
     ]
    ],
    "price_change": 0
+  },
+  {
+   "hotel": "Villa del Mar",
+   "url": "https://www.satur.sk/produkt/villa-del-mar--321636?strava=all-inclusive&doprava=letecky&odlet=BTS",
+   "image": "https://www.satur.sk/media/cache/500x333/tour/321636/Titlka_699c32df6cb04.jpeg",
+   "stars": 4.0,
+   "rating": null,
+   "country": "Španielsko",
+   "country_code": "ES",
+   "region": "Valencia",
+   "place": "Alicante",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "BTS",
+   "date_from": "2027-08-04",
+   "date_to": "2027-08-11",
+   "nights": 7,
+   "price_total": 4386,
+   "price_original": null,
+   "discount_label": "Cena za os. × 3 (orientačne)",
+   "pets_allowed": null,
+   "source": "satur",
+   "source_name": "Satur.sk",
+   "discount_pct": null,
+   "price_exact": false,
+   "id": "satur:5ce94d2d8254",
+   "score": 39,
+   "first_seen": "2026-10-29",
+   "last_seen": "2026-10-29",
+   "price_history": [
+    [
+     "2026-10-29",
+     4386
+    ]
+   ],
+   "price_change": null
   },
   {
    "hotel": "Sundia by Liberty Suncity",
@@ -92905,8 +92441,8 @@
    "price_change": 0
   },
   {
-   "hotel": "Saratoga Hotel",
-   "url": "https://www.cedok.sk/dovolena/spanielsko/malorka/saratoga-hotel,AMTSES0S8O/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgpBTVRTRVMwUzhPKAQ6BEtMMjBCBgiAp9niBkoGCICc%252FuIGUAJiBQoDVklFagUKA1BNSXIICgZEUDcwNDN6BQoDUE1JggEFCgNWSUWKAQgKBkRQNzA0M5IBBgiAp9niBpoBBgiAnP7iBqIBDAoKUk1DRjAwMDAwMKoBAwoBVeIBCQoHQW1hZGV1c%252BoBCQoHQW1hZGV1c%252FIBBQoDT1RT&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
+   "hotel": "Hotel Saratoga",
+   "url": "https://www.cedok.sk/dovolena/spanielsko/malorka/hotel-saratoga,AMTSES0S8O/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgpBTVRTRVMwUzhPKAQ6BEtMMjBCBgiAp9niBkoGCICc%252FuIGUAJiBQoDVklFagUKA1BNSXIICgZEUDcwNDN6BQoDUE1JggEFCgNWSUWKAQgKBkRQNzA0M5IBBgiAp9niBpoBBgiAnP7iBqIBDAoKUk1DRjAwMDAwMKoBAwoBVeIBCQoHQW1hZGV1c%252BoBCQoHQW1hZGV1c%252FIBBQoDT1RT&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
    "image": "https://s.content4travel.com/pim-cdk/amtses0s8o_21_fb93d63874_e438d3ca63.jpg",
    "stars": 4.0,
    "rating": null,
@@ -92928,21 +92464,17 @@
    "source_name": "Čedok",
    "discount_pct": null,
    "price_exact": false,
-   "id": "cedok:cfb96693fc94",
+   "id": "cedok:f97bb44da6cf",
    "score": 38,
-   "first_seen": "2026-10-28",
+   "first_seen": "2026-10-29",
    "last_seen": "2026-10-29",
    "price_history": [
-    [
-     "2026-10-28",
-     3537
-    ],
     [
      "2026-10-29",
      3537
     ]
    ],
-   "price_change": 0
+   "price_change": null
   },
   {
    "hotel": "Hotel Flamingo Beach Mate",
@@ -93100,54 +92632,6 @@
     [
      "2026-10-29",
      3790
-    ]
-   ],
-   "price_change": 0
-  },
-  {
-   "hotel": "Hotel Cynthiana Beach",
-   "url": "https://www.cedok.sk/dovolena/cyprus/pafos/hotel-cynthiana-beach,AMTSCY1Z3G/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgpBTVRTQ1kxWjNHKAQ6BEtMMjBCBgiA39rhBkoGCIDJpOIGUAJiBQoDVklFagUKA1BGT3IICgZEUDQwNzN6BQoDUEZPggEFCgNWSUWKAQgKBkRQNDA3M5IBBgiA39rhBpoBBgiAyaTiBqIBDAoKUk1TRFRXU1ZCMKoBAwoBSOIBCQoHQW1hZGV1c%252BoBCQoHQW1hZGV1c%252FIBBQoDT1RT&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
-   "image": "https://s.content4travel.com/pim-cdk/amtscy1z3g_0_2eb6ad58e0.jpg",
-   "stars": 3.0,
-   "rating": 8.8,
-   "country": "Cyprus",
-   "country_code": "CY",
-   "region": "Pafos",
-   "place": null,
-   "board": "HB",
-   "transport": "flight",
-   "departure": "VIE",
-   "date_from": "2027-07-14",
-   "date_to": "2027-07-28",
-   "nights": 14,
-   "price_total": 3970,
-   "price_original": null,
-   "discount_label": "Cena za os. × 3 (orientačne)",
-   "pets_allowed": null,
-   "source": "cedok",
-   "source_name": "Čedok",
-   "discount_pct": null,
-   "price_exact": false,
-   "id": "cedok:e28b37193702",
-   "score": 38,
-   "first_seen": "2026-10-25",
-   "last_seen": "2026-10-29",
-   "price_history": [
-    [
-     "2026-10-25",
-     3972
-    ],
-    [
-     "2026-10-26",
-     3972
-    ],
-    [
-     "2026-10-27",
-     3970
-    ],
-    [
-     "2026-10-29",
-     3970
     ]
    ],
    "price_change": 0
@@ -93681,6 +93165,50 @@
    "price_change": 0
   },
   {
+   "hotel": "Hotel Cynthiana Beach",
+   "url": "https://www.cedok.sk/dovolena/cyprus/pafos/hotel-cynthiana-beach,AMTSCY1Z3G/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgpBTVRTQ1kxWjNHKAQ6BEtMMjBCBgiAyaTiBkoGCICz7uIGUAJiBQoDVklFagUKA1BGT3IICgZEUDQwNzN6BQoDUEZPggEFCgNWSUWKAQgKBkRQNDA3M5IBBgiAyaTiBpoBBgiAs%252B7iBqIBDAoKUk1TRFRXU1ZCMKoBAwoBSOIBCQoHQW1hZGV1c%252BoBCQoHQW1hZGV1c%252FIBBQoDT1RT&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
+   "image": "https://s.content4travel.com/pim-cdk/amtscy1z3g_0_2eb6ad58e0.jpg",
+   "stars": 3.0,
+   "rating": 8.8,
+   "country": "Cyprus",
+   "country_code": "CY",
+   "region": "Pafos",
+   "place": null,
+   "board": "HB",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-07-28",
+   "date_to": "2027-08-11",
+   "nights": 14,
+   "price_total": 4062,
+   "price_original": null,
+   "discount_label": "Cena za os. × 3 (orientačne)",
+   "pets_allowed": null,
+   "source": "cedok",
+   "source_name": "Čedok",
+   "discount_pct": null,
+   "price_exact": false,
+   "id": "cedok:6323c7b8f390",
+   "score": 37,
+   "first_seen": "2026-10-24",
+   "last_seen": "2026-10-29",
+   "price_history": [
+    [
+     "2026-10-24",
+     4065
+    ],
+    [
+     "2026-10-28",
+     4062
+    ],
+    [
+     "2026-10-29",
+     4062
+    ]
+   ],
+   "price_change": 0
+  },
+  {
    "hotel": "Hotel Robolla Beach Aparthotel",
    "url": "https://www.cedok.sk/dovolena/grecko/korfu/hotel-robolla-beach-aparthotel,CFU2ROB/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgdDRlUyUk9CKAQ6BEcyMTBCBgiAjvXhBkoGCID4vuIGUAJiBQoDQlRTagUKA0NGVXIDCgExegUKA0NGVYIBBQoDQlRTigEDCgExkgEGCICO9eEGmgEGCID4vuIGogEFCgNBUDKqAQMKAUjiAQkKB1Jlc2FiZWXqAQkKB1Jlc2FiZWXyAQkKB1Jlc2FiZWU%253D&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
    "image": "https://s.content4travel.com/pim-cdk/Snimek_obrazovky_2025_06_02_145802_10e56da912.png",
@@ -93982,7 +93510,7 @@
      3820
     ]
    ],
-   "price_change": 114
+   "price_change": 0
   },
   {
    "hotel": "Hotel Belussi Beach",
@@ -94542,7 +94070,7 @@
      3818
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Gillieru",
@@ -94654,7 +94182,7 @@
      3926
     ]
    ],
-   "price_change": 16
+   "price_change": 0
   },
   {
    "hotel": "H10 Big Sur Boutique Hotel",
@@ -95134,7 +94662,7 @@
      4016
     ]
    ],
-   "price_change": 192
+   "price_change": 0
   },
   {
    "hotel": "Lopesan Costa Meloneras Resort & Spa",
@@ -95170,7 +94698,7 @@
      4132
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "SeaView Hotel",
@@ -95394,7 +94922,7 @@
      3837
     ]
    ],
-   "price_change": 90
+   "price_change": 0
   },
   {
    "hotel": "Hotel Barcelo Valencia",
@@ -95614,7 +95142,7 @@
      4062
     ]
    ],
-   "price_change": 15
+   "price_change": 0
   },
   {
    "hotel": "Hotel Best Triton",
@@ -95666,7 +95194,7 @@
      4086
     ]
    ],
-   "price_change": -46
+   "price_change": 0
   },
   {
    "hotel": "Hotel Beverly Park & Spa",
@@ -95758,7 +95286,7 @@
      4110
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Cristina by Tigotan",
@@ -95814,7 +95342,7 @@
      4166
     ]
    ],
-   "price_change": -14
+   "price_change": 0
   },
   {
    "hotel": "Corallium Beach By Lopesan Hotels",
@@ -95870,7 +95398,7 @@
      4179
     ]
    ],
-   "price_change": 114
+   "price_change": 0
   },
   {
    "hotel": "AX The Victoria",
@@ -96414,7 +95942,7 @@
      4059
     ]
    ],
-   "price_change": 17
+   "price_change": 0
   },
   {
    "hotel": "La Falconeria",
@@ -96814,7 +96342,7 @@
      4330
     ]
    ],
-   "price_change": 1
+   "price_change": 0
   },
   {
    "hotel": "Contessa Hotel",
@@ -96994,7 +96522,7 @@
      4305
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Biokovka",
@@ -97086,7 +96614,7 @@
      4430
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Neptuno Bungalows",
@@ -97196,54 +96724,6 @@
     [
      "2026-10-29",
      4095
-    ]
-   ],
-   "price_change": 0
-  },
-  {
-   "hotel": "Hotel Roger de Flor Seleqtta",
-   "url": "https://www.cedok.sk/dovolena/spanielsko/costa-brava/hotel-roger-de-flor-seleqtta,AESBCB8IIC/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgpBRVNCQ0I4SUlDKAQ6BEtMMjBCBgiAu5vhBkoGCICl5eEGUAJiBQoDVklFagUKA0JDTnIICgZEUDYwNTJ6BQoDQkNOggEFCgNWSUWKAQgKBkRQNjA1MpIBBgiAu5vhBpoBBgiApeXhBqIBDAoKUk1TRERCMDBCMKoBAwoBRuIBCQoHQW1hZGV1c%252BoBCQoHQW1hZGV1c%252FIBBQoDT1RT&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
-   "image": "https://s.content4travel.com/pim-cdk/AESBCB8IIC_1703692_a4cf3a328b.jpg",
-   "stars": 4.0,
-   "rating": 7.5,
-   "country": "Španielsko",
-   "country_code": "ES",
-   "region": "Costa Brava",
-   "place": null,
-   "board": "BB",
-   "transport": "flight",
-   "departure": "VIE",
-   "date_from": "2027-07-02",
-   "date_to": "2027-07-16",
-   "nights": 14,
-   "price_total": 4308,
-   "price_original": null,
-   "discount_label": "Cena za os. × 3 (orientačne)",
-   "pets_allowed": null,
-   "source": "cedok",
-   "source_name": "Čedok",
-   "discount_pct": null,
-   "price_exact": false,
-   "id": "cedok:9afa73d50c4b",
-   "score": 27,
-   "first_seen": "2026-10-24",
-   "last_seen": "2026-10-29",
-   "price_history": [
-    [
-     "2026-10-24",
-     4298
-    ],
-    [
-     "2026-10-25",
-     4298
-    ],
-    [
-     "2026-10-28",
-     4308
-    ],
-    [
-     "2026-10-29",
-     4308
     ]
    ],
    "price_change": 0
@@ -97834,7 +97314,7 @@
   },
   {
    "hotel": "Hotel Best Delta Hotel",
-   "url": "https://www.cedok.sk/dovolena/spanielsko/malorka/hotel-best-delta-hotel,AMTSES1FV2/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgpBTVRTRVMxRlYyKAQ6BEtMMjBCBgiA3qDhBkoGCIDI6uEGUAJiBQoDVklFagUKA1BNSXIICgZEUDcwNTB6BQoDUE1JggEFCgNWSUWKAQgKBkRQNzA1MJIBBgiA3qDhBpoBBgiAyOrhBqIBDAoKUk1TRERCMDBBMKoBAwoBRuIBCQoHQW1hZGV1c%252BoBCQoHQW1hZGV1c%252FIBBQoDT1RT&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
+   "url": "https://www.cedok.sk/dovolena/spanielsko/malorka/hotel-best-delta-hotel,AMTSES1FV2/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgpBTVRTRVMxRlYyKAQ6BEtMMjBCBgiAhY7jBkoGCIDv1%252BMGUAJiBQoDVklFagUKA1BNSXIICgZEUDMwMjB6BQoDUE1JggEFCgNWSUWKAQgKBkRQMzAyMJIBBgiAhY7jBpoBBgiA79fjBqIBDAoKUk1TRERCMDBBMKoBAwoBRuIBCQoHQW1hZGV1c%252BoBCQoHQW1hZGV1c%252FIBBQoDT1RT&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
    "image": "https://s.content4travel.com/pim-cdk/AMTSES1FV2_1081540_cb0cd0967a.jpg",
    "stars": 4.0,
    "rating": null,
@@ -97845,10 +97325,10 @@
    "board": "BB",
    "transport": "flight",
    "departure": "VIE",
-   "date_from": "2027-07-03",
-   "date_to": "2027-07-17",
+   "date_from": "2027-08-17",
+   "date_to": "2027-08-31",
    "nights": 14,
-   "price_total": 4418,
+   "price_total": 4426,
    "price_original": null,
    "discount_label": "Cena za os. × 3 (orientačne)",
    "pets_allowed": null,
@@ -97856,25 +97336,29 @@
    "source_name": "Čedok",
    "discount_pct": null,
    "price_exact": false,
-   "id": "cedok:9c6fbcf410a8",
+   "id": "cedok:2527ebee9ab1",
    "score": 26,
-   "first_seen": "2026-10-24",
+   "first_seen": "2026-10-26",
    "last_seen": "2026-10-29",
    "price_history": [
     [
-     "2026-10-24",
-     4419
+     "2026-10-26",
+     4428
     ],
     [
-     "2026-10-25",
-     4419
+     "2026-10-27",
+     4426
+    ],
+    [
+     "2026-10-28",
+     4426
     ],
     [
      "2026-10-29",
-     4418
+     4426
     ]
    ],
-   "price_change": -1
+   "price_change": 0
   },
   {
    "hotel": "Hotel Cavo Maris Beach",
@@ -98037,6 +97521,50 @@
    "price_change": 0
   },
   {
+   "hotel": "Hotel Roger de Flor Seleqtta",
+   "url": "https://www.cedok.sk/dovolena/spanielsko/costa-brava/hotel-roger-de-flor-seleqtta,AESBCB8IIC/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgpBRVNCQ0I4SUlDKAQ6BEtMMjBCBgiApKvhBkoGCICO9eEGUAJiBQoDQlRTagUKA0JDTnIICgZEUDIwNjN6BQoDQkNOggEFCgNCVFOKAQgKBkRQMjA2M5IBBgiApKvhBpoBBgiAjvXhBqIBDAoKUk1TRERCMDBCMKoBAwoBRuIBCQoHQW1hZGV1c%252BoBCQoHQW1hZGV1c%252FIBBQoDT1RT&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
+   "image": "https://s.content4travel.com/pim-cdk/AESBCB8IIC_1703692_a4cf3a328b.jpg",
+   "stars": 4.0,
+   "rating": 7.5,
+   "country": "Španielsko",
+   "country_code": "ES",
+   "region": "Costa Brava",
+   "place": null,
+   "board": "BB",
+   "transport": "flight",
+   "departure": "BTS",
+   "date_from": "2027-07-05",
+   "date_to": "2027-07-19",
+   "nights": 14,
+   "price_total": 4452,
+   "price_original": null,
+   "discount_label": "Cena za os. × 3 (orientačne)",
+   "pets_allowed": null,
+   "source": "cedok",
+   "source_name": "Čedok",
+   "discount_pct": null,
+   "price_exact": false,
+   "id": "cedok:c4277021bb9a",
+   "score": 25,
+   "first_seen": "2026-10-26",
+   "last_seen": "2026-10-29",
+   "price_history": [
+    [
+     "2026-10-26",
+     4454
+    ],
+    [
+     "2026-10-27",
+     4452
+    ],
+    [
+     "2026-10-29",
+     4452
+    ]
+   ],
+   "price_change": 0
+  },
+  {
    "hotel": "Hotel H10 Imperial Tarraco",
    "url": "https://www.cedok.sk/dovolena/spanielsko/costa-dorada/hotel-h10-imperial-tarraco,AESBCDEM66/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgpBRVNCQ0RFTTY2KAQ6BEtMMjBCBgiA6%252B%252FhBkoGCIDJpOIGUAJiBQoDVklFagUKA0JDTnIICgZEUDEwMzV6BQoDQkNOggEFCgNWSUWKAQgKBkRQMTAzNZIBBgiA6%252B%252FhBpoBBgiAyaTiBqIBDAoKUk1DU0RCQ1YwMKoBAwoBRuIBCQoHQW1hZGV1c%252BoBCQoHQW1hZGV1c%252FIBBQoDT1RT&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
    "image": "https://s.content4travel.com/pim-cdk/AESBCDEM66_1203106_f281406e9b.jpg",
@@ -98082,7 +97610,7 @@
      4485
     ]
    ],
-   "price_change": 17
+   "price_change": 0
   },
   {
    "hotel": "Hotel Valentina",
