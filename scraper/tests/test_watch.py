@@ -63,9 +63,10 @@ def test_settings_watched_invalid(bad):
         config.validate(raw_settings(sledovane_hotely=bad))
 
 
-def test_repo_settings_watch_sural_and_alhambra():
+def test_repo_settings_watch_list_is_valid():
+    # The user edits nastavenia.yml on GitHub, so only check that it loads, not which hotels it lists.
     c = config.load(Path(__file__).resolve().parents[2] / "nastavenia.yml")
-    assert {"Sural", "Alhambra"} <= set(c["watched"])
+    assert all(isinstance(t, str) and t for t in c["watched"])
 
 
 # --- keep-above-cap rule ----------------------------------------------------------------------------------------
