@@ -17,6 +17,15 @@ Checked 2026-10-30 from GitHub runners:
   ids sent as destinationId are ignored -> worldwide list, a country *name* in destination -> 0 results), dauer =
   ONE stay length as a bit (2**nights: 128 = 7 nights, 1024 = 10, 16384 = 14; sums of bits are not understood,
   they fall back to 1–2 night stays), level=2 (hotel list).
+
+Watched hotels (watch() hook, checked 2026-10-30 from GitHub runners):
+- The search form's autocomplete getDestination.php?destination=<text> also lists hotels: {"field": "hotelname",
+  "name": "Sural Resort<span …> Türkische Riviera, Colakli, Türkei</span>", "id": 53099}; the id is the GIATA id the
+  cards carry (data-giataid="53099p") and the results page's gid parameter.
+- deliver.php with gid=<ids> (space- or comma-separated) and an empty destination lists just those hotels, one card
+  per hotel = its cheapest term in start..until for the dauer asked, priced for the party like any other card.
+  A gid without offers answers resultCount 0 *plus* 10 unrelated fallback cards, so cards are kept only when their
+  giataid is one of the asked gids. hotelSearchtext=<name> filters too, but by text; the ids are exact.
 """
 
 import re
@@ -35,6 +44,10 @@ IBE = "https://pauschal.ruefa.at"
 AIRPORTS = "VIE-BTS"
 AI_CODES = "AI AIP AIU AIR"
 MAX_CALLS = 60
+WATCH_CALLS = 10  # extra requests of the watch() hook: id lookups + deliver.php calls
+# Hotel ids the autocomplete gave on 2026-10-30, used only when the run-time lookup fails or finds nothing
+# (keys: normalised watch terms, see watch.norm_name). Sural Saray (4924) had no offer for 1+2 in Jul–Aug 2027.
+WATCH_GIDS = {"sural": ["53099", "4924", "4923", "4922"], "royal alhambra": ["239871"]}
 # German country names used by the destination lookup, per country code of nastavenia.yml
 COUNTRY_NAMES = {
     "HR": "Kroatien", "TR": "Türkei", "CY": "Zypern", "IT": "Italien", "GR": "Griechenland", "ES": "Spanien",
@@ -239,4 +252,91 @@ def search(cfg):
     print(f"[ruefa] {calls} requests, {len(offers)} offers; ids: {ids}")
     if errors and not offers:
         raise RuntimeError(f"all {len(errors)} Ruefa requests failed, first: {errors[0]}")
+    return offers
+
+
+def watch_lookup(term):
+    """[(gid, hotel name)] of the hotels the autocomplete lists for a watch term (only names the term matches)."""
+    from watch import match
+    res = get(IBE + "/hub/ajax/getDestination.php", params={"destination": term}, as_json=True,
+              headers={"X-Requested-With": "XMLHttpRequest", "Referer": IBE + "/"})
+    out = []
+    for x in res if isinstance(res, list) else []:
+        name = re.sub(r"<span.*", "", x.get("name") or "", flags=re.S)
+        name = re.sub(r"<[^>]+>", "", name).strip()
+        gid = str(x.get("id") or "").strip()
+        if x.get("field") == "hotelname" and gid.isdigit() and match(name, [term]):
+            out.append((gid, name))
+    return out
+
+
+def watch_windows(cfg):
+    """[(start, until)]: departures in the first and in the second half of the travel window (until = latest
+    return, so the first half may return later), each answered with the cheapest term per hotel."""
+    a, b = cfg["date_from"], cfg["date_to"]
+    mid = date.fromordinal((a.toordinal() + b.toordinal()) // 2)
+    if (b - a).days < 14:
+        return [(a, b)]
+    return [(a, date.fromordinal(mid.toordinal() + cfg["nights_max"] + 1)),
+            (date.fromordinal(mid.toordinal() + 1), b)]
+
+
+def watch_form(cfg, gids, nights, start, until):
+    f = form(cfg, "", nights)
+    f.update({"gid": " ".join(gids), "verpflegung": "", "start": start.isoformat(), "until": until.isoformat()})
+    return f
+
+
+def watch_parse(data, cfg, gids):
+    """Offers of the asked hotels only (a gid without offers comes back with unrelated fallback cards)."""
+    if not data or not int(data.get("resultCount") or 0):
+        return []
+    soup = BeautifulSoup(data.get("value") or "", "lxml")
+    ok = {c["data-href"].lstrip("/") for c in soup.select("div.card-hotel[data-href]")
+          if re.sub(r"\D", "", c.get("data-giataid") or "") in gids}
+    return [o for o in parse(data, cfg) if o["url"].split(IBE + "/", 1)[-1] in ok]
+
+
+def watch(cfg, terms, hints=None):
+    """run.py hook: the watched hotels' cheapest terms per stay length (7/10/14 nights) and half of the travel
+    window, any board, for the configured party, looked up by hotel id (≤ WATCH_CALLS requests)."""
+    from watch import norm_name
+    if "flight" not in cfg["transports"] or not terms:
+        return []
+    calls, gids = 0, {}
+    for t in terms:
+        try:
+            found = watch_lookup(t)
+        except Exception as e:
+            print(f"[ruefa] watch lookup {t!r}: {type(e).__name__} {str(e)[:120]}")
+            found = []
+        calls += 1
+        ids = [g for g, _ in found] or WATCH_GIDS.get(norm_name(t), [])
+        print(f"[ruefa] watch {t!r}: " + (", ".join(f"{n} ({g})" for g, n in found) or
+                                          f"autocomplete found nothing, cached ids {ids}"))
+        for g in ids:
+            gids.setdefault(g, t)
+    if not gids:
+        return []
+    hdr = {"X-Requested-With": "XMLHttpRequest", "Referer": IBE + "/index.php?page=results"}
+    asked = list(gids)
+    offers = []
+    for nights in stays(cfg):
+        for start, until in watch_windows(cfg):
+            if calls >= WATCH_CALLS:
+                print(f"[ruefa] watch: call budget {WATCH_CALLS} reached")
+                return offers
+            calls += 1
+            try:
+                data = get(IBE + "/hub/ajax/deliver.php", method="POST", headers=hdr, as_json=True,
+                           data=watch_form(cfg, asked, nights, start, until))
+            except Exception as e:
+                print(f"[ruefa] watch {nights}n {start}: {type(e).__name__} {str(e)[:120]}")
+                if "403" in str(e) or "429" in str(e):
+                    break
+                continue
+            got = watch_parse(data, cfg, set(asked))
+            print(f"[ruefa] watch {nights}n {start}..{until}: {data.get('resultCount')} results, {len(got)} watched: "
+                  + ", ".join(f"{o['hotel']} {o['date_from']} {o['price_total']}" for o in got))
+            offers += got
     return offers
