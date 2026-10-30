@@ -192,3 +192,55 @@ def search(tag, home, cfg, fischer):
     if errors and not offers:
         raise RuntimeError(f"all {len(errors)} {tag} API requests failed, first: {errors[0]}")
     return offers
+
+
+# --- watched hotels (sledovane_hotely) ---------------------------------------------------------------------------
+# The search API has no hotel-name filter (checked 2026-10-30: hid/h/HID/hi/ft/q/text are ignored, no fulltext
+# endpoint under /api/), but a whole country fits in a few pages of 100 tours (Turecko without the AI filter:
+# 315 hotels = 4 calls). watch() reads the categories (1 call) and then every page of the countries where a watched
+# hotel was seen (this run or the previous one, any agency), any board, ≤ WATCH_CALLS calls, and keeps the own-brand
+# tours whose hotel matches. Kartago and Fischer each read the shared inventory for their own brand.
+WATCH_CALLS = 10
+WATCH_PAGE = 100
+
+
+def watch(tag, home, cfg, fischer, terms, hints):
+    from watch import match
+    if "flight" not in cfg["transports"]:
+        return []
+    codes = []
+    for t in terms:
+        for h in hints.get(t, []):
+            if h.get("country_code") in cfg["countries"] and h["country_code"] not in codes:
+                codes.append(h["country_code"])
+    if not codes:
+        return []
+    hdr = {"Accept": "application/json", "Referer": home + "/"}
+    q = query(cfg)
+    q.pop("m", None)
+    cats = get(home + API, params=q, headers=hdr, as_json=True)
+    calls, offers = 1, []
+    todo = [c for c in countries(cats, cfg) if c[0] in codes]
+    for code, name, dest, count in todo:
+        for page in range(math.ceil(count / WATCH_PAGE) or 1):
+            if calls >= WATCH_CALLS:
+                print(f"[{tag}] watch: call budget {WATCH_CALLS} reached")
+                return offers
+            calls += 1
+            q = query(cfg, None, dest, page * WATCH_PAGE)
+            q.pop("m", None)
+            q["pitg"] = WATCH_PAGE
+            try:
+                data = get(home + API, params=q, headers=hdr, as_json=True)
+            except Exception as e:
+                print(f"[{tag}] watch {name} p{page + 1}: {type(e).__name__} {str(e)[:120]}")
+                break
+            tours = data.get("tours") or []
+            hits = [t for t in tours if _mine(t, fischer) and match((t.get("hotel") or {}).get("name"), terms)]
+            got = [o for o in (to_offer(t, home, cfg) for t in hits) if o]
+            print(f"[{tag}] watch {name} p{page + 1}: {len(tours)}/{data.get('toursCount')} tours, {len(got)} watched: "
+                  + ", ".join(f"{o['hotel']} {o['price_total']}" for o in got))
+            offers += got
+            if len(tours) < WATCH_PAGE:
+                break
+    return offers

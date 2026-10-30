@@ -237,3 +237,71 @@ def search(cfg):
     if errors and not offers:
         raise RuntimeError(f"all {len(errors)} satur.sk listing requests failed, first: {errors[0]}")
     return offers
+
+
+# --- watched hotels (sledovane_hotely) ---------------------------------------------------------------------------
+# Satur has no hotel-name search a crawler may use (the searchbox autocomplete lives under /ajax, which robots.txt
+# disallows). But every place has a listing /dovolenka/<country>/<place> (checked 2026-10-30: /dovolenka/turecko/side
+# = 24 hotels in 2 pages incl. Sural Hotel and Sural Saray, /dovolenka/turecko/evrenseki = Sural Saray), with the same
+# ?termin / ?dlzka-pobytu filters, any board and departure. watch() reads the listings of the places where a watched
+# hotel was seen (this run or the previous one, any agency), all lengths at once, and keeps the matching cards –
+# so a watched hotel shows up even when it is above price_cap or not AI (the crawled listings above are AI-only).
+# An unknown place slug falls back to a generic listing; such a page (no card from that place) is discarded.
+WATCH_REQUESTS = 10
+COUNTRY_SLUG = {**{v: k for k, v in PAGE_COUNTRY.items()}, **FAR}
+
+
+def slug(text):
+    return re.sub(r"[^a-z0-9]+", "-", strip_accents(str(text or "")).lower()).strip("-")
+
+
+def watch_paths(hints):
+    """Listing paths for the hinted places: [(path, place slug, place name)] in hint order, no duplicates."""
+    out, seen = [], set()
+    for h in hints:
+        cs = COUNTRY_SLUG.get(h.get("country_code"))
+        for p in (h.get("place"), h.get("region")):
+            path = f"/dovolenka/{cs}/{slug(p)}"
+            if cs and slug(p) and path not in seen:
+                seen.add(path)
+                out.append((path, slug(p), p))
+    return out
+
+
+def watch(cfg, terms, hints):
+    """run.py hook: offers of the watched hotels from the place listings where they were seen (≤ WATCH_REQUESTS)."""
+    from watch import match
+    party = party_size(cfg)
+    termin = f"{cfg['date_from']:%d.%m.%Y}-{cfg['date_to']:%d.%m.%Y}"
+    all_nights = ",".join(str(n) for n in range(cfg["nights_min"], cfg["nights_max"] + 1))
+    places = watch_paths([h for t in terms for h in hints.get(t, [])])
+    offers, calls = [], 0
+    for path, place, _ in places:
+        for n in range(1, 4):
+            if calls >= WATCH_REQUESTS:
+                print(f"[satur] watch: request budget {WATCH_REQUESTS} reached")
+                return offers
+            calls += 1
+            params = {"termin": termin, "dlzka-pobytu": all_nights, **({"stranka": n} if n > 1 else {})}
+            try:
+                cards = parse_cards(get(HOME + path, params=params))
+            except Exception as e:
+                print(f"[satur] watch {path} p{n}: {type(e).__name__} {str(e)[:120]}")
+                break
+            if cards and not any(place in (slug(c["place"]), slug(c["region"])) for c in cards):
+                print(f"[satur] watch {path}: place not known to the site (generic listing), discarded")
+                break
+            hits = [c for c in cards if match(c["hotel"], terms)]
+            got = [o for o in (to_offer(c, "flight", None, party) for c in hits) if o]
+            print(f"[satur] watch {path} p{n}: {len(cards)} cards, {len(got)} watched: "
+                  + ", ".join(f"{o['hotel']} {o['price_total']}" for o in got))
+            offers += got
+            if len(cards) < 20:
+                break
+    return offers
+
+
+def watch_links(cfg, term, hints):
+    termin = f"{cfg['date_from']:%d.%m.%Y}-{cfg['date_to']:%d.%m.%Y}"
+    return [{"label": f"všetky hotely v mieste {name}", "url": f"{HOME}{path}?termin={termin}"}
+            for path, _, name in watch_paths(hints)[:2]]

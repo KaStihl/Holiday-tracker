@@ -90,3 +90,12 @@ destinations:
   DO: 0.6
   MX: 0.6
   CU: 0.5
+
+# Sledované hotely – každý názov na samostatnom riadku začínajúcom '- '. Stačí časť názvu, na veľkých/malých
+# písmenách a diakritike nezáleží a slová ako hotel, resort, spa či & sa ignorujú ("Sural" nájde aj
+# "Hotel Süral Hotel" a "Sural Saray"). Ich ponuky sú na stránke hore v sekcii ⭐ Sledované hotely a v
+# týždennom e-maile – aj keď sú drahšie ako price_cap (najviac do dvojnásobku, označené "nad strop").
+# Bez sledovaných hotelov: sledovane_hotely: []
+sledovane_hotely:
+  - Sural
+  - Alhambra

@@ -159,8 +159,16 @@
       boardsPref: pref.length ? pref : ["UAI", "AI"],
       departures: strList(c.departures).map(function (d) { return d.toUpperCase(); }).filter(function (d) { return /^[A-Z]{3,4}$/.test(d); }),
       transports: transports,
-      dogs: dogs !== null && dogs >= 0 ? Math.round(dogs) : null
+      dogs: dogs !== null && dogs >= 0 ? Math.round(dogs) : null,
+      watched: watchedTerms(c)
     };
+  }
+  // watched hotel terms: offers.json "watched" [{term, count, links}] (newer files) or criteria.watched
+  function watchedTerms(c) {
+    var list = Array.isArray(data.watched) ? data.watched.filter(function (w) { return w && typeof w.term === "string"; })
+      .map(function (w) { return w.term; }) : strList(c.watched, 20);
+    allOffers.forEach(function (o) { if (o.watched && list.indexOf(o.watched) < 0) list.push(o.watched); });
+    return list.filter(function (t) { return t.length && t.length <= 80; }).slice(0, 20);
   }
   function partyLong() {
     if (!CFG || CFG.adults === null) return "skupina neuvedená";
@@ -186,7 +194,7 @@
     DEFAULTS = {
       t: "all", ct: [], c: [], pmin: 0, pmax: Math.min(CFG.budget, CFG.priceMax), df: "", dt: "",
       nmin: CFG.nLo, nmax: CFG.nHi, b: CFG.boardsPref.slice(), st: 0, r: 0, d: [], src: [],
-      ex: false, z: false, dog: false, dr: false, q: "", s: "score", pp: false
+      ex: false, z: false, dog: false, dr: false, w: false, q: "", s: "score", pp: false
     };
     OPEN = clone(DEFAULTS);
     OPEN.pmax = CFG.priceMax;
@@ -218,13 +226,13 @@
     if (o.nmin > o.nmax) { var t = o.nmin; o.nmin = o.nmax; o.nmax = t; }
     var st = num(s.st); if (st !== null && STAR_OPTS.indexOf(st) >= 0) o.st = st;
     var r = num(s.r); if (r !== null && RATING_OPTS.indexOf(r) >= 0) o.r = r;
-    ["ex", "z", "dog", "dr", "pp"].forEach(function (k) { if (typeof s[k] === "boolean") o[k] = s[k]; });
+    ["ex", "z", "dog", "dr", "w", "pp"].forEach(function (k) { if (typeof s[k] === "boolean") o[k] = s[k]; });
     if (typeof s.q === "string") o.q = s.q.slice(0, 80);
     if (SORTS[s.s]) o.s = s.s;
     return o;
   }
   var ARR_KEYS = ["ct", "c", "b", "d", "src"];
-  var BOOL_KEYS = ["ex", "z", "dog", "dr", "pp"];
+  var BOOL_KEYS = ["ex", "z", "dog", "dr", "w", "pp"];
   function stateToHash(s) {
     var h = new URLSearchParams();
     Object.keys(DEFAULTS).forEach(function (k) {
@@ -301,7 +309,8 @@
       score: num(o.score),
       first_seen: str(o.first_seen), last_seen: str(o.last_seen),
       price_history: hist,
-      price_change: num(o.price_change)
+      price_change: num(o.price_change),
+      watched: typeof o.watched === "string" && o.watched.length <= 80 ? o.watched : ""
     };
     n._text = fold([n.hotel, n.place, n.region, n.country].join(" "));
     return n;
@@ -339,6 +348,7 @@
     if (s.z && !isDiscount(o)) return false;
     if (s.dog && !(o.transport === "car" && o.pets_allowed === true)) return false;
     if (s.dr && !(o.price_change !== null && o.price_change < 0)) return false;
+    if (s.w && !o.watched) return false;
     for (var i = 0; i < qWords.length; i++) if (o._text.indexOf(qWords[i]) < 0) return false;
     return true;
   }
@@ -600,6 +610,13 @@
     [["f-ex", "ex"], ["f-disc", "z"], ["f-dog", "dog"], ["f-drop", "dr"]].forEach(function (p) {
       $(p[0]).addEventListener("change", function () { state[p[1]] = this.checked; update(); });
     });
+    $("f-watch").addEventListener("change", function () { setWatchOnly(this.checked); });
+    $("watch-filter").addEventListener("click", function () {
+      setWatchOnly(true);
+      var t = $("ponuky");
+      if (t.scrollIntoView) t.scrollIntoView({ block: "start" });
+      t.focus({ preventScroll: true });
+    });
     var qt = null;
     $("f-q").addEventListener("input", function () {
       var v = this.value;
@@ -612,6 +629,16 @@
       var s = hashToState(location.hash);
       if (s && stateToHash(s) !== stateToHash(state)) { state = s; update(true); }
     });
+  }
+  // "only watched": watched hotels are kept above price_cap and in any board, so turning it on also lifts
+  // the default price/board filters that would hide them (each can be set again afterwards)
+  function setWatchOnly(on) {
+    state.w = on;
+    if (on) {
+      if (state.pmax === DEFAULTS.pmax) state.pmax = CFG.priceMax;
+      if (sameArr(state.b, DEFAULTS.b)) state.b = [];
+    }
+    update();
   }
   function clearAll() {
     var keep = { s: state.s, pp: state.pp };
@@ -651,6 +678,8 @@
     $("f-disc").checked = state.z;
     $("f-dog").checked = state.dog;
     $("f-drop").checked = state.dr;
+    $("f-watch").checked = state.w;
+    $("f-watch-wrap").hidden = !CFG.watched.length && !state.w;
     $("f-ex-label").textContent = "Len presné ceny pre našu skupinu" + (partyShort() ? " (" + partyShort() + ")" : "");
   }
 
@@ -680,6 +709,7 @@
     if (s.z) add("len so zľavou", function () { s.z = false; });
     if (s.dog) add("len so psami", function () { s.dog = false; });
     if (s.dr) add("len zlacnené", function () { s.dr = false; });
+    if (s.w) add("⭐ len sledované", function () { s.w = false; });
     if (s.q) add("„" + s.q + "“", function () { s.q = ""; setVal("f-q", ""); });
     return out;
   }
@@ -765,6 +795,117 @@
     });
   }
 
+  // ---------- render: watched hotels (ignores the filters: the user always wants to see these) ----------
+  var BOARD_SHORT = { UAI: "Ultra AI", AI: "All Inclusive", FB: "plná penzia", HB: "polpenzia", BB: "raňajky", RO: "bez stravy" };
+  function watchLinks(term) {
+    var out = [], seen = {};
+    var w = Array.isArray(data.watched) ? data.watched.filter(function (x) { return x && x.term === term; })[0] : null;
+    var own = w && Array.isArray(w.links) ? w.links : [];
+    var generic = (Array.isArray(data.deeplinks) ? data.deeplinks : []).filter(function (d) { return d && d.transport !== "car"; });
+    own.concat(generic).forEach(function (d) {
+      var u = d && safeUrl(d.url);
+      var src = str(d && (d.source || d.name));
+      if (!u || out.length >= 4 || (seen[src] && own.indexOf(d) < 0)) return;
+      seen[src] = 1;
+      out.push({ url: u, name: str(d.name || d.source), label: str(d.label) });
+    });
+    return out;
+  }
+  function watchRow(o, more) {
+    var li = el("li", "watch-row");
+    var name = el("div", "watch-hotel", flag(o.country_code) + " " + o.hotel);
+    li.appendChild(name);
+    var place = [o.place, o.region].filter(Boolean).filter(function (v, i, a) { return a.indexOf(v) === i; }).join(", ");
+    li.appendChild(el("div", "watch-meta", (place ? place + ", " : "") + o.country + " · " + o.source_name));
+    var when = shortDay(o.date_from) + (o.date_to ? " – " + shortDay(o.date_to, true) : "") +
+      (o.nights ? " · " + o.nights + " " + nightsWord(o.nights) : "") +
+      " · " + (o.board ? BOARD_SHORT[o.board] || o.board : "strava ?") +
+      " · " + (o.transport === "car" ? "🚗 autom" : "✈️ " + (o.departure || "let"));
+    li.appendChild(el("div", "watch-meta mono", when));
+    var tags = el("div", "watch-tags");
+    if (o.price_exact) {
+      var ex = el("span", "exact-badge", "✓ presná" + (partyShort() ? " " + partyShort() : ""));
+      ex.title = "Cestovka vypočítala cenu priamo pre " + partyLong();
+      tags.appendChild(ex);
+    } else {
+      var ap = el("span", "approx-badge", "≈ orientačne");
+      ap.title = o.price_note || "Prepočítané z ceny za osobu – overte pred rezerváciou";
+      tags.appendChild(ap);
+    }
+    if (o.price_total > CFG.cap) {
+      var cb = el("span", "cap-badge", "nad strop");
+      cb.title = "Drahšie ako strop " + eur(CFG.cap) + " z nastavení – zobrazené len preto, že hotel sledujete";
+      tags.appendChild(cb);
+    } else if (o.price_total > CFG.budget) tags.appendChild(el("span", "tag", "nad budget"));
+    if (more) tags.appendChild(el("span", "tag", "+" + more + " " + plural(more, "ďalší termín", "ďalšie termíny", "ďalších termínov")));
+    li.appendChild(tags);
+    var pr = el("div", "watch-price");
+    pr.appendChild(el("div", "price-total mono", priceText(o.price_total)));
+    if (o.url) {
+      var a = el("a", "btn", "Ponuka ↗");
+      a.href = o.url; a.target = "_blank"; a.rel = "noopener noreferrer";
+      a.setAttribute("aria-label", "Zobraziť ponuku " + o.hotel + " na " + o.source_name + " (nové okno)");
+      pr.appendChild(a);
+    }
+    li.appendChild(pr);
+    return li;
+  }
+  function renderWatch() {
+    var box = $("watch-list");
+    clear(box);
+    $("watch-block").hidden = !CFG.watched.length;
+    if (!CFG.watched.length) return;
+    $("watch-sub").textContent = "najlacnejšia ponuka každého hotela v každej cestovke · " +
+      (perPerson() ? "cena za osobu" : "cena spolu za " + (partyShort() || "skupinu"));
+    var any = false;
+    CFG.watched.forEach(function (term) {
+      var groups = {};
+      allOffers.forEach(function (o) {
+        if (o.watched !== term) return;
+        var k = fold(o.hotel) + "|" + o.source;
+        var g = groups[k] || (groups[k] = { best: o, n: 0 });
+        g.n++;
+        if (o.price_total < g.best.price_total) g.best = o;
+      });
+      var rows = Object.keys(groups).map(function (k) { return groups[k]; })
+        .sort(function (a, b) { return a.best.price_total - b.best.price_total; });
+      var card = el("article", "watch-term");
+      var h = el("h3", "", "⭐ " + term);
+      var hotels = {};
+      rows.forEach(function (g) { hotels[fold(g.best.hotel)] = 1; });
+      var nh = Object.keys(hotels).length, no = rows.reduce(function (s, g) { return s + g.n; }, 0);
+      h.appendChild(el("span", "muted", rows.length
+        ? nh + " " + plural(nh, "hotel", "hotely", "hotelov") + " · " + no + " " + offersWord(no) + " · od " + priceText(rows[0].best.price_total)
+        : "zatiaľ bez ponuky"));
+      card.appendChild(h);
+      if (rows.length) {
+        any = true;
+        var ul = el("ul", "watch-rows");
+        rows.slice(0, 8).forEach(function (g) { ul.appendChild(watchRow(g.best, g.n - 1)); });
+        card.appendChild(ul);
+        if (rows.length > 8) card.appendChild(el("p", "muted watch-how", "…a ďalšie v zozname ponúk (filter ⭐ len sledované)."));
+      } else {
+        card.appendChild(el("p", "watch-empty", "Žiadna cestovka ho teraz pre vaše termíny nepredáva – hľadajte priamo:"));
+        var links = watchLinks(term);
+        var dl = el("ul", "deep-list");
+        links.forEach(function (d) {
+          var li = el("li"), a = el("a");
+          a.href = d.url; a.target = "_blank"; a.rel = "noopener noreferrer";
+          a.appendChild(el("span", "deep-name", d.name));
+          var r = el("span", "deep-label", d.label);
+          r.appendChild(el("span", "deep-arrow", " ↗"));
+          a.appendChild(r);
+          a.setAttribute("aria-label", d.name + ": " + d.label + " (nové okno)");
+          li.appendChild(a);
+          dl.appendChild(li);
+        });
+        if (links.length) card.appendChild(dl);
+      }
+      box.appendChild(card);
+    });
+    $("watch-filter").hidden = !any;
+  }
+
   // ---------- render: offers ----------
   function sparkline(hist) {
     if (hist.length < 2) return null;
@@ -826,6 +967,14 @@
     }
 
     node.querySelector(".offer-hotel").textContent = o.hotel;
+    if (o.watched) {
+      node.classList.add("watched");
+      var wm = node.querySelector(".watch-mark");
+      wm.hidden = false;
+      wm.title = "Sledovaný hotel (" + o.watched + ")";
+      wm.setAttribute("role", "img");
+      wm.setAttribute("aria-label", "Sledovaný hotel");
+    }
     var stars = node.querySelector(".offer-stars");
     if (o.stars) {
       var full = Math.floor(o.stars), half = o.stars - full >= 0.5;
@@ -892,7 +1041,8 @@
     var sp = sparkline(o.price_history);
     if (sp) trend.appendChild(sp);
 
-    if (over) node.querySelector(".price-warn").textContent = "⚠ nad budget o " + eur(o.price_total - CFG.budget);
+    if (o.price_total > CFG.cap) node.querySelector(".price-warn").textContent = "⚠ nad strop " + eur(CFG.cap) + " (sledovaný hotel)";
+    else if (over) node.querySelector(".price-warn").textContent = "⚠ nad budget o " + eur(o.price_total - CFG.budget);
 
     var a = node.querySelector(".btn");
     if (o.url) {
@@ -1033,6 +1183,7 @@
     var list = sortOffers(allOffers.filter(function (o) { return matches(o); }));
     renderPills(list);
     renderKpis(list);
+    renderWatch();
     renderCheapStrip();
     renderOffers(list);
     renderDeeplinks();

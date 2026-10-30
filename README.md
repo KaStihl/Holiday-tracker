@@ -42,6 +42,20 @@ zisťuje z detailu ponuky **presnú cenu pre nastavenú zostavu** (v e-maile ✓
 odhad v `price_approx`). Každá ponuka má aj `continent` (Európa, Afrika, Blízky východ, Ázia, Indický oceán,
 Karibik a Amerika).
 
+## Sledované hotely
+`sledovane_hotely` v `nastavenia.yml` = zoznam názvov (stačí časť, bez ohľadu na diakritiku/veľkosť písmen; slová
+hotel/resort/spa/& sa ignorujú – `scraper/watch.py`). Zhodné ponuky dostanú v dátach `watched: "<názov>"`, zostávajú aj
+nad `price_cap` (do 2× stropu, `over_cap: true`, na stránke „nad strop“) a v akejkoľvek strave. Na stránke sú hore
+v sekcii ⭐ Sledované hotely (najlacnejšia ponuka každého hotela v každej cestovke, alebo „zatiaľ bez ponuky“ s odkazmi),
+filter „⭐ Len sledované hotely“ a ⭐ na kartách; týždenný e-mail ich má ako prvú sekciu so zmenou ceny od minulého.
+
+Cielené dohľadanie (`watch(cfg, terms, hints)` v adaptéroch, ≤ 10 požiadaviek na cestovku a beh, robots.txt platí):
+žiadna z cestoviek nemá názvové vyhľadávanie, ktoré robots.txt povoľuje (Satur `/ajax`, Čedok `/api` sú zakázané,
+Kartago/Fischer API názov ignoruje). Preto sa číta celá ponuka **miesta/krajiny, kde bol hotel už videný**
+(tento alebo minulý beh, ktorákoľvek cestovka): Satur – zoznam miesta `/dovolenka/<krajina>/<miesto>` (napr. Side,
+Evrenseki), Čedok – všetky strany krajiny, Kartago/Fischer – všetky hotely krajiny bez filtra stravy. Hotel, ktorý ešte
+nikde nebol videný, sa ukáže, keď sa objaví v bežne sťahovaných zoznamoch.
+
 ## E-maily
 **Raz týždenne, v pondelok ráno** príde súhrn: top 10 ponúk All Inclusive do budgetu, nové ponuky a
 zlacnenia o ≥ 50 € od minulého súhrnu. Workflow ho vytvorí ako **GitHub issue** so štítkom `dovolenka`

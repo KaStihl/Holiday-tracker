@@ -45,6 +45,16 @@
     <div id="sample-note" class="note" hidden>Zobrazujú sa <strong>ukážkové dáta</strong> (?sample=1) – hotely a ceny sú vymyslené.</div>
     <div id="load-error" class="note note-err" role="alert" hidden></div>
 
+    <section aria-labelledby="h-watch" class="block watch" id="watch-block" hidden>
+      <div class="block-head">
+        <h2 id="h-watch"><span aria-hidden="true">⭐</span> Sledované hotely</h2>
+        <span class="muted" id="watch-sub"></span>
+        <button type="button" class="btn-ghost btn-sm" id="watch-filter" aria-controls="ponuky">Len sledované v zozname ↓</button>
+      </div>
+      <div class="watch-list" id="watch-list"></div>
+      <p class="muted watch-how">Zoznam sledovaných hotelov upravíte v <code>nastavenia.yml</code> (riadky pod <code>sledovane_hotely</code>). Ponuky sledovaných hotelov sa zobrazia aj nad stropom ceny (označené „nad strop“).</p>
+    </section>
+
     <section aria-label="Súhrn" class="kpis" id="kpis"></section>
 
     <section aria-labelledby="h-party" class="block party" id="party-block">
@@ -151,6 +161,7 @@
             <label class="check"><input type="checkbox" id="f-disc"> Len so zľavou (first / last minute)</label>
             <label class="check"><input type="checkbox" id="f-dog"> Len so psami (autom, psy povolené)</label>
             <label class="check"><input type="checkbox" id="f-drop"> Len zlacnené od minula</label>
+            <label class="check" id="f-watch-wrap"><input type="checkbox" id="f-watch"> ⭐ Len sledované hotely</label>
           </div>
         </fieldset>
       </form>
@@ -204,6 +215,7 @@
       <div class="offer-media"><img alt="" loading="lazy" decoding="async" width="320" height="200"><span class="media-fallback" aria-hidden="true">🏝️</span></div>
       <div class="offer-body">
         <div class="offer-head">
+          <span class="watch-mark" hidden>⭐</span>
           <h3 class="offer-hotel"></h3>
           <span class="offer-stars"></span>
         </div>

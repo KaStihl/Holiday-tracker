@@ -26,7 +26,11 @@
    "flight",
    "car"
   ],
-  "dogs": 2
+  "dogs": 2,
+  "watched": [
+   "Sural",
+   "Alhambra"
+  ]
  },
  "sources": [
   {
@@ -2539,6 +2543,186 @@
    "price_exact": false,
    "continent": "Afrika",
    "price_note": "orientačne: cena pre 2 dospelých prepočítaná na 1 dospelého + 2 deti"
+  },
+  {
+   "id": "ukazka:watch1",
+   "source": "ukazka",
+   "source_name": "Ukážka (fake)",
+   "hotel": "Ukážkový Süral Beach Hotel",
+   "stars": 3.0,
+   "rating": 9.2,
+   "country": "Turecko",
+   "country_code": "TR",
+   "region": null,
+   "place": "Side",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "BUD",
+   "date_from": "2027-08-24",
+   "date_to": "2027-08-31",
+   "nights": 7,
+   "price_total": 2890,
+   "price_original": null,
+   "discount_pct": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "image": null,
+   "url": "https://example.com/sural-1",
+   "score": 40,
+   "first_seen": "2026-10-15",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-28",
+     2990
+    ],
+    [
+     "2026-10-30",
+     2890
+    ]
+   ],
+   "price_change": -100,
+   "continent": "Európa",
+   "price_exact": false,
+   "price_note": "orientačne: cena za osobu pri 2 dospelých × 3",
+   "watched": "Sural"
+  },
+  {
+   "id": "ukazka:watch2",
+   "source": "ukazka",
+   "source_name": "Ukážka (fake)",
+   "hotel": "Ukážkový Süral Beach Hotel",
+   "stars": 3.0,
+   "rating": 9.2,
+   "country": "Turecko",
+   "country_code": "TR",
+   "region": null,
+   "place": "Side",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "BUD",
+   "date_from": "2027-07-06",
+   "date_to": "2027-07-16",
+   "nights": 10,
+   "price_total": 3990,
+   "price_original": null,
+   "discount_pct": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "image": null,
+   "url": "https://example.com/sural-2",
+   "score": 40,
+   "first_seen": "2026-10-15",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-30",
+     3990
+    ]
+   ],
+   "price_change": null,
+   "continent": "Európa",
+   "price_exact": false,
+   "price_note": "orientačne: cena za osobu pri 2 dospelých × 3",
+   "watched": "Sural"
+  },
+  {
+   "id": "ukazka2:watch3",
+   "source": "ukazka2",
+   "source_name": "Ukážka 2 (fake)",
+   "hotel": "Ukážkový Süral Beach Hotel",
+   "stars": 3.0,
+   "rating": 9.2,
+   "country": "Turecko",
+   "country_code": "TR",
+   "region": null,
+   "place": "Side",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "BUD",
+   "date_from": "2027-07-17",
+   "date_to": "2027-07-24",
+   "nights": 7,
+   "price_total": 3120,
+   "price_original": null,
+   "discount_pct": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "image": null,
+   "url": "https://example.com/sural-3",
+   "score": 40,
+   "first_seen": "2026-10-15",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-30",
+     3120
+    ]
+   ],
+   "price_change": null,
+   "continent": "Európa",
+   "price_exact": true,
+   "price_note": null,
+   "watched": "Sural"
+  },
+  {
+   "id": "ukazka:watch4",
+   "source": "ukazka",
+   "source_name": "Ukážka (fake)",
+   "hotel": "Ukážkový Sural Saray",
+   "stars": 3.0,
+   "rating": 9.2,
+   "country": "Turecko",
+   "country_code": "TR",
+   "region": "Side",
+   "place": "Evrenseki",
+   "board": "UAI",
+   "transport": "flight",
+   "departure": "BUD",
+   "date_from": "2027-07-07",
+   "date_to": "2027-07-17",
+   "nights": 10,
+   "price_total": 6400,
+   "price_original": null,
+   "discount_pct": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "image": null,
+   "url": "https://example.com/sural-4",
+   "score": 40,
+   "first_seen": "2026-10-15",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-30",
+     6400
+    ]
+   ],
+   "price_change": null,
+   "continent": "Európa",
+   "price_exact": false,
+   "price_note": "orientačne: cena za osobu pri 2 dospelých × 3",
+   "watched": "Sural",
+   "over_cap": true
+  }
+ ],
+ "watched": [
+  {
+   "term": "Sural",
+   "count": 4,
+   "links": []
+  },
+  {
+   "term": "Alhambra",
+   "count": 0,
+   "links": [
+    {
+     "source": "satur",
+     "name": "Satur",
+     "label": "všetky hotely v mieste Side",
+     "url": "https://www.satur.sk/dovolenka/turecko/side?termin=01.07.2027-31.08.2027"
+    }
+   ]
   }
  ]
 }

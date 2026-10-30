@@ -90,3 +90,7 @@ destinations:
   DO: 0.6
   MX: 0.6
   CU: 0.5
+
+sledovane_hotely:
+  - Sural
+  - Alhambra

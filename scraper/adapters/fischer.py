@@ -18,3 +18,8 @@ def deeplinks(cfg):
 
 def search(cfg):
     return dertour.search("fischer", HOME, cfg, fischer=True)
+
+
+def watch(cfg, terms, hints):
+    """run.py hook for sledovane_hotely – see dertour.watch()."""
+    return dertour.watch("fischer", HOME, cfg, True, terms, hints)

@@ -14,6 +14,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from config import CONFIG, party_label, party_short, party_size  # noqa: E402
+from watch import match  # noqa: E402
 
 DROP_EUR = 50
 MAX_ROWS = 10
@@ -54,6 +55,41 @@ def boards_title(boards):
     return " / ".join(BOARD.get(b, b) for b in boards)
 
 
+def watched_best(offers, cfg=CONFIG):
+    """{term: cheapest current offer} for every watched hotel (any board, also above price_cap); None = no offer."""
+    best = {t: None for t in cfg.get("watched") or []}
+    for o in offers:
+        t = o.get("watched") if o.get("watched") in best else match(o.get("hotel"), cfg.get("watched"))
+        if t and (best[t] is None or o["price_total"] < best[t]["price_total"]):
+            best[t] = o
+    return best
+
+
+def watched_section(prev, offers, cfg=CONFIG):
+    """'⭐ Sledované hotely' lines: cheapest offer per watched term and its change since the previous digest."""
+    terms = cfg.get("watched") or []
+    if not terms:
+        return []
+    old = prev.get("watched") or {}
+    parts = ["### ⭐ Sledované hotely", ""]
+    for t, o in watched_best(offers, cfg).items():
+        if o is None:
+            parts.append(f"- **{t}**: zatiaľ bez ponuky" + (" (minulý týždeň bola)" if old.get(t) else ""))
+            continue
+        was = old.get(t)
+        if not was:
+            change = " · 🆕 nová" if prev.get("offers") else ""
+        elif bool(was.get("price_exact")) != bool(o.get("price_exact")):
+            change = f" · minule {eur(was['price_total'])} (iný typ ceny)"
+        else:
+            d = o["price_total"] - was["price_total"]
+            change = (f" · 📉 −{eur(-d)}" if d < 0 else f" · 📈 +{eur(d)}" if d > 0 else " · bez zmeny")
+        cap = " · ⚠ nad strop" if o["price_total"] > cfg["price_cap"] else ""
+        parts.append(f"- **{t}**{change}{cap}")
+        parts.append(row(o).replace("- ", "  ", 1))
+    return parts + [""]
+
+
 def digest(prev, cur, budget, cfg=CONFIG):
     """Returns (title, markdown). prev is the snapshot of the previous digest ({} on the first one)."""
     old = {o["id"]: o for o in prev.get("offers", [])}
@@ -69,7 +105,8 @@ def digest(prev, cur, budget, cfg=CONFIG):
     new.sort(key=lambda o: (-o.get("score", 0), o["price_total"]))
     drops.sort(key=lambda o: o["price_total"] - old[o["id"]]["price_total"])
 
-    parts = [f"### ⭐ Top {len(top)} ponúk {boards_title(cfg['boards_preferred'])} do {eur(budget)} ({len(ai)} spolu)", ""]
+    parts = watched_section(prev, offers, cfg)
+    parts += [f"### ⭐ Top {len(top)} ponúk {boards_title(cfg['boards_preferred'])} do {eur(budget)} ({len(ai)} spolu)", ""]
     parts += [row(o) for o in top] or ["Zatiaľ žiadna."]
     if drops:
         parts += ["", f"### 📉 Zlacnené za týždeň o {DROP_EUR} € a viac ({len(drops)})", ""]
@@ -98,11 +135,12 @@ def digest(prev, cur, budget, cfg=CONFIG):
     return "Dovolenka – týždenný prehľad: " + ", ".join(bits), "\n".join(parts)
 
 
-def snapshot(cur, sent=None):
+def snapshot(cur, sent=None, cfg=CONFIG):
     """Only what next week's comparison needs, to keep the committed file small."""
     keep = ("id", "price_total", "price_exact")
+    best = {t: {k: o.get(k) for k in keep} for t, o in watched_best(cur.get("offers", []), cfg).items() if o}
     return {"generated_at": cur.get("generated_at"), "sent": sent,
-            "offers": [{k: o.get(k) for k in keep} for o in cur.get("offers", [])]}
+            "offers": [{k: o.get(k) for k in keep} for o in cur.get("offers", [])], "watched": best}
 
 
 def main(snap_path, cur_path, out_path, sent=None):

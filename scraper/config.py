@@ -11,6 +11,8 @@ from pathlib import Path
 
 import yaml
 
+from watch import norm_name
+
 ROOT = Path(__file__).resolve().parents[1]
 SETTINGS = Path(os.environ.get("DOVOLENKA_SETTINGS") or ROOT / "nastavenia.yml")
 
@@ -103,7 +105,8 @@ def validate(raw):
     missing = [k for k in required if k not in raw]
     if missing:
         raise SettingsError(f"chýbajú položky: {', '.join(missing)}")
-    known = set(required) | {"departures_secondary", "transports", "dogs", "boards_preferred", "car_start"}
+    known = set(required) | {"departures_secondary", "transports", "dogs", "boards_preferred", "car_start",
+                             "sledovane_hotely"}
     unknown = sorted(set(raw) - known)
     if unknown:
         raise SettingsError(f"neznáme položky (preklep?): {', '.join(unknown)}")
@@ -160,8 +163,41 @@ def validate(raw):
         if not 0 < w <= 1:
             raise SettingsError(f"destinations: váha pri {code} musí byť od 0.1 do 1.0")
         c["countries"][code] = w
+    c["watched"] = _watched(raw.get("sledovane_hotely"))
     c["children_birthdates"] = [birthdate(a, c["date_from"]) for a in c["children_ages"]]
     return c
+
+
+WATCH_MAX = 20
+
+
+def _watched(v):
+    """sledovane_hotely: list of hotel names (partial, any case/diacritics) -> list of unique stripped strings."""
+    if v is None:
+        return []
+    if isinstance(v, str):
+        v = [v]
+    if not isinstance(v, list):
+        raise SettingsError("sledovane_hotely: čakám zoznam názvov, každý na novom riadku začínajúcom '- '")
+    out, seen = [], set()
+    for x in v:
+        if isinstance(x, bool) or not isinstance(x, (str, int, float)):
+            raise SettingsError(f"sledovane_hotely: '{x}' nie je názov hotela (čakám text, napr. - Sural)")
+        name = " ".join(str(x).split())
+        if not name:
+            continue
+        if len(name) > 60:
+            raise SettingsError(f"sledovane_hotely: '{name[:30]}…' je príliš dlhý názov (najviac 60 znakov)")
+        key = norm_name(name)
+        if not key:
+            raise SettingsError(f"sledovane_hotely: '{name}' – zadajte aj vlastný názov hotela, nie len "
+                                "slová ako hotel/resort/spa")
+        if key not in seen:
+            seen.add(key)
+            out.append(name)
+    if len(out) > WATCH_MAX:
+        raise SettingsError(f"sledovane_hotely: najviac {WATCH_MAX} hotelov")
+    return out
 
 
 def load(path=SETTINGS):

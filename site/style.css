@@ -253,6 +253,33 @@ input[type="range"] { accent-color: var(--accent); min-height: 30px; }
 .pill:hover .pill-x { background: var(--bad-bg); color: var(--bad); }
 .more { align-self: center; }
 
+/* ---------- Watched hotels ---------- */
+.watch-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 460px), 1fr)); gap: 12px; }
+.watch-term {
+  background: var(--surface); border: 1px solid var(--border); border-top: 3px solid var(--flap);
+  border-radius: var(--radius); box-shadow: var(--shadow); padding: 12px 14px; min-width: 0;
+}
+.watch-term h3 { font-size: 1rem; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; margin-bottom: 8px; }
+.watch-term h3 .muted { font-size: .82rem; font-weight: 500; }
+.watch-rows { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.watch-row {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; align-items: center;
+  padding: 8px 10px; border-radius: 10px; background: var(--surface-2);
+}
+.watch-hotel { font-weight: 700; overflow-wrap: anywhere; }
+.watch-meta { font-size: .84rem; color: var(--muted); overflow-wrap: anywhere; }
+.watch-tags { display: flex; flex-wrap: wrap; gap: 4px 6px; margin-top: 4px; }
+.watch-price { grid-column: 2; grid-row: 1 / span 3; text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+.watch-price .price-total { font-size: 1.25rem; }
+.watch-price .btn { margin-top: 2px; min-height: 34px; padding: 6px 12px; font-size: .84rem; }
+.approx-badge { background: var(--warn-bg); color: var(--warn); font-size: .76rem; font-weight: 700; padding: 2px 7px; border-radius: 6px; white-space: nowrap; }
+.cap-badge { background: var(--bad-bg); color: var(--bad); font-size: .76rem; font-weight: 700; padding: 2px 7px; border-radius: 6px; white-space: nowrap; }
+.watch-empty { margin: 0 0 8px; font-weight: 600; color: var(--muted); }
+.watch-term .deep-list a { font-size: .86rem; }
+.watch-how { font-size: .84rem; margin: 10px 0 0; }
+.watch-mark { color: #e0a100; font-size: 1rem; }
+.offer.watched { border-color: #e0a100; box-shadow: 0 0 0 1px #e0a100, var(--shadow); }
+
 /* ---------- Offers ---------- */
 .offers { display: flex; flex-direction: column; gap: 12px; }
 .offer {
@@ -384,6 +411,8 @@ table.sources { width: 100%; border-collapse: collapse; font-size: .9rem; }
   .results-tools { margin-left: 0; width: 100%; justify-content: space-between; }
 }
 @media (max-width: 480px) {
+  .watch-row { grid-template-columns: minmax(0, 1fr); }
+  .watch-price { grid-column: 1; grid-row: auto; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-between; text-align: left; }
   body { font-size: 14px; }
   .filters-grid { grid-template-columns: minmax(0, 1fr); }
   .f-span2 { grid-column: auto; }

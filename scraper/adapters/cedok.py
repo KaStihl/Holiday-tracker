@@ -274,3 +274,47 @@ def search(cfg):
     if errors and not offers:
         raise RuntimeError(f"all {len(errors)} cedok.sk requests failed, first: {errors[0]}")
     return offers
+
+
+# --- watched hotels (sledovane_hotely) ---------------------------------------------------------------------------
+# The results page has no hotel-name filter (checked 2026-10-30: ?q=sural is ignored, the autosuggester calls /api,
+# which robots.txt disallows; region slugs like /dovolenky/turecko/side/ answer 404). A country's whole offer is
+# small, though (Turecko, 7–14 nights from BTS/VIE in Jul–Aug: 104 hotels = 5 pages of 25, cheapest first), so
+# watch() pages through the countries where a watched hotel was seen (this run or the previous one, any agency)
+# beyond the pages search() reads, ≤ WATCH_REQUESTS pages per run, and keeps the matching hotels at any price/board.
+WATCH_REQUESTS = 10
+COUNTRY_SLUG = {**{c: s for s, c in reversed(list(DESTINATIONS.items()))}, **{c: s[0] for c, s in FAR.items()}}
+
+
+def watch(cfg, terms, hints):
+    """run.py hook: offers of the watched hotels from the full listing of the countries they were seen in."""
+    from watch import match
+    if "flight" not in cfg["transports"]:
+        return []
+    codes = []
+    for t in terms:
+        for h in hints.get(t, []):
+            if h.get("country_code") in COUNTRY_SLUG and h["country_code"] not in codes:
+                codes.append(h["country_code"])
+    wide = (cfg["nights_min"] + 1, cfg["nights_max"] + 1)
+    offers, calls = [], 0
+    for code in codes:
+        slug = COUNTRY_SLUG[code]
+        for page in range(1, WATCH_REQUESTS + 1):
+            if calls >= WATCH_REQUESTS:
+                print(f"[cedok] watch: request budget {WATCH_REQUESTS} reached")
+                return offers
+            calls += 1
+            try:
+                html = get(f"{HOME}/vysledky-vyhladavania/dovolenky/{slug}/", params=_query(cfg, page, days=wide))
+            except Exception as e:
+                print(f"[cedok] watch {slug} p{page}: {type(e).__name__} {str(e)[:120]}")
+                break
+            rates, count, links = parse_page(html)
+            got = [o for o in (to_offer(r, links, cfg) for r in rates) if o and match(o["hotel"], terms)]
+            print(f"[cedok] watch {slug} p{page}: {len(rates)}/{count} rates, {len(got)} watched: "
+                  + ", ".join(f"{o['hotel']} {o['price_total']}" for o in got))
+            offers += got
+            if page * 25 >= count or not rates:
+                break
+    return offers

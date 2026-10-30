@@ -19,6 +19,7 @@ from adapters import ADAPTERS  # noqa: E402
 from common import https_or_none, norm_board, norm_country, offer_id  # noqa: E402
 from config import (CONFIG, COUNTRY_NAMES, approx_note, continent, criteria_for_display, party_short,  # noqa: E402
                     party_size)
+from watch import keep_limit, match  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "site" / "data"
@@ -43,7 +44,11 @@ def normalise(raw, source, source_name, cfg):
         d_from = date.fromisoformat(str(o.get("date_from"))[:10])
     except (TypeError, ValueError):
         return None
-    if not o.get("hotel") or price <= 0 or price > cfg["price_cap"]:
+    if not o.get("hotel") or price <= 0:
+        return None
+    # watched hotels (sledovane_hotely) stay even above price_cap, up to keep_limit(), flagged over_cap
+    o["watched"] = match(o["hotel"], cfg.get("watched"))
+    if price > (keep_limit(cfg) if o["watched"] else cfg["price_cap"]):
         return None
     if not (cfg["nights_min"] <= nights <= cfg["nights_max"]):
         return None
@@ -79,7 +84,22 @@ def normalise(raw, source, source_name, cfg):
     # price_total is for the configured party; when it is extrapolated from a per-person price, say how
     o["price_note"] = None if o["price_exact"] else (o.get("price_note") or approx_note(cfg))
     o["id"] = offer_id(source, o["hotel"], o["date_from"], nights, o["transport"], o["departure"])
+    flag_cap(o, cfg)
     return o
+
+
+def flag_cap(o, cfg):
+    """over_cap: a watched offer kept although it costs more than price_cap. Unwatched offers never carry it."""
+    if o.get("watched") and o["price_total"] > cfg["price_cap"]:
+        o["over_cap"] = True
+    else:
+        o.pop("over_cap", None)
+    if not o.get("watched"):
+        o.pop("watched", None)
+
+
+def within_limit(o, cfg):
+    return o["price_total"] <= (keep_limit(cfg) if o.get("watched") else cfg["price_cap"])
 
 
 def score(o, cfg):
@@ -109,8 +129,11 @@ def refine_exact(offers, mods, cfg):
         hook = getattr(mod, "exact_price", None)
         if not hook:
             continue
-        todo = [o for o in offers if o["source"] == name and not o["price_exact"] and o["board"] in cfg["boards_preferred"]]
-        todo = sorted(todo, key=lambda o: (-score(o, cfg), o["price_total"]))[:getattr(mod, "EXACT_MAX", 35)]
+        todo = [o for o in offers if o["source"] == name and not o["price_exact"]
+                and (o["board"] in cfg["boards_preferred"] or o.get("watched"))]
+        # watched hotels first (any board), then the best-scoring ones
+        todo = sorted(todo, key=lambda o: (not o.get("watched"), -score(o, cfg), o["price_total"]))
+        todo = todo[:getattr(mod, "EXACT_MAX", 35)]
         done = failed = 0
         for o in todo:
             try:
@@ -132,8 +155,11 @@ def refine_exact(offers, mods, cfg):
             o["discount_pct"] = round(100 * (1 - o["price_total"] / o["price_original"])) if o["price_original"] else None
             done += 1
         print(f"[{name}] exact {party_short(cfg)} prices: {done}/{len(todo)} confirmed")
-    # an exact price above the cap no longer matches the criteria
-    return [o for o in offers if o["price_total"] <= cfg["price_cap"]]
+    # an exact price above the cap no longer matches the criteria (watched hotels: above the wider limit)
+    out = [o for o in offers if within_limit(o, cfg)]
+    for o in out:
+        flag_cap(o, cfg)
+    return out
 
 
 def load(path, default):
@@ -194,6 +220,80 @@ def _timed_search(mod, cfg):
         return None, f"{type(e).__name__}: {str(e)[:200]}", time.time() - t0
 
 
+def watch_hints(offers, prev_offers, cfg):
+    """{term: [{country_code, place, region}]}: where each watched hotel was seen – this run's offers first, then
+    the previous offers.json (re-matched, so a term added to nastavenia.yml uses older data too)."""
+    out = {t: [] for t in cfg.get("watched", [])}
+    for o in list(offers) + list(prev_offers):
+        term = match(o.get("hotel"), cfg.get("watched"))
+        if not term:
+            continue
+        h = {"country_code": o.get("country_code"), "place": o.get("place"), "region": o.get("region")}
+        if h["country_code"] and h not in out[term]:
+            out[term].append(h)
+    return out
+
+
+def _timed_watch(name, mod, cfg, hints):
+    t0 = time.time()
+    try:
+        return mod.watch(cfg, cfg["watched"], hints), None, time.time() - t0
+    except Exception as e:
+        print(f"[{name}] watch failed: {type(e).__name__} {str(e)[:200]}")
+        return [], f"{type(e).__name__}: {str(e)[:200]}", time.time() - t0
+
+
+def run_watch(mods, sources, offers, cfg):
+    """Second phase: adapters with a watch(cfg, terms, hints) hook look up the watched hotels directly (in
+    parallel, one agency per thread as in phase 1). Returns {term: [deeplink dicts]} for the page."""
+    terms = cfg.get("watched") or []
+    if not terms:
+        return {}
+    hints = watch_hints(offers.values(), load(OFFERS, {}).get("offers", []), cfg)
+    print("watched hotels seen at: " + "; ".join(
+        f"{t}: " + (", ".join(f"{h['country_code']} {h['place'] or ''}/{h['region'] or ''}" for h in hs) or "nowhere yet")
+        for t, hs in hints.items()))
+    ok = {s["id"] for s in sources if s["status"] in ("ok", "empty")}
+    todo = [(n, m) for n, m in mods.items() if n in ok and getattr(m, "watch", None)]
+    t0 = time.time()
+    with ThreadPoolExecutor(max_workers=max(len(todo), 1)) as pool:
+        futures = [(n, m, pool.submit(_timed_watch, n, m, cfg, hints)) for n, m in todo]
+        for name, mod, fut in futures:
+            raw, err, secs = fut.result()
+            info = next(s for s in sources if s["id"] == name)
+            clean = [n for n in (normalise(r, name, mod.NAME, cfg) for r in raw or []) if n and n.get("watched")]
+            new = 0
+            for o in clean:
+                if o["id"] not in offers:
+                    new += 1
+                if o["id"] not in offers or o["price_total"] < offers[o["id"]]["price_total"]:
+                    offers[o["id"]] = o
+            info["watch"] = {"found": len(clean), "new": new, "seconds": round(secs, 1), "error": err}
+            if new and info["status"] == "empty":
+                info["status"] = "ok"
+            info["count"] = sum(o["source"] == name for o in offers.values())
+            print(f"[{name}] watch: {len(raw or [])} raw, {len(clean)} watched offers, {new} not in the listings")
+    print(f"watch lookups took {time.time() - t0:.0f} s")
+    links = {}
+    for t in terms:
+        for name, mod in mods.items():
+            fn = getattr(mod, "watch_links", None)
+            if fn:
+                try:
+                    links.setdefault(t, []).extend(dict(d, source=name, name=mod.NAME)
+                                                   for d in fn(cfg, t, hints.get(t, [])))
+                except Exception as e:
+                    print(f"[{name}] watch_links failed: {e}", file=sys.stderr)
+    return links
+
+
+def watched_summary(offers, links, cfg):
+    """offers.json "watched": one entry per term with its offer count and term-specific search links."""
+    return [{"term": t, "count": sum(o.get("watched") == t for o in offers),
+             "links": [d for d in links.get(t, []) if https_or_none(d.get("url"))]}
+            for t in cfg.get("watched") or []]
+
+
 def main(only=None):
     cfg = CONFIG
     sources, deeplinks, offers, mods = [], [], {}, {}
@@ -233,6 +333,7 @@ def main(only=None):
             print(f"[{name}] {len(raw)} raw, {len(clean)} kept")
             log_drops(name, raw, cfg)
     print(f"scraping took {time.time() - t0:.0f} s")
+    watch_links = run_watch(mods, sources, offers, cfg)
 
     today = datetime.now(timezone.utc).date().isoformat()
     t0 = time.time()
@@ -251,6 +352,7 @@ def main(only=None):
         "sources": sources,
         "deeplinks": deeplinks,
         "offers": result,
+        "watched": watched_summary(result, watch_links, cfg),
     }
     if only:
         print(json.dumps(out, ensure_ascii=False, indent=1)[:4000])
@@ -263,6 +365,7 @@ def main(only=None):
             o.setdefault("continent", continent(o.get("country_code")))
             o.setdefault("price_note", None if o.get("price_exact") else approx_note(cfg))
         out["stale"] = True
+        out["watched"] = watched_summary(out["offers"], watch_links, cfg)
     OFFERS.write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
     HISTORY.write_text(json.dumps(hist, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     print(f"wrote {len(out['offers'])} offers from {sum(s['status'] == 'ok' for s in sources)} sources "
