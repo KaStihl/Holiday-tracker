@@ -1,0 +1,27 @@
+[
+{
+"name": "<b>Hotels</b>",
+"id": 0,
+"headline": 1
+},
+{
+"field": "hotelname",
+"name": "Sural Resort<span class=\"hotelRegion\"> Türkische Riviera, Colakli, Türkei</span>",
+"id": 53099
+},
+{
+"field": "hotelname",
+"name": "Sural Saray<span class=\"hotelRegion\"> Türkische Riviera, Colakli, Türkei</span>",
+"id": 4924
+},
+{
+"field": "hotelname",
+"name": "Sural Garden<span class=\"hotelRegion\"> Türkische Riviera, Colakli, Türkei</span>",
+"id": 4923
+},
+{
+"field": "hotelname",
+"name": "Sural Hotel<span class=\"hotelRegion\"> Türkische Riviera, Colakli, Türkei</span>",
+"id": 4922
+}
+]
