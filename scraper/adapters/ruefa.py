@@ -27,7 +27,7 @@ from bs4 import BeautifulSoup
 
 from adapters import at_common
 from common import get, parse_price
-from config import period_label
+from config import continent, period_label
 
 NAME = "Ruefa"
 HOME = "https://www.ruefa.at"
@@ -186,14 +186,16 @@ def lookup(code):
 
 
 def plan(cfg):
-    """[(code, nights, page)]: every configured country once at the shortest stay, then the longer stays and a
-    second page for the favourites (weight >= 0.9)."""
+    """[(code, dauer nights, page)]: every configured country once at the shortest stay, then the longer stays and a
+    second page for the favourites (weight >= 0.9). dauer counts travel nights including an overnight flight: for
+    Maldives/Thailand/… dauer=7 gives 6 hotel nights (checked 2026-10-30), so outside Europe one night is added."""
     codes = [c for c, w in sorted(cfg["countries"].items(), key=lambda kv: -kv[1]) if c in COUNTRY_NAMES]
     fav = [c for c in codes if cfg["countries"][c] >= 0.9]
     st = stays(cfg)
-    out = [(c, st[0], 1) for c in codes]
-    out += [(c, n, 1) for n in st[1:] for c in fav]
-    out += [(c, st[0], 2) for c in fav]
+    extra = {c: 0 if continent(c) == "Európa" else 1 for c in codes}
+    out = [(c, st[0] + extra[c], 1) for c in codes]
+    out += [(c, n + extra[c], 1) for n in st[1:] for c in fav]
+    out += [(c, st[0] + extra[c], 2) for c in fav]
     return out
 
 

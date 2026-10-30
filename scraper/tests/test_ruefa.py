@@ -44,9 +44,12 @@ def test_cards_for_another_party_are_dropped():
 
 def test_plan_starts_with_every_country_once():
     plan = ruefa.plan(CONFIG)
-    first = [c for c, n, p in plan if n == 7 and p == 1]
-    assert len(first) == len(set(first)) and first[0] in ("HR", "TR", "CY", "IT")
+    n = len({c for c, _, _ in plan})
+    first = [c for c, _, _ in plan[:n]]
+    assert len(set(first)) == n and first[0] in ("HR", "TR", "CY", "IT")
     assert set(first) == {c for c in CONFIG["countries"] if c in ruefa.COUNTRY_NAMES}
+    nights = {c: d for c, d, _ in plan[:n]}
+    assert nights["TR"] == 7 and nights["MV"] == 8  # overnight flight counts as a travel night outside Europe
 
 
 def test_lookup_reads_the_country_entry(monkeypatch):
