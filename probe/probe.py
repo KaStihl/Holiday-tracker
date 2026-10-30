@@ -75,53 +75,62 @@ def devalue(arr):
 
 
 
+
 import json as _j, os
 from urllib.parse import urlencode, parse_qsl
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-print("\n===== BILLA adapter test")
-from config import CONFIG
-import billa_reisen as B
-t0 = time.time()
-try:
-    offs = B.search(CONFIG)
-    from collections import Counter
-    print("  BILLA", len(offs), "offers in", round(time.time() - t0), "s;", Counter(o["country_code"] for o in offs).most_common(),
-          Counter(o["board"] for o in offs), Counter(o["departure"] for o in offs))
-    for o in offs:
-        if any(k in o["hotel"].lower() for k in ("sural", "alhambra")):
-            print("  HIT", o["hotel"], o["date_from"], o["nights"], o["price_total"], o["url"][:120])
-except Exception as e:
-    import traceback; traceback.print_exc()
-html = S.get(B.HOME + B.PATH, params=B.query(CONFIG, "3380096"), timeout=40).text; time.sleep(1.5)
-blob("billa_tr.html", html)
-html = S.get(B.HOME + B.PATH, params=B.query(CONFIG, B.COUNTRIES["ES"]), timeout=40).text; time.sleep(1.5)
-o, p = B.parse_page(html, CONFIG)
-print("  ES multi-id:", len(o), p, sorted({x["region"] for x in o})[:10])
+def cards(v, n=4):
+    out = []
+    for c in v.split('class="card nocity card-hotel')[1:]:
+        g = lambda p: (re.search(p, c, re.S).group(1).strip() if re.search(p, c, re.S) else None)
+        out.append({"href": g(r'data-href="([^"]+)"'), "price": g(r'data-price="([^"]+)"'), "nights": g(r'data-nights="([^"]+)"'),
+                    "start": g(r'data-startdate="([^"]+)"'), "name": g(r'hotel-name h5">([^<]+)'), "region": g(r'region">([^<]+)'),
+                    "board": g(r'class="board">.*?icontext">([^<]+)'), "dep": g(r'ab/bis\s+([^<]+)<'),
+                    "pp": g(r'Preis p\. Pers\.[^\d]*([\d.]+)')})
+    return out
 
-print("\n===== RUEFA deliver 2")
-h = fetch("https://pauschal.ruefa.at/js/hotelsearch/dist/hotelsearch.min.js?id=492")
+R = "https://pauschal.ruefa.at"
+r = fetch(R + "/index.php?page=results&level=1&adults=2&start=2027-07-01&until=2027-08-31&anzZimmer=1&airport=VIE&dauer=1024&destination=T%C3%BCrkei")
+print("\n===== RUEFA getDestination")
+h = fetch(R + "/js/hotelsearch/dist/hotelsearch.min.js?id=492")
 if h is not None:
-    print("   endpoints:", sorted(set(re.findall(r"/hub/ajax/\w+\.php", h.text))))
-    grep(h.text, r"dauer[\"']?\s*[:=]\s*\[|value:\s*\"?(?:128|1024|4096)\"?", 6, 400, "dauer")
-r = fetch("https://pauschal.ruefa.at/index.php?page=results&level=1&adults=2&start=2027-07-01&until=2027-08-31&anzZimmer=1&airport=VIE&dauer=1024&destination=T%C3%BCrkei")
-base = {"adults": "2", "children": "", "start": "2027-07-01", "until": "2027-08-31", "hotelSearchtext": "", "level": "1",
-        "page": "1", "topGid": "", "destinationName": "Türkei", "airport": "VIE", "recommendationrate": "70", "dauer": "1024",
+    grep(h.text, r"getDestination\.php", 4, 700, "gd")
+for data in [{"term": "Türkei"}, {"q": "Türkei"}, {"search": "Türkei"}, {"destination": "Türkei"}, {"value": "Türkei"}]:
+    for meth in ("post", "get"):
+        try:
+            p = getattr(S, meth)(R + "/hub/ajax/getDestination.php", **({"data": data} if meth == "post" else {"params": data}),
+                                  timeout=30, headers={"X-Requested-With": "XMLHttpRequest"}); time.sleep(1.5)
+            print("  ", meth, data, p.status_code, len(p.text), p.text[:600].replace("\n", " "))
+        except Exception as e:
+            print("  fail", e)
+
+print("\n===== RUEFA deliver variants")
+base = {"adults": "2", "children": "", "start": "2027-07-01", "until": "2027-08-31", "hotelSearchtext": "", "level": "2",
+        "page": "1", "topGid": "", "destinationName": "", "airport": "VIE", "recommendationrate": "", "dauer": "1024",
         "anzZimmer": "1", "sort": "", "airline": "", "maxPrice": "", "minPrice": "", "citycodes": "", "destination_groups": "",
-        "excludeNbc": "1", "destination": "Türkei"}
-for extra in [{}, {"level": "2"}, {"level": "2", "destination": "", "destinationId": "19"}]:
+        "excludeNbc": "1", "destination": "", "destinationId": "19"}
+tests = [
+  ("base", {}),
+  ("dauer7-14", {"dauer": str(sum(2 ** n for n in range(7, 15)))}),
+  ("kids 1+2", {"adults": "1", "children": "10-12"}),
+  ("kids 1+2 comma", {"adults": "1", "children": "10,12"}),
+  ("AI", {"verpflegung": "AI AIP AIU AIR"}),
+  ("AI+sort price", {"verpflegung": "AI AIP AIU AIR", "sort": "price"}),
+  ("no destId", {"destinationId": ""}),
+  ("BTS-VIE", {"airport": "VIE-BTS"}),
+  ("page2", {"page": "2"}),
+]
+for name, extra in tests:
     d = dict(base, **extra)
     try:
-        p = S.post("https://pauschal.ruefa.at/hub/ajax/deliver.php", data=d, timeout=60,
-                   headers={"X-Requested-With": "XMLHttpRequest", "Referer": r.url if r is not None else ""}); time.sleep(1.5)
-        print("  POST", extra, p.status_code, len(p.text), p.text[:200].replace("\n", " "))
-        try:
-            j = p.json(); print("    keys:", list(j)[:30], "resultCount", j.get("resultCount"), "level", j.get("level"))
-            v = j.get("value") or ""
-            print("    value:", re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", v))[:1500])
-            if extra.get("level") == "2":
-                blob("ruefa_deliver_l2.json", p.text)
-        except Exception as e:
-            print("    not json", e)
+        p = S.post(R + "/hub/ajax/deliver.php", data=d, timeout=60,
+                   headers={"X-Requested-With": "XMLHttpRequest", "Referer": r.url if r is not None else R}); time.sleep(1.5)
+        j = p.json()
+        cs = cards(j.get("value") or "")
+        print(f"  [{name}] {p.status_code} count={j.get('resultCount')} n={len(cs)} bc={str(j.get('breadcrumb'))[:80]} boards={j.get('boardTypes')}")
+        for c in cs[:3]:
+            print("     ", c)
+        if name == "kids 1+2":
+            blob("ruefa_kids.json", p.text)
     except Exception as e:
-        print("  POST failed", e)
+        print(f"  [{name}] fail {type(e).__name__} {e}")
