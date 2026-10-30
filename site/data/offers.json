@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-30T07:07:42Z",
+ "generated_at": "2026-10-30T07:15:03Z",
  "criteria": {
   "adults": 1,
   "children_ages": [
@@ -275,7 +275,7 @@
    "status": "ok",
    "count": 387,
    "error": null,
-   "duration_s": 350.0
+   "duration_s": 281.6
   },
   {
    "id": "cedok",
@@ -284,7 +284,7 @@
    "status": "ok",
    "count": 743,
    "error": null,
-   "duration_s": 133.0
+   "duration_s": 128.5
   },
   {
    "id": "tiptravel",
@@ -300,9 +300,9 @@
    "name": "Kartago Tours",
    "home": "https://www.kartago.sk",
    "status": "ok",
-   "count": 774,
+   "count": 775,
    "error": null,
-   "duration_s": 113.0
+   "duration_s": 88.6
   },
   {
    "id": "fischer",
@@ -311,7 +311,7 @@
    "status": "ok",
    "count": 704,
    "error": null,
-   "duration_s": 104.1
+   "duration_s": 89.1
   },
   {
    "id": "eximtours",
@@ -2096,15 +2096,15 @@
    "price_change": 0
   },
   {
-   "hotel": "THE HOLIDAY RESORT",
-   "url": "https://www.kartago.sk/turecko/egejska-riviera-bodrum/akbuk/the-holiday-resort?DS=65536&GIATA=4263&D=63260%7C63288%7C63448%7C64152%7C64153%7C64154%7C64157%7C211801%7C211814%7C212113&HID=247489&MT=5&MMT=5&DI=AI&RCS=DR01&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-30&DD=2027-08-23&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=BJV90082&DPR=KARTAGO-SK-ATCOM&PC=164195251%2F2%2F2791%2F7&IFC=207808371%2F643229&OFC=207806823%2F643228",
-   "image": "https://img.kartago.sk/hotels/720/turecko/egejska-riviera-bodrum/akbuk/the-holiday-resort/general-pool-.jpg",
-   "stars": 4.0,
-   "rating": 9.4,
+   "hotel": "Defne Defnem",
+   "url": "https://www.kartago.sk/turecko/turecka-riviera/side/defne-defnem?DS=65536&GIATA=265658&D=63260%7C63288%7C63448%7C64152%7C64153%7C64154%7C64157%7C211801%7C211814%7C212113&HID=8484&MT=5&MMT=5&DI=AI&RCS=DR01&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-30&DD=2027-08-23&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=AYT90091&DPR=KARTAGO-SK-ATCOM&PC=15787693%2F2%2F2791%2F7&IFC=210522222%2F654880&OFC=210520673%2F654879",
+   "image": "https://img.kartago.sk/hotels/720/turecko/turecka-riviera/side/defne-defnem/0-hotel.jpg",
+   "stars": 5.0,
+   "rating": 8.8,
    "country": "Turecko",
    "country_code": "TR",
-   "region": "Egejská riviéra - Bodrum",
-   "place": "Akbuk",
+   "region": "Turecká riviéra",
+   "place": "Side",
    "board": "AI",
    "transport": "flight",
    "departure": "BTS",
@@ -2112,16 +2112,16 @@
    "date_to": "2027-08-30",
    "nights": 7,
    "price_total": 2179,
-   "price_original": 3299,
+   "price_original": 3221,
    "discount_label": null,
    "pets_allowed": null,
    "price_exact": true,
    "source": "kartago",
    "source_name": "Kartago Tours",
    "continent": "Európa",
-   "discount_pct": 34,
+   "discount_pct": 32,
    "price_note": null,
-   "id": "kartago:829ab1f2f0f1",
+   "id": "kartago:4fceefd97807",
    "score": 97,
    "first_seen": "2026-10-25",
    "last_seen": "2026-10-30",
@@ -2154,15 +2154,15 @@
    "price_change": 0
   },
   {
-   "hotel": "Defne Defnem",
-   "url": "https://www.kartago.sk/turecko/turecka-riviera/side/defne-defnem?DS=65536&GIATA=265658&D=63260%7C63288%7C63448%7C64152%7C64153%7C64154%7C64157%7C211801%7C211814%7C212113&HID=8484&MT=5&MMT=5&DI=AI&RCS=DR01&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-30&DD=2027-08-23&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=AYT90091&DPR=KARTAGO-SK-ATCOM&PC=15787693%2F2%2F2791%2F7&IFC=210522222%2F654880&OFC=210520673%2F654879",
-   "image": "https://img.kartago.sk/hotels/720/turecko/turecka-riviera/side/defne-defnem/0-hotel.jpg",
-   "stars": 5.0,
-   "rating": 8.8,
+   "hotel": "THE HOLIDAY RESORT",
+   "url": "https://www.kartago.sk/turecko/egejska-riviera-bodrum/akbuk/the-holiday-resort?DS=65536&GIATA=4263&D=63260%7C63288%7C63448%7C64152%7C64153%7C64154%7C64157%7C211801%7C211814%7C212113&HID=247489&MT=5&MMT=5&DI=AI&RCS=DR01&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-30&DD=2027-08-23&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=BJV90082&DPR=KARTAGO-SK-ATCOM&PC=164195251%2F2%2F2791%2F7&IFC=207808371%2F643229&OFC=207806823%2F643228",
+   "image": "https://img.kartago.sk/hotels/720/turecko/egejska-riviera-bodrum/akbuk/the-holiday-resort/general-pool-.jpg",
+   "stars": 4.0,
+   "rating": 9.4,
    "country": "Turecko",
    "country_code": "TR",
-   "region": "Turecká riviéra",
-   "place": "Side",
+   "region": "Egejská riviéra - Bodrum",
+   "place": "Akbuk",
    "board": "AI",
    "transport": "flight",
    "departure": "BTS",
@@ -2170,16 +2170,16 @@
    "date_to": "2027-08-30",
    "nights": 7,
    "price_total": 2179,
-   "price_original": 3221,
+   "price_original": 3299,
    "discount_label": null,
    "pets_allowed": null,
    "price_exact": true,
    "source": "kartago",
    "source_name": "Kartago Tours",
    "continent": "Európa",
-   "discount_pct": 32,
+   "discount_pct": 34,
    "price_note": null,
-   "id": "kartago:4fceefd97807",
+   "id": "kartago:829ab1f2f0f1",
    "score": 97,
    "first_seen": "2026-10-25",
    "last_seen": "2026-10-30",
@@ -8018,64 +8018,6 @@
    "price_change": 0
   },
   {
-   "hotel": "Les Magnolias",
-   "url": "https://www.kartago.sk/bulharsko/burgas/primorsko/les-magnolias?DS=65536&GIATA=58359&D=63483%7C63484%7C63485%7C63486&HID=2124&MT=5&MMT=5&DI=AI&RCS=DR02&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-31&DD=2027-08-24&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=BOJ90005&DPR=KARTAGO-SK-ATCOM&PC=13686241%2F2%2F2792%2F7&IFC=207948536%2F644237&OFC=207947078%2F644236",
-   "image": "https://img.kartago.sk/hotels/720/bulharsko/oblast-burgas/primorsko/les-magnolias/fff_pool_magn.jpg",
-   "stars": 3.0,
-   "rating": 8.6,
-   "country": "Bulharsko",
-   "country_code": "BG",
-   "region": "Burgas",
-   "place": "Primorsko",
-   "board": "AI",
-   "transport": "flight",
-   "departure": "BTS",
-   "date_from": "2027-08-24",
-   "date_to": "2027-08-31",
-   "nights": 7,
-   "price_total": 1723,
-   "price_original": 2675,
-   "discount_label": null,
-   "pets_allowed": null,
-   "price_exact": true,
-   "source": "kartago",
-   "source_name": "Kartago Tours",
-   "continent": "Európa",
-   "discount_pct": 36,
-   "price_note": null,
-   "id": "kartago:0df44c9497e7",
-   "score": 93,
-   "first_seen": "2026-10-25",
-   "last_seen": "2026-10-30",
-   "price_history": [
-    [
-     "2026-10-25",
-     1723
-    ],
-    [
-     "2026-10-26",
-     1723
-    ],
-    [
-     "2026-10-27",
-     1723
-    ],
-    [
-     "2026-10-28",
-     1723
-    ],
-    [
-     "2026-10-29",
-     1723
-    ],
-    [
-     "2026-10-30",
-     1723
-    ]
-   ],
-   "price_change": 0
-  },
-  {
    "hotel": "Arabella Beach",
    "url": "https://www.kartago.sk/bulharsko/varna/albena/arabella-beach?DS=65536&GIATA=76387&D=63483%7C63484%7C63485%7C63486&HID=9791&MT=5&MMT=5&DI=AI&RCS=DR02&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-31&DD=2027-08-24&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=VAR90016&DPR=KARTAGO-SK-ATCOM&PC=157408116%2F2%2F2792%2F7&IFC=215615576%2F672064&OFC=215615568%2F672063",
    "image": "https://img.kartago.sk/hotels/720/bulharsko/oblast-varna/albena/arabella-beach/dji_0213.jpg",
@@ -8135,8 +8077,8 @@
   },
   {
    "hotel": "Les Magnolias",
-   "url": "https://www.fischer.sk/bulharsko/burgas-a-okoli/primorsko/les-magnolias?DS=256&GIATA=58359&D=63483%7C63484%7C63485%7C63486&HID=2124&MT=5&MMT=5&DI=AI&RCS=DR02&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-31&DD=2027-08-24&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=BOJ90005&DPR=FISCHER+SK+ATCOM&PC=13662345%2F2%2F2792%2F7&IFC=207948536%2F644237&OFC=207947078%2F644236",
-   "image": "https://img.fischer.sk/hotels/720/bulharsko/oblast-burgas/primorsko/les-magnolias/fff_pool_magn.jpg",
+   "url": "https://www.kartago.sk/bulharsko/burgas/primorsko/les-magnolias?DS=65536&GIATA=58359&D=63483%7C63484%7C63485%7C63486&HID=2124&MT=5&MMT=5&DI=AI&RCS=DR02&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-31&DD=2027-08-24&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=BOJ90005&DPR=KARTAGO-SK-ATCOM&PC=13686241%2F2%2F2792%2F7&IFC=207948536%2F644237&OFC=207947078%2F644236",
+   "image": "https://img.kartago.sk/hotels/720/bulharsko/oblast-burgas/primorsko/les-magnolias/fff_pool_magn.jpg",
    "stars": 3.0,
    "rating": 8.6,
    "country": "Bulharsko",
@@ -8154,12 +8096,12 @@
    "discount_label": null,
    "pets_allowed": null,
    "price_exact": true,
-   "source": "fischer",
-   "source_name": "Fischer",
+   "source": "kartago",
+   "source_name": "Kartago Tours",
    "continent": "Európa",
    "discount_pct": 36,
    "price_note": null,
-   "id": "fischer:94d902485b55",
+   "id": "kartago:0df44c9497e7",
    "score": 93,
    "first_seen": "2026-10-25",
    "last_seen": "2026-10-30",
@@ -8218,6 +8160,64 @@
    "discount_pct": 38,
    "price_note": null,
    "id": "fischer:7f18194aed5c",
+   "score": 93,
+   "first_seen": "2026-10-25",
+   "last_seen": "2026-10-30",
+   "price_history": [
+    [
+     "2026-10-25",
+     1723
+    ],
+    [
+     "2026-10-26",
+     1723
+    ],
+    [
+     "2026-10-27",
+     1723
+    ],
+    [
+     "2026-10-28",
+     1723
+    ],
+    [
+     "2026-10-29",
+     1723
+    ],
+    [
+     "2026-10-30",
+     1723
+    ]
+   ],
+   "price_change": 0
+  },
+  {
+   "hotel": "Les Magnolias",
+   "url": "https://www.fischer.sk/bulharsko/burgas-a-okoli/primorsko/les-magnolias?DS=256&GIATA=58359&D=63483%7C63484%7C63485%7C63486&HID=2124&MT=5&MMT=5&DI=AI&RCS=DR02&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-31&DD=2027-08-24&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=BOJ90005&DPR=FISCHER+SK+ATCOM&PC=13662345%2F2%2F2792%2F7&IFC=207948536%2F644237&OFC=207947078%2F644236",
+   "image": "https://img.fischer.sk/hotels/720/bulharsko/oblast-burgas/primorsko/les-magnolias/fff_pool_magn.jpg",
+   "stars": 3.0,
+   "rating": 8.6,
+   "country": "Bulharsko",
+   "country_code": "BG",
+   "region": "Burgas",
+   "place": "Primorsko",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "BTS",
+   "date_from": "2027-08-24",
+   "date_to": "2027-08-31",
+   "nights": 7,
+   "price_total": 1723,
+   "price_original": 2675,
+   "discount_label": null,
+   "pets_allowed": null,
+   "price_exact": true,
+   "source": "fischer",
+   "source_name": "Fischer",
+   "continent": "Európa",
+   "discount_pct": 36,
+   "price_note": null,
+   "id": "fischer:94d902485b55",
    "score": 93,
    "first_seen": "2026-10-25",
    "last_seen": "2026-10-30",
@@ -13981,7 +13981,7 @@
      1940
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Nesrine",
@@ -14591,7 +14591,7 @@
      2037
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Laguna Park Sunrise",
@@ -15035,7 +15035,7 @@
      2159
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Les Magnolias",
@@ -15073,7 +15073,7 @@
      2173
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Concorde Marco Polo",
@@ -15309,7 +15309,7 @@
   },
   {
    "hotel": "Tiara Beach",
-   "url": "https://www.kartago.sk/bulharsko/burgas/slnecne-pobrezie/tiara-beach-hotel?DS=65536&GIATA=32916&D=63483%7C63484%7C63485%7C63486&HID=257968&MT=5&MMT=5&DI=AI&RCS=DR02&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-07-08&DD=2027-07-01&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=BOJ21035&DPR=KARTAGO-SK-ATCOM&PC=215031095%2F2%2F2738%2F7&IFC=207903232%2F644009&OFC=207901773%2F644008",
+   "url": "https://www.kartago.sk/bulharsko/burgas/slnecne-pobrezie/tiara-beach?DS=65536&GIATA=32916&D=63483%7C63484%7C63485%7C63486&HID=257968&MT=5&MMT=5&DI=AI&RCS=DR02&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-07-08&DD=2027-07-01&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=BOJ21035&DPR=KARTAGO-SK-ATCOM&PC=215031095%2F2%2F2738%2F7&IFC=207903232%2F644009&OFC=207901773%2F644008",
    "image": "https://img.kartago.sk/hotels/720/bulharsko/oblast-burgas/slunecne-pobrezi/tiara-beach/559675541x.jpg",
    "stars": 4.0,
    "rating": 9.0,
@@ -18705,7 +18705,7 @@
      1983
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Zephir Hotel & Spa",
@@ -19419,7 +19419,7 @@
      2257
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Belleville Duni",
@@ -19573,7 +19573,7 @@
      2269
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Aquamarine",
@@ -19959,7 +19959,7 @@
      2311
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Amour Holiday Resort",
@@ -20345,7 +20345,7 @@
      2351
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "ST.CONSTANTINE",
@@ -22243,7 +22243,7 @@
      2181
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Ropotamo Villas",
@@ -22957,7 +22957,7 @@
      2331
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Maritim Amelia",
@@ -24791,7 +24791,7 @@
      2437
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Kavros Beach",
@@ -25127,7 +25127,7 @@
      2509
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Diar Lemdina",
@@ -27946,7 +27946,7 @@
      2376
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Bella Vista Family Resort",
@@ -27984,7 +27984,7 @@
      2389
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "One Resort Aqua Park",
@@ -28312,7 +28312,7 @@
      2435
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Marina Beach Duni",
@@ -28698,7 +28698,7 @@
      2503
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Nozha Beach (ex Vincci)",
@@ -29010,7 +29010,7 @@
      2597
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Sol Nessebar Bay & Mare",
@@ -29164,7 +29164,7 @@
      2623
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Queen Nelly Hotel",
@@ -29202,7 +29202,7 @@
      2633
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Queen Nelly Park",
@@ -29240,7 +29240,7 @@
      2633
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Imperial Resort",
@@ -29278,7 +29278,7 @@
      2639
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "White Olive Premium Laganas",
@@ -31774,7 +31774,7 @@
      2463
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "King Tut Resort",
@@ -31928,7 +31928,7 @@
      2482
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "El Mouradi Hammamet",
@@ -31966,7 +31966,7 @@
      2482
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Cesar Thalasso",
@@ -32378,7 +32378,7 @@
      2613
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Sun Beach Lindos",
@@ -32773,7 +32773,7 @@
   {
    "hotel": "Olympos Beach",
    "url": "https://www.kartago.sk/grecko/rhodos/faliraki/olympos-beach?DS=65536&GIATA=1270&D=63209%7C63214%7C63219%7C63220%7C63262%7C63266%7C63281%7C63283%7C63285%7C63290%7C63297%7C63311%7C63314%7C63316%7C63319%7C63324%7C63327%7C63333%7C63335%7C63336%7C63341%7C63352%7C63357%7C63362%7C63364%7C63383%7C63384%7C63387%7C63388%7C63390%7C63399%7C63402%7C63408%7C63409%7C63424%7C63427%7C63428%7C63430%7C63431%7C63437%7C63439%7C63442%7C63463%7C63471%7C63472%7C64431%7C64432%7C64433%7C64434%7C64435%7C64436%7C64437%7C64438%7C64440%7C64441%7C64442%7C74677&HID=143281&MT=5&MMT=5&DI=AI&RCS=TR01&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-30&DD=2027-08-23&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=RHO90005&DPR=KARTAGO-SK-ATCOM&PC=11273098%2F2%2F2791%2F7&IFC=209298229%2F648789&OFC=209296771%2F648788",
-   "image": "https://img.kartago.sk/hotels/720/recko/rhodos/faliraki/olympos-beach-resort/265496.jpg",
+   "image": "https://img.kartago.sk/hotels/720/recko/rhodos/faliraki/olympos-beach-resort/265496xx.jpg",
    "stars": 4.0,
    "rating": 8.4,
    "country": "Grécko",
@@ -34570,7 +34570,7 @@
      2644
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Concorde Marco Polo",
@@ -34608,7 +34608,7 @@
      2649
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Avena Resort & Spa Hotel",
@@ -35658,7 +35658,7 @@
      2793
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Serena Holiday Resort",
@@ -35734,7 +35734,7 @@
      2838
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Ilusion Markus & Spa",
@@ -38310,7 +38310,7 @@
      2722
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "MAGIC INN",
@@ -38754,7 +38754,7 @@
      2785
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Seaphoria",
@@ -40151,7 +40151,7 @@
      2695
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Georgina Inn",
@@ -40825,7 +40825,7 @@
      2775
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Saint George Palace",
@@ -41041,7 +41041,7 @@
      2819
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Sousse Palace",
@@ -42475,7 +42475,7 @@
      2653
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Vincci Dar Midoun",
@@ -42941,7 +42941,7 @@
      2826
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "GEMMA RESORT",
@@ -43563,7 +43563,7 @@
      2883
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Flow Spectrum Sahl Hasheesh",
@@ -43735,6 +43735,52 @@
     [
      "2026-10-30",
      2896
+    ]
+   ],
+   "price_change": 0
+  },
+  {
+   "hotel": "Sultan Bay El Gouna",
+   "url": "https://www.kartago.sk/egypt/hurghada/el-gouna/sultan-bay-el-gouna?DS=65536&GIATA=5701&D=64419%7C64420%7C64421%7C64422%7C64423%7C64424%7C64425%7C64426&HID=144178&MT=5&MMT=5&DI=AI&RCS=DR01&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-31&DD=2027-08-24&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=HRG16006&DPR=KARTAGO-SK-ATCOM&PC=56391416%2F2%2F2792%2F7&IFC=208384125%2F645380&OFC=208382577%2F645379",
+   "image": "https://img.kartago.sk/hotels/720/egypt/oblast-hurghada/el-gouna/sultan-bay-el-gouna/overview.jpg",
+   "stars": 4.0,
+   "rating": 10.0,
+   "country": "Egypt",
+   "country_code": "EG",
+   "region": "Hurghada",
+   "place": "El Gouna",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "BTS",
+   "date_from": "2027-08-24",
+   "date_to": "2027-08-31",
+   "nights": 7,
+   "price_total": 2924,
+   "price_original": 3882,
+   "discount_label": null,
+   "pets_allowed": null,
+   "price_exact": true,
+   "source": "kartago",
+   "source_name": "Kartago Tours",
+   "continent": "Afrika",
+   "discount_pct": 25,
+   "price_note": null,
+   "id": "kartago:8a38195ecae7",
+   "score": 83,
+   "first_seen": "2026-10-28",
+   "last_seen": "2026-10-30",
+   "price_history": [
+    [
+     "2026-10-28",
+     2924
+    ],
+    [
+     "2026-10-29",
+     2924
+    ],
+    [
+     "2026-10-30",
+     2924
     ]
    ],
    "price_change": 0
@@ -44755,7 +44801,7 @@
      2613
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "AMC Royal Hotel & Spa",
@@ -45391,7 +45437,7 @@
      2874
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Concorde Moreen Beach Resort & Spa",
@@ -45661,7 +45707,7 @@
      2941
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "LAGUNA HOLIDAY RESORT",
@@ -46027,7 +46073,7 @@
      2993
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Zenith",
@@ -46065,7 +46111,7 @@
      2993
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Zaton (mobilné domčeky)",
@@ -46227,7 +46273,7 @@
      1530
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Rezort Villas Rubin",
@@ -46881,7 +46927,7 @@
      2799
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Perla Beach Hotel",
@@ -46919,7 +46965,7 @@
      2807
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Sentido Caribbean World Soma Bay",
@@ -47073,7 +47119,7 @@
      2910
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Old Palace Resort Sahl Hasheesh",
@@ -48206,7 +48252,7 @@
      2936
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Dream Lagoon & Aqua Park Resort",
@@ -54274,7 +54320,7 @@
      3093
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Oceanis Beach",
@@ -55788,7 +55834,7 @@
      3062
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Navarria Blue",
@@ -56120,7 +56166,7 @@
      3112
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Jaz Viva Villagio",
@@ -56332,7 +56378,7 @@
      3131
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Barceló Royal Beach",
@@ -56370,7 +56416,7 @@
      3133
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Noxinn Deluxe",
@@ -60696,7 +60742,7 @@
      3009
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Titanic Resort & Aquapark",
@@ -60792,7 +60838,7 @@
      3014
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "SRNTY Sahl Hasheesh",
@@ -61212,7 +61258,7 @@
      3101
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Sentido Reef Oasis Suakin Resort",
@@ -61714,7 +61760,7 @@
      3118
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Iberostar Selection Kantaoui Bay",
@@ -61944,7 +61990,7 @@
      3209
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "MÖVENPICK RESORT EL QUSEIR",
@@ -64390,7 +64436,7 @@
      1935
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Windrose",
@@ -65556,7 +65602,7 @@
      3157
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Marhaba Club",
@@ -65594,7 +65640,7 @@
      3162
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Continental Resort Hurghada",
@@ -66134,7 +66180,7 @@
      3218
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "PICKALBATROS PORTOFINO VITA",
@@ -66570,7 +66616,7 @@
      3268
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Seven Seas Jolie Bay (ex. Aqua Mondo Abu Soma)",
@@ -67182,7 +67228,7 @@
      3354
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Villa del Mar",
@@ -67632,7 +67678,7 @@
      3444
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Nestor",
@@ -69296,7 +69342,7 @@
      3236
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Stella Gardens Resort & Spa",
@@ -69680,7 +69726,7 @@
      3383
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Sunberk Side",
@@ -70066,7 +70112,7 @@
      3463
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "VOYA BEACH RESORT",
@@ -71322,7 +71368,7 @@
      1419
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Dražica",
@@ -72038,7 +72084,7 @@
      2340
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Plaza Regency Hotel",
@@ -72598,7 +72644,7 @@
      3269
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Utopia Blue Resort",
@@ -72674,7 +72720,7 @@
      3354
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "The One Resort Sahl Hasheesh",
@@ -72750,7 +72796,7 @@
      3431
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Valtur Sardegna Baia dei Pini",
@@ -73260,12 +73306,12 @@
      3538
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Olympos Beach",
    "url": "https://www.kartago.sk/grecko/rhodos/faliraki/olympos-beach?DS=65536&GIATA=1270&D=63209%7C63214%7C63219%7C63220%7C63262%7C63266%7C63281%7C63283%7C63285%7C63290%7C63297%7C63311%7C63314%7C63316%7C63319%7C63324%7C63327%7C63333%7C63335%7C63336%7C63341%7C63352%7C63357%7C63362%7C63364%7C63383%7C63384%7C63387%7C63388%7C63390%7C63399%7C63402%7C63408%7C63409%7C63424%7C63427%7C63428%7C63430%7C63431%7C63437%7C63439%7C63442%7C63463%7C63471%7C63472%7C64431%7C64432%7C64433%7C64434%7C64435%7C64436%7C64437%7C64438%7C64440%7C64441%7C64442%7C74677&HID=143281&MT=5&MMT=5&DI=AI&RCS=TR01&NN=10&MNN=10%7C11%7C12%7C13%7C14&NNM=10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-27&DD=2027-08-17&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=RHO90005&DPR=KARTAGO-SK-ATCOM&PC=11273098%2F2%2F2785%2F10&IFC=209369748%2F648997&OFC=209349812%2F648996",
-   "image": "https://img.kartago.sk/hotels/720/recko/rhodos/faliraki/olympos-beach-resort/265496.jpg",
+   "image": "https://img.kartago.sk/hotels/720/recko/rhodos/faliraki/olympos-beach-resort/265496xx.jpg",
    "stars": 4.0,
    "rating": 8.4,
    "country": "Grécko",
@@ -75318,7 +75364,7 @@
      2214
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Route Active Hotel",
@@ -76474,7 +76520,7 @@
      3377
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Old Palace Resort Sahl Hasheesh",
@@ -76550,7 +76596,7 @@
      3403
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Palia Sa Coma Playa",
@@ -76646,7 +76692,7 @@
      3510
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Blue Water",
@@ -76862,7 +76908,7 @@
      3605
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Flamboyan Caribe",
@@ -77752,7 +77798,7 @@
      1839
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Tildi Hotel & Spa",
@@ -79022,7 +79068,7 @@
      3277
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Jaz Neo Dar El Madina",
@@ -79300,7 +79346,7 @@
      3591
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Ninos Grand Beach Hotel & Resort",
@@ -80536,7 +80582,7 @@
      1707
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "CA Sand Dune Hotel",
@@ -80654,7 +80700,7 @@
      2325
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Atarazanas Malaga",
@@ -81549,7 +81595,7 @@
      3541
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Cesar Thalasso",
@@ -81587,7 +81633,7 @@
      3607
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Prima Life Makadi Resort & Spa",
@@ -81957,7 +82003,7 @@
      3751
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Nobel",
@@ -81995,7 +82041,7 @@
      3751
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Parco dei Principi",
@@ -83837,7 +83883,7 @@
      3063
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Nostos Beach Boutique",
@@ -84565,7 +84611,7 @@
      3698
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Sousse Pearl Mariott Resort & Spa",
@@ -84603,7 +84649,7 @@
      3806
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel El Mehdi Beach Resort",
@@ -84765,7 +84811,7 @@
      3874
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Steigenberger Marhaba Thalasso Hammamet",
@@ -84803,7 +84849,7 @@
      3883
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Alkyon Beach",
@@ -86035,7 +86081,7 @@
      1956
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "La Milagrosa Hotel and Apartments",
@@ -88037,7 +88083,7 @@
      3830
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Sural Saray",
@@ -88303,7 +88349,7 @@
      3888
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Angela Beach",
@@ -93065,7 +93111,7 @@
      4001
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Jaz Elite Makadi",
@@ -94291,7 +94337,7 @@
      1536
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Aggelos Family",
@@ -94765,7 +94811,7 @@
      2772
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Govino Bay Corfu",
@@ -97285,7 +97331,7 @@
      2595
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Mirage Studios",
@@ -99363,7 +99409,7 @@
      2991
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Nafsika Livadi",
@@ -99455,7 +99501,7 @@
      3444
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Suriya Resort Kammala",
@@ -100903,7 +100949,7 @@
      2877
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Fuengirola Beach Apartments",
@@ -102495,7 +102541,7 @@
      1224
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Vivat",
@@ -102533,7 +102579,7 @@
      2007
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Livada Prestige",
@@ -102571,7 +102617,7 @@
      2115
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Orazio Palace",
@@ -102835,7 +102881,7 @@
      3377
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Jaz Sharks Bay",
@@ -104797,7 +104843,7 @@
      3900
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Le Meridien Al Aqah Beach Resort",
@@ -105433,7 +105479,7 @@
      1038
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Saltic Resort und SPA Leba",
@@ -108307,7 +108353,7 @@
      4942
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Louis Ledra Beach",
@@ -108825,7 +108871,7 @@
      2016
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Tent Capi Playa",
@@ -108971,7 +109017,7 @@
      3120
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Pimar & Spa",
@@ -110185,7 +110231,7 @@
      4727
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Jaz Neo Dar El Madina",
@@ -110855,7 +110901,7 @@
      3105
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Boutique TAO Caleta Mar",
@@ -112379,7 +112425,7 @@
      3003
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Golden Tulip Media",
@@ -112517,7 +112563,7 @@
      3129
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Sofitel Agadir Royal Bay Resort",
@@ -112555,7 +112601,7 @@
      3132
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Pyramos Hotel",
@@ -112643,7 +112689,7 @@
      3159
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Relax Inn",
@@ -114071,7 +114117,7 @@
      3105
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Los Almendros Exclusive Vacation Club - Adults Gay Only",
@@ -115213,7 +115259,7 @@
      5047
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Mediterraneo Bay Hotel Spa & Resort",
@@ -115837,7 +115883,7 @@
      3687
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Paradise Bay Resort Hotel",
@@ -117059,7 +117105,7 @@
      3441
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Govino Bay Corfu",
@@ -117135,7 +117181,7 @@
      3477
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Dražica",
@@ -117389,7 +117435,7 @@
      3747
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Barcelo Malaga",
@@ -118729,7 +118775,7 @@
      3513
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Towers Rotana",
@@ -119155,7 +119201,7 @@
      3831
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Belussi Beach",
@@ -119375,7 +119421,7 @@
      3924
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Marriott Malta Hotel and Spa",
@@ -119517,7 +119563,7 @@
      4029
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Delfinia Hotel",
@@ -119945,7 +119991,7 @@
      5218
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Golden Coast Beach Hotel",
@@ -121919,7 +121965,7 @@
      3696
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Pergola Hotel and Spa",
@@ -122019,7 +122065,7 @@
      3777
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Al Habtoor Grand Resort, Autograph Collection",
@@ -122095,7 +122141,7 @@
      3834
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Daniya Alicante",
@@ -123471,7 +123517,7 @@
      3450
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Gevora Hotel",
@@ -123785,7 +123831,7 @@
      3936
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Maritim Antonine Hotel",
@@ -124469,7 +124515,7 @@
      5613
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Valtur Sardegna Baia dei Pini",
@@ -124583,7 +124629,7 @@
      3771
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Neptuno Apartments",
@@ -124759,7 +124805,7 @@
      3960
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel La Riviera Barbati",
@@ -125125,7 +125171,7 @@
      4308
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Secrets Bahía Real Resort & Spa",
@@ -125395,7 +125441,7 @@
      5181
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "FIVE Palm Jumeirah Dubai",
@@ -125623,7 +125669,7 @@
      3873
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hugo's Boutique Hotel",
@@ -125723,7 +125769,7 @@
      3996
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Katathani Phuket Beach Resort",
@@ -125761,7 +125807,7 @@
      4017
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Marriott Resort Palm Jumeirah",
@@ -125799,7 +125845,7 @@
      4053
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Vida Dubai Marina & Yacht Club",
@@ -125875,7 +125921,7 @@
      4059
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Royal M Abu Dhabi",
@@ -126013,7 +126059,7 @@
      4278
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel GHT Costa Brava",
@@ -126541,7 +126587,7 @@
      3484
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Centara Nova Pattaya",
@@ -127559,7 +127605,7 @@
      5793
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "The Mulberry Bangkok Khaosan Road Hotel",
@@ -128181,7 +128227,7 @@
      5181
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Laguna Beach Hotel & Spa",
@@ -128447,7 +128493,7 @@
      5977
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Neptuno Bungalows",
@@ -128761,7 +128807,7 @@
      5490
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Ellaidhoo Maldives by Cinnamon",
@@ -128837,7 +128883,7 @@
      5550
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Leonardo Cypria Bay",
@@ -129141,7 +129187,7 @@
      4740
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Precise Resort Tenerife",
@@ -129293,7 +129339,7 @@
      5601
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "The Fortress Resort and Spa",
@@ -129483,7 +129529,7 @@
      4305
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Apartmány Doramar",
@@ -129697,7 +129743,7 @@
      4539
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Renaissance Phuket Resort & Spa",
@@ -129735,7 +129781,7 @@
      4560
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Hibiscus Beach Resort & Spa",
@@ -129925,7 +129971,7 @@
      5541
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "The Villas Wadduwa by Amaya",
@@ -130039,7 +130085,7 @@
      5778
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "AP VICTORIA SPORTS & BEACH",
@@ -130723,7 +130769,7 @@
      5811
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Cinnamon Dhonveli Maldives",
@@ -130951,7 +130997,7 @@
      5112
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Alexander The Great Beach",
@@ -131141,7 +131187,7 @@
      4932
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Thulhagiri Island Resort",
@@ -131179,7 +131225,7 @@
      5188
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Crystals Beach Resort Belle Mare, Member Of Radisson",
@@ -131217,7 +131263,7 @@
      5214
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "The Ravenala Attitude",
@@ -131255,7 +131301,7 @@
      5238
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Radisson Blu Poste Lafayette Resort & Spa",
@@ -131293,7 +131339,7 @@
      5262
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Paradise Bay Resort Hotel",
@@ -131483,7 +131529,7 @@
      4647
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Ramayana Candidasa Beach Resort",
@@ -131901,7 +131947,7 @@
      5174
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Coin de Mire Attitude",
@@ -132053,7 +132099,7 @@
      5550
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Vassos Nissi Plage",
@@ -132281,7 +132327,7 @@
      5348
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Thulhagiri Island Resort and Spa",
@@ -132319,7 +132365,7 @@
      5379
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel The Ravenala Attitude",
@@ -132395,7 +132441,7 @@
      5622
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Veranda Paul et Virginie Hotel & Spa",
@@ -132471,7 +132517,7 @@
      5672
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Veranda Paul and Virginie Hotel & Spa",
@@ -132509,7 +132555,7 @@
      5763
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "M Social Hotel Phuket",
@@ -132699,7 +132745,7 @@
      5476
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Veranda Grand Baie",
@@ -132737,7 +132783,7 @@
      5658
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel OUTRIGGER Mauritius Beach Resort",
@@ -132889,7 +132935,7 @@
      5314
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Ellaidhoo Maldives by Cinnamon",
@@ -132927,7 +132973,7 @@
      5481
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Sadara Resort",
@@ -133003,7 +133049,7 @@
      5580
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Tamassa Bel Ombre",
@@ -133117,7 +133163,7 @@
      5841
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Kempinski San Lawrenz Resort",
@@ -133269,7 +133315,7 @@
      5829
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Angaga Island Resort and Spa",
@@ -133307,7 +133353,7 @@
      5998
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Hoi An Memories Resort and Spa",
@@ -133383,7 +133429,7 @@
      5660
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Koi Resort & Spa Hoi An",
@@ -133459,7 +133505,7 @@
      5772
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "MERUSAKA Nusa Dua",
@@ -133535,7 +133581,7 @@
      5940
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "SINAE PHUKET TAMBON RATSADA THAJSKO",
@@ -133649,7 +133695,7 @@
      5901
     ]
    ],
-   "price_change": null
+   "price_change": 0
   }
  ]
 }
