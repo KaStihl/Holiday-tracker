@@ -1,3 +1,4 @@
+# Search criteria: nastavenia.yml at the repo root; editing it on github.com (a push to main) starts a run.
 # Scrapes travel agencies twice a day, rebuilds the single-file dovolenka.html (open it locally, no hosting),
 # commits it with site/data/*.json and once a week (Monday morning) sends an e-mail digest:
 # top offers now + new AI offers within budget and price drops since the previous digest.
@@ -22,7 +23,7 @@ on:
         default: false
   push:
     branches: [main]
-    paths: ["scraper/**", "site/**", ".github/workflows/refresh.yml"]
+    paths: ["nastavenia.yml", "scraper/**", "site/**", ".github/workflows/refresh.yml"]
 
 permissions:
   contents: write
@@ -53,6 +54,8 @@ jobs:
         run: python -m pytest -q scraper/tests
 
       - name: Scrape travel agencies
+        env:
+          DOVOLENKA_DIAG: "1"  # TEMP: one sample per long-haul destination in the log
         run: |
           python scraper/run.py
           python scraper/build_html.py

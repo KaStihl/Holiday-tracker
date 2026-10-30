@@ -81,9 +81,12 @@ def test_search_uses_summer_filter(monkeypatch):
     monkeypatch.setattr(satur, "get", lambda url, params=None: calls.append((url, params)) or html)
     offers = satur.search(CONFIG)
     n = sum(t in budget for _, budget in satur.STAYS for _, t, _, _ in satur.PAGES)  # 3 cards < 20: no page 2
-    assert len(calls) == n and len(offers) == 3 * n
+    far = len(satur.FAR)  # one page per long-haul country, every allowed length at once
+    assert len(calls) == n + far and len(offers) == 3 * (n + far)
+    assert len(calls) <= 80  # polite
     assert calls[0][1] == {"termin": "01.07.2027-31.08.2027", "dlzka-pobytu": 7}
-    assert {c[1]["dlzka-pobytu"] for c in calls} == {7, "10,11", 14}
+    assert {c[1]["dlzka-pobytu"] for c in calls} == {7, "10,11", 14, "7,8,9,10,11,12,13,14"}
+    assert calls[-1][0] == satur.HOME + "/dovolenka/kuba/letecky"
     # no 10–11 night car terms exist, so car pages are only asked for 7 and 14 nights
     car = {p for p, t, _, _ in satur.PAGES if t == "car"}
     assert not [c for c in calls if c[1]["dlzka-pobytu"] == "10,11" and c[0].removeprefix(satur.HOME) in car]
@@ -108,8 +111,9 @@ def test_10_11_night_flight_listing():
     o = offers[0]
     assert o["hotel"] == "Hotel Jaz Tamerina" and (o["date_from"], o["date_to"]) == ("2027-07-07", "2027-07-17")
     assert o["price_total"] == 1651 * 3  # 4953 € is over the 4500 € cap ...
-    assert run.normalise(o, "satur", "Satur.sk", CONFIG) is None
-    assert run.normalise(dict(o, price_total=4400), "satur", "Satur.sk", CONFIG)["nights"] == 10  # ... not the length
+    cap = dict(CONFIG, price_cap=4500)
+    assert run.normalise(o, "satur", "Satur.sk", cap) is None
+    assert run.normalise(dict(o, price_total=4400), "satur", "Satur.sk", cap)["nights"] == 10  # ... not the length
 
 
 def test_paging_stops_on_length_fallback(monkeypatch):
@@ -121,3 +125,19 @@ def test_paging_stops_on_length_fallback(monkeypatch):
     satur.search(CONFIG)
     assert not [p for p in calls if p["dlzka-pobytu"] == 14 and "stranka" in p]
     assert [p for p in calls if p["dlzka-pobytu"] == 7 and "stranka" in p]
+
+
+def test_search_follows_settings(monkeypatch):
+    calls = []
+    monkeypatch.setattr(satur, "get", lambda url, params=None: calls.append(url) or "")
+    # no car, only Turkey and the Maldives
+    satur.search(dict(CONFIG, transports=["flight"], countries={"TR": 1.0, "MV": 0.6}))
+    paths = {u.removeprefix(satur.HOME) for u in calls}
+    assert not [p for p in paths if "so-psom" in p or "vlastna" in p]
+    assert "/dovolenka/turecko/letecky/z-bratislavy/all-inclusive" in paths
+    assert "/dovolenka/grecko/letecky/z-bratislavy/all-inclusive" not in paths
+    assert "/dovolenka/maldivy/letecky" in paths and "/dovolenka/thajsko/letecky" not in paths
+    # car without dogs: the so-psom listings are not needed
+    calls.clear()
+    satur.search(dict(CONFIG, transports=["car"], dogs=0))
+    assert calls and not [u for u in calls if "so-psom" in u] and not [u for u in calls if "letecky" in u]

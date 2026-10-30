@@ -4,8 +4,8 @@
 Checked 2026-10-24: robots.txt disallows /objednavka, /tpls/, /partner, /e/, /o/ … but not /search.json; no
 terms / text-and-data-mining page is linked from the site. exotika.tiptravel.sk timed out from GitHub runners.
 Prices are per person for the default occupancy (2 adults; the endpoint ignored AdultsCount/ChildrenAges),
-so the party price is per-person x 3, labelled "orientačne" like satur.py.
-Exact 1+2 prices (checked 2026-10-25): the detail page (/dovolenka/<dest>/<hotel>/) ignores AdultsCount/ChildrenAges
+so the party price is per-person x party size, labelled "orientačne" like satur.py.
+Exact party prices (checked 2026-10-25): the detail page (/dovolenka/<dest>/<hotel>/) ignores AdultsCount/ChildrenAges
 query params (its persons popup is filled client-side) and the price calculation (calculationUrl) lives under
 /objednavka, which robots.txt disallows -> no exact_price hook; revisit once 2027 terms are online.
 On 2026-10-24 TIP had no Jul–Aug 2027 terms yet (site still on "LETO 2026"), so expect 'empty' for a while.
@@ -15,6 +15,7 @@ import json
 import re
 
 from common import get, norm_board, norm_country, parse_price
+from config import party_size
 
 NAME = "TIP travel"
 HOME = "https://tiptravel.sk"
@@ -63,13 +64,15 @@ def to_offer(it, home, party, dep=None):
         "departure": STATIONS.get((it.get("departureStation") or "").upper(), dep),
         "date_from": it.get("dateFrom"), "date_to": it.get("dateTo"), "nights": days - 1,
         "price_total": pp * party, "price_original": orig * party if akcia else None,
-        "discount_label": "Zľava (cena za os. × 3, orientačne)" if akcia else "Cena za os. × 3 (orientačne)",
+        "discount_label": (f"Zľava (cena za os. × {party}, orientačne)" if akcia
+                           else f"Cena za os. × {party} (orientačne)"),
+        "price_note": f"orientačne: cena za osobu pri 2 dospelých × {party}",
         "pets_allowed": None,
     }
 
 
 def search_site(cfg, home, tag):
-    party = cfg["adults"] + len(cfg["children_ages"])
+    party = party_size(cfg)
     offers, errors = [], []
     for code in cfg["departures"]:
         if code not in AIRPORTS:

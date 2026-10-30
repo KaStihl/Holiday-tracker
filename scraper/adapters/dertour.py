@@ -9,35 +9,51 @@ contain no text-and-data-mining reservation or scraping ban.
 
 Query parameters (from the app's URL mapping in /Scripts/web/index.*.js):
   tt=1 flight, to=483|3789 BTS|VIE airport ids, dd/rd date range, nn=7|8|…|14 allowed nights, m=5 All Inclusive
-  (incl. Ultra), ac1 adults, kc1 children, ka1=10|12 children ages (without ka1 the children count as infants!),
-  d=<destination ids> (without it the API returns only per-country "categories"), pitg page size, pstg skip.
-With ac1=1&kc1=2&ka1=10|12 every tour is priced for exactly that party: rooms[0].adults/children carry the ages
+  (incl. Ultra), ac1 adults, kc1 children, ka1=<ages joined by |> children ages (without ka1 the children count
+  as infants!), d=<destination ids> (without it the API returns only per-country "categories"), pitg page size,
+  pstg skip. All party values come from nastavenia.yml.
+With ac1/kc1/ka1 every tour is priced for exactly that party: rooms[0].adults/children carry the ages
 and per-person prices and tour.price.total is the sum -> price_exact. Each tour is one hotel with its cheapest
-matching term. Kartago and Fischer search one shared inventory (both sites list ATCOM_Kartago and ATCOM_Fischer
+matching term.
+Destination ids are not hard-coded: the categories call lists every country on sale for the criteria with its
+destinationIds (2026-10-25 fixture: also SAE, Omán, Maldivy, Srí Lanka, Thajsko, Mexiko, Dominikánska republika,
+Kapverdy, Tanzánia), and countries() keeps those listed in nastavenia.yml.
+Kartago and Fischer search one shared inventory (both sites list ATCOM_Kartago and ATCOM_Fischer
 products at the same prices), so each adapter keeps only its own brand's products to avoid duplicates.
 """
 
+import json
 import math
 from urllib.parse import urlencode
 
-from common import get, norm_board, norm_country
+from common import diag, get, norm_board, norm_country
+from config import approx_label, party_label, party_size, period_label
 
 API = "/api/searchapi/getsearchresult"
 AIRPORTS = "483|3789"  # BTS | VIE (fromId in the flight segments)
 PAGE = 50              # tours per API call (~1 MB JSON)
-MAX_CALLS = 24         # tour pages per source and run (+1 categories call)
+MAX_CALLS = 40         # tour pages per source and run (+1 categories call)
 # (nights, max pages per country) – the 7–14 pass returns the cheapest stay (practically always 7 nights),
-# a second 10–14 pass gives the longer stays
+# a second 10–14 pass gives the longer stays. Calls are made in rounds (every country's first page, then
+# second pages, then the 10–14 pass), so with ~20 countries the cap trims the extra pages of the big
+# European countries, never a whole long-haul country.
 PASSES = [((7, 14), 2), ((10, 14), 1)]
+FAR_DIAG = {"AE", "OM", "JO", "MV", "MU", "SC", "LK", "TH", "ID", "VN", "TZ", "KE", "CV", "DO", "MX", "CU"}  # TEMP
 FISCHER_SOURCE = 256   # tour "dataSource" of FISCHER products (brand ATCOM_Fischer)
 
 
 def query(cfg, nights=None, dest=None, skip=0):
     lo, hi = nights or (cfg["nights_min"], cfg["nights_max"])
+    lo, hi = max(lo, cfg["nights_min"]), min(hi, cfg["nights_max"])
+    if lo > hi:
+        lo, hi = cfg["nights_min"], cfg["nights_max"]
     q = {"tt": 1, "to": AIRPORTS, "dd": cfg["date_from"].isoformat(), "rd": cfg["date_to"].isoformat(),
-         "nn": "|".join(str(n) for n in range(lo, hi + 1)), "m": 5,
-         "ac1": cfg["adults"], "kc1": len(cfg["children_ages"]),
-         "ka1": "|".join(str(a) for a in cfg["children_ages"])}
+         "nn": "|".join(str(n) for n in range(lo, hi + 1)),
+         "ac1": cfg["adults"], "kc1": len(cfg["children_ages"])}
+    if cfg["children_ages"]:
+        q["ka1"] = "|".join(str(a) for a in cfg["children_ages"])
+    if set(cfg["boards_preferred"]) <= {"AI", "UAI"}:
+        q["m"] = 5  # All Inclusive incl. Ultra; other preferred boards -> no meal filter
     if dest:
         q["d"] = dest
         q["pitg"] = PAGE
@@ -47,8 +63,8 @@ def query(cfg, nights=None, dest=None, skip=0):
 
 
 def deeplinks(home, path, cfg):
-    label = (f"Letecky z Bratislavy/Viedne, AI, júl–aug, {cfg['nights_min']}–{cfg['nights_max']} nocí, "
-             f"1 dospelý + deti {' a '.join(str(a) for a in cfg['children_ages'])} r.")
+    label = (f"Letecky z Bratislavy/Viedne{', AI' if 'm' in query(cfg) else ''}, {period_label(cfg)}, "
+             f"{cfg['nights_min']}–{cfg['nights_max']} nocí, {party_label(cfg)}")
     return [{"transport": "flight", "label": label, "url": f"{home}{path}?{urlencode(query(cfg))}"}]
 
 
@@ -81,7 +97,7 @@ def to_offer(t, home, cfg):
     adults, kids = room.get("adults") or [], room.get("children") or []
     exact = (len(rooms) == 1 and len(adults) == cfg["adults"]
              and sorted(c.get("age") for c in kids) == sorted(cfg["children_ages"]))
-    party = cfg["adults"] + len(cfg["children_ages"])
+    party = party_size(cfg)
     if not exact:  # never seen, but don't pass another party's price off as ours
         pp = (tour.get("price") or {}).get("adultPrice") or (adults[0].get("price") if adults else None)
         if not pp:
@@ -104,8 +120,9 @@ def to_offer(t, home, cfg):
         "departure": (seg.get("airport") or {}).get("fromIATA"),
         "date_from": tour["date"]["from"], "date_to": tour["date"].get("to"), "nights": tour.get("nightsCount"),
         "price_total": round(price), "price_original": round(orig) if orig else None,
-        "discount_label": fm if exact else ("Cena za os. × 3 (orientačne)" if not fm else f"{fm} (cena za os. × 3, orientačne)"),
-        "pets_allowed": None, **({"price_exact": True} if exact else {}),
+        "discount_label": fm if exact else approx_label(cfg, fm),
+        "pets_allowed": None,
+        **({"price_exact": True} if exact else {"price_note": f"orientačne: cena za dospelého × {party}"}),
     }
 
 
@@ -113,37 +130,68 @@ def _mine(t, fischer):
     return (t.get("dataSource") == FISCHER_SOURCE) == fischer
 
 
+def plan(todo, cfg):
+    """Call order [(nights, country tuple, page)]: round 1 = page 1 of every country in the first pass, then the
+    remaining pages of that pass, then the other passes; within a round by preference weight. A pass whose
+    nights collapse to an already asked range (e.g. nights_max < 10) is skipped."""
+    rounds, seen = [], set()
+    for nights, max_pages in PASSES:
+        nn = query(cfg, nights)["nn"]
+        if nn in seen:
+            continue
+        seen.add(nn)
+        for page in range(max_pages):
+            rounds.append([(nights, c, page) for c in todo if page < (math.ceil(c[3] / PAGE) or 1)])
+    return [x for r in rounds for x in r]
+
+
 def search(tag, home, cfg, fischer):
-    """All preferred countries, two night passes, own brand only. ≤ 1 + MAX_CALLS API calls."""
+    """All countries from nastavenia.yml on sale, two night passes, own brand only. ≤ 1 + MAX_CALLS API calls."""
     hdr = {"Accept": "application/json", "Referer": home + "/"}
+    if "flight" not in cfg["transports"]:
+        return []
     cats = get(home + API, params=query(cfg), headers=hdr, as_json=True)
     todo = countries(cats, cfg)
     print(f"[{tag}] {len(todo)} countries: " + ", ".join(f"{c[1]} {c[3]}" for c in todo))
+    missing = sorted(set(cfg["countries"]) - {c[0] for c in todo})
+    if missing:
+        print(f"[{tag}] not on sale for these criteria: {', '.join(missing)}")
     offers, calls, errors, other = [], 0, [], 0
-    for nights, max_pages in PASSES:
-        for code, name, dest, count in todo:
-            for page in range(min(max_pages, math.ceil(count / PAGE)) or 1):
-                if calls >= MAX_CALLS:
-                    break
-                calls += 1
-                try:
-                    data = get(home + API, params=query(cfg, nights, dest, page * PAGE), headers=hdr, as_json=True)
-                except Exception as e:
-                    print(f"[{tag}] {name} {nights} p{page + 1}: {type(e).__name__} {str(e)[:120]}")
-                    errors.append(f"{type(e).__name__}: {str(e)[:120]}")
-                    if "403" in str(e) or "429" in str(e):  # blocked / rate limited: stop, don't push on
-                        raise
-                    break
-                tours = data.get("tours") or []
-                own = [t for t in tours if _mine(t, fischer)]
-                other += len(tours) - len(own)
-                got = [o for o in (to_offer(t, home, cfg) for t in own) if o]
-                exact = sum(bool(o.get("price_exact")) for o in got)
-                print(f"[{tag}] {name} {nights[0]}-{nights[1]}n p{page + 1}: {len(tours)}/{data.get('toursCount')} tours, "
-                      f"{len(got)} own-brand offers ({exact} exact), nights={sorted({o['nights'] for o in got})}")
-                offers += got
-                if len(tours) < PAGE or (page + 1) * PAGE >= (data.get("toursCount") or 0):
-                    break
+    done = set()  # (nights, code): pass finished (last page reached or failed)
+    for nights, (code, name, dest, count), page in plan(todo, cfg):
+        if calls >= MAX_CALLS:
+            print(f"[{tag}] call budget {MAX_CALLS} reached")
+            break
+        if (nights, code) in done:
+            continue
+        calls += 1
+        try:
+            data = get(home + API, params=query(cfg, nights, dest, page * PAGE), headers=hdr, as_json=True)
+        except Exception as e:
+            print(f"[{tag}] {name} {nights} p{page + 1}: {type(e).__name__} {str(e)[:120]}")
+            errors.append(f"{type(e).__name__}: {str(e)[:120]}")
+            if "403" in str(e) or "429" in str(e):  # blocked / rate limited: stop, don't push on
+                raise
+            done.add((nights, code))
+            continue
+        tours = data.get("tours") or []
+        own = [t for t in tours if _mine(t, fischer)]
+        other += len(tours) - len(own)
+        got = [o for o in (to_offer(t, home, cfg) for t in own) if o]
+        exact = sum(bool(o.get("price_exact")) for o in got)
+        prices = sorted(o["price_total"] for o in got)
+        print(f"[{tag}] {name} {nights[0]}-{nights[1]}n p{page + 1}: {len(tours)}/{data.get('toursCount')} tours, "
+              f"{len(got)} own-brand offers ({exact} exact), nights={sorted({o['nights'] for o in got})}, "
+              f"price {prices[0] if prices else '-'}–{prices[-1] if prices else '-'}")
+        if code in FAR_DIAG and own:
+            t = json.loads(json.dumps(own[0]))
+            h = t.get("hotel") or {}
+            t["hotel"] = {k: h.get(k) for k in ("name", "starsCount", "trustYou", "breadcrumbs", "countryId")}
+            t["hotel"]["images"] = (h.get("images") or [])[:1]
+            diag(f"{tag}-{code}", {k: t.get(k) for k in ("tour", "hotel", "detailUrl", "dataSource")})
+        offers += got
+        if len(tours) < PAGE or (page + 1) * PAGE >= (data.get("toursCount") or 0):
+            done.add((nights, code))
     print(f"[{tag}] {calls + 1} API calls, {len(offers)} offers, {other} other-brand tours skipped")
     if errors and not offers:
         raise RuntimeError(f"all {len(errors)} {tag} API requests failed, first: {errors[0]}")

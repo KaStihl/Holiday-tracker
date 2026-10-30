@@ -9,7 +9,8 @@ from datetime import date
 
 from bs4 import BeautifulSoup
 
-from common import get, norm_board, norm_country, parse_price
+from common import diag, get, norm_board, norm_country, parse_price
+from config import party_size
 
 NAME = "Satur.sk"
 HOME = "https://www.satur.sk"
@@ -27,6 +28,16 @@ PAGES = [
     ("/dovolenka/letecky/z-bratislavy/ultra-all-inclusive", "flight", None, 2),
 ] + [(f"/dovolenka/{c}/letecky/z-bratislavy/all-inclusive", "flight", None, 2)
      for c in ("turecko", "grecko", "cyprus", "taliansko", "spanielsko", "chorvatsko", "malta")]
+PAGE_COUNTRY = {"turecko": "TR", "grecko": "GR", "cyprus": "CY", "taliansko": "IT", "spanielsko": "ES",
+                "chorvatsko": "HR", "malta": "MT"}
+
+# Long-haul / non-European countries: one listing page per country (any departure airport and board, every
+# allowed length in one ?dlzka-pobytu list), departures outside nastavenia.yml are dropped by run.py.
+# Asked only for countries listed in nastavenia.yml destinations. A slug Satur doesn't use answers 404 (logged).
+FAR = {"EG": "egypt", "TN": "tunisko", "MA": "maroko", "AE": "spojene-arabske-emiraty", "OM": "oman",
+       "JO": "jordansko", "MV": "maldivy", "MU": "mauricius", "SC": "seychely", "LK": "sri-lanka", "TH": "thajsko",
+       "ID": "indonezia", "VN": "vietnam", "TZ": "tanzania", "KE": "kena", "CV": "kapverdske-ostrovy",
+       "DO": "dominikanska-republika", "MX": "mexiko", "CU": "kuba"}
 
 DATES_RE = re.compile(r"(\d{1,2})\.(\d{1,2})\.(\d{4})?\s*-\s*(\d{1,2})\.(\d{1,2})\.(\d{4})")
 AIRPORTS = {"bratislava": "BTS", "viede": "VIE", "vieden": "VIE", "kosice": "KSC", "budapest": "BUD"}
@@ -106,10 +117,10 @@ def _dates(s):
 def to_offer(c, transport, pets, party):
     """Card -> offer dict. Satur shows per-person prices (for 2 adults sharing a room); the party price is
     approximated as per-person x party size – child discounts or a single-adult surcharge only show in the
-    booking form, so the real price for 1 adult + 2 kids can differ either way.
+    booking form, so the real price for the configured party can differ either way.
     Checked 2026-10-25: neither listings nor /produkt/ pages take the party server-side (?passengers=1|3|18,10,12,
     ?date=…&passengers=… from the product form, ?dospeli=…: still "2 dospelí", group price = 2 x per person; dospeli
-    is the adults-only club facet). The 1+2 prices come only from /ajax, which robots.txt disallows -> stays
+    is the adults-only club facet). Exact party prices come only from /ajax, which robots.txt disallows -> stays
     approximate (no exact_price hook)."""
     d1, d2 = _dates(c["dates"])
     if not (d1 and c["price_person"]):
@@ -129,24 +140,46 @@ def to_offer(c, transport, pets, party):
         "nights": c["nights"] or (d2 - d1).days,
         "price_total": c["price_person"] * party,
         "price_original": orig * party if orig else None,
-        "discount_label": "Zľava (cena za os. × 3, orientačne)" if orig else "Cena za os. × 3 (orientačne)",
+        "discount_label": (f"Zľava (cena za os. × {party}, orientačne)" if orig
+                           else f"Cena za os. × {party} (orientačne)"),
+        "price_note": f"orientačne: cena za osobu pri 2 dospelých × {party}",
         "pets_allowed": (pets or c.get("pets") or None) if car else None,
     }
 
 
 # ?dlzka-pobytu (nights; a comma list works, ranges like 10-11 are ignored) -> {transport: max pages per PAGES
 # entry, None = all}. Checked 2026-10-24 for Jul–Aug: car stays are Saturday to Saturday (no 10–11 night terms)
-# and most 10–14 night flight terms cost more than price_cap, so those get one page. ~55 requests per run.
+# and most 10–14 night flight terms cost more than price_cap, so those get one page. ~55 requests per run,
+# plus one per long-haul country in FAR (~19) -> ≤ ~75.
 STAYS = [(7, {"car": None, "flight": None}), ("10,11", {"flight": 1}), (14, {"car": 2, "flight": 1})]
 
 
+def pages_for(cfg):
+    """PAGES narrowed to nastavenia.yml: transports, dogs, destination countries."""
+    out = []
+    for path, transport, pets, pages in PAGES:
+        if transport not in cfg["transports"] or (pets and not cfg["dogs"]):
+            continue
+        slug = path.split("/")[2] if path.startswith("/dovolenka/") else None
+        if slug in PAGE_COUNTRY and PAGE_COUNTRY[slug] not in cfg["countries"]:
+            continue
+        out.append((path, transport, pets, pages))
+    return out
+
+
+def far_pages(cfg):
+    if "flight" not in cfg["transports"]:
+        return []
+    return [(code, f"/dovolenka/{slug}/letecky") for code, slug in FAR.items() if code in cfg["countries"]]
+
+
 def search(cfg):
-    party = cfg["adults"] + len(cfg["children_ages"])
+    party = party_size(cfg)
     termin = f"{cfg['date_from']:%d.%m.%Y}-{cfg['date_to']:%d.%m.%Y}"
     offers, errors = [], []  # duplicates across pages are fine: run.py keeps the cheapest per offer id
     for stay, budget in STAYS:
         wanted = {int(x) for x in str(stay).split(",")}
-        for path, transport, pets, pages in PAGES:
+        for path, transport, pets, pages in pages_for(cfg):
             if transport not in budget:
                 continue
             for n in range(1, min(pages, budget[transport] or pages) + 1):
@@ -164,6 +197,23 @@ def search(cfg):
                 # no term of the asked length: the site fell back to other lengths, more pages won't help
                 if len(cards) < 20 or not wanted & set(nights):
                     break
+    all_nights = ",".join(str(n) for n in range(cfg["nights_min"], cfg["nights_max"] + 1))
+    for code, path in far_pages(cfg):
+        try:
+            html = get(HOME + path, params={"termin": termin, "dlzka-pobytu": all_nights})
+            cards = parse_cards(html)
+            art = BeautifulSoup(html, "lxml").select_one("ul[data-category-target=productsListing] article")
+            if art:
+                diag(f"satur-{code}", re.sub(r"\s+", " ", str(art)))
+        except Exception as e:
+            print(f"[satur] {path}: {type(e).__name__} {str(e)[:120]}")
+            errors.append(f"{type(e).__name__}: {str(e)[:120]}")
+            continue
+        got = [o for o in (to_offer(c, "flight", None, party) for c in cards) if o]
+        print(f"[satur] {code} {path}: {len(cards)} cards, {len(got)} offers, nights={sorted({o['nights'] for o in got})}, "
+              f"deps={sorted({o['departure'] or '?' for o in got})}, "
+              f"prices={sorted(o['price_total'] for o in got)[:3]}")
+        offers += got
     if errors and not offers:
         raise RuntimeError(f"all {len(errors)} satur.sk listing requests failed, first: {errors[0]}")
     return offers

@@ -4,13 +4,13 @@
 Checked 2026-10-24: robots.txt only disallows /api*, /booking*, /reservation*, /_next/static/; the terms
 (/obchodne-podmienky/) contain no text-and-data-mining reservation; plain requests get the page (no challenge).
 Length filter: durationMin/durationMax in days (nights + 1). Children in the URL: none of ~15 participants[0][...]
-variants was picked up (children=N answers 500), so we ask for 2 adults and show per-person price x 3, labelled
-"orientačne" like satur.py. Each page lists the cheapest matching term per hotel.
+variants was picked up (children=N answers 500), so we ask for 2 adults and show per-person price x party size,
+labelled "orientačne" like satur.py. Each page lists the cheapest matching term per hotel.
 
 Exact party prices (checked 2026-10-25): the hotel/term detail page /dovolena/<country>/<region>/<hotel>,<ID>/?id=…
 (server-rendered React Server Components payload, robots allows /dovolena/) honours
-participants[0][adults]=1&participants[0][children][0]=DD.MM.YYYY&participants[0][children][1]=DD.MM.YYYY and
-embeds the priced variant as "date":{"range":{start,end}} … "participants":{"adultNumber":1,"childrenNumber":2,
+participants[0][adults]=A&participants[0][children][i]=DD.MM.YYYY (party from nastavenia.yml) and
+embeds the priced variant as "date":{"range":{start,end}} … "participants":{"adultNumber":A,"childrenNumber":C,
 "childrenBirthDates":[…]},"totalPrice":N. exact_price() fetches that for a shortlist chosen by run.py and only
 accepts it when the dates and the party in the payload match the offer (otherwise the offer stays approximate).
 """
@@ -22,21 +22,29 @@ from urllib.parse import parse_qs, parse_qsl, urlencode, urlsplit, urlunsplit
 
 from bs4 import BeautifulSoup
 
-from common import get, norm_board, norm_country
+from common import diag, get, norm_board, norm_country
+from config import approx_label, party_label, party_size, period_label
 
 NAME = "Čedok"
 HOME = "https://www.cedok.sk"
 
-# destination slugs as used in cedok.sk URLs; a wrong slug just returns few/no rates (logged)
-DESTINATIONS = ["turecko", "grecko", "cyprus", "spanielsko", "kanarske-ostrovy", "taliansko", "malta",
-                "chorvatsko", "egypt"]
+# destination slugs as used in cedok.sk URLs -> country code; a wrong slug just returns few/no rates (logged).
+# Only slugs whose country is in nastavenia.yml destinations are asked.
+DESTINATIONS = {"turecko": "TR", "grecko": "GR", "cyprus": "CY", "spanielsko": "ES", "kanarske-ostrovy": "ES",
+                "taliansko": "IT", "malta": "MT", "chorvatsko": "HR", "egypt": "EG"}
+# Long-haul / other non-European countries: one wide-length page (25 cheapest rates) each, to stay polite.
+FAR = {"tunisko": "TN", "maroko": "MA", "spojene-arabske-emiraty": "AE", "oman": "OM", "jordansko": "JO",
+       "maledivy": "MV", "mauricius": "MU", "seychely": "SC", "sri-lanka": "LK", "thajsko": "TH",
+       "indonezia": "ID", "vietnam": "VN", "tanzania": "TZ", "kena": "KE", "kapverdske-ostrovy": "CV",
+       "dominikanska-republika": "DO", "mexiko": "MX", "kuba": "CU"}
 AIRPORTS = {"bratislava": "BTS", "vieden": "VIE", "viede": "VIE", "kosice": "KSC", "budapest": "BUD"}
 # (durationMin, durationMax) in days and max pages (25 rates each) per destination. One wide 8–15 query only ever
 # showed the cheapest stay, 7 nights; separate ranges give real 7, 10–11 and 14 night terms.
-DURATIONS = [((8, 10), 3), ((11, 12), 2), ((15, 15), 2)]
+# Budget (checked 2026-10-30): ≤ 9 x (2+1+1) + 18 FAR + EXACT_MAX ≈ 84 requests per run.
+DURATIONS = [((8, 10), 2), ((11, 12), 1), ((15, 15), 1)]
 ADULTS = 2  # see module docstring
-EXACT_MAX = 35  # detail pages (~1 MB each) fetched per run for exact 1 adult + 2 children prices
-APPROX_NOTE = re.compile(r"\s*\(cena za os\. × 3, orientačne\)|Cena za os\. × 3 \(orientačne\)")
+EXACT_MAX = 30  # detail pages (~1 MB each) fetched per run for exact prices of the configured party
+APPROX_NOTE = re.compile(r"\s*\(cena za os\. × \d+, orientačne\)|Cena za os\. × \d+ \(orientačne\)")
 
 
 def _query(cfg, page=1, adults=ADULTS, days=None):
@@ -55,7 +63,8 @@ def deeplinks(cfg):
     for slug, label in [("turecko", "Turecko"), ("grecko", "Grécko"), ("spanielsko", "Španielsko"),
                         ("cyprus", "Cyprus")]:
         q = _query(cfg, adults=cfg["adults"])
-        out.append({"transport": "flight", "label": f"{label} letecky z Bratislavy / Viedne, júl–aug, {n}",
+        out.append({"transport": "flight", "label": f"{label} letecky z {'/'.join(cfg['departures'])}, "
+                                                    f"{period_label(cfg)}, {n}, {party_label(cfg)}",
                     "url": f"{HOME}/vysledky-vyhladavania/dovolenky/{slug}/?{urlencode(q)}"})
     out.append({"transport": "flight", "label": "All inclusive z Bratislavy (všetky destinácie)",
                 "url": HOME + "/all-inclusive/?departuresByPlane=BTS%2CKSC%2CTAT"})
@@ -87,7 +96,7 @@ def parse_page(html):
     return rates.get("list") or [], rates.get("ratesCount") or 0, links
 
 
-def to_offer(r, links, party, adults=ADULTS):
+def to_offer(r, links, cfg, adults=ADULTS):
     """One rate -> offer dict, or None for round trips / rates without a hotel."""
     if r.get("rateType") != "holidays":
         return None
@@ -100,7 +109,9 @@ def to_offer(r, links, party, adults=ADULTS):
     geo = {g["type"]: g["title"] for g in c.get("geographicalIdentifiers", [])}
     people = r.get("participants") or []
     kids = sum(p.get("type") == "child" for p in people)
-    exact = len(people) == party and kids == party - 1  # 1 adult + 2 children priced by the site
+    party = party_size(cfg)
+    # priced by the site for exactly the configured party (listing pages normally price 2 adults)
+    exact = len(people) == party and kids == len(cfg["children_ages"])
     total = r["price"] / 100 if exact else r["price"] / 100 / max(len(people) or adults, 1) * party
     orig = r.get("baseCatalogPrice") or 0
     orig = (orig / 100 if exact else orig / 100 / max(len(people) or adults, 1) * party) if orig > r["price"] else None
@@ -108,7 +119,7 @@ def to_offer(r, links, party, adults=ADULTS):
     if exact:
         label = promo  # run.py marks it price_exact
     else:
-        label = f"{promo} (cena za os. × 3, orientačne)" if promo or orig else "Cena za os. × 3 (orientačne)"
+        label = approx_label(cfg, promo or ("Zľava" if orig else None))
     stars = c.get("hotelRating")
     rating = (c.get("reviews") or {}).get("customersRating")
     photos = (c.get("photos") or {}).get("gallery") or []
@@ -126,11 +137,13 @@ def to_offer(r, links, party, adults=ADULTS):
         "board": norm_board((hotel.get("meal") or {}).get("title")), "transport": "flight", "departure": dep,
         "date_from": d1, "date_to": d2, "nights": nights - 1 if nights else None,
         "price_total": round(total), "price_original": round(orig) if orig else None,
-        "discount_label": label, "pets_allowed": None, **({"price_exact": True} if exact else {}),
+        "discount_label": label, "pets_allowed": None,
+        **({"price_exact": True} if exact else
+           {"price_note": f"orientačne: cena za osobu pri {max(len(people) or adults, 1)} dospelých × {party}"}),
     }
 
 
-# --- exact 1 adult + 2 children price from the detail page -------------------------------------------------
+# --- exact price for the configured party from the detail page -------------------------------------------------
 
 def occupancy_url(url, cfg):
     """The offer's detail URL re-asked for the configured party (birth dates as DD.MM.YYYY, the site's format)."""
@@ -200,7 +213,7 @@ def pick_exact(variants, offer, cfg):
 
 
 def exact_price(offer, cfg):
-    """run.py hook: {'price_total': …} for 1 adult + 2 children, or None when the page doesn't confirm it."""
+    """run.py hook: {'price_total': …} for the configured party, or None when the page doesn't confirm it."""
     url = occupancy_url(offer["url"], cfg)
     variants = parse_detail(get(url))
     total = pick_exact(variants, offer, cfg)
@@ -211,25 +224,42 @@ def exact_price(offer, cfg):
             "discount_label": APPROX_NOTE.sub("", offer.get("discount_label") or "").strip() or None}
 
 
+def plan(cfg):
+    """[(slug, (durationMin, durationMax), max pages)] for the countries in nastavenia.yml."""
+    if "flight" not in cfg["transports"]:
+        return []
+    out = [(slug, days, pages) for days, pages in DURATIONS
+           for slug, code in DESTINATIONS.items() if code in cfg["countries"]]
+    wide = (cfg["nights_min"] + 1, cfg["nights_max"] + 1)
+    return out + [(slug, wide, 1) for slug, code in FAR.items() if code in cfg["countries"]]
+
+
 def search(cfg):
-    party = cfg["adults"] + len(cfg["children_ages"])
     offers, errors = [], []
-    for days, pages in DURATIONS:
-        for slug in DESTINATIONS:
-            for page in range(1, pages + 1):
-                try:
-                    html = get(f"{HOME}/vysledky-vyhladavania/dovolenky/{slug}/", params=_query(cfg, page, days=days))
-                except Exception as e:
-                    print(f"[cedok] {slug} {days} p{page}: {type(e).__name__} {str(e)[:120]}")
-                    errors.append(f"{type(e).__name__}: {str(e)[:120]}")
-                    break
-                rates, count, links = parse_page(html)
-                got = [o for o in (to_offer(r, links, party) for r in rates) if o]
-                nights = sorted({o["nights"] for o in got})
-                print(f"[cedok] {slug} {days} p{page}: {len(rates)}/{count} rates, {len(got)} offers, nights={nights}")
-                offers += got
-                if page * 25 >= count or not rates:
-                    break
+    for slug, days, pages in plan(cfg):
+        for page in range(1, pages + 1):
+            try:
+                html = get(f"{HOME}/vysledky-vyhladavania/dovolenky/{slug}/", params=_query(cfg, page, days=days))
+            except Exception as e:
+                print(f"[cedok] {slug} {days} p{page}: {type(e).__name__} {str(e)[:120]}")
+                errors.append(f"{type(e).__name__}: {str(e)[:120]}")
+                break
+            rates, count, links = parse_page(html)
+            got = [o for o in (to_offer(r, links, cfg) for r in rates) if o]
+            nights = sorted({o["nights"] for o in got})
+            print(f"[cedok] {slug} {days} p{page}: {len(rates)}/{count} rates, {len(got)} offers, nights={nights}"
+                  + (f", countries={sorted({o['country_code'] or '?' for o in got})}, "
+                     f"prices={sorted(o['price_total'] for o in got)[:3]}" if slug in FAR else ""))
+            if slug in FAR and rates:
+                r0 = json.loads(json.dumps(rates[0]))
+                for seg in r0.get("segments", []):
+                    ph = (seg.get("content") or {}).get("photos")
+                    if isinstance(ph, dict):
+                        ph["gallery"] = (ph.get("gallery") or [])[:1]
+                diag(f"cedok-{slug}", {"rate": r0, "link": links.get(r0.get("supplierObjectId")), "count": count})
+            offers += got
+            if page * 25 >= count or not rates:
+                break
     if errors and not offers:
         raise RuntimeError(f"all {len(errors)} cedok.sk requests failed, first: {errors[0]}")
     return offers

@@ -52,6 +52,18 @@ def dump(url, status, body):
         f.write(f"{_dump_n:03d} {status} {url}\n")
 
 
+_diag_seen = set()
+
+
+def diag(tag, obj):
+    """TEMPORARY (long-haul fixture collection): DOVOLENKA_DIAG=1 prints one sample per tag to the job log."""
+    if os.environ.get("DOVOLENKA_DIAG") != "1" or tag in _diag_seen:
+        return
+    _diag_seen.add(tag)
+    import json
+    print(f"DIAG {tag} " + (obj if isinstance(obj, str) else json.dumps(obj, ensure_ascii=False)))
+
+
 class RobotsDisallowed(Exception):
     pass
 
@@ -171,25 +183,45 @@ def norm_board(text):
     return None
 
 
+# country code -> name prefixes (accent-free, lower case; Slovak, Czech, English and well-known resorts).
+# Matched at a word start, so short names like "kuba" or "oman" don't fire inside other words.
 _COUNTRIES = {
     "HR": ["chorvatsko", "croatia", "hrvatska"],
     "TR": ["turecko", "turkey", "turkiye"],
     "CY": ["cyprus", "kypr", "cypr"],
     "IT": ["taliansko", "italie", "italy", "italia", "sicilia", "sardinia", "sardinie", "sicilie"],
     "GR": ["grecko", "recko", "greece"],
-    "ES": ["spanielsko", "spanelsko", "spain", "kanarske", "mallorca", "malorka", "tenerife", "gran canaria", "fuerteventura", "lanzarote", "ibiza", "menorca"],
+    "ES": ["spanielsko", "spanelsko", "spain", "kanarske", "mallorca", "malorka", "tenerife", "gran canaria",
+           "fuerteventura", "lanzarote", "ibiza", "menorca"],
     "MT": ["malta"],
     "PT": ["portugalsko", "portugal", "madeira"],
     "ME": ["cierna hora", "cerna hora", "montenegro"],
     "AL": ["albansko", "albanie", "albania"],
-    "BG": ["bulharsko", "bulharsko", "bulgaria"],
+    "BG": ["bulharsko", "bulgaria"],
     "EG": ["egypt"],
     "TN": ["tunisko", "tunisia"],
-    "SI": ["slovinsko", "slovinsko", "slovenia"],
+    "SI": ["slovinsko", "slovenia"],
     "FR": ["francuzsko", "francie", "france", "korzika"],
     "MA": ["maroko", "morocco"],
-    "AE": ["emiraty", "sae", "dubaj", "dubai"],
+    "AE": ["spojene arabske emiraty", "arabske emiraty", "emiraty", "united arab emirates", "sae\\b", "uae\\b",
+           "dubaj", "dubai", "abu dhabi", "ras al khaimah", "fujairah", "sharjah"],
+    "OM": ["oman\\b", "omanu", "omansky", "salalah", "muscat", "maskat"],
+    "JO": ["jordansko", "jordan", "akaba", "aqaba"],
+    "MV": ["maldiv", "maledivy", "maldives"],
+    "MU": ["mauricius", "mauritius"],
+    "SC": ["seychel", "sejsel"],
+    "LK": ["sri lanka", "srilanka"],
+    "TH": ["thajsko", "thailand", "phuket", "krabi", "koh samui", "ko samui", "khao lak", "pattaya"],
+    "ID": ["indonez", "bali\\b", "lombok"],
+    "VN": ["vietnam", "phu quoc", "nha trang"],
+    "TZ": ["tanzan", "zanzibar"],
+    "KE": ["kena\\b", "kenya", "kenia", "mombasa", "diani"],
+    "CV": ["kapverd", "cape verde", "cabo verde", "boa vista"],
+    "DO": ["dominikansk", "dominican", "punta cana", "puerto plata", "bayahibe", "la romana"],
+    "MX": ["mexiko", "mexico", "cancun", "riviera maya", "playa del carmen"],
+    "CU": ["kuba\\b", "cuba\\b", "varadero", "havana", "habana"],
 }
+_COUNTRY_RX = [(code, re.compile(r"\b(?:" + "|".join(names) + ")")) for code, names in _COUNTRIES.items()]
 
 
 def norm_country(text):
@@ -199,8 +231,8 @@ def norm_country(text):
     t = strip_accents(str(text)).lower()
     if len(t) == 2 and t.upper() in _COUNTRIES:
         return t.upper()
-    for code, names in _COUNTRIES.items():
-        if any(n in t for n in names):
+    for code, rx in _COUNTRY_RX:
+        if rx.search(t):
             return code
     return None
 

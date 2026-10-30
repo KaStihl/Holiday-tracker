@@ -11,7 +11,7 @@ The file is key-compressed: decode_tree() re-implements the site's decode_json (
 field name from the site's dictionary is replaced by a short key; keys are generated from the de-duplicated
 names sorted with Slovak collation ('ch' sorts after 'h') -> a, b, c, …
 A term ("terms") is a room variant with occupancy limits (room.adultCount, room.personCount, room.childAge =
-[min, max] age of a child bed) and a price per person; the party price is per-person x 3 ("orientačne", like
+[min, max] age of a child bed) and a price per person; the party price is per-person x party size ("orientačne", like
 satur.py) because child discounts are only computed in the booking form under /objednavka (robots-disallowed).
 """
 
@@ -19,6 +19,7 @@ import json
 from datetime import date
 
 from common import get, norm_board, norm_country
+from config import approx_label, approx_note, party_size
 
 NAME = "Koala Tours"
 HOME = "https://koala.sk"
@@ -97,9 +98,9 @@ def deeplinks(cfg):
 
 
 def fits(term, cfg):
-    """Can this room variant take 1 adult + the two children (ages) at all? Mirrors the site's own filters."""
+    """Can this room variant take the configured party at all? Mirrors the site's own filters."""
     room = term.get("room") or {}
-    party = cfg["adults"] + len(cfg["children_ages"])
+    party = party_size(cfg)
     adults, persons = room.get("adultCount") or 0, room.get("personCount") or 0
     if persons and persons < party:
         return False
@@ -116,7 +117,7 @@ def to_offer(hotel, names, top_url, term, cfg):
         return None
     if not fits(term, cfg):
         return None
-    party = cfg["adults"] + len(cfg["children_ages"])
+    party = party_size(cfg)
     d1, d2 = _ymd(term["date"][0]), _ymd(term["date"][1])
     pp = int(term["price"])
     # The site shows "Cena za osobu" = price and, next to it, "zľava N%" (only when N < 50). Whether price is
@@ -138,7 +139,8 @@ def to_offer(hotel, names, top_url, term, cfg):
         "date_from": d1.isoformat(), "date_to": d2.isoformat(),
         "nights": (term.get("dayCount") or ((d2 - d1).days + 1)) - 1,
         "price_total": pp * party, "price_original": None, "discount_pct": disc,
-        "discount_label": f"Zľava {disc} % (cena za os. × 3, orientačne)" if disc else "Cena za os. × 3 (orientačne)",
+        "discount_label": approx_label(cfg, f"Zľava {disc} %" if disc else None),
+        "price_note": approx_note(cfg, basis=None),
         "pets_allowed": None,
     }
 

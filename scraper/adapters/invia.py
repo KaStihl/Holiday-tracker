@@ -13,6 +13,8 @@ So the page gets ready-made filtered searches for a human to click.
 
 from urllib.parse import urlencode
 
+from config import party_short, period_label
+
 NAME = "Invia.sk"
 HOME = "https://www.invia.sk"
 DEEPLINK_ONLY = True
@@ -38,7 +40,7 @@ def deeplinks(cfg):
     out = []
     for code, label in (("BTS", "z Bratislavy"), ("VIE", "z Viedne")):
         q = urlencode(list(base.items()) + [("nl_transportation_id[]", AIRPORTS[code])] + meals + ages)
-        out.append({"transport": "flight", "label": f"Letecky {label}, AI/UAI, júl–aug, {n}, 1+2",
+        out.append({"transport": "flight", "label": f"Letecky {label}, AI/UAI, {period_label(cfg)}, {n}, {party_short(cfg)}",
                     "url": f"{HOME}/dovolenka/?{q}"})
     out.append({"transport": "car", "label": "Vlastná doprava (psy overiť v detaile hotela)",
                 "url": f"{HOME}/dovolenka/vlastna-doprava/"})

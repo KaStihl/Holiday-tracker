@@ -1,0 +1,92 @@
+# Nastavenia trackera dovoleniek – upravujte priamo na github.com (aj z mobilu: ceruzka ✏️ → Commit changes).
+# Po uložení (commit do vetvy main) sa automaticky spustí nové hľadanie (Actions → Refresh), výsledok
+# je v dovolenka.html o ~10–15 minút. Riadky začínajúce '#' sú len vysvetlivky.
+# Pri chybe (napr. preklep v dátume) beh skončí červenou chybou s popisom, čo opraviť.
+
+# Počet dospelých (1–6).
+adults: 1
+
+# Vek detí počas dovolenky, v rokoch (0–17), v hranatých zátvorkách oddelené čiarkou.
+# Bez detí: children_ages: []
+# Dátumy narodenia, ktoré niektoré cestovky chcú, sa odvodia z veku a z date_from.
+children_ages: [10, 12]
+
+# Najskorší a najneskorší deň odchodu (RRRR-MM-DD).
+date_from: 2027-07-01
+date_to: 2027-08-31
+
+# Dĺžka pobytu v nociach (od – do).
+nights_min: 7
+nights_max: 14
+
+# Rozpočet za celú rodinu v eurách (ponuky do neho sú zvýraznené a dostanú lepšie skóre).
+budget: 3000
+
+# Strop ceny za celú rodinu v eurách – drahšie ponuky sa vôbec nezobrazia.
+# Vyšší strop (napr. 6000) nechá v zozname aj vzdialené destinácie (Maldivy, Mexiko, Thajsko…).
+price_cap: 6000
+
+# Letiská odletu (IATA kódy): BTS = Bratislava, VIE = Viedeň, BUD = Budapešť, KSC = Košice, PRG = Praha.
+departures: [BTS, VIE]
+# Záložné letiská – ponuky odtiaľ sa ponechajú, ale primárne sa hľadá z 'departures'.
+departures_secondary: [BUD, KSC]
+
+# Spôsob dopravy: flight = letecky, car = vlastným autom. Jedno alebo oboje.
+transports: [flight, car]
+
+# Počet psov, ktoré idú s vami autom. Ak je viac ako 0, pri ceste autom sa vyradia
+# ubytovania, ktoré psy výslovne nepovoľujú. 0 = bez psov.
+dogs: 2
+
+# Odkiaľ sa ide autom (len pre informáciu na stránke).
+car_start: Bratislava
+
+# Preferovaná strava: UAI = Ultra All Inclusive, AI = All Inclusive, FB = plná penzia,
+# HB = polpenzia, BB = raňajky, RO = bez stravy. Preferované dostanú lepšie skóre a týždenný
+# e-mail ukazuje top ponuky s touto stravou. Ak je tu len AI/UAI, Kartago a Fischer hľadajú iba All Inclusive.
+boards_preferred: [UAI, AI]
+
+# Destinácie: kód krajiny: váha (1.0 = najobľúbenejšia … 0.1 = len ak je lacná).
+# Hľadá sa len v krajinách z tohto zoznamu; krajinu zmažete vymazaním riadku.
+# Kódy: HR Chorvátsko, TR Turecko, CY Cyprus, IT Taliansko, GR Grécko, ES Španielsko, MT Malta,
+# PT Portugalsko, ME Čierna Hora, AL Albánsko, BG Bulharsko, EG Egypt, TN Tunisko, MA Maroko,
+# AE Dubaj/SAE, OM Omán, JO Jordánsko, MV Maldivy, MU Maurícius, SC Seychely, LK Srí Lanka,
+# TH Thajsko, ID Bali/Indonézia, VN Vietnam, TZ Zanzibar/Tanzánia, KE Keňa, CV Kapverdy,
+# DO Dominikánska republika, MX Mexiko, CU Kuba.
+destinations:
+  # Európa
+  HR: 1.0
+  TR: 1.0
+  CY: 1.0
+  IT: 1.0
+  GR: 0.95
+  ES: 0.95
+  MT: 0.9
+  PT: 0.8
+  ME: 0.8
+  AL: 0.75
+  BG: 0.7
+  # Afrika
+  EG: 0.7
+  TN: 0.65
+  MA: 0.6
+  CV: 0.6
+  TZ: 0.6
+  KE: 0.55
+  # Blízky východ
+  AE: 0.65
+  OM: 0.6
+  JO: 0.55
+  # Indický oceán
+  MV: 0.6
+  MU: 0.6
+  SC: 0.55
+  # Ázia
+  LK: 0.6
+  TH: 0.6
+  ID: 0.55
+  VN: 0.55
+  # Karibik a Amerika
+  DO: 0.6
+  MX: 0.6
+  CU: 0.5

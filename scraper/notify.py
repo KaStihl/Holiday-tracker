@@ -13,7 +13,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from config import CONFIG  # noqa: E402
+from config import CONFIG, party_label, party_short, party_size  # noqa: E402
 
 DROP_EUR = 50
 MAX_ROWS = 10
@@ -48,14 +48,20 @@ def row(o, extra=""):
             f"{BOARD.get(o.get('board'), '?')} · {how} · {o['source_name']}")
 
 
-def digest(prev, cur, budget):
+def boards_title(boards):
+    if set(boards) <= {"AI", "UAI"}:
+        return "All Inclusive"
+    return " / ".join(BOARD.get(b, b) for b in boards)
+
+
+def digest(prev, cur, budget, cfg=CONFIG):
     """Returns (title, markdown). prev is the snapshot of the previous digest ({} on the first one)."""
     old = {o["id"]: o for o in prev.get("offers", [])}
     offers = cur.get("offers", [])
     first_run = not old
-    ai = [o for o in offers if o.get("board") in ("AI", "UAI") and o["price_total"] <= budget]
+    ai = [o for o in offers if o.get("board") in cfg["boards_preferred"] and o["price_total"] <= budget]
     new = [] if first_run else [o for o in ai if o["id"] not in old]
-    # a switch between the x3 approximation and the exact party price is not a price drop
+    # a switch between the per-person approximation and the exact party price is not a price drop
     drops = [o for o in offers if o["id"] in old and o["price_total"] <= budget * 1.1
              and bool(o.get("price_exact")) == bool(old[o["id"]].get("price_exact"))
              and old[o["id"]]["price_total"] - o["price_total"] >= DROP_EUR]
@@ -63,7 +69,7 @@ def digest(prev, cur, budget):
     new.sort(key=lambda o: (-o.get("score", 0), o["price_total"]))
     drops.sort(key=lambda o: o["price_total"] - old[o["id"]]["price_total"])
 
-    parts = [f"### ⭐ Top {len(top)} ponúk All Inclusive do {eur(budget)} ({len(ai)} spolu)", ""]
+    parts = [f"### ⭐ Top {len(top)} ponúk {boards_title(cfg['boards_preferred'])} do {eur(budget)} ({len(ai)} spolu)", ""]
     parts += [row(o) for o in top] or ["Zatiaľ žiadna."]
     if drops:
         parts += ["", f"### 📉 Zlacnené za týždeň o {DROP_EUR} € a viac ({len(drops)})", ""]
@@ -77,11 +83,12 @@ def digest(prev, cur, budget):
 
     shown = top + drops[:MAX_ROWS] + new[:MAX_ROWS]
     exact_src = sorted({o["source_name"] for o in shown if o.get("price_exact")})
+    who, n, short = party_label(cfg, "gen"), party_size(cfg), party_short(cfg)
     if exact_src:
-        note = (f"Ceny sú za 1 dospelého + 2 deti. ✓ = presná cena 1+2 priamo od cestovky ({', '.join(exact_src)}). "
-                "Ostatné sú orientačne cena za osobu pri 2 dospelých × 3 – pred rezerváciou overte u cestovky.")
+        note = (f"Ceny sú za {who}. ✓ = presná cena {short} priamo od cestovky ({', '.join(exact_src)}). "
+                f"Ostatné sú orientačne cena za osobu pri 2 dospelých × {n} – pred rezerváciou overte u cestovky.")
     else:
-        note = ("Ceny sú za 1 dospelého + 2 deti, orientačne cena za osobu pri 2 dospelých × 3 – "
+        note = (f"Ceny sú za {who}, orientačne cena za osobu pri 2 dospelých × {n} – "
                 "pred rezerváciou overte u cestovky.")
     parts += ["", "---", note,
               "", f"📄 Všetky ponuky: [dovolenka.html]({SITE}) – stiahnite (Download raw file) a otvorte v prehliadači."]

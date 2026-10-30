@@ -1,6 +1,6 @@
 """Kartago Tours (kartago.sk) – offers from the JSON search API the results page itself calls; see dertour.py.
 
-Exact prices for 1 adult + 2 children (ages from config). Kartago and Fischer share one inventory: this adapter
+Exact prices for the party from nastavenia.yml. Kartago and Fischer share one inventory: this adapter
 keeps every product that is not FISCHER's own (KARTAGO, DERTOUR, …), fischer.py keeps the FISCHER ones.
 History: until 2026-10-25 search links only, because the HTML pages fill terms and prices client-side.
 """

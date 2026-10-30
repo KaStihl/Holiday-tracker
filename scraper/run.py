@@ -16,7 +16,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from adapters import ADAPTERS  # noqa: E402
 from common import https_or_none, norm_board, norm_country, offer_id  # noqa: E402
-from config import CONFIG, COUNTRY_NAMES, criteria_for_display  # noqa: E402
+from config import (CONFIG, COUNTRY_NAMES, approx_note, continent, criteria_for_display, party_short,  # noqa: E402
+                    party_size)
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "site" / "data"
@@ -25,7 +26,6 @@ HISTORY = DATA / "history.json"
 
 HISTORY_POINTS = 90
 HISTORY_KEEP_DAYS = 60
-EXACT_BOARDS = ("AI", "UAI")
 BOARD_SCORE = {"UAI": 1.0, "AI": 0.95, "FB": 0.6, "HB": 0.45, "BB": 0.25, "RO": 0.1, None: 0.2}
 
 
@@ -34,6 +34,8 @@ def normalise(raw, source, source_name, cfg):
     o = dict(raw)
     o["source"], o["source_name"] = source, source_name
     o["transport"] = o.get("transport") if o.get("transport") in ("flight", "car") else "flight"
+    if o["transport"] not in cfg["transports"]:
+        return None
     try:
         price = int(o.get("price_total"))
         nights = int(o.get("nights"))
@@ -46,13 +48,17 @@ def normalise(raw, source, source_name, cfg):
         return None
     if not (cfg["date_from"] <= d_from <= cfg["date_to"]):
         return None
-    if o["transport"] == "car" and o.get("pets_allowed") is False:
+    if o["transport"] == "car" and cfg["dogs"] and o.get("pets_allowed") is False:
+        return None
+    if o["transport"] == "flight" and o.get("departure") and \
+            o["departure"] not in cfg["departures"] + cfg["departures_secondary"]:
         return None
     if o.get("board") not in BOARD_SCORE:
         o["board"] = norm_board(o.get("board"))
     cc = o.get("country_code") or norm_country(o.get("country")) or norm_country(o.get("region"))
     o["country_code"] = cc
     o["country"] = COUNTRY_NAMES.get(cc, o.get("country"))
+    o["continent"] = continent(cc)
     o["price_total"], o["nights"], o["date_from"] = price, nights, d_from.isoformat()
     if o.get("date_to"):
         o["date_to"] = str(o["date_to"])[:10]
@@ -69,6 +75,8 @@ def normalise(raw, source, source_name, cfg):
     for k in ("stars", "rating", "region", "place", "departure", "discount_label", "discount_pct", "pets_allowed"):
         o.setdefault(k, None)
     o["price_exact"] = o.get("price_exact") is True
+    # price_total is for the configured party; when it is extrapolated from a per-person price, say how
+    o["price_note"] = None if o["price_exact"] else (o.get("price_note") or approx_note(cfg))
     o["id"] = offer_id(source, o["hotel"], o["date_from"], nights, o["transport"], o["departure"])
     return o
 
@@ -78,6 +86,8 @@ def score(o, cfg):
     p = o["price_total"]
     price_s = 1.0 if p <= budget * 0.7 else max(0.0, 1 - (p - budget * 0.7) / (cfg["price_cap"] - budget * 0.7))
     board_s = BOARD_SCORE.get(o["board"], 0.2)
+    if o["board"] in cfg["boards_preferred"]:
+        board_s = max(board_s, 0.95)
     country_s = cfg["countries"].get(o["country_code"], 0.5)
     disc_s = min((o.get("discount_pct") or 0) / 30, 1.0)
     q = o.get("rating")
@@ -91,13 +101,14 @@ def score(o, cfg):
 
 
 def refine_exact(offers, mods, cfg):
-    """Ask adapters with an exact_price(offer, cfg) hook for the real 1 adult + 2 children total of their best
-    AI/UAI offers (top mod.EXACT_MAX by score). Offers the site doesn't confirm keep the x3 approximation."""
+    """Ask adapters with an exact_price(offer, cfg) hook for the real total of the configured party for their best
+    offers with a preferred board (top mod.EXACT_MAX by score). Offers the site doesn't confirm keep the
+    per-person x party-size approximation."""
     for name, mod in mods.items():
         hook = getattr(mod, "exact_price", None)
         if not hook:
             continue
-        todo = [o for o in offers if o["source"] == name and not o["price_exact"] and o["board"] in EXACT_BOARDS]
+        todo = [o for o in offers if o["source"] == name and not o["price_exact"] and o["board"] in cfg["boards_preferred"]]
         todo = sorted(todo, key=lambda o: (-score(o, cfg), o["price_total"]))[:getattr(mod, "EXACT_MAX", 35)]
         done = failed = 0
         for o in todo:
@@ -114,12 +125,12 @@ def refine_exact(offers, mods, cfg):
                 continue
             o["price_approx"] = o["price_total"]
             o.update(res)
-            o["price_total"], o["price_exact"] = int(res["price_total"]), True
+            o["price_total"], o["price_exact"], o["price_note"] = int(res["price_total"]), True, None
             po = o.get("price_original")
             o["price_original"] = int(po) if isinstance(po, (int, float)) and po > o["price_total"] else None
             o["discount_pct"] = round(100 * (1 - o["price_total"] / o["price_original"])) if o["price_original"] else None
             done += 1
-        print(f"[{name}] exact 1+2 prices: {done}/{len(todo)} confirmed")
+        print(f"[{name}] exact {party_short(cfg)} prices: {done}/{len(todo)} confirmed")
     # an exact price above the cap no longer matches the criteria
     return [o for o in offers if o["price_total"] <= cfg["price_cap"]]
 
@@ -131,21 +142,25 @@ def load(path, default):
         return default
 
 
-def merge_history(offers, today):
+def merge_history(offers, today, cfg=CONFIG):
     hist = load(HISTORY, {})
-    prev = {o["id"]: o for o in load(OFFERS, {}).get("offers", [])}
+    party = party_signature(cfg)
+    prev_doc = load(OFFERS, {})
+    same_party = party_signature_of(prev_doc.get("criteria") or {}) in (None, party)
+    prev = {o["id"]: o for o in prev_doc.get("offers", [])} if same_party else {}
     prev_price = {}
     for o in offers:
         h = hist.setdefault(o["id"], {"first_seen": today, "points": []})
         exact = bool(o.get("price_exact"))
-        if bool(h.get("exact")) != exact:
-            # x3 approximation <-> exact party price is not a price change: start a new series
+        if bool(h.get("exact")) != exact or h.get("party", party) != party:
+            # approximation <-> exact party price, or another party in nastavenia.yml: not a price change,
+            # start a new series
             h["points"] = []
         else:
             p = prev.get(o["id"])
             if p and bool(p.get("price_exact")) == exact:
                 prev_price[o["id"]] = p["price_total"]
-        h["exact"] = exact
+        h["exact"], h["party"] = exact, party
         pts = [p for p in h["points"] if p[0] != today] + [[today, o["price_total"]]]
         h["points"], h["last_seen"] = pts[-HISTORY_POINTS:], today
         o["first_seen"], o["last_seen"] = h["first_seen"], today
@@ -154,6 +169,17 @@ def merge_history(offers, today):
         o["price_change"] = (o["price_total"] - before) if before is not None else None
     cutoff = date.fromisoformat(today).toordinal() - HISTORY_KEEP_DAYS
     return {k: v for k, v in hist.items() if date.fromisoformat(v.get("last_seen", today)).toordinal() >= cutoff}
+
+
+def party_signature(cfg):
+    return f"{cfg['adults']}|" + ",".join(str(a) for a in sorted(cfg["children_ages"]))
+
+
+def party_signature_of(criteria):
+    """Party of a previous offers.json, or None when it doesn't say."""
+    if "adults" not in criteria or "children_ages" not in criteria:
+        return None
+    return party_signature(criteria)
 
 
 def main(only=None):
@@ -183,6 +209,7 @@ def main(only=None):
             info["count"] = len({o["id"] for o in clean})
             info["status"] = "ok" if clean else "empty"
             print(f"[{name}] {len(raw)} raw, {len(clean)} kept")
+            log_drops(name, raw, cfg)
         except Exception as e:
             info["status"], info["error"] = "error", f"{type(e).__name__}: {str(e)[:200]}"
             traceback.print_exc()
@@ -197,7 +224,7 @@ def main(only=None):
     result = sorted(result, key=lambda o: (-score(o, cfg), o["price_total"]))
     for o in result:
         o["score"] = score(o, cfg)
-    hist = merge_history(result, today)
+    hist = merge_history(result, today, cfg)
 
     DATA.mkdir(parents=True, exist_ok=True)
     out = {
@@ -214,10 +241,42 @@ def main(only=None):
         # Every scraper failed this run: keep yesterday's offers on the page instead of blanking it.
         prev = load(OFFERS, {})
         out["offers"] = prev.get("offers", [])
+        for o in out["offers"]:  # older files predate these fields
+            o.setdefault("continent", continent(o.get("country_code")))
+            o.setdefault("price_note", None if o.get("price_exact") else approx_note(cfg))
         out["stale"] = True
     OFFERS.write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
     HISTORY.write_text(json.dumps(hist, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
-    print(f"wrote {len(out['offers'])} offers from {sum(s['status'] == 'ok' for s in sources)} sources")
+    print(f"wrote {len(out['offers'])} offers from {sum(s['status'] == 'ok' for s in sources)} sources "
+          f"(party {party_short(cfg)}, {party_size(cfg)} persons)")
+    summary(out["offers"])
+
+
+def log_drops(name, raw, cfg):
+    """Per-country raw offers vs. those above price_cap (why a destination may end up with no offers)."""
+    from collections import Counter
+    seen, over = Counter(), Counter()
+    for r in raw:
+        cc = r.get("country_code") or norm_country(r.get("country")) or "?"
+        seen[cc] += 1
+        try:
+            if int(r.get("price_total")) > cfg["price_cap"]:
+                over[cc] += 1
+        except (TypeError, ValueError):
+            pass
+    print(f"[{name}] raw by country (over price_cap): "
+          + ", ".join(f"{k} {v}" + (f" ({over[k]})" if over[k] else "") for k, v in seen.most_common()))
+
+
+def summary(offers):
+    """Counts by continent and by source x country for the job log."""
+    from collections import Counter
+    print("by continent: " + ", ".join(f"{k} {v}" for k, v in Counter(o["continent"] for o in offers).most_common()))
+    by_src = {}
+    for o in offers:
+        by_src.setdefault(o["source"], Counter())[o["country_code"] or "?"] += 1
+    for src, cnt in by_src.items():
+        print(f"  {src}: " + ", ".join(f"{k} {v}" for k, v in cnt.most_common()))
 
 
 if __name__ == "__main__":

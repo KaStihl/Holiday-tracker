@@ -23,7 +23,9 @@ def test_query_asks_for_the_real_party_and_criteria():
 def test_countries_keeps_preferred_ones_by_weight():
     got = dertour.countries(load("dertour_categories.json"), CONFIG)
     codes = [c[0] for c in got]
-    assert set(codes) == {"GR", "TR", "EG", "BG", "ES", "TN", "CY", "IT", "PT", "HR", "MT", "AL"}
+    europe = {"GR", "TR", "EG", "BG", "ES", "TN", "CY", "IT", "PT", "HR", "MT", "AL"}
+    far = {"AE", "MV", "MX", "LK", "CV", "DO", "TZ", "TH", "OM"}  # real destination ids from the categories call
+    assert set(codes) == europe | far
     assert codes[:4] == ["TR", "CY", "IT", "HR"]  # weight 1.0 first, bigger countries first
     tr = got[0]
     assert tr[1] == "Turecko" and tr[3] == 375 and tr[2].startswith("63260|")
@@ -81,3 +83,22 @@ def test_deeplinks_and_exim_redirect():
         assert d["url"].startswith(mod.HOME + mod.PATH + "?") and "ka1=10%7C12" in d["url"]
     assert eximtours.DEEPLINK_ONLY and eximtours.search(CONFIG) == []
     assert eximtours.deeplinks(CONFIG)[0]["url"].startswith("https://www.kartago.sk/")
+
+
+def test_long_haul_countries_get_their_first_page_within_budget(monkeypatch):
+    cats, tours = load("dertour_categories.json"), load("fischer_tours_turecko.json")
+    calls = []
+
+    def fake_get(url, params=None, headers=None, as_json=False, **kw):
+        calls.append(params)
+        return cats if "d" not in params else dict(tours, toursCount=500)  # always "more pages"
+
+    monkeypatch.setattr(dertour, "get", fake_get)
+    fischer.search(CONFIG)
+    asked = {c["d"] for c in calls[1:]}
+    assert len(calls) == 1 + dertour.MAX_CALLS
+    for dest in ("220441", "64077", "63862|63863|63864|63865|63866"):  # Maldivy, Srí Lanka, Dominikánska rep.
+        assert dest in asked
+    # round 1 = every country once, before any second page
+    first = [c["d"] for c in calls[1:22]]
+    assert len(set(first)) == 21 and all("pstg" not in c for c in calls[1:22])

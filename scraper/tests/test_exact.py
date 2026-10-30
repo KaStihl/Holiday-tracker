@@ -1,4 +1,4 @@
-"""Exact 1 adult + 2 children prices: Čedok detail page parsing, run.py shortlist, history and digest handling."""
+"""Exact prices for the configured party (1 adult + 2 children in the pinned test settings): Čedok detail page parsing, run.py shortlist, history and digest handling."""
 
 import json
 from pathlib import Path
@@ -22,8 +22,8 @@ def test_occupancy_url_keeps_term_and_asks_for_the_party():
     assert "id=CgVDZWRvaxIEVklUQxoDQ1pLIgdIRVIyRlJBKAQ6BEcyMDBC%253D" in u  # double-encoded term id untouched
     q = parse_qsl(urlsplit(u).query)
     assert [kv for kv in q if kv[0].startswith("participants")] == [
-        ("participants[0][adults]", "1"), ("participants[0][children][0]", "15.01.2017"),
-        ("participants[0][children][1]", "15.01.2015")]
+        ("participants[0][adults]", "1"), ("participants[0][children][0]", "30.06.2017"),
+        ("participants[0][children][1]", "30.06.2015")]
     assert ("airports", "BTS,VIE") in q
 
 
@@ -50,7 +50,7 @@ def test_exact_price_hook(monkeypatch):
     monkeypatch.setattr(cedok, "get", lambda url: calls.append(url) or html)
     res = cedok.exact_price(OFFER, CONFIG)
     assert res == {"price_total": 1920, "price_original": None, "url": calls[0], "discount_label": "First Minute"}
-    assert "participants%5B0%5D%5Bchildren%5D%5B1%5D=15.01.2015" in calls[0]
+    assert "participants%5B0%5D%5Bchildren%5D%5B1%5D=30.06.2015" in calls[0]
     monkeypatch.setattr(cedok, "get", lambda url: "<html></html>")
     assert cedok.exact_price(OFFER, CONFIG) is None
 
@@ -75,12 +75,13 @@ def test_refine_exact_shortlist(monkeypatch):
         return {"price_total": 4600 if o["hotel"] == "H3" else o["price_total"] - 300, "discount_label": None}
 
     mod = SimpleNamespace(exact_price=hook, EXACT_MAX=4)
-    out = run.refine_exact(offers, {"cedok": mod, "satur": SimpleNamespace()}, CONFIG)
+    out = run.refine_exact(offers, {"cedok": mod, "satur": SimpleNamespace()}, dict(CONFIG, price_cap=4500))
     assert asked == ["H0", "H1", "H2", "H3"]  # AI/UAI only, best score first, capped at EXACT_MAX
     by = {o["hotel"]: o for o in out}
     assert "H3" not in by  # exact price above price_cap no longer matches
     assert (by["H0"]["price_total"], by["H0"]["price_approx"], by["H0"]["price_exact"]) == (1700, 2000, True)
-    assert by["H0"]["discount_label"] is None
+    assert by["H0"]["discount_label"] is None and by["H0"]["price_note"] is None
+    assert by["H1"]["price_note"] == "orientačne: cena za osobu pri 2 dospelých × 3"
     assert not by["H1"]["price_exact"] and by["H1"]["price_total"] == 2010
     assert not by["H4"]["price_exact"] and not by["H9"]["price_exact"] and not by["H8"]["price_exact"]
 
