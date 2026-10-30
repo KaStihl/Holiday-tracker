@@ -102,3 +102,32 @@ def test_long_haul_countries_get_their_first_page_within_budget(monkeypatch):
     # round 1 = every country once, before any second page
     first = [c["d"] for c in calls[1:22]]
     assert len(set(first)) == 21 and all("pstg" not in c for c in calls[1:22])
+
+
+def test_long_haul_tours_exact_party_price():
+    # trimmed real tours (job log 2026-10-30), priced by the API for 1 adult + children 10 and 12
+    tours = load("kartago_tours_far.json")["tours"]
+    got = [run.normalise(dertour.to_offer(t, kartago.HOME, CONFIG), "kartago", "Kartago Tours", CONFIG) for t in tours]
+    mv, ae, do, lk = got
+    assert (mv["hotel"], mv["country_code"], mv["continent"], mv["price_total"]) == (
+        "Adaaran Club Rannalhi", "MV", "Indický oceán", 5332)
+    assert (ae["country_code"], ae["continent"], ae["price_total"]) == ("AE", "Blízky východ", 2877)
+    assert do is None  # the API widened the window: departure 30 June is before date_from
+    raw_do = dertour.to_offer(tours[2], kartago.HOME, CONFIG)
+    k = run.normalise(raw_do, "kartago", "Kartago Tours", dict(CONFIG, date_from=__import__("datetime").date(2027, 6, 30)))
+    assert (k["country_code"], k["continent"], k["price_total"]) == ("DO", "Karibik a Amerika", 4578)
+    assert (lk["country_code"], lk["continent"], lk["region"]) == ("LK", "Ázia", "Srí Lanka")
+    assert all(o["price_exact"] and o["price_note"] is None and o["departure"] == "VIE" for o in (mv, ae, lk))
+
+
+def test_country_sold_only_by_the_other_brand_is_not_paged(monkeypatch):
+    cats, far = load("dertour_categories.json"), load("kartago_tours_far.json")  # all KARTAGO products
+    calls = []
+
+    def fake_get(url, params=None, headers=None, as_json=False, **kw):
+        calls.append(params)
+        return cats if "d" not in params else dict(far, toursCount=500)
+
+    monkeypatch.setattr(dertour, "get", fake_get)
+    assert fischer.search(CONFIG) == []
+    assert len(calls) == 1 + 21  # one page per country, then nothing more

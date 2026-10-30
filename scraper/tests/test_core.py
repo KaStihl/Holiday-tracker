@@ -26,6 +26,8 @@ def test_norm_country():
     assert norm_country("Kanárske ostrovy - Tenerife") == "ES"
     assert norm_country("Chorvátsko") == "HR"
     assert norm_country("Neznámo") is None
+    assert norm_country("Poľsko") == "PL" and norm_country("Slovinsko") == "SI"  # not "slovensko"
+    assert norm_country("Slovensko") == "SK" and norm_country("Maďarsko") == "HU"
 
 
 def _raw(**kw):

@@ -17,7 +17,8 @@ SETTINGS = Path(os.environ.get("DOVOLENKA_SETTINGS") or ROOT / "nastavenia.yml")
 COUNTRY_NAMES = {
     "HR": "Chorvátsko", "TR": "Turecko", "CY": "Cyprus", "IT": "Taliansko", "GR": "Grécko",
     "ES": "Španielsko", "MT": "Malta", "PT": "Portugalsko", "ME": "Čierna Hora", "AL": "Albánsko",
-    "BG": "Bulharsko", "SI": "Slovinsko", "FR": "Francúzsko",
+    "BG": "Bulharsko", "SI": "Slovinsko", "FR": "Francúzsko", "PL": "Poľsko", "SK": "Slovensko", "CZ": "Česko",
+    "AT": "Rakúsko", "HU": "Maďarsko", "DE": "Nemecko", "RO": "Rumunsko",
     "EG": "Egypt", "TN": "Tunisko", "MA": "Maroko", "CV": "Kapverdy", "TZ": "Zanzibar (Tanzánia)", "KE": "Keňa",
     "AE": "Dubaj (SAE)", "OM": "Omán", "JO": "Jordánsko",
     "MV": "Maldivy", "MU": "Maurícius", "SC": "Seychely",
@@ -28,7 +29,8 @@ COUNTRY_NAMES = {
 CONTINENTS = ("Európa", "Afrika", "Blízky východ", "Ázia", "Indický oceán", "Karibik a Amerika")
 # country code -> continent (the frontend groups and filters by these exact strings)
 CONTINENT_OF = {
-    **{c: "Európa" for c in ("HR", "TR", "CY", "IT", "GR", "ES", "MT", "PT", "ME", "AL", "BG", "SI", "FR")},
+    **{c: "Európa" for c in ("HR", "TR", "CY", "IT", "GR", "ES", "MT", "PT", "ME", "AL", "BG", "SI", "FR",
+                                     "PL", "SK", "CZ", "AT", "HU", "DE", "RO")},
     **{c: "Afrika" for c in ("EG", "TN", "MA", "CV", "TZ", "KE")},
     **{c: "Blízky východ" for c in ("AE", "OM", "JO")},
     **{c: "Indický oceán" for c in ("MV", "MU", "SC")},

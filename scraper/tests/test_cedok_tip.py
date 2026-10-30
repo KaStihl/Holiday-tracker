@@ -110,3 +110,28 @@ def test_tip_empty_response():
 def test_tip_real_empty_summer_response():
     resp = tiptravel.parse_response((FX / "tiptravel_search_summer_empty.js").read_text())
     assert resp["itemsCount"] == 0 and resp["items"] == []
+
+
+def test_cedok_long_haul_rates():
+    # trimmed real rates (job log 2026-10-30): Maurícius (VIE) and SAE, priced for 2 adults -> per person x 3
+    rates, count, links = cedok.parse_page((FX / "cedok_far.html").read_text())
+    mu, ae = [cedok.to_offer(r, links, CONFIG) for r in rates]
+    assert (mu["hotel"], mu["country_code"], mu["departure"], mu["board"]) == (
+        "Hotel Hibiscus Beach Resort & Spa", "MU", "VIE", "HB")
+    assert mu["price_total"] == round(3251 / 2 * 3) and mu["price_note"] == "orientačne: cena za osobu pri 2 dospelých × 3"
+    k = run.normalise(mu, "cedok", "Čedok", CONFIG)
+    assert k["continent"] == "Indický oceán" and k["country"] == "Maurícius" and not k["price_exact"]
+    assert ae["country_code"] == "AE" and run.normalise(ae, "cedok", "Čedok", CONFIG)["continent"] == "Blízky východ"
+
+
+def test_cedok_unknown_slug_tries_next_candidate(monkeypatch):
+    calls = []
+    far = (FX / "cedok_far.html").read_text()
+
+    def fake_get(url, params=None):
+        calls.append(url)
+        return "<html></html>" if "/maledivy/" in url else far  # 0 rates for the first candidate
+
+    monkeypatch.setattr(cedok, "get", fake_get)
+    cedok.search(dict(CONFIG, countries={"MV": 0.6}))
+    assert [u.split("/")[-2] for u in calls] == ["maledivy", "maldivy"]

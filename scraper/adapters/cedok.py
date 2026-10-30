@@ -33,14 +33,18 @@ HOME = "https://www.cedok.sk"
 DESTINATIONS = {"turecko": "TR", "grecko": "GR", "cyprus": "CY", "spanielsko": "ES", "kanarske-ostrovy": "ES",
                 "taliansko": "IT", "malta": "MT", "chorvatsko": "HR", "egypt": "EG"}
 # Long-haul / other non-European countries: one wide-length page (25 cheapest rates) each, to stay polite.
-FAR = {"tunisko": "TN", "maroko": "MA", "spojene-arabske-emiraty": "AE", "oman": "OM", "jordansko": "JO",
-       "maledivy": "MV", "mauricius": "MU", "seychely": "SC", "sri-lanka": "LK", "thajsko": "TH",
-       "indonezia": "ID", "vietnam": "VN", "tanzania": "TZ", "kena": "KE", "kapverdske-ostrovy": "CV",
-       "dominikanska-republika": "DO", "mexiko": "MX", "kuba": "CU"}
+# code -> slug candidates; an unknown slug answers an empty result (0 rates), then the next one is tried.
+# Confirmed 2026-10-30 (rates found): tunisko, maroko, spojene-arabske-emiraty, mauricius, seychely, thajsko,
+# indonezia, vietnam, dominikanska-republika, mexiko (= the geographicalIdentifiers country ids of the rates).
+FAR = {"TN": ("tunisko",), "MA": ("maroko",), "AE": ("spojene-arabske-emiraty",), "OM": ("oman",),
+       "JO": ("jordansko",), "MV": ("maledivy", "maldivy"), "MU": ("mauricius",), "SC": ("seychely",),
+       "LK": ("sri-lanka", "srilanka"), "TH": ("thajsko",), "ID": ("indonezia",), "VN": ("vietnam",),
+       "TZ": ("tanzania", "zanzibar"), "KE": ("kena", "kenya"), "CV": ("kapverdske-ostrovy", "kapverdy"),
+       "DO": ("dominikanska-republika",), "MX": ("mexiko",), "CU": ("kuba",)}
 AIRPORTS = {"bratislava": "BTS", "vieden": "VIE", "viede": "VIE", "kosice": "KSC", "budapest": "BUD"}
 # (durationMin, durationMax) in days and max pages (25 rates each) per destination. One wide 8–15 query only ever
 # showed the cheapest stay, 7 nights; separate ranges give real 7, 10–11 and 14 night terms.
-# Budget (checked 2026-10-30): ≤ 9 x (2+1+1) + 18 FAR + EXACT_MAX ≈ 84 requests per run.
+# Budget (checked 2026-10-30): ≤ 9 x (2+1+1) + 18 FAR (+ ≤ 6 slug retries) + EXACT_MAX ≈ 90 requests per run.
 DURATIONS = [((8, 10), 2), ((11, 12), 1), ((15, 15), 1)]
 ADULTS = 2  # see module docstring
 EXACT_MAX = 30  # detail pages (~1 MB each) fetched per run for exact prices of the configured party
@@ -225,40 +229,47 @@ def exact_price(offer, cfg):
 
 
 def plan(cfg):
-    """[(slug, (durationMin, durationMax), max pages)] for the countries in nastavenia.yml."""
+    """[(slug candidates, (durationMin, durationMax), max pages)] for the countries in nastavenia.yml."""
     if "flight" not in cfg["transports"]:
         return []
-    out = [(slug, days, pages) for days, pages in DURATIONS
+    out = [((slug,), days, pages) for days, pages in DURATIONS
            for slug, code in DESTINATIONS.items() if code in cfg["countries"]]
     wide = (cfg["nights_min"] + 1, cfg["nights_max"] + 1)
-    return out + [(slug, wide, 1) for slug, code in FAR.items() if code in cfg["countries"]]
+    return out + [(slugs, wide, 1) for code, slugs in FAR.items() if code in cfg["countries"]]
+
+
+def _search_slug(cfg, slug, days, pages, far, offers, errors):
+    """Pages of one destination slug into offers; False when the site had no rate at all for it."""
+    for page in range(1, pages + 1):
+        try:
+            html = get(f"{HOME}/vysledky-vyhladavania/dovolenky/{slug}/", params=_query(cfg, page, days=days))
+        except Exception as e:
+            print(f"[cedok] {slug} {days} p{page}: {type(e).__name__} {str(e)[:120]}")
+            errors.append(f"{type(e).__name__}: {str(e)[:120]}")
+            return True
+        rates, count, links = parse_page(html)
+        got = [o for o in (to_offer(r, links, cfg) for r in rates) if o]
+        nights = sorted({o["nights"] for o in got})
+        print(f"[cedok] {slug} {days} p{page}: {len(rates)}/{count} rates, {len(got)} offers, nights={nights}"
+              + (f", countries={sorted({o['country_code'] or '?' for o in got})}, "
+                 f"prices={sorted(o['price_total'] for o in got)[:3]}" if far else ""))
+        if far and page == 1:
+            ids = sorted(set(re.findall(r'"(?:id|value|slug)":"([a-z0-9-]+)"[^{}]{0,160}?"(?:type|level)":"country"', html)))
+            diag("cedok-country-ids", " ".join(ids) or "-")  # TEMP: which country slugs the page knows
+        offers += got
+        if page == 1 and not rates:
+            return False
+        if page * 25 >= count or not rates:
+            break
+    return True
 
 
 def search(cfg):
     offers, errors = [], []
-    for slug, days, pages in plan(cfg):
-        for page in range(1, pages + 1):
-            try:
-                html = get(f"{HOME}/vysledky-vyhladavania/dovolenky/{slug}/", params=_query(cfg, page, days=days))
-            except Exception as e:
-                print(f"[cedok] {slug} {days} p{page}: {type(e).__name__} {str(e)[:120]}")
-                errors.append(f"{type(e).__name__}: {str(e)[:120]}")
-                break
-            rates, count, links = parse_page(html)
-            got = [o for o in (to_offer(r, links, cfg) for r in rates) if o]
-            nights = sorted({o["nights"] for o in got})
-            print(f"[cedok] {slug} {days} p{page}: {len(rates)}/{count} rates, {len(got)} offers, nights={nights}"
-                  + (f", countries={sorted({o['country_code'] or '?' for o in got})}, "
-                     f"prices={sorted(o['price_total'] for o in got)[:3]}" if slug in FAR else ""))
-            if slug in FAR and rates:
-                r0 = json.loads(json.dumps(rates[0]))
-                for seg in r0.get("segments", []):
-                    ph = (seg.get("content") or {}).get("photos")
-                    if isinstance(ph, dict):
-                        ph["gallery"] = (ph.get("gallery") or [])[:1]
-                diag(f"cedok-{slug}", {"rate": r0, "link": links.get(r0.get("supplierObjectId")), "count": count})
-            offers += got
-            if page * 25 >= count or not rates:
+    far = {s for slugs in FAR.values() for s in slugs}
+    for slugs, days, pages in plan(cfg):
+        for slug in slugs:
+            if _search_slug(cfg, slug, days, pages, slug in far, offers, errors):
                 break
     if errors and not offers:
         raise RuntimeError(f"all {len(errors)} cedok.sk requests failed, first: {errors[0]}")

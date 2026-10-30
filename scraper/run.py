@@ -9,6 +9,7 @@ import json
 import sys
 import time
 import traceback
+from concurrent.futures import ThreadPoolExecutor
 from datetime import date, datetime, timezone
 from pathlib import Path
 
@@ -182,9 +183,21 @@ def party_signature_of(criteria):
     return party_signature(criteria)
 
 
+def _timed_search(mod, cfg):
+    """(raw offers, error text or None, seconds). Runs in a worker thread: one per agency, so every agency still
+    gets one request at a time (polite) while the slow ones no longer add up."""
+    t0 = time.time()
+    try:
+        return mod.search(cfg), None, time.time() - t0
+    except Exception as e:
+        traceback.print_exc()
+        return None, f"{type(e).__name__}: {str(e)[:200]}", time.time() - t0
+
+
 def main(only=None):
     cfg = CONFIG
     sources, deeplinks, offers, mods = [], [], {}, {}
+    todo = []
     for name in ADAPTERS:
         if only and name not in only:
             continue
@@ -198,10 +211,19 @@ def main(only=None):
             info["status"] = "disabled"
             sources.append(info)
             continue
-        t0 = time.time()
         mods[name] = mod
-        try:
-            raw = mod.search(cfg)
+        todo.append((name, mod, info))
+        sources.append(info)
+
+    t0 = time.time()
+    with ThreadPoolExecutor(max_workers=max(len(todo), 1)) as pool:
+        futures = [(name, mod, info, pool.submit(_timed_search, mod, cfg)) for name, mod, info in todo]
+        for name, mod, info, fut in futures:  # results in ADAPTERS order -> deterministic dedup
+            raw, err, secs = fut.result()
+            info["duration_s"] = round(secs, 1)
+            if err:
+                info["status"], info["error"] = "error", err
+                continue
             clean = [n for n in (normalise(r, name, mod.NAME, cfg) for r in raw) if n]
             for o in clean:
                 if o["id"] not in offers or o["price_total"] < offers[o["id"]]["price_total"]:
@@ -210,11 +232,7 @@ def main(only=None):
             info["status"] = "ok" if clean else "empty"
             print(f"[{name}] {len(raw)} raw, {len(clean)} kept")
             log_drops(name, raw, cfg)
-        except Exception as e:
-            info["status"], info["error"] = "error", f"{type(e).__name__}: {str(e)[:200]}"
-            traceback.print_exc()
-        info["duration_s"] = round(time.time() - t0, 1)
-        sources.append(info)
+    print(f"scraping took {time.time() - t0:.0f} s")
 
     today = datetime.now(timezone.utc).date().isoformat()
     t0 = time.time()

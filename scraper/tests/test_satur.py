@@ -81,8 +81,10 @@ def test_search_uses_summer_filter(monkeypatch):
     monkeypatch.setattr(satur, "get", lambda url, params=None: calls.append((url, params)) or html)
     offers = satur.search(CONFIG)
     n = sum(t in budget for _, budget in satur.STAYS for _, t, _, _ in satur.PAGES)  # 3 cards < 20: no page 2
-    far = len(satur.FAR)  # one page per long-haul country, every allowed length at once
-    assert len(calls) == n + far and len(offers) == 3 * (n + far)
+    # one page per long-haul country (every allowed length at once); this fixture is Croatian, i.e. what the site
+    # shows for an unknown slug, so those pages are discarded and every slug candidate is tried
+    far = sum(len(paths) for _, paths in satur.far_pages(CONFIG))
+    assert len(calls) == n + far and len(offers) == 3 * n
     assert len(calls) <= 80  # polite
     assert calls[0][1] == {"termin": "01.07.2027-31.08.2027", "dlzka-pobytu": 7}
     assert {c[1]["dlzka-pobytu"] for c in calls} == {7, "10,11", 14, "7,8,9,10,11,12,13,14"}
@@ -141,3 +143,27 @@ def test_search_follows_settings(monkeypatch):
     calls.clear()
     satur.search(dict(CONFIG, transports=["car"], dogs=0))
     assert calls and not [u for u in calls if "so-psom" in u] and not [u for u in calls if "letecky" in u]
+
+
+def test_long_haul_cards():
+    # trimmed real cards (job log 2026-10-30): Maldivy and Zanzibar use a plain "za osobu" footer and only an
+    # airport tag ("Viedeň"); Omán ignored ?termin (a December term) and is dropped by the date rule
+    cards = satur.parse_cards((FX / "satur_far.html").read_text())
+    offers = [satur.to_offer(c, "flight", None, 3) for c in cards]
+    mv, om, tz = offers
+    assert (mv["hotel"], mv["country_code"], mv["departure"], mv["board"], mv["nights"]) == (
+        "Bandos Maldives", "MV", "VIE", "HB", 7)
+    assert (mv["price_total"], mv["price_original"]) == (1926 * 3, 2752 * 3)
+    assert (tz["country_code"], tz["departure"], tz["date_from"]) == ("TZ", "VIE", "2027-07-06")
+    kept = [run.normalise(o, "satur", "Satur.sk", CONFIG) for o in offers]
+    assert kept[0]["continent"] == "Indický oceán" and kept[1] is None and kept[2] is None  # 6069 € > cap
+    assert run.normalise(tz, "satur", "Satur.sk", dict(CONFIG, price_cap=6500))["continent"] == "Afrika"
+
+
+def test_long_haul_slug_found(monkeypatch):
+    html = (FX / "satur_far.html").read_text()
+    calls = []
+    monkeypatch.setattr(satur, "get", lambda url, params=None: calls.append(url) or html)
+    offers = satur.search(dict(CONFIG, transports=["flight"], countries={"MV": 0.6, "CU": 0.5}))
+    assert satur.HOME + "/dovolenka/maldivy/letecky" in calls
+    assert "Bandos Maldives" in {o["hotel"] for o in offers}

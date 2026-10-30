@@ -9,7 +9,7 @@ from datetime import date
 
 from bs4 import BeautifulSoup
 
-from common import diag, get, norm_board, norm_country, parse_price
+from common import get, norm_board, norm_country, parse_price, strip_accents
 from config import party_size
 
 NAME = "Satur.sk"
@@ -33,14 +33,17 @@ PAGE_COUNTRY = {"turecko": "TR", "grecko": "GR", "cyprus": "CY", "taliansko": "I
 
 # Long-haul / non-European countries: one listing page per country (any departure airport and board, every
 # allowed length in one ?dlzka-pobytu list), departures outside nastavenia.yml are dropped by run.py.
-# Asked only for countries listed in nastavenia.yml destinations. A slug Satur doesn't use answers 404 (logged).
+# Asked only for countries listed in nastavenia.yml destinations. An unknown slug does not 404: the site falls
+# back to the generic listing (checked 2026-10-30: "kapverdske-ostrovy" and "kuba" showed Greek hotels), so a
+# page with no card of the asked country is discarded and the next slug candidate (if any) is tried.
 FAR = {"EG": "egypt", "TN": "tunisko", "MA": "maroko", "AE": "spojene-arabske-emiraty", "OM": "oman",
        "JO": "jordansko", "MV": "maldivy", "MU": "mauricius", "SC": "seychely", "LK": "sri-lanka", "TH": "thajsko",
-       "ID": "indonezia", "VN": "vietnam", "TZ": "tanzania", "KE": "kena", "CV": "kapverdske-ostrovy",
-       "DO": "dominikanska-republika", "MX": "mexiko", "CU": "kuba"}
+       "ID": "indonezia", "VN": "vietnam", "TZ": ("tanzania", "zanzibar"), "KE": "kena",
+       "CV": ("kapverdy", "kapverske-ostrovy"), "DO": "dominikanska-republika", "MX": "mexiko", "CU": ("kuba",)}
 
 DATES_RE = re.compile(r"(\d{1,2})\.(\d{1,2})\.(\d{4})?\s*-\s*(\d{1,2})\.(\d{1,2})\.(\d{4})")
 AIRPORTS = {"bratislava": "BTS", "viede": "VIE", "vieden": "VIE", "kosice": "KSC", "budapest": "BUD"}
+AIRPORT_NAMES = {"bratislava", "vieden", "kosice", "budapest", "praha", "brno"}
 
 
 def deeplinks(cfg):
@@ -63,6 +66,11 @@ def _text(el):
 def _price_block(card, cls):
     """(current, original, nights) from the .collapse-price-person / -group footer block."""
     box = card.select_one(f"footer .{cls}")
+    if not box and cls == "collapse-price-person":
+        # long-haul cards (checked 2026-10-30: Maldivy, SAE, Thajsko, Mexiko…) have one plain footer price
+        # "1 926 € <s>2 752 €</s> Konečná cena · 7 nocí · za osobu" without the person/group toggle
+        foot = card.select_one("footer")
+        box = foot if foot and "za osobu" in _text(foot) else None
     if not box:
         return None, None, None
     cur = box.select_one(".fw-bold")
@@ -84,7 +92,9 @@ def parse_cards(html):
         stars = re.search(r"([\d.]+)", stars_el["aria-label"]) if stars_el else None
         rating = next((float(t) for t in tags if re.fullmatch(r"\d(\.\d)?", t)), None)  # 0–5 scale
         dates = next((DATES_RE.search(t) for t in tags if DATES_RE.search(t)), None)
-        transport = next((t for t in tags if re.search(r"doprava|let\b|letecky|Priamy", t, re.I)), "")
+        # "Bratislava - Priamy let", "Vlastná doprava"; long-haul cards only show the airport ("Viedeň")
+        transport = next((t for t in tags if re.search(r"doprava|let\b|letecky|Priamy", t, re.I)
+                          or strip_accents(t).lower().strip() in AIRPORT_NAMES), "")
         board = next((t for t in tags if norm_board(t)), None)
         pp, pp_orig, nights = _price_block(art, "collapse-price-person")
         pg, pg_orig, _ = _price_block(art, "collapse-price-group")
@@ -168,9 +178,11 @@ def pages_for(cfg):
 
 
 def far_pages(cfg):
+    """[(code, [candidate paths])] for the long-haul countries in nastavenia.yml."""
     if "flight" not in cfg["transports"]:
         return []
-    return [(code, f"/dovolenka/{slug}/letecky") for code, slug in FAR.items() if code in cfg["countries"]]
+    return [(code, [f"/dovolenka/{s}/letecky" for s in ((slugs,) if isinstance(slugs, str) else slugs)])
+            for code, slugs in FAR.items() if code in cfg["countries"]]
 
 
 def search(cfg):
@@ -198,22 +210,24 @@ def search(cfg):
                 if len(cards) < 20 or not wanted & set(nights):
                     break
     all_nights = ",".join(str(n) for n in range(cfg["nights_min"], cfg["nights_max"] + 1))
-    for code, path in far_pages(cfg):
-        try:
-            html = get(HOME + path, params={"termin": termin, "dlzka-pobytu": all_nights})
-            cards = parse_cards(html)
-            art = BeautifulSoup(html, "lxml").select_one("ul[data-category-target=productsListing] article")
-            if art:
-                diag(f"satur-{code}", re.sub(r"\s+", " ", str(art)))
-        except Exception as e:
-            print(f"[satur] {path}: {type(e).__name__} {str(e)[:120]}")
-            errors.append(f"{type(e).__name__}: {str(e)[:120]}")
-            continue
-        got = [o for o in (to_offer(c, "flight", None, party) for c in cards) if o]
-        print(f"[satur] {code} {path}: {len(cards)} cards, {len(got)} offers, nights={sorted({o['nights'] for o in got})}, "
-              f"deps={sorted({o['departure'] or '?' for o in got})}, "
-              f"prices={sorted(o['price_total'] for o in got)[:3]}")
-        offers += got
+    for code, paths in far_pages(cfg):
+        for path in paths:
+            try:
+                cards = parse_cards(get(HOME + path, params={"termin": termin, "dlzka-pobytu": all_nights}))
+            except Exception as e:
+                print(f"[satur] {path}: {type(e).__name__} {str(e)[:120]}")
+                errors.append(f"{type(e).__name__}: {str(e)[:120]}")
+                continue
+            if cards and not any(norm_country(c["country"]) == code for c in cards):
+                print(f"[satur] {code} {path}: slug not known to the site (generic listing, "
+                      f"{cards[0]['country']} …), {len(cards)} cards discarded")
+                continue
+            got = [o for o in (to_offer(c, "flight", None, party) for c in cards) if o]
+            print(f"[satur] {code} {path}: {len(cards)} cards, {len(got)} offers, nights={sorted({o['nights'] for o in got})}, "
+                  f"deps={sorted({o['departure'] or '?' for o in got})}, "
+                  f"prices={sorted(o['price_total'] for o in got)[:3]}")
+            offers += got
+            break
     if errors and not offers:
         raise RuntimeError(f"all {len(errors)} satur.sk listing requests failed, first: {errors[0]}")
     return offers

@@ -3,6 +3,7 @@
 import hashlib
 import os
 import re
+import threading
 import time
 import unicodedata
 from pathlib import Path
@@ -15,19 +16,19 @@ UA = (
     "Chrome/126.0 Safari/537.36 dovolenka-tracker/1.0 (+https://github.com/KaStihl/Holiday-tracker)"
 )
 
-_session = None
+_local = threading.local()  # run.py scrapes the agencies in parallel threads (each agency itself sequentially)
 _robots = {}
 
 
 def session():
-    global _session
-    if _session is None:
-        _session = requests.Session()
-        _session.headers.update({
+    s = getattr(_local, "session", None)
+    if s is None:
+        s = _local.session = requests.Session()
+        s.headers.update({
             "User-Agent": UA,
             "Accept-Language": "sk-SK,sk;q=0.9,cs;q=0.8,en;q=0.7",
         })
-    return _session
+    return s
 
 
 DUMP_DIR = Path(__file__).resolve().parent / "debug"
@@ -203,6 +204,13 @@ _COUNTRIES = {
     "SI": ["slovinsko", "slovenia"],
     "FR": ["francuzsko", "francie", "france", "korzika"],
     "MA": ["maroko", "morocco"],
+    "PL": ["polsko", "poland", "polska"],
+    "SK": ["slovensko", "slovakia"],
+    "CZ": ["cesko", "ceska republika", "czech"],
+    "AT": ["rakusko", "austria", "osterreich"],
+    "HU": ["madarsko", "hungary", "balaton"],
+    "DE": ["nemecko", "germany", "deutschland"],
+    "RO": ["rumunsko", "romania"],
     "AE": ["spojene arabske emiraty", "arabske emiraty", "emiraty", "united arab emirates", "sae\\b", "uae\\b",
            "dubaj", "dubai", "abu dhabi", "ras al khaimah", "fujairah", "sharjah"],
     "OM": ["oman\\b", "omanu", "omansky", "salalah", "muscat", "maskat"],

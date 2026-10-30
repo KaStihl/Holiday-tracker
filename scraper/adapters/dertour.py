@@ -22,11 +22,10 @@ Kartago and Fischer search one shared inventory (both sites list ATCOM_Kartago a
 products at the same prices), so each adapter keeps only its own brand's products to avoid duplicates.
 """
 
-import json
 import math
 from urllib.parse import urlencode
 
-from common import diag, get, norm_board, norm_country
+from common import get, norm_board, norm_country
 from config import approx_label, party_label, party_size, period_label
 
 API = "/api/searchapi/getsearchresult"
@@ -38,7 +37,6 @@ MAX_CALLS = 40         # tour pages per source and run (+1 categories call)
 # second pages, then the 10–14 pass), so with ~20 countries the cap trims the extra pages of the big
 # European countries, never a whole long-haul country.
 PASSES = [((7, 14), 2), ((10, 14), 1)]
-FAR_DIAG = {"AE", "OM", "JO", "MV", "MU", "SC", "LK", "TH", "ID", "VN", "TZ", "KE", "CV", "DO", "MX", "CU"}  # TEMP
 FISCHER_SOURCE = 256   # tour "dataSource" of FISCHER products (brand ATCOM_Fischer)
 
 
@@ -158,11 +156,12 @@ def search(tag, home, cfg, fischer):
         print(f"[{tag}] not on sale for these criteria: {', '.join(missing)}")
     offers, calls, errors, other = [], 0, [], 0
     done = set()  # (nights, code): pass finished (last page reached or failed)
+    foreign = set()  # countries whose first page had no own-brand product: the other brand sells them, skip
     for nights, (code, name, dest, count), page in plan(todo, cfg):
         if calls >= MAX_CALLS:
             print(f"[{tag}] call budget {MAX_CALLS} reached")
             break
-        if (nights, code) in done:
+        if (nights, code) in done or code in foreign:
             continue
         calls += 1
         try:
@@ -183,16 +182,13 @@ def search(tag, home, cfg, fischer):
         print(f"[{tag}] {name} {nights[0]}-{nights[1]}n p{page + 1}: {len(tours)}/{data.get('toursCount')} tours, "
               f"{len(got)} own-brand offers ({exact} exact), nights={sorted({o['nights'] for o in got})}, "
               f"price {prices[0] if prices else '-'}–{prices[-1] if prices else '-'}")
-        if code in FAR_DIAG and own:
-            t = json.loads(json.dumps(own[0]))
-            h = t.get("hotel") or {}
-            t["hotel"] = {k: h.get(k) for k in ("name", "starsCount", "trustYou", "breadcrumbs", "countryId")}
-            t["hotel"]["images"] = (h.get("images") or [])[:1]
-            diag(f"{tag}-{code}", {k: t.get(k) for k in ("tour", "hotel", "detailUrl", "dataSource")})
         offers += got
+        if not own and tours and not page:
+            foreign.add(code)
         if len(tours) < PAGE or (page + 1) * PAGE >= (data.get("toursCount") or 0):
             done.add((nights, code))
-    print(f"[{tag}] {calls + 1} API calls, {len(offers)} offers, {other} other-brand tours skipped")
+    print(f"[{tag}] {calls + 1} API calls, {len(offers)} offers, {other} other-brand tours skipped"
+          + (f", other brand only: {', '.join(sorted(foreign))}" if foreign else ""))
     if errors and not offers:
         raise RuntimeError(f"all {len(errors)} {tag} API requests failed, first: {errors[0]}")
     return offers
