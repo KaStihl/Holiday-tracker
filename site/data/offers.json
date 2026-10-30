@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-30T06:47:47Z",
+ "generated_at": "2026-10-30T07:00:20Z",
  "criteria": {
   "adults": 1,
   "children_ages": [
@@ -275,7 +275,7 @@
    "status": "ok",
    "count": 335,
    "error": null,
-   "duration_s": 385.7
+   "duration_s": 325.8
   },
   {
    "id": "cedok",
@@ -284,7 +284,7 @@
    "status": "ok",
    "count": 726,
    "error": null,
-   "duration_s": 135.4
+   "duration_s": 121.8
   },
   {
    "id": "tiptravel",
@@ -293,7 +293,7 @@
    "status": "empty",
    "count": 0,
    "error": null,
-   "duration_s": 4.4
+   "duration_s": 3.9
   },
   {
    "id": "kartago",
@@ -302,7 +302,7 @@
    "status": "ok",
    "count": 774,
    "error": null,
-   "duration_s": 141.9
+   "duration_s": 102.7
   },
   {
    "id": "fischer",
@@ -311,7 +311,7 @@
    "status": "ok",
    "count": 609,
    "error": null,
-   "duration_s": 133.9
+   "duration_s": 103.1
   },
   {
    "id": "eximtours",
@@ -336,7 +336,7 @@
    "status": "empty",
    "count": 0,
    "error": null,
-   "duration_s": 2.6
+   "duration_s": 2.2
   },
   {
    "id": "firotour",
@@ -31785,7 +31785,7 @@
   {
    "hotel": "Olympos Beach",
    "url": "https://www.kartago.sk/grecko/rhodos/faliraki/olympos-beach?DS=65536&GIATA=1270&D=63209%7C63214%7C63219%7C63220%7C63262%7C63266%7C63281%7C63283%7C63285%7C63290%7C63297%7C63311%7C63314%7C63316%7C63319%7C63324%7C63327%7C63333%7C63335%7C63336%7C63341%7C63352%7C63357%7C63362%7C63364%7C63383%7C63384%7C63387%7C63388%7C63390%7C63399%7C63402%7C63408%7C63409%7C63424%7C63427%7C63428%7C63430%7C63431%7C63437%7C63439%7C63442%7C63463%7C63471%7C63472%7C64431%7C64432%7C64433%7C64434%7C64435%7C64436%7C64437%7C64438%7C64440%7C64441%7C64442%7C74677&HID=143281&MT=5&MMT=5&DI=AI&RCS=TR01&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-30&DD=2027-08-23&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=RHO90005&DPR=KARTAGO-SK-ATCOM&PC=11273098%2F2%2F2791%2F7&IFC=209298229%2F648789&OFC=209296771%2F648788",
-   "image": "https://img.kartago.sk/hotels/720/recko/rhodos/faliraki/olympos-beach-resort/265496xx.jpg",
+   "image": "https://img.kartago.sk/hotels/720/recko/rhodos/faliraki/olympos-beach-resort/265496.jpg",
    "stars": 4.0,
    "rating": 8.4,
    "country": "Grécko",
@@ -70605,7 +70605,7 @@
   {
    "hotel": "Olympos Beach",
    "url": "https://www.kartago.sk/grecko/rhodos/faliraki/olympos-beach?DS=65536&GIATA=1270&D=63209%7C63214%7C63219%7C63220%7C63262%7C63266%7C63281%7C63283%7C63285%7C63290%7C63297%7C63311%7C63314%7C63316%7C63319%7C63324%7C63327%7C63333%7C63335%7C63336%7C63341%7C63352%7C63357%7C63362%7C63364%7C63383%7C63384%7C63387%7C63388%7C63390%7C63399%7C63402%7C63408%7C63409%7C63424%7C63427%7C63428%7C63430%7C63431%7C63437%7C63439%7C63442%7C63463%7C63471%7C63472%7C64431%7C64432%7C64433%7C64434%7C64435%7C64436%7C64437%7C64438%7C64440%7C64441%7C64442%7C74677&HID=143281&MT=5&MMT=5&DI=AI&RCS=TR01&NN=10&MNN=10%7C11%7C12%7C13%7C14&NNM=10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-27&DD=2027-08-17&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=RHO90005&DPR=KARTAGO-SK-ATCOM&PC=11273098%2F2%2F2785%2F10&IFC=209369748%2F648997&OFC=209349812%2F648996",
-   "image": "https://img.kartago.sk/hotels/720/recko/rhodos/faliraki/olympos-beach-resort/265496xx.jpg",
+   "image": "https://img.kartago.sk/hotels/720/recko/rhodos/faliraki/olympos-beach-resort/265496.jpg",
    "stars": 4.0,
    "rating": 8.4,
    "country": "Grécko",
