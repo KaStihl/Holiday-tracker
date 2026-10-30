@@ -12,7 +12,9 @@ Checked 2026-10-30 from GitHub runners:
 - Fields: adults, children = child ages joined by "-" (e.g. "10-12"; the card links echo children=12-10 and the
   price changes, so every card is priced for exactly the configured party: data-price = "Gesamtpreis"),
   start/until travel window, airport "VIE-BTS", verpflegung "AI AIP AIU AIR" (all-inclusive codes), destinationId
-  (space-separated region ids of a country from /hub/ajax/getDestination.php?destination=<German name>), dauer =
+  is empty and the region ids go to 'destination' (the page's own JS does suchConfig.destination =
+  destinationId; space-separated ids of a country from /hub/ajax/getDestination.php?destination=<German name>;
+  ids sent as destinationId are ignored -> worldwide list, a country *name* in destination -> 0 results), dauer =
   ONE stay length as a bit (2**nights: 128 = 7 nights, 1024 = 10, 16384 = 14; sums of bits are not understood,
   they fall back to 1–2 night stays), level=2 (hotel list).
 """
@@ -23,7 +25,7 @@ from urllib.parse import parse_qs, urlencode, urlsplit
 
 from bs4 import BeautifulSoup
 
-import at_common
+from adapters import at_common
 from common import get, parse_price
 from config import period_label
 
@@ -32,7 +34,7 @@ HOME = "https://www.ruefa.at"
 IBE = "https://pauschal.ruefa.at"
 AIRPORTS = "VIE-BTS"
 AI_CODES = "AI AIP AIU AIR"
-MAX_CALLS = 55
+MAX_CALLS = 60
 # German country names used by the destination lookup, per country code of nastavenia.yml
 COUNTRY_NAMES = {
     "HR": "Kroatien", "TR": "Türkei", "CY": "Zypern", "IT": "Italien", "GR": "Griechenland", "ES": "Spanien",
@@ -42,9 +44,39 @@ COUNTRY_NAMES = {
     "SC": "Seychellen", "LK": "Sri Lanka", "TH": "Thailand", "ID": "Indonesien", "VN": "Vietnam",
     "DO": "Dominikanische Republik", "MX": "Mexiko", "CU": "Kuba",
 }
-# Destination ids per country (from getDestination.php, 2026-10-30). A country missing here is looked up at run
-# time (one extra request).
-DEST_IDS = {}
+# other names tried by the run-time lookup (the plain name found nothing on 2026-10-30)
+ALT_NAMES = {"AE": ["Arabische Emirate", "Dubai"], "DO": ["Dominikanische Rep.", "Dominikanische"],
+             "LK": ["Sri"], "CV": ["Kapverden", "Kapverdische Inseln", "Kap Verde Inseln"]}
+# Region ids per country as getDestination.php?destination=<name> listed them on 2026-10-30. A country missing
+# here (or whose ids stop matching: first page without a card of that country) is looked up at run time.
+DEST_IDS = {
+    "HR": "1562 1418 1326 1108 90 1635 1561 1386 1325 698 1634 1560 1327 1109 659",
+    "TR": "1670 1650 1444 724 149 144 1669 1645 1309 559 148 1668 1446 960 292 147",
+    "CY": "713 163 637 632",
+    "IT": "436 433 85 82 79 1099 76 1047 1040 1035 1005 614 438 435 300 84 81 78 1097 1045 1039 1034 947 580 437 434 283 83 80 77 1074 1041 1036 1007 712 440",
+    "GR": "42 259 38 71 35 68 1435 32 65 1401 28 62 1323 25 59 1134 56 1017 53 965 50 962 47 916 44 829 41 258 37 70 34 67 1431 31 64 1390 27 61 1322 58 1131 55 993 52 964 49 924 46 833 43 745 39 165 36 69 1711 33 66 1429 30 63 1324 26 60 1232 57 1118 54 967 51 963 48 917 45 832",
+    "ES": "707 591 134 1135 131 935 128 877 125 850 740 737 734 730 720 704 290 1504 133 957 130 923 127 857 805 739 736 733 729 708 655 135 1315 132 956 129 922 126 851 741 738 735 731 726",
+    "MT": "101 716 715",
+    "PT": "1301 653 112 109 1428 1300 652 111 1335 725 326 110",
+    "ME": "1052",
+    "AL": "918",
+    "BG": "1537 1534 1531 743 14 1536 1533 1530 178 1538 1535 1532 1239 15",
+    "EG": "1031 1028 561 1680 1030 651 1032 1029 562",
+    "TN": "1542 1539 819 153 150 1541 1507 633 152 1540 1038 154 151",
+    "MA": "1286 102 1285 1519 1284",
+    "TZ": "1643 643 138 1642 642 1644 1641 641",
+    "OM": "108 612",
+    "MV": "1153 1150 1147 1144 1141 100 1518 1348 1155 1152 1149 1146 1143 1140 1381 1157 1154 1151 1148 1145 1142 1139 1380 1156",
+    "MU": "1114 746 603 104 869 699 594 1520 864 681 593",
+    "TH": "1654 934 927 742 139 1506 932 926 141 1119 929 908 140",
+    "MX": "1566 1563 1355 1288 1116 106 1565 1459 1349 1287 1027 1567 1564 1394 1289 1117 1026",
+    "KE": "640 269 639 638",
+    "JO": "1279 87 1278 1559 1277",
+    "SC": "1420 116 1422 1419 1421 709",
+    "ID": "1403 1087 1084 1080 995 72 1712 1552 1436 1402 1086 1083 1079 912 1648 1505 1404 1398 1085 1081 1078 910 1553 1437",
+    "VN": "323",
+    "CU": "1667 1128 92 1399 1127 1129 1126",
+}
 
 
 def ai_only(cfg):
@@ -67,7 +99,7 @@ def form(cfg, dest_id, nights, page=1):
             "until": cfg["date_to"].isoformat(), "hotelSearchtext": "", "level": "2", "page": str(page), "topGid": "",
             "destinationName": "", "airport": AIRPORTS, "recommendationrate": "", "dauer": str(2 ** nights),
             "anzZimmer": "1", "sort": "price", "airline": "", "maxPrice": "", "minPrice": "", "citycodes": "",
-            "destination_groups": "", "excludeNbc": "1", "destination": "", "destinationId": dest_id,
+            "destination_groups": "", "excludeNbc": "1", "destination": dest_id, "destinationId": "",
             "verpflegung": AI_CODES if ai_only(cfg) else ""}
 
 
@@ -138,14 +170,19 @@ def parse(data, cfg):
     return out
 
 
-def lookup(name):
-    """Space-separated destination ids of a country, or None."""
-    res = get(IBE + "/hub/ajax/getDestination.php", params={"destination": name}, as_json=True,
-              headers={"X-Requested-With": "XMLHttpRequest", "Referer": IBE + "/"})
-    for x in res or []:
-        if x.get("country") and x.get("name") == name and str(x.get("id") or "").strip():
-            return str(x["id"]).strip()
-    return None
+def lookup(code):
+    """(space-separated region ids of a country or None, requests made) via getDestination.php, the search form's
+    own autocomplete."""
+    n = 0
+    for name in [COUNTRY_NAMES[code]] + ALT_NAMES.get(code, []):
+        n += 1
+        res = get(IBE + "/hub/ajax/getDestination.php", params={"destination": name}, as_json=True,
+                  headers={"X-Requested-With": "XMLHttpRequest", "Referer": IBE + "/"})
+        for x in res or []:
+            ids = str(x.get("id") or "").strip()
+            if x.get("country") and ids and at_common.country(re.sub(r"<[^>]+>", "", x.get("name") or "")) == code:
+                return ids, n
+    return None, n
 
 
 def plan(cfg):
@@ -173,8 +210,8 @@ def search(cfg):
             continue
         try:
             if code not in ids:
-                calls += 1
-                ids[code] = lookup(COUNTRY_NAMES[code])
+                ids[code], n = lookup(code)
+                calls += n
                 if not ids[code]:
                     print(f"[ruefa] {code}: no destination id for {COUNTRY_NAMES[code]}")
                     empty.add(code)
