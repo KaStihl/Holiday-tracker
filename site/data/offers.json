@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-30T16:36:52Z",
+ "generated_at": "2026-10-30T16:43:12Z",
  "criteria": {
   "adults": 1,
   "children_ages": [
@@ -279,11 +279,11 @@
    "status": "ok",
    "count": 391,
    "error": null,
-   "duration_s": 279.7,
+   "duration_s": 262.4,
    "watch": {
     "found": 3,
     "new": 0,
-    "seconds": 21.5,
+    "seconds": 19.7,
     "error": null
    }
   },
@@ -294,11 +294,11 @@
    "status": "ok",
    "count": 743,
    "error": null,
-   "duration_s": 137.9,
+   "duration_s": 135.3,
    "watch": {
     "found": 0,
     "new": 0,
-    "seconds": 13.0,
+    "seconds": 12.5,
     "error": null
    }
   },
@@ -318,11 +318,11 @@
    "status": "ok",
    "count": 783,
    "error": null,
-   "duration_s": 104.6,
+   "duration_s": 106.2,
    "watch": {
     "found": 0,
     "new": 0,
-    "seconds": 18.1,
+    "seconds": 15.2,
     "error": null
    }
   },
@@ -333,11 +333,11 @@
    "status": "ok",
    "count": 704,
    "error": null,
-   "duration_s": 101.9,
+   "duration_s": 110.3,
    "watch": {
     "found": 0,
     "new": 0,
-    "seconds": 16.4,
+    "seconds": 15.4,
     "error": null
    }
   },
@@ -395,9 +395,15 @@
    "name": "Ruefa",
    "home": "https://www.ruefa.at",
    "status": "ok",
-   "count": 439,
+   "count": 463,
    "error": null,
-   "duration_s": 103.4
+   "duration_s": 105.6,
+   "watch": {
+    "found": 24,
+    "new": 24,
+    "seconds": 14.2,
+    "error": null
+   }
   },
   {
    "id": "billa_reisen",
@@ -406,7 +412,7 @@
    "status": "ok",
    "count": 1008,
    "error": null,
-   "duration_s": 181.5
+   "duration_s": 111.9
   },
   {
    "id": "tui_at",
@@ -30573,6 +30579,45 @@
    "price_change": 0
   },
   {
+   "hotel": "Süral Garden",
+   "url": "https://pauschal.ruefa.at/index.php?page=hotel&start=2027-07-01&until=2027-07-08&adults=1&cabinClass=economy&ankunftshafen=AYT&children=12-10&anzZimmer=1&abflughafen=VIE%20BTS&reisetag=2027-07-01&rq=1&rva=Q09S&bu=AYT2432K&gid=4923&pos=1",
+   "image": null,
+   "stars": 3.0,
+   "rating": 8.7,
+   "country": "Turecko",
+   "country_code": "TR",
+   "region": "Türkische Riviera",
+   "place": "Çolakli",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-07-01",
+   "date_to": "2027-07-08",
+   "nights": 7,
+   "price_total": 2013,
+   "price_original": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "price_exact": true,
+   "source": "ruefa",
+   "source_name": "Ruefa",
+   "watched": "Sural",
+   "continent": "Európa",
+   "discount_pct": null,
+   "price_note": null,
+   "id": "ruefa:eafdbda95b4b",
+   "score": 88,
+   "first_seen": "2026-10-30",
+   "last_seen": "2026-10-30",
+   "price_history": [
+    [
+     "2026-10-30",
+     2013
+    ]
+   ],
+   "price_change": null
+  },
+  {
    "hotel": "El Mouradi Cap Mahdia",
    "url": "https://www.billareisen.at/Reisen/El+Mouradi+Cap+Mahdia-MIR14007P.html?bdid=ib&toid=dla&ptid=DDS&ssnid=S27&pttid=PF&phidf=MIR14007P&pdaf=VIE&dft=apx&psdf=2027-07-01&pedf=2027-08-31&psdsf=2026-11-01&pedsf=2026-11-22&pnnfl=7&pnnfh=14&pbtf=ai&ptf=1&ps=pr&pdm=pp&psbbr=pna%3D2%26pnc%3D0",
    "image": "https://www.billareisen.at/pibe-media/derl_atc/hotel/MIR14007B_W26-D70G2526_1.jpg?w=580&h=468",
@@ -30747,6 +30792,45 @@
     ]
    ],
    "price_change": 0
+  },
+  {
+   "hotel": "Süral Garden",
+   "url": "https://pauschal.ruefa.at/index.php?page=hotel&start=2027-08-24&until=2027-08-31&adults=1&cabinClass=economy&ankunftshafen=AYT&children=12-10&anzZimmer=1&abflughafen=VIE%20BTS&reisetag=2027-08-24&rq=1&rva=Q09S&bu=AYT2432K&gid=4923&pos=1",
+   "image": null,
+   "stars": 3.0,
+   "rating": 8.7,
+   "country": "Turecko",
+   "country_code": "TR",
+   "region": "Türkische Riviera",
+   "place": "Çolakli",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-08-24",
+   "date_to": "2027-08-31",
+   "nights": 7,
+   "price_total": 2061,
+   "price_original": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "price_exact": true,
+   "source": "ruefa",
+   "source_name": "Ruefa",
+   "watched": "Sural",
+   "continent": "Európa",
+   "discount_pct": null,
+   "price_note": null,
+   "id": "ruefa:8139c8d63f2e",
+   "score": 88,
+   "first_seen": "2026-10-30",
+   "last_seen": "2026-10-30",
+   "price_history": [
+    [
+     "2026-10-30",
+     2061
+    ]
+   ],
+   "price_change": null
   },
   {
    "hotel": "President Sea Palace/o.T.",
@@ -47037,6 +47121,45 @@
    "price_change": 0
   },
   {
+   "hotel": "Süral Resort",
+   "url": "https://pauschal.ruefa.at/index.php?page=hotel&start=2027-07-01&until=2027-07-08&adults=1&cabinClass=economy&ankunftshafen=AYT&children=12-10&anzZimmer=1&abflughafen=VIE%20BTS&reisetag=2027-07-01&rq=1&rva=Q09S&bu=AYT7067K&gid=53099&pos=3",
+   "image": null,
+   "stars": 5.0,
+   "rating": 8.7,
+   "country": "Turecko",
+   "country_code": "TR",
+   "region": "Türkische Riviera",
+   "place": "Çolakli",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-07-01",
+   "date_to": "2027-07-08",
+   "nights": 7,
+   "price_total": 2438,
+   "price_original": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "price_exact": true,
+   "source": "ruefa",
+   "source_name": "Ruefa",
+   "watched": "Sural",
+   "continent": "Európa",
+   "discount_pct": null,
+   "price_note": null,
+   "id": "ruefa:d84ac26f9a76",
+   "score": 84,
+   "first_seen": "2026-10-30",
+   "last_seen": "2026-10-30",
+   "price_history": [
+    [
+     "2026-10-30",
+     2438
+    ]
+   ],
+   "price_change": null
+  },
+  {
    "hotel": "Kaila Beach Hotel",
    "url": "https://www.billareisen.at/Reisen/Kaila+Beach+Hotel-AYT19122P.html?bdid=ib&toid=dla&ptid=DDS&ssnid=S27&clgid=D69S2727&pttid=PF&phidf=AYT19122P&pdaf=VIE&dft=apx&psdf=2027-07-01&pedf=2027-08-31&psdsf=2026-11-01&pedsf=2026-11-22&pnnfl=7&pnnfh=14&pbtf=ai&ptf=1&ps=pr&pdm=pp&psbbr=pna%3D2%26pnc%3D0",
    "image": "https://www.billareisen.at/pibe-media/derl_atc/hotel/AYT19122B_S27-D69S2727_1.jpg?w=580&h=468",
@@ -50809,6 +50932,45 @@
    "price_change": 0
   },
   {
+   "hotel": "Süral Hotel",
+   "url": "https://pauschal.ruefa.at/index.php?page=hotel&start=2027-07-01&until=2027-07-08&adults=1&cabinClass=economy&ankunftshafen=AYT&children=12-10&anzZimmer=1&abflughafen=VIE%20BTS&reisetag=2027-07-01&rq=1&rva=Q09S&bu=AYT9185K&gid=4922&pos=2",
+   "image": null,
+   "stars": 5.0,
+   "rating": 8.0,
+   "country": "Turecko",
+   "country_code": "TR",
+   "region": "Türkische Riviera",
+   "place": "Çolakli",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-07-01",
+   "date_to": "2027-07-08",
+   "nights": 7,
+   "price_total": 2417,
+   "price_original": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "price_exact": true,
+   "source": "ruefa",
+   "source_name": "Ruefa",
+   "watched": "Sural",
+   "continent": "Európa",
+   "discount_pct": null,
+   "price_note": null,
+   "id": "ruefa:7d437269777c",
+   "score": 83,
+   "first_seen": "2026-10-30",
+   "last_seen": "2026-10-30",
+   "price_history": [
+    [
+     "2026-10-30",
+     2417
+    ]
+   ],
+   "price_change": null
+  },
+  {
    "hotel": "Scoglio della Galea",
    "url": "https://pauschal.ruefa.at/index.php?page=hotel&start=2027-07-10&until=2027-07-17&adults=1&ankunftshafen=SUF&children=12-10&anzZimmer=1&abflughafen=VIE%20BTS&verpflegung=GT06-AI%20GT06-AIP%20GT06-AI%23ST06-PL%20GT06-AI%23ST06-UL&reisetag=2027-07-10&rq=1&destinationId=436%20433%2085%2082%2079%201099%2076%201047%201040%201035%201005%20614%20438%20435%20300%2084%2081%2078%201097%201045%201039%201034%20947%20580%20437%20434%20283%2083%2080%2077%201074%201041%201036%201007%20712%20440&rva=QllF&bu=SUF066Z&gid=1514&pos=13",
    "image": null,
@@ -50997,6 +51159,45 @@
     ]
    ],
    "price_change": 0
+  },
+  {
+   "hotel": "Süral Hotel",
+   "url": "https://pauschal.ruefa.at/index.php?page=hotel&start=2027-08-24&until=2027-08-31&adults=1&cabinClass=economy&ankunftshafen=AYT&children=12-10&anzZimmer=1&abflughafen=VIE%20BTS&reisetag=2027-08-24&rq=1&rva=Q09S&bu=AYT9185K&gid=4922&pos=2",
+   "image": null,
+   "stars": 5.0,
+   "rating": 8.0,
+   "country": "Turecko",
+   "country_code": "TR",
+   "region": "Türkische Riviera",
+   "place": "Çolakli",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-08-24",
+   "date_to": "2027-08-31",
+   "nights": 7,
+   "price_total": 2485,
+   "price_original": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "price_exact": true,
+   "source": "ruefa",
+   "source_name": "Ruefa",
+   "watched": "Sural",
+   "continent": "Európa",
+   "discount_pct": null,
+   "price_note": null,
+   "id": "ruefa:b0884013c222",
+   "score": 83,
+   "first_seen": "2026-10-30",
+   "last_seen": "2026-10-30",
+   "price_history": [
+    [
+     "2026-10-30",
+     2485
+    ]
+   ],
+   "price_change": null
   },
   {
    "hotel": "Vincci Saphir Palace",
@@ -51189,6 +51390,45 @@
    "price_change": 0
   },
   {
+   "hotel": "Süral Resort",
+   "url": "https://pauschal.ruefa.at/index.php?page=hotel&start=2027-08-24&until=2027-08-31&adults=1&cabinClass=economy&ankunftshafen=AYT&children=12-10&anzZimmer=1&abflughafen=VIE%20BTS&reisetag=2027-08-24&rq=1&rva=Q09S&bu=AYT7067K&gid=53099&pos=3",
+   "image": null,
+   "stars": 5.0,
+   "rating": 8.7,
+   "country": "Turecko",
+   "country_code": "TR",
+   "region": "Türkische Riviera",
+   "place": "Çolakli",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-08-24",
+   "date_to": "2027-08-31",
+   "nights": 7,
+   "price_total": 2531,
+   "price_original": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "price_exact": true,
+   "source": "ruefa",
+   "source_name": "Ruefa",
+   "watched": "Sural",
+   "continent": "Európa",
+   "discount_pct": null,
+   "price_note": null,
+   "id": "ruefa:5412a4f82281",
+   "score": 83,
+   "first_seen": "2026-10-30",
+   "last_seen": "2026-10-30",
+   "price_history": [
+    [
+     "2026-10-30",
+     2531
+    ]
+   ],
+   "price_change": null
+  },
+  {
    "hotel": "Marhaba Beach",
    "url": "https://www.billareisen.at/Reisen/Marhaba+Beach-MIR12003P.html?bdid=ib&toid=dla&ptid=DDS&ssnid=S27&clgid=D70G2627&pttid=PF&phidf=MIR12003P&pdaf=VIE&dft=apx&psdf=2027-07-01&pedf=2027-08-31&psdsf=2026-11-01&pedsf=2026-11-22&pnnfl=7&pnnfh=14&pbtf=ai&ptf=1&ps=pr&pdm=pp&psbbr=pna%3D2%26pnc%3D0",
    "image": "https://www.billareisen.at/pibe-media/derl_atc/hotel/MIR12003B_W26-D70G2627_1.jpg?w=580&h=468",
@@ -51263,6 +51503,45 @@
     ]
    ],
    "price_change": 0
+  },
+  {
+   "hotel": "Süral Garden",
+   "url": "https://pauschal.ruefa.at/index.php?page=hotel&start=2027-07-01&until=2027-07-11&adults=1&cabinClass=economy&ankunftshafen=AYT&children=12-10&anzZimmer=1&abflughafen=VIE%20BTS&reisetag=2027-07-01&rq=1&rva=Q09S&bu=AYT2432K&gid=4923&pos=1",
+   "image": null,
+   "stars": 3.0,
+   "rating": 8.7,
+   "country": "Turecko",
+   "country_code": "TR",
+   "region": "Türkische Riviera",
+   "place": "Çolakli",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-07-01",
+   "date_to": "2027-07-11",
+   "nights": 10,
+   "price_total": 2539,
+   "price_original": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "price_exact": true,
+   "source": "ruefa",
+   "source_name": "Ruefa",
+   "watched": "Sural",
+   "continent": "Európa",
+   "discount_pct": null,
+   "price_note": null,
+   "id": "ruefa:2ae313b3a9f9",
+   "score": 83,
+   "first_seen": "2026-10-30",
+   "last_seen": "2026-10-30",
+   "price_history": [
+    [
+     "2026-10-30",
+     2539
+    ]
+   ],
+   "price_change": null
   },
   {
    "hotel": "President Sea Palace/o.T.",
@@ -59203,6 +59482,45 @@
     ]
    ],
    "price_change": 0
+  },
+  {
+   "hotel": "Süral Garden",
+   "url": "https://pauschal.ruefa.at/index.php?page=hotel&start=2027-08-21&until=2027-08-31&adults=1&cabinClass=economy&ankunftshafen=AYT&children=12-10&anzZimmer=1&abflughafen=VIE%20BTS&reisetag=2027-08-21&rq=1&rva=Q09S&bu=AYT2432K&gid=4923&pos=1",
+   "image": null,
+   "stars": 3.0,
+   "rating": 8.7,
+   "country": "Turecko",
+   "country_code": "TR",
+   "region": "Türkische Riviera",
+   "place": "Çolakli",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-08-21",
+   "date_to": "2027-08-31",
+   "nights": 10,
+   "price_total": 2662,
+   "price_original": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "price_exact": true,
+   "source": "ruefa",
+   "source_name": "Ruefa",
+   "watched": "Sural",
+   "continent": "Európa",
+   "discount_pct": null,
+   "price_note": null,
+   "id": "ruefa:7e848df72325",
+   "score": 81,
+   "first_seen": "2026-10-30",
+   "last_seen": "2026-10-30",
+   "price_history": [
+    [
+     "2026-10-30",
+     2662
+    ]
+   ],
+   "price_change": null
   },
   {
    "hotel": "Febeach Hotel",
@@ -92314,6 +92632,45 @@
    "price_change": 0
   },
   {
+   "hotel": "Royal Alhambra Palace",
+   "url": "https://pauschal.ruefa.at/index.php?page=hotel&start=2027-07-01&until=2027-07-08&adults=1&cabinClass=economy&ankunftshafen=AYT&children=12-10&anzZimmer=1&abflughafen=VIE%20BTS&reisetag=2027-07-01&rq=1&rva=VFVJRA==&bu=AYT41041&gid=239871&pos=4",
+   "image": null,
+   "stars": 5.0,
+   "rating": 8.7,
+   "country": "Turecko",
+   "country_code": "TR",
+   "region": "Türkische Riviera",
+   "place": "Çolakli",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-07-01",
+   "date_to": "2027-07-08",
+   "nights": 7,
+   "price_total": 3407,
+   "price_original": 3965,
+   "discount_label": null,
+   "pets_allowed": null,
+   "price_exact": true,
+   "source": "ruefa",
+   "source_name": "Ruefa",
+   "watched": "Royal Alhambra",
+   "continent": "Európa",
+   "discount_pct": 14,
+   "price_note": null,
+   "id": "ruefa:8d8ade0bf667",
+   "score": 70,
+   "first_seen": "2026-10-30",
+   "last_seen": "2026-10-30",
+   "price_history": [
+    [
+     "2026-10-30",
+     3407
+    ]
+   ],
+   "price_change": null
+  },
+  {
    "hotel": "HILTON PLAZA HOTEL",
    "url": "https://www.fischer.sk/egypt/egypt-hurghada/hurghada/hilton-plaza-hotel?DS=256&GIATA=24&D=64419%7C64420%7C64421%7C64422%7C64423%7C64424%7C64425%7C64426&HID=9192&MT=5&MMT=5&DI=AI&RCS=DR05&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-08-31&DD=2027-08-24&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=HRG90045&DPR=FISCHER+SK+ATCOM&PC=14043912%2F2%2F2792%2F7&IFC=208384125%2F645380&OFC=208382577%2F645379",
    "image": "https://img.fischer.sk/hotels/720/egypt/oblast-hurghada/hurghada/hilton-plaza/216682.jpg",
@@ -100227,6 +100584,45 @@
    "price_change": 0
   },
   {
+   "hotel": "Süral Hotel",
+   "url": "https://pauschal.ruefa.at/index.php?page=hotel&start=2027-07-01&until=2027-07-11&adults=1&cabinClass=economy&ankunftshafen=AYT&children=12-10&anzZimmer=1&abflughafen=VIE%20BTS&reisetag=2027-07-01&rq=1&rva=Q09S&bu=AYT9185K&gid=4922&pos=2",
+   "image": null,
+   "stars": 5.0,
+   "rating": 8.0,
+   "country": "Turecko",
+   "country_code": "TR",
+   "region": "Türkische Riviera",
+   "place": "Çolakli",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-07-01",
+   "date_to": "2027-07-11",
+   "nights": 10,
+   "price_total": 3096,
+   "price_original": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "price_exact": true,
+   "source": "ruefa",
+   "source_name": "Ruefa",
+   "watched": "Sural",
+   "continent": "Európa",
+   "discount_pct": null,
+   "price_note": null,
+   "id": "ruefa:3b8010e53b11",
+   "score": 68,
+   "first_seen": "2026-10-30",
+   "last_seen": "2026-10-30",
+   "price_history": [
+    [
+     "2026-10-30",
+     3096
+    ]
+   ],
+   "price_change": null
+  },
+  {
    "hotel": "Hotel Donat",
    "url": "https://www.kartago.sk/hotely/chorvatsko/dalmacia-severna/zadar/hotel-donat?DS=2&GIATA=19549&D=63249%7C63250%7C63251%7C63289%7C63326%7C63529&HID=7479&MT=5&MMT=5&DI=GT06-AI&RCS=RMCFTP0000&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-08-18%7C2027-09-15&RD=2027-09-01&DD=2027-08-25&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=3789&TT=1&PID=AHRSPU7JEG&DPR=OTSCKF&PC=7-2027-08-25&IFC=1-ZADVIE-2967-ZAD-DT01-09-16-10-K-EW-2758-STR-DT01-09-16-10-K-EW&OFC=1-VIEZAD-753-VIE-DT25-08-08-30-X-EW-974-CGN-DT25-08-08-30-X-EW",
    "image": "https://img.kartago.sk/hotels/720/chorvatsko/dalmacie-severni/zadar/donat/01_ch_zadar_donat_ext05-jpg.jpg",
@@ -100389,6 +100785,45 @@
    "price_change": 0
   },
   {
+   "hotel": "Süral Resort",
+   "url": "https://pauschal.ruefa.at/index.php?page=hotel&start=2027-07-01&until=2027-07-11&adults=1&cabinClass=economy&ankunftshafen=AYT&children=12-10&anzZimmer=1&abflughafen=VIE%20BTS&reisetag=2027-07-01&rq=1&rva=Q09S&bu=AYT7067K&gid=53099&pos=3",
+   "image": null,
+   "stars": 5.0,
+   "rating": 8.7,
+   "country": "Turecko",
+   "country_code": "TR",
+   "region": "Türkische Riviera",
+   "place": "Çolakli",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-07-01",
+   "date_to": "2027-07-11",
+   "nights": 10,
+   "price_total": 3146,
+   "price_original": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "price_exact": true,
+   "source": "ruefa",
+   "source_name": "Ruefa",
+   "watched": "Sural",
+   "continent": "Európa",
+   "discount_pct": null,
+   "price_note": null,
+   "id": "ruefa:894d312b0881",
+   "score": 68,
+   "first_seen": "2026-10-30",
+   "last_seen": "2026-10-30",
+   "price_history": [
+    [
+     "2026-10-30",
+     3146
+    ]
+   ],
+   "price_change": null
+  },
+  {
    "hotel": "Atlantica Akteon",
    "url": "https://pauschal.ruefa.at/index.php?page=hotel&start=2027-07-01&until=2027-07-11&adults=1&ankunftshafen=LCA&children=12-10&anzZimmer=1&abflughafen=VIE%20BTS&verpflegung=GT06-AI%20GT06-AIP%20GT06-AI%23ST06-PL%20GT06-AI%23ST06-UL&reisetag=2027-07-01&rq=1&destinationId=713%20163%20637%20632&rva=QllF&bu=LCA203Z&gid=32922&pos=2",
    "image": null,
@@ -100463,6 +100898,45 @@
     ]
    ],
    "price_change": 0
+  },
+  {
+   "hotel": "Süral Garden",
+   "url": "https://pauschal.ruefa.at/index.php?page=hotel&start=2027-07-01&until=2027-07-15&adults=1&cabinClass=economy&ankunftshafen=AYT&children=12-10&anzZimmer=1&abflughafen=VIE%20BTS&reisetag=2027-07-01&rq=1&rva=Q09S&bu=AYT2432K&gid=4923&pos=1",
+   "image": null,
+   "stars": 3.0,
+   "rating": 8.7,
+   "country": "Turecko",
+   "country_code": "TR",
+   "region": "Türkische Riviera",
+   "place": "Çolakli",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-07-01",
+   "date_to": "2027-07-15",
+   "nights": 14,
+   "price_total": 3163,
+   "price_original": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "price_exact": true,
+   "source": "ruefa",
+   "source_name": "Ruefa",
+   "watched": "Sural",
+   "continent": "Európa",
+   "discount_pct": null,
+   "price_note": null,
+   "id": "ruefa:01856b08b72f",
+   "score": 68,
+   "first_seen": "2026-10-30",
+   "last_seen": "2026-10-30",
+   "price_history": [
+    [
+     "2026-10-30",
+     3163
+    ]
+   ],
+   "price_change": null
   },
   {
    "hotel": "Valeria Dar Atlas",
@@ -101495,6 +101969,45 @@
     ]
    ],
    "price_change": 0
+  },
+  {
+   "hotel": "Royal Alhambra Palace",
+   "url": "https://pauschal.ruefa.at/index.php?page=hotel&start=2027-08-24&until=2027-08-31&adults=1&cabinClass=economy&ankunftshafen=AYT&children=12-10&anzZimmer=1&abflughafen=VIE%20BTS&reisetag=2027-08-24&rq=1&rva=VFVJRA==&bu=AYT41041&gid=239871&pos=4",
+   "image": null,
+   "stars": 5.0,
+   "rating": 8.7,
+   "country": "Turecko",
+   "country_code": "TR",
+   "region": "Türkische Riviera",
+   "place": "Çolakli",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-08-24",
+   "date_to": "2027-08-31",
+   "nights": 7,
+   "price_total": 3549,
+   "price_original": 4077,
+   "discount_label": null,
+   "pets_allowed": null,
+   "price_exact": true,
+   "source": "ruefa",
+   "source_name": "Ruefa",
+   "watched": "Royal Alhambra",
+   "continent": "Európa",
+   "discount_pct": 13,
+   "price_note": null,
+   "id": "ruefa:435b63c2535c",
+   "score": 68,
+   "first_seen": "2026-10-30",
+   "last_seen": "2026-10-30",
+   "price_history": [
+    [
+     "2026-10-30",
+     3549
+    ]
+   ],
+   "price_change": null
   },
   {
    "hotel": "Hotel Pickalbatros - Makadi Resort Hughada",
@@ -107821,6 +108334,45 @@
    "price_change": 0
   },
   {
+   "hotel": "Süral Hotel",
+   "url": "https://pauschal.ruefa.at/index.php?page=hotel&start=2027-08-21&until=2027-08-31&adults=1&cabinClass=economy&ankunftshafen=AYT&children=12-10&anzZimmer=1&abflughafen=VIE%20BTS&reisetag=2027-08-21&rq=1&rva=Q09S&bu=AYT9185K&gid=4922&pos=2",
+   "image": null,
+   "stars": 5.0,
+   "rating": 8.0,
+   "country": "Turecko",
+   "country_code": "TR",
+   "region": "Türkische Riviera",
+   "place": "Çolakli",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-08-21",
+   "date_to": "2027-08-31",
+   "nights": 10,
+   "price_total": 3252,
+   "price_original": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "price_exact": true,
+   "source": "ruefa",
+   "source_name": "Ruefa",
+   "watched": "Sural",
+   "continent": "Európa",
+   "discount_pct": null,
+   "price_note": null,
+   "id": "ruefa:09b366b44675",
+   "score": 66,
+   "first_seen": "2026-10-30",
+   "last_seen": "2026-10-30",
+   "price_history": [
+    [
+     "2026-10-30",
+     3252
+    ]
+   ],
+   "price_change": null
+  },
+  {
    "hotel": "Bohemian Gardens Htl o.T.",
    "url": "https://pauschal.ruefa.at/index.php?page=hotel&start=2027-08-16&until=2027-08-26&adults=1&cabinClass=economy&ankunftshafen=LCA&children=12-10&anzZimmer=1&abflughafen=VIE%20BTS&verpflegung=GT06-AI%20GT06-AIP%20GT06-AI%23ST06-PL%20GT06-AI%23ST06-UL&reisetag=2027-08-16&rq=1&destinationId=713%20163%20637%20632&rva=U0xSRA==&bu=LCA201O&gid=1162145&pos=6",
    "image": null,
@@ -108052,6 +108604,45 @@
    "price_change": 0
   },
   {
+   "hotel": "Süral Resort",
+   "url": "https://pauschal.ruefa.at/index.php?page=hotel&start=2027-08-21&until=2027-08-31&adults=1&cabinClass=economy&ankunftshafen=AYT&children=12-10&anzZimmer=1&abflughafen=VIE%20BTS&reisetag=2027-08-21&rq=1&rva=Q09S&bu=AYT7067K&gid=53099&pos=3",
+   "image": null,
+   "stars": 5.0,
+   "rating": 8.7,
+   "country": "Turecko",
+   "country_code": "TR",
+   "region": "Türkische Riviera",
+   "place": "Çolakli",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-08-21",
+   "date_to": "2027-08-31",
+   "nights": 10,
+   "price_total": 3332,
+   "price_original": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "price_exact": true,
+   "source": "ruefa",
+   "source_name": "Ruefa",
+   "watched": "Sural",
+   "continent": "Európa",
+   "discount_pct": null,
+   "price_note": null,
+   "id": "ruefa:776924b61f4b",
+   "score": 66,
+   "first_seen": "2026-10-30",
+   "last_seen": "2026-10-30",
+   "price_history": [
+    [
+     "2026-10-30",
+     3332
+    ]
+   ],
+   "price_change": null
+  },
+  {
    "hotel": "Hovima Jardin Caleta",
    "url": "https://www.kartago.sk/hotely/spanielsko/tenerife/costa-adeje/jardin-caleta?DS=2&GIATA=3677&D=63213%7C63216%7C63226%7C63231%7C63241%7C63242%7C63243%7C63244%7C63245%7C63267%7C63272%7C63284%7C63312%7C63313%7C63334%7C63349%7C63350%7C63354%7C63360%7C63455%7C64430%7C74459%7C74460%7C74461%7C74462%7C74463%7C74464%7C74465%7C77806%7C211764&HID=4668&MT=5&MMT=5&DI=GT06-AI&RCS=APCFT100A0&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-07-14&DD=2027-07-06&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=3789&TT=1&PID=AMTSES0FHC&DPR=OTSCKF&PC=7-2027-07-06&IFC=1-TFSVIE-253-TFS-DT13-07-18-10-L-EW-752-CGN-DT13-07-18-10-L-EW&OFC=1-VIETFS-751-VIE-DT06-07-11-10-T-EW-252-CGN-DT06-07-11-10-T-EW",
    "image": "https://img.kartago.sk/hotels/720/spanelsko/tenerife/costa-adeje/hotel-jardin-caleta/h15409_c0_99564-179_processed_1.jpg",
@@ -108146,6 +108737,45 @@
     ]
    ],
    "price_change": 0
+  },
+  {
+   "hotel": "Süral Garden",
+   "url": "https://pauschal.ruefa.at/index.php?page=hotel&start=2027-08-17&until=2027-08-31&adults=1&cabinClass=economy&ankunftshafen=AYT&children=12-10&anzZimmer=1&abflughafen=VIE%20BTS&reisetag=2027-08-17&rq=1&rva=Q09S&bu=AYT2432K&gid=4923&pos=1",
+   "image": null,
+   "stars": 3.0,
+   "rating": 8.7,
+   "country": "Turecko",
+   "country_code": "TR",
+   "region": "Türkische Riviera",
+   "place": "Çolakli",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-08-17",
+   "date_to": "2027-08-31",
+   "nights": 14,
+   "price_total": 3373,
+   "price_original": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "price_exact": true,
+   "source": "ruefa",
+   "source_name": "Ruefa",
+   "watched": "Sural",
+   "continent": "Európa",
+   "discount_pct": null,
+   "price_note": null,
+   "id": "ruefa:61b4bbef754e",
+   "score": 66,
+   "first_seen": "2026-10-30",
+   "last_seen": "2026-10-30",
+   "price_history": [
+    [
+     "2026-10-30",
+     3373
+    ]
+   ],
+   "price_change": null
   },
   {
    "hotel": "TUI SUNEO Supetar",
@@ -134731,6 +135361,45 @@
    "price_change": 0
   },
   {
+   "hotel": "Süral Hotel",
+   "url": "https://pauschal.ruefa.at/index.php?page=hotel&start=2027-07-01&until=2027-07-15&adults=1&cabinClass=economy&ankunftshafen=AYT&children=12-10&anzZimmer=1&abflughafen=VIE%20BTS&reisetag=2027-07-01&rq=1&rva=Q09S&bu=AYT9185K&gid=4922&pos=2",
+   "image": null,
+   "stars": 5.0,
+   "rating": 8.0,
+   "country": "Turecko",
+   "country_code": "TR",
+   "region": "Türkische Riviera",
+   "place": "Çolakli",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-07-01",
+   "date_to": "2027-07-15",
+   "nights": 14,
+   "price_total": 3925,
+   "price_original": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "price_exact": true,
+   "source": "ruefa",
+   "source_name": "Ruefa",
+   "watched": "Sural",
+   "continent": "Európa",
+   "discount_pct": null,
+   "price_note": null,
+   "id": "ruefa:2854dbe2273c",
+   "score": 59,
+   "first_seen": "2026-10-30",
+   "last_seen": "2026-10-30",
+   "price_history": [
+    [
+     "2026-10-30",
+     3925
+    ]
+   ],
+   "price_change": null
+  },
+  {
    "hotel": "Narcis",
    "url": "https://www.billareisen.at/Reisen/Hotel+Narcis-PUY17013P.html?bdid=ib&toid=dla&ptid=DDS&ssnid=S27&clgid=D19G2727&pttid=PF&phidf=PUY17013P&pdaf=VIE&dft=apx&psdf=2027-07-01&pedf=2027-08-31&psdsf=2026-11-01&pedsf=2026-11-22&pnnfl=7&pnnfh=14&pbtf=ai&ptf=1&ps=pr&pdm=pp&psbbr=pna%3D2%26pnc%3D0",
    "image": "https://www.billareisen.at/pibe-media/derl_atc/hotel/PUY17013B_W27-D19G2727_1.jpg?w=580&h=468",
@@ -134973,6 +135642,45 @@
     ]
    ],
    "price_change": 0
+  },
+  {
+   "hotel": "Süral Resort",
+   "url": "https://pauschal.ruefa.at/index.php?page=hotel&start=2027-07-01&until=2027-07-15&adults=1&cabinClass=economy&ankunftshafen=AYT&children=12-10&anzZimmer=1&abflughafen=VIE%20BTS&reisetag=2027-07-01&rq=1&rva=Q09S&bu=AYT7067K&gid=53099&pos=3",
+   "image": null,
+   "stars": 5.0,
+   "rating": 8.7,
+   "country": "Turecko",
+   "country_code": "TR",
+   "region": "Türkische Riviera",
+   "place": "Çolakli",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-07-01",
+   "date_to": "2027-07-15",
+   "nights": 14,
+   "price_total": 4013,
+   "price_original": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "price_exact": true,
+   "source": "ruefa",
+   "source_name": "Ruefa",
+   "watched": "Sural",
+   "continent": "Európa",
+   "discount_pct": null,
+   "price_note": null,
+   "id": "ruefa:0f20dfd8dc59",
+   "score": 59,
+   "first_seen": "2026-10-30",
+   "last_seen": "2026-10-30",
+   "price_history": [
+    [
+     "2026-10-30",
+     4013
+    ]
+   ],
+   "price_change": null
   },
   {
    "hotel": "Hotel Fame Residence Goynuk",
@@ -140138,6 +140846,45 @@
    "price_change": 0
   },
   {
+   "hotel": "Süral Hotel",
+   "url": "https://pauschal.ruefa.at/index.php?page=hotel&start=2027-08-17&until=2027-08-31&adults=1&cabinClass=economy&ankunftshafen=AYT&children=12-10&anzZimmer=1&abflughafen=VIE%20BTS&reisetag=2027-08-17&rq=1&rva=Q09S&bu=AYT9185K&gid=4922&pos=2",
+   "image": null,
+   "stars": 5.0,
+   "rating": 8.0,
+   "country": "Turecko",
+   "country_code": "TR",
+   "region": "Türkische Riviera",
+   "place": "Çolakli",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-08-17",
+   "date_to": "2027-08-31",
+   "nights": 14,
+   "price_total": 4182,
+   "price_original": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "price_exact": true,
+   "source": "ruefa",
+   "source_name": "Ruefa",
+   "watched": "Sural",
+   "continent": "Európa",
+   "discount_pct": null,
+   "price_note": null,
+   "id": "ruefa:945dfa0defbc",
+   "score": 57,
+   "first_seen": "2026-10-30",
+   "last_seen": "2026-10-30",
+   "price_history": [
+    [
+     "2026-10-30",
+     4182
+    ]
+   ],
+   "price_change": null
+  },
+  {
    "hotel": "Lanka Princess Hotel",
    "url": "https://www.billareisen.at/Reisen/Lanka+Princess-CMB14107P.html?bdid=ib&toid=da&ptid=DTS&ssnid=S27&clgid=D17G2627&pttid=PF&phidf=CMB14107P&pdaf=VIE&dft=apx&psdf=2027-07-01&pedf=2027-08-31&psdsf=2026-11-01&pedsf=2026-11-22&pnnfl=7&pnnfh=14&pbtf=ai&ptf=1&ps=pr&pdm=pp&psbbr=pna%3D2%26pnc%3D0",
    "image": "https://www.billareisen.at/pibe-media/der_atc/hotel/CMB14107B_W26-D17G2627_1.jpg?w=580&h=468",
@@ -142774,6 +143521,45 @@
    "price_change": 0
   },
   {
+   "hotel": "Süral Resort",
+   "url": "https://pauschal.ruefa.at/index.php?page=hotel&start=2027-08-17&until=2027-08-31&adults=1&cabinClass=economy&ankunftshafen=AYT&children=12-10&anzZimmer=1&abflughafen=VIE%20BTS&reisetag=2027-08-17&rq=1&rva=Q09S&bu=AYT7067K&gid=53099&pos=3",
+   "image": null,
+   "stars": 5.0,
+   "rating": 8.7,
+   "country": "Turecko",
+   "country_code": "TR",
+   "region": "Türkische Riviera",
+   "place": "Çolakli",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-08-17",
+   "date_to": "2027-08-31",
+   "nights": 14,
+   "price_total": 4308,
+   "price_original": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "price_exact": true,
+   "source": "ruefa",
+   "source_name": "Ruefa",
+   "watched": "Sural",
+   "continent": "Európa",
+   "discount_pct": null,
+   "price_note": null,
+   "id": "ruefa:f0dbcc25fd5f",
+   "score": 56,
+   "first_seen": "2026-10-30",
+   "last_seen": "2026-10-30",
+   "price_history": [
+    [
+     "2026-10-30",
+     4308
+    ]
+   ],
+   "price_change": null
+  },
+  {
    "hotel": "Golden Beach Cha Am Hotel",
    "url": "https://www.billareisen.at/Reisen/Golden+Beach+Cha+Am+Hotel-BKK30259P.html?bdid=ib&toid=dla&ptid=DDS&ssnid=S27&clgid=D13G2627&pttid=PF&phidf=BKK30259P&pdaf=VIE&dft=apx&psdf=2027-07-01&pedf=2027-08-31&psdsf=2026-11-01&pedsf=2026-11-22&pnnfl=7&pnnfh=14&pbtf=ai&ptf=1&ps=pr&pdm=pp&psbbr=pna%3D2%26pnc%3D0",
    "image": "https://www.billareisen.at/pibe-media/derl_atc/hotel/BKK30259B_W26-D13G2627_1.jpg?w=580&h=468",
@@ -143156,6 +143942,45 @@
     ]
    ],
    "price_change": 0
+  },
+  {
+   "hotel": "Royal Alhambra Palace",
+   "url": "https://pauschal.ruefa.at/index.php?page=hotel&start=2027-07-01&until=2027-07-11&adults=1&cabinClass=economy&ankunftshafen=AYT&children=12-10&anzZimmer=1&abflughafen=VIE%20BTS&reisetag=2027-07-01&rq=1&rva=VFVJRA==&bu=AYT41041&gid=239871&pos=4",
+   "image": null,
+   "stars": 5.0,
+   "rating": 8.7,
+   "country": "Turecko",
+   "country_code": "TR",
+   "region": "Türkische Riviera",
+   "place": "Çolakli",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-07-01",
+   "date_to": "2027-07-11",
+   "nights": 10,
+   "price_total": 4610,
+   "price_original": 5210,
+   "discount_label": null,
+   "pets_allowed": null,
+   "price_exact": true,
+   "source": "ruefa",
+   "source_name": "Ruefa",
+   "watched": "Royal Alhambra",
+   "continent": "Európa",
+   "discount_pct": 12,
+   "price_note": null,
+   "id": "ruefa:70ef4d81a81a",
+   "score": 56,
+   "first_seen": "2026-10-30",
+   "last_seen": "2026-10-30",
+   "price_history": [
+    [
+     "2026-10-30",
+     4610
+    ]
+   ],
+   "price_change": null
   },
   {
    "hotel": "RIU Palace Tikida Agadir",
@@ -148252,6 +149077,45 @@
     ]
    ],
    "price_change": 0
+  },
+  {
+   "hotel": "Royal Alhambra Palace",
+   "url": "https://pauschal.ruefa.at/index.php?page=hotel&start=2027-08-21&until=2027-08-31&adults=1&cabinClass=economy&ankunftshafen=AYT&children=12-10&anzZimmer=1&abflughafen=VIE%20BTS&reisetag=2027-08-21&rq=1&rva=VFVJRA==&bu=AYT41041&gid=239871&pos=4",
+   "image": null,
+   "stars": 5.0,
+   "rating": 8.7,
+   "country": "Turecko",
+   "country_code": "TR",
+   "region": "Türkische Riviera",
+   "place": "Çolakli",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-08-21",
+   "date_to": "2027-08-31",
+   "nights": 10,
+   "price_total": 4784,
+   "price_original": 5273,
+   "discount_label": null,
+   "pets_allowed": null,
+   "price_exact": true,
+   "source": "ruefa",
+   "source_name": "Ruefa",
+   "watched": "Royal Alhambra",
+   "continent": "Európa",
+   "discount_pct": 9,
+   "price_note": null,
+   "id": "ruefa:8947babf94aa",
+   "score": 54,
+   "first_seen": "2026-10-30",
+   "last_seen": "2026-10-30",
+   "price_history": [
+    [
+     "2026-10-30",
+     4784
+    ]
+   ],
+   "price_change": null
   },
   {
    "hotel": "Bahari Beach Hotel",
@@ -178424,6 +179288,86 @@
    "price_change": 0
   },
   {
+   "hotel": "Royal Alhambra Palace",
+   "url": "https://pauschal.ruefa.at/index.php?page=hotel&start=2027-07-01&until=2027-07-15&adults=1&cabinClass=economy&ankunftshafen=AYT&children=12-10&anzZimmer=1&abflughafen=VIE%20BTS&reisetag=2027-07-01&rq=1&rva=VFVJRA==&bu=AYT41041&gid=239871&pos=4",
+   "image": null,
+   "stars": 5.0,
+   "rating": 8.7,
+   "country": "Turecko",
+   "country_code": "TR",
+   "region": "Türkische Riviera",
+   "place": "Çolakli",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-07-01",
+   "date_to": "2027-07-15",
+   "nights": 14,
+   "price_total": 6139,
+   "price_original": 6697,
+   "discount_label": null,
+   "pets_allowed": null,
+   "price_exact": true,
+   "source": "ruefa",
+   "source_name": "Ruefa",
+   "watched": "Royal Alhambra",
+   "continent": "Európa",
+   "discount_pct": 8,
+   "price_note": null,
+   "id": "ruefa:c8492881c334",
+   "over_cap": true,
+   "score": 41,
+   "first_seen": "2026-10-30",
+   "last_seen": "2026-10-30",
+   "price_history": [
+    [
+     "2026-10-30",
+     6139
+    ]
+   ],
+   "price_change": null
+  },
+  {
+   "hotel": "Royal Alhambra Palace",
+   "url": "https://pauschal.ruefa.at/index.php?page=hotel&start=2027-08-17&until=2027-08-31&adults=1&cabinClass=economy&ankunftshafen=AYT&children=12-10&anzZimmer=1&abflughafen=VIE%20BTS&reisetag=2027-08-17&rq=1&rva=VFVJRA==&bu=AYT41041&gid=239871&pos=4",
+   "image": null,
+   "stars": 5.0,
+   "rating": 8.7,
+   "country": "Turecko",
+   "country_code": "TR",
+   "region": "Türkische Riviera",
+   "place": "Çolakli",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-08-17",
+   "date_to": "2027-08-31",
+   "nights": 14,
+   "price_total": 6336,
+   "price_original": 6825,
+   "discount_label": null,
+   "pets_allowed": null,
+   "price_exact": true,
+   "source": "ruefa",
+   "source_name": "Ruefa",
+   "watched": "Royal Alhambra",
+   "continent": "Európa",
+   "discount_pct": 7,
+   "price_note": null,
+   "id": "ruefa:d337afce6021",
+   "over_cap": true,
+   "score": 41,
+   "first_seen": "2026-10-30",
+   "last_seen": "2026-10-30",
+   "price_history": [
+    [
+     "2026-10-30",
+     6336
+    ]
+   ],
+   "price_change": null
+  },
+  {
    "hotel": "Hotel Sural Saray",
    "url": "https://www.satur.sk/produkt/sural-saray?strava=ultra-all-inclusive&doprava=letecky&odlet=BTS",
    "image": "https://www.satur.sk/media/cache/500x333/tour/201094/sural-sm-slider-5_65e105ec95274.jpeg",
@@ -189155,7 +190099,7 @@
  "watched": [
   {
    "term": "Sural",
-   "count": 9,
+   "count": 27,
    "links": [
     {
      "label": "všetky hotely v mieste Side",
@@ -189173,7 +190117,7 @@
   },
   {
    "term": "Royal Alhambra",
-   "count": 0,
+   "count": 6,
    "links": []
   }
  ]
