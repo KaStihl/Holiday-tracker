@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-30T16:43:12Z",
+ "generated_at": "2026-10-30T16:50:02Z",
  "criteria": {
   "adults": 1,
   "children_ages": [
@@ -279,11 +279,11 @@
    "status": "ok",
    "count": 391,
    "error": null,
-   "duration_s": 262.4,
+   "duration_s": 278.6,
    "watch": {
     "found": 3,
     "new": 0,
-    "seconds": 19.7,
+    "seconds": 20.8,
     "error": null
    }
   },
@@ -294,11 +294,11 @@
    "status": "ok",
    "count": 743,
    "error": null,
-   "duration_s": 135.3,
+   "duration_s": 138.2,
    "watch": {
     "found": 0,
     "new": 0,
-    "seconds": 12.5,
+    "seconds": 13.4,
     "error": null
    }
   },
@@ -318,11 +318,11 @@
    "status": "ok",
    "count": 783,
    "error": null,
-   "duration_s": 106.2,
+   "duration_s": 97.4,
    "watch": {
     "found": 0,
     "new": 0,
-    "seconds": 15.2,
+    "seconds": 12.1,
     "error": null
    }
   },
@@ -333,11 +333,11 @@
    "status": "ok",
    "count": 704,
    "error": null,
-   "duration_s": 110.3,
+   "duration_s": 93.6,
    "watch": {
     "found": 0,
     "new": 0,
-    "seconds": 15.4,
+    "seconds": 12.1,
     "error": null
    }
   },
@@ -397,11 +397,11 @@
    "status": "ok",
    "count": 463,
    "error": null,
-   "duration_s": 105.6,
+   "duration_s": 106.0,
    "watch": {
     "found": 24,
     "new": 24,
-    "seconds": 14.2,
+    "seconds": 14.3,
     "error": null
    }
   },
@@ -412,7 +412,7 @@
    "status": "ok",
    "count": 1008,
    "error": null,
-   "duration_s": 111.9
+   "duration_s": 159.7
   },
   {
    "id": "tui_at",
@@ -43281,7 +43281,7 @@
      2192
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Atlas",
@@ -54329,7 +54329,7 @@
      2076
     ]
    ],
-   "price_change": -36
+   "price_change": 0
   },
   {
    "hotel": "Minamark Resort & Spa",
@@ -67767,7 +67767,7 @@
      2775
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Nido del Aguila",
@@ -69865,7 +69865,7 @@
      2841
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Azuline Hotel Bahamas And Bahamas II",
@@ -76033,7 +76033,7 @@
      2934
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "FV Hotels Itaca Nausicaa",
