@@ -53,18 +53,6 @@ def dump(url, status, body):
         f.write(f"{_dump_n:03d} {status} {url}\n")
 
 
-_diag_seen = set()
-
-
-def diag(tag, obj):
-    """TEMPORARY (long-haul fixture collection): DOVOLENKA_DIAG=1 prints one sample per tag to the job log."""
-    if os.environ.get("DOVOLENKA_DIAG") != "1" or tag in _diag_seen:
-        return
-    _diag_seen.add(tag)
-    import json
-    print(f"DIAG {tag} " + (obj if isinstance(obj, str) else json.dumps(obj, ensure_ascii=False)))
-
-
 class RobotsDisallowed(Exception):
     pass
 

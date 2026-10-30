@@ -54,8 +54,6 @@ jobs:
         run: python -m pytest -q scraper/tests
 
       - name: Scrape travel agencies
-        env:
-          DOVOLENKA_DIAG: "1"  # TEMP: one sample per long-haul destination in the log
         run: |
           python scraper/run.py
           python scraper/build_html.py

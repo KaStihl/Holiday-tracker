@@ -22,7 +22,7 @@ from urllib.parse import parse_qs, parse_qsl, urlencode, urlsplit, urlunsplit
 
 from bs4 import BeautifulSoup
 
-from common import diag, get, norm_board, norm_country
+from common import get, norm_board, norm_country
 from config import approx_label, party_label, party_size, period_label
 
 NAME = "Čedok"
@@ -34,17 +34,20 @@ DESTINATIONS = {"turecko": "TR", "grecko": "GR", "cyprus": "CY", "spanielsko": "
                 "taliansko": "IT", "malta": "MT", "chorvatsko": "HR", "egypt": "EG"}
 # Long-haul / other non-European countries: one wide-length page (25 cheapest rates) each, to stay polite.
 # code -> slug candidates; an unknown slug answers an empty result (0 rates), then the next one is tried.
-# Confirmed 2026-10-30 (rates found): tunisko, maroko, spojene-arabske-emiraty, mauricius, seychely, thajsko,
-# indonezia, vietnam, dominikanska-republika, mexiko (= the geographicalIdentifiers country ids of the rates).
+# Confirmed 2026-10-30 (rates found): tunisko, maroko, spojene-arabske-emiraty, maldivy, mauricius, seychely,
+# thajsko, indonezia, vietnam, zanzibar, dominikanska-republika, mexiko (= geographicalIdentifiers country ids).
+# 0 rates for Jul–Aug from BTS/VIE (every candidate tried 2026-10-30): oman, jordansko, sri-lanka/srilanka,
+# kena/kenya, kapverdske-ostrovy/kapverdy, kuba, maledivy, tanzania – kept as one cheap request each in case
+# Čedok adds them.
 FAR = {"TN": ("tunisko",), "MA": ("maroko",), "AE": ("spojene-arabske-emiraty",), "OM": ("oman",),
-       "JO": ("jordansko",), "MV": ("maledivy", "maldivy"), "MU": ("mauricius",), "SC": ("seychely",),
-       "LK": ("sri-lanka", "srilanka"), "TH": ("thajsko",), "ID": ("indonezia",), "VN": ("vietnam",),
-       "TZ": ("tanzania", "zanzibar"), "KE": ("kena", "kenya"), "CV": ("kapverdske-ostrovy", "kapverdy"),
+       "JO": ("jordansko",), "MV": ("maldivy",), "MU": ("mauricius",), "SC": ("seychely",),
+       "LK": ("sri-lanka",), "TH": ("thajsko",), "ID": ("indonezia",), "VN": ("vietnam",),
+       "TZ": ("zanzibar", "tanzania"), "KE": ("kena",), "CV": ("kapverdske-ostrovy",),
        "DO": ("dominikanska-republika",), "MX": ("mexiko",), "CU": ("kuba",)}
 AIRPORTS = {"bratislava": "BTS", "vieden": "VIE", "viede": "VIE", "kosice": "KSC", "budapest": "BUD"}
 # (durationMin, durationMax) in days and max pages (25 rates each) per destination. One wide 8–15 query only ever
 # showed the cheapest stay, 7 nights; separate ranges give real 7, 10–11 and 14 night terms.
-# Budget (checked 2026-10-30): ≤ 9 x (2+1+1) + 18 FAR (+ ≤ 6 slug retries) + EXACT_MAX ≈ 90 requests per run.
+# Budget (checked 2026-10-30): ≤ 9 x (2+1+1) + 18 FAR + EXACT_MAX ≈ 84 requests per run.
 DURATIONS = [((8, 10), 2), ((11, 12), 1), ((15, 15), 1)]
 ADULTS = 2  # see module docstring
 EXACT_MAX = 30  # detail pages (~1 MB each) fetched per run for exact prices of the configured party
@@ -253,9 +256,6 @@ def _search_slug(cfg, slug, days, pages, far, offers, errors):
         print(f"[cedok] {slug} {days} p{page}: {len(rates)}/{count} rates, {len(got)} offers, nights={nights}"
               + (f", countries={sorted({o['country_code'] or '?' for o in got})}, "
                  f"prices={sorted(o['price_total'] for o in got)[:3]}" if far else ""))
-        if far and page == 1:
-            ids = sorted(set(re.findall(r'"(?:id|value|slug)":"([a-z0-9-]+)"[^{}]{0,160}?"(?:type|level)":"country"', html)))
-            diag("cedok-country-ids", " ".join(ids) or "-")  # TEMP: which country slugs the page knows
         offers += got
         if page == 1 and not rates:
             return False

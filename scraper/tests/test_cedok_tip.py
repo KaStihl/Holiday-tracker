@@ -130,8 +130,8 @@ def test_cedok_unknown_slug_tries_next_candidate(monkeypatch):
 
     def fake_get(url, params=None):
         calls.append(url)
-        return "<html></html>" if "/maledivy/" in url else far  # 0 rates for the first candidate
+        return "<html></html>" if "/zanzibar/" in url else far  # 0 rates for the first candidate
 
     monkeypatch.setattr(cedok, "get", fake_get)
-    cedok.search(dict(CONFIG, countries={"MV": 0.6}))
-    assert [u.split("/")[-2] for u in calls] == ["maledivy", "maldivy"]
+    cedok.search(dict(CONFIG, countries={"TZ": 0.6}))
+    assert [u.split("/")[-2] for u in calls] == ["zanzibar", "tanzania"]

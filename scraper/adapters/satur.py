@@ -34,12 +34,13 @@ PAGE_COUNTRY = {"turecko": "TR", "grecko": "GR", "cyprus": "CY", "taliansko": "I
 # Long-haul / non-European countries: one listing page per country (any departure airport and board, every
 # allowed length in one ?dlzka-pobytu list), departures outside nastavenia.yml are dropped by run.py.
 # Asked only for countries listed in nastavenia.yml destinations. An unknown slug does not 404: the site falls
-# back to the generic listing (checked 2026-10-30: "kapverdske-ostrovy" and "kuba" showed Greek hotels), so a
-# page with no card of the asked country is discarded and the next slug candidate (if any) is tried.
+# back to the generic listing, so a page with no card of the asked country is discarded and the next slug
+# candidate (if any) is tried. Checked 2026-10-30: kapverdske-ostrovy, kapverdy, kapverske-ostrovy and kuba all
+# showed Greek hotels – Satur sells no Kapverdy/Kuba (Kapverdy come via Kartago/Fischer), so they are left out.
 FAR = {"EG": "egypt", "TN": "tunisko", "MA": "maroko", "AE": "spojene-arabske-emiraty", "OM": "oman",
        "JO": "jordansko", "MV": "maldivy", "MU": "mauricius", "SC": "seychely", "LK": "sri-lanka", "TH": "thajsko",
-       "ID": "indonezia", "VN": "vietnam", "TZ": ("tanzania", "zanzibar"), "KE": "kena",
-       "CV": ("kapverdy", "kapverske-ostrovy"), "DO": "dominikanska-republika", "MX": "mexiko", "CU": ("kuba",)}
+       "ID": "indonezia", "VN": "vietnam", "TZ": "tanzania", "KE": "kena", "DO": "dominikanska-republika",
+       "MX": "mexiko"}
 
 DATES_RE = re.compile(r"(\d{1,2})\.(\d{1,2})\.(\d{4})?\s*-\s*(\d{1,2})\.(\d{1,2})\.(\d{4})")
 AIRPORTS = {"bratislava": "BTS", "viede": "VIE", "vieden": "VIE", "kosice": "KSC", "budapest": "BUD"}
@@ -144,7 +145,7 @@ def to_offer(c, transport, pets, party):
     orig = c["price_person_original"]
     return {
         "hotel": c["hotel"], "url": c["url"], "image": c["image"], "stars": c["stars"], "rating": c["rating"],
-        "country": c["country"], "country_code": norm_country(c["country"]), "region": c["region"],
+        "country": c["country"], "country_code": _country(c), "region": c["region"],
         "place": c["place"], "board": norm_board(c["board"]), "transport": "car" if car else "flight",
         "departure": None if car else dep, "date_from": d1.isoformat(), "date_to": d2.isoformat(),
         "nights": c["nights"] or (d2 - d1).days,
@@ -175,6 +176,11 @@ def pages_for(cfg):
             continue
         out.append((path, transport, pets, pages))
     return out
+
+
+def _country(c):
+    # round trips like "Bali – Silvester na ostrove bohov" may carry the country only in the title
+    return norm_country(c["country"]) or norm_country(c["hotel"])
 
 
 def far_pages(cfg):
@@ -218,7 +224,7 @@ def search(cfg):
                 print(f"[satur] {path}: {type(e).__name__} {str(e)[:120]}")
                 errors.append(f"{type(e).__name__}: {str(e)[:120]}")
                 continue
-            if cards and not any(norm_country(c["country"]) == code for c in cards):
+            if cards and not any(_country(c) == code for c in cards):
                 print(f"[satur] {code} {path}: slug not known to the site (generic listing, "
                       f"{cards[0]['country']} …), {len(cards)} cards discarded")
                 continue

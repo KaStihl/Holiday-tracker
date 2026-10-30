@@ -88,7 +88,7 @@ def test_search_uses_summer_filter(monkeypatch):
     assert len(calls) <= 80  # polite
     assert calls[0][1] == {"termin": "01.07.2027-31.08.2027", "dlzka-pobytu": 7}
     assert {c[1]["dlzka-pobytu"] for c in calls} == {7, "10,11", 14, "7,8,9,10,11,12,13,14"}
-    assert calls[-1][0] == satur.HOME + "/dovolenka/kuba/letecky"
+    assert calls[-1][0] == satur.HOME + "/dovolenka/mexiko/letecky"
     # no 10–11 night car terms exist, so car pages are only asked for 7 and 14 nights
     car = {p for p, t, _, _ in satur.PAGES if t == "car"}
     assert not [c for c in calls if c[1]["dlzka-pobytu"] == "10,11" and c[0].removeprefix(satur.HOME) in car]
@@ -164,6 +164,7 @@ def test_long_haul_slug_found(monkeypatch):
     html = (FX / "satur_far.html").read_text()
     calls = []
     monkeypatch.setattr(satur, "get", lambda url, params=None: calls.append(url) or html)
-    offers = satur.search(dict(CONFIG, transports=["flight"], countries={"MV": 0.6, "CU": 0.5}))
+    offers = satur.search(dict(CONFIG, transports=["flight"], countries={"MV": 0.6, "DO": 0.5}))
     assert satur.HOME + "/dovolenka/maldivy/letecky" in calls
+    assert [u for u in calls if u.endswith("/letecky")] == [satur.HOME + "/dovolenka/maldivy/letecky", satur.HOME + "/dovolenka/dominikanska-republika/letecky"]  # DO page (Maldives cards here) discarded, no more candidates
     assert "Bandos Maldives" in {o["hotel"] for o in offers}

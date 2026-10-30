@@ -31,6 +31,7 @@ Európa + Egypt/Tunisko/Maroko + vzdialené destinácie (SAE, Omán, Maldivy, Th
 | Čedok.sk | sťahované ponuky (letecky z BTS a VIE) |
 | TIP travel | sťahované, keď zverejnia leto 2027 |
 | Kartago Tours, Fischer | sťahované ponuky (JSON vyhľadávania, letecky z BTS a VIE, **presné ceny pre 1 dospelého + 2 deti**) |
+| _Vzdialené destinácie_ | Kartago/Fischer: krajiny z `nastavenia.yml`, ktoré sú v predaji (ID destinácií z ich API); Čedok a Satur: 1 stránka na krajinu (najlacnejšie termíny) |
 | Exim Tours | len odkaz – eximtours.sk presmerúva na kartago.sk (ponuky prichádzajú cez Kartago) |
 | Invia, Blue Style, Seneca, Koala, Firo | len odkazy (zákaz sťahovania / robots.txt / JavaScript) |
 
