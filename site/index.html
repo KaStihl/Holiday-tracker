@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Dovolenka tracker</title>
-  <meta name="description" content="Sledovanie cien dovoleniek First minute / Last minute – júl–august 2027, 1 dospelý + 2 deti, letecky alebo autom so psami.">
+  <meta name="description" content="Sledovanie cien dovoleniek First minute / Last minute – leto 2027, Európa aj exotika, letecky alebo autom so psami.">
   <meta name="robots" content="noindex">
   <meta name="color-scheme" content="light dark">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,17 +32,11 @@
           </div>
         </div>
       </div>
-      <ul class="criteria" aria-label="Kritériá vyhľadávania">
-        <li class="chip-c">👨‍👧‍👦 1 dospelý + 2 deti (10 a 12)</li>
-        <li class="chip-c">🌙 7–14 nocí</li>
-        <li class="chip-c">📅 júl–august 2027</li>
-        <li class="chip-c">💶 budget 3 000 €</li>
-        <li class="chip-c">🍹 All Inclusive</li>
-      </ul>
+      <ul class="criteria" id="criteria" aria-label="Kritériá vyhľadávania"></ul>
       <div class="transport" role="radiogroup" aria-label="Spôsob dopravy" id="transport">
         <button type="button" role="radio" data-transport="all" aria-checked="true">Všetko</button>
-        <button type="button" role="radio" data-transport="flight" aria-checked="false">✈️ Letecky <small>(bez psov)</small></button>
-        <button type="button" role="radio" data-transport="car" aria-checked="false">🚗 Autom <small>(so 2 psami)</small></button>
+        <button type="button" role="radio" data-transport="flight" aria-checked="false">✈️ Letecky <small id="t-flight-note"></small></button>
+        <button type="button" role="radio" data-transport="car" aria-checked="false">🚗 Autom <small id="t-car-note"></small></button>
       </div>
     </div>
   </header>
@@ -53,57 +47,133 @@
 
     <section aria-label="Súhrn" class="kpis" id="kpis"></section>
 
+    <section aria-labelledby="h-party" class="block party" id="party-block">
+      <div class="party-main">
+        <h2 id="h-party">Počet osôb</h2>
+        <div class="party-people" id="party-people" aria-hidden="true"></div>
+        <p class="party-text"><strong>Ceny sú pre:</strong> <span id="party-text"></span></p>
+        <p class="muted party-small" id="party-exact"></p>
+      </div>
+      <div class="party-side">
+        <div class="party-how">
+          <h3>Ako zmeniť počet osôb?</h3>
+          <p>Ceny sa sťahujú z cestoviek priamo pre túto skupinu, preto sa tu nedá prepnúť iný počet osôb. Zmeníte ho v súbore <code>nastavenia.yml</code> v GitHub repozitári (riadky <code>adults</code> = počet dospelých a <code>children_ages</code> = veky detí) a uložíte <em>Commit changes</em> – ceny sa stiahnu nanovo a stránka sa obnoví zhruba do 10 minút.</p>
+          <a class="btn" id="party-edit" href="https://github.com/KaStihl/Holiday-tracker/edit/main/nastavenia.yml" target="_blank" rel="noopener noreferrer">✏️ Upraviť nastavenia.yml ↗</a>
+        </div>
+        <div class="view-toggle" role="group" aria-label="Zobrazenie cien">
+          <span class="view-label">Zobraziť ceny</span>
+          <div class="seg">
+            <button type="button" data-view="total" aria-pressed="true">Spolu za skupinu</button>
+            <button type="button" data-view="pp" aria-pressed="false">Za osobu</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section aria-labelledby="h-cheap" class="block" id="cheap-block">
-      <h2 id="h-cheap">Najlacnejšie podľa destinácie</h2>
+      <div class="block-head">
+        <h2 id="h-cheap">Najlacnejšie podľa destinácie</h2>
+        <span class="muted" id="cheap-sub"></span>
+      </div>
       <div class="strip" id="cheap-strip"></div>
     </section>
 
     <details class="filters" id="filters-box" open>
-      <summary><h2>Filtre a zoradenie</h2> <span class="filter-count" id="filter-count"></span></summary>
-      <form id="filters" class="filters-grid" onsubmit="return false">
+      <summary><h2>Filtre</h2> <span class="filter-count" id="filter-count"></span> <span class="filter-results mono" id="filter-results"></span></summary>
+      <form id="filters" class="filters-grid" onsubmit="return false" role="search">
+        <div class="f-item f-wide">
+          <label for="f-q">Hľadať hotel, miesto alebo oblasť</label>
+          <input type="search" id="f-q" placeholder="napr. Hurghada, Rixos, Kréta…" autocomplete="off" maxlength="80">
+        </div>
+        <fieldset class="f-wide">
+          <legend>Kontinent / oblasť</legend>
+          <div class="chips" id="f-continents"></div>
+        </fieldset>
         <fieldset class="f-wide">
           <legend>Krajina</legend>
-          <div class="chips" id="f-countries"></div>
+          <div class="c-groups" id="f-countries"></div>
         </fieldset>
-        <div class="f-item">
-          <label for="f-price">Max. cena: <output id="f-price-out" class="mono">3 000 €</output></label>
-          <input type="range" id="f-price" min="500" max="4500" step="50" value="3000">
-        </div>
+        <fieldset class="f-item f-span2">
+          <legend>Cena spolu za skupinu</legend>
+          <div class="price-range">
+            <label class="range-row"><span>od</span> <input type="range" id="f-pmin" min="0" max="6000" step="50" value="0" aria-label="Minimálna cena"> <output id="f-pmin-out" class="mono" for="f-pmin"></output></label>
+            <label class="range-row"><span>do</span> <input type="range" id="f-pmax" min="0" max="6000" step="50" value="6000" aria-label="Maximálna cena"> <output id="f-pmax-out" class="mono" for="f-pmax"></output></label>
+            <div class="price-track" id="price-track" aria-hidden="true"><span class="pt-sel"></span><span class="pt-bud"></span></div>
+            <div class="muted f-hint" id="f-price-pp"></div>
+          </div>
+        </fieldset>
+        <fieldset class="f-item">
+          <legend>Termín odchodu</legend>
+          <div class="pair">
+            <label>od <input type="date" id="f-df"></label>
+            <label>do <input type="date" id="f-dt"></label>
+          </div>
+        </fieldset>
         <fieldset class="f-item">
           <legend>Počet nocí</legend>
-          <div class="nights">
+          <div class="pair">
             <label>od <select id="f-nmin"></select></label>
             <label>do <select id="f-nmax"></select></label>
           </div>
         </fieldset>
+        <fieldset class="f-item f-span2">
+          <legend>Strava</legend>
+          <div class="chips" id="f-boards"></div>
+        </fieldset>
         <div class="f-item">
-          <label for="f-dep">Odlet z</label>
-          <select id="f-dep"><option value="">Všetky letiská</option></select>
+          <label for="f-stars">Hviezdičky</label>
+          <select id="f-stars"></select>
         </div>
         <div class="f-item">
-          <label for="f-sort">Zoradiť podľa</label>
-          <select id="f-sort">
-            <option value="score">Skóre</option>
-            <option value="price">Cena (od najnižšej)</option>
-            <option value="discount">Zľava (najväčšia)</option>
-            <option value="date">Dátum odchodu</option>
-            <option value="drop">Najväčší pokles ceny</option>
-          </select>
+          <label for="f-rating">Hodnotenie hostí</label>
+          <select id="f-rating"></select>
         </div>
-        <div class="f-item f-checks">
-          <label class="check"><input type="checkbox" id="f-ai" checked> Len All Inclusive (AI / UAI)</label>
-          <label class="check"><input type="checkbox" id="f-disc"> Len zľavy (first / last minute)</label>
-        </div>
-        <div class="f-item f-reset">
-          <button type="button" class="btn-ghost" id="f-reset">Zrušiť filtre</button>
-        </div>
+        <fieldset class="f-item">
+          <legend>Doprava</legend>
+          <div class="chips">
+            <button type="button" class="chip" data-transport="all" aria-pressed="true">Všetko</button>
+            <button type="button" class="chip" data-transport="flight" aria-pressed="false">✈️ Letecky</button>
+            <button type="button" class="chip" data-transport="car" aria-pressed="false">🚗 Autom</button>
+          </div>
+        </fieldset>
+        <fieldset class="f-item">
+          <legend>Odletové letisko</legend>
+          <div class="chips" id="f-deps"></div>
+        </fieldset>
+        <fieldset class="f-item f-span2">
+          <legend>Cestovka</legend>
+          <div class="chips" id="f-srcs"></div>
+        </fieldset>
+        <fieldset class="f-wide">
+          <legend>Ďalšie</legend>
+          <div class="f-checks">
+            <label class="check"><input type="checkbox" id="f-ex"> <span id="f-ex-label">Len presné ceny pre našu skupinu</span></label>
+            <label class="check"><input type="checkbox" id="f-disc"> Len so zľavou (first / last minute)</label>
+            <label class="check"><input type="checkbox" id="f-dog"> Len so psami (autom, psy povolené)</label>
+            <label class="check"><input type="checkbox" id="f-drop"> Len zlacnené od minula</label>
+          </div>
+        </fieldset>
       </form>
     </details>
 
     <section aria-labelledby="h-offers" class="block" id="ponuky" tabindex="-1">
-      <div class="block-head">
+      <div class="block-head results-head">
         <h2 id="h-offers">Ponuky</h2>
         <span class="muted" id="result-count" aria-live="polite"></span>
+        <div class="results-tools">
+          <label class="sort"><span>Zoradiť</span> <select id="f-sort"></select></label>
+          <div class="seg seg-sm" role="group" aria-label="Zobrazenie cien">
+            <button type="button" data-view="total" aria-pressed="true">Spolu</button>
+            <button type="button" data-view="pp" aria-pressed="false">Za osobu</button>
+          </div>
+        </div>
+      </div>
+      <div class="pills-bar" id="pills-bar" hidden>
+        <span class="pills-label">Aktívne filtre:</span>
+        <div class="pills" id="pills"></div>
+        <span class="muted" id="pills-empty">žiadne – zobrazujú sa všetky ponuky</span>
+        <button type="button" class="btn-ghost btn-sm" id="f-reset">Zrušiť všetky filtre</button>
+        <button type="button" class="btn-ghost btn-sm" id="f-defaults" title="Cena do budgetu a preferovaná strava">Obnoviť predvolené</button>
       </div>
       <div id="offers" class="offers"></div>
     </section>
@@ -126,7 +196,7 @@
   </main>
 
   <footer class="wrap foot">
-    <p>Ceny sú za celú skupinu (1 dospelý + 2 deti) a pochádzajú z verejných stránok cestoviek – pred rezerváciou ich vždy overte priamo u predajcu. Dáta sa obnovujú automaticky 2× denne (ráno a večer).</p>
+    <p>Ceny sú za celú skupinu (<span id="foot-party">podľa nastavení</span>) a pochádzajú z verejných stránok cestoviek – pred rezerváciou ich vždy overte priamo u predajcu. Dáta sa obnovujú automaticky 2× denne (ráno a večer).</p>
   </footer>
 
   <template id="tpl-offer">
@@ -144,6 +214,8 @@
       <div class="offer-price">
         <div class="price-row"><s class="price-orig mono"></s><span class="disc-badge"></span></div>
         <div class="price-total mono"></div>
+        <div class="price-sub"></div>
+        <div class="price-note"></div>
         <div class="price-trend"></div>
         <div class="price-warn"></div>
         <a class="btn" target="_blank" rel="noopener noreferrer">Zobraziť ponuku</a>

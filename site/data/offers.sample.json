@@ -10,7 +10,23 @@
   "date_to": "2027-08-31",
   "nights_min": 7,
   "nights_max": 14,
-  "budget_eur": 3000
+  "budget": 3000,
+  "price_cap": 5500,
+  "boards_preferred": [
+   "UAI",
+   "AI"
+  ],
+  "departures": [
+   "BTS",
+   "VIE",
+   "BUD",
+   "KSC"
+  ],
+  "transports": [
+   "flight",
+   "car"
+  ],
+  "dogs": 2
  },
  "sources": [
   {
@@ -18,9 +34,27 @@
    "name": "Ukážka (fake)",
    "home": "https://example.com",
    "status": "ok",
-   "count": 26,
+   "count": 16,
    "error": null,
    "duration_s": 0.4
+  },
+  {
+   "id": "ukazka2",
+   "name": "Ukážka 2 (fake)",
+   "home": "https://example.com",
+   "status": "ok",
+   "count": 16,
+   "error": null,
+   "duration_s": 1.2
+  },
+  {
+   "id": "ukazka3",
+   "name": "Ukážka 3 (fake)",
+   "home": "https://example.com",
+   "status": "ok",
+   "count": 15,
+   "error": null,
+   "duration_s": 0.9
   },
   {
    "id": "invia",
@@ -132,12 +166,14 @@
      1897
     ]
    ],
-   "price_change": 0
+   "price_change": 0,
+   "continent": "Európa",
+   "price_exact": true
   },
   {
    "id": "ukazka:fa94ac07f561",
-   "source": "ukazka",
-   "source_name": "Ukážka (fake)",
+   "source": "ukazka2",
+   "source_name": "Ukážka 2 (fake)",
    "hotel": "Ukážkový hotel 2",
    "stars": 3.0,
    "rating": 9.2,
@@ -191,12 +227,15 @@
      2685
     ]
    ],
-   "price_change": 130
+   "price_change": 130,
+   "continent": "Európa",
+   "price_exact": false,
+   "price_note": "orientačne: cena za osobu pri 2 dospelých × 3"
   },
   {
    "id": "ukazka:db60bdda0355",
-   "source": "ukazka",
-   "source_name": "Ukážka (fake)",
+   "source": "ukazka3",
+   "source_name": "Ukážka 3 (fake)",
    "hotel": "Ukážkový hotel 3",
    "stars": 5.0,
    "rating": 7.8,
@@ -258,7 +297,9 @@
      2245
     ]
    ],
-   "price_change": 160
+   "price_change": 160,
+   "continent": "Európa",
+   "price_exact": true
   },
   {
    "id": "ukazka:69a8637f6b34",
@@ -313,12 +354,13 @@
      2216
     ]
    ],
-   "price_change": -250
+   "price_change": -250,
+   "price_exact": true
   },
   {
    "id": "ukazka:48d7c9cd6c18",
-   "source": "ukazka",
-   "source_name": "Ukážka (fake)",
+   "source": "ukazka2",
+   "source_name": "Ukážka 2 (fake)",
    "hotel": "Ukážkový <b>resort</b> & spa \"Mare\" 5",
    "stars": 4.0,
    "rating": 7.8,
@@ -352,12 +394,15 @@
      3538
     ]
    ],
-   "price_change": -150
+   "price_change": -150,
+   "continent": "Európa",
+   "price_exact": false,
+   "price_note": "orientačne: cena za osobu pri 2 dospelých × 3"
   },
   {
    "id": "ukazka:60bde284604a",
-   "source": "ukazka",
-   "source_name": "Ukážka (fake)",
+   "source": "ukazka3",
+   "source_name": "Ukážka 3 (fake)",
    "hotel": "Ukážkový hotel 6",
    "stars": 4.0,
    "rating": 8.9,
@@ -407,7 +452,9 @@
      2017
     ]
    ],
-   "price_change": -210
+   "price_change": -210,
+   "continent": "Európa",
+   "price_exact": true
   },
   {
    "id": "ukazka:a3705fcb2be1",
@@ -470,12 +517,14 @@
      2968
     ]
    ],
-   "price_change": -250
+   "price_change": -250,
+   "continent": "Európa",
+   "price_exact": true
   },
   {
    "id": "ukazka:e3990d2293a4",
-   "source": "ukazka",
-   "source_name": "Ukážka (fake)",
+   "source": "ukazka2",
+   "source_name": "Ukážka 2 (fake)",
    "hotel": "Ukážkový hotel 8",
    "stars": 3.5,
    "rating": 8.9,
@@ -493,7 +542,7 @@
    "price_original": null,
    "discount_pct": null,
    "discount_label": null,
-   "pets_allowed": null,
+   "pets_allowed": false,
    "image": null,
    "url": "https://example.com/ukazka/ponuka-8",
    "score": 90,
@@ -529,12 +578,14 @@
      2712
     ]
    ],
-   "price_change": 50
+   "price_change": 50,
+   "price_exact": false,
+   "price_note": "orientačne: cena za osobu pri 2 dospelých × 3"
   },
   {
    "id": "ukazka:319ad1af24ab",
-   "source": "ukazka",
-   "source_name": "Ukážka (fake)",
+   "source": "ukazka3",
+   "source_name": "Ukážka 3 (fake)",
    "hotel": "Ukážkový hotel 9",
    "stars": 3.0,
    "rating": 8.9,
@@ -572,7 +623,9 @@
      2645
     ]
    ],
-   "price_change": 40
+   "price_change": 40,
+   "continent": "Európa",
+   "price_exact": true
   },
   {
    "id": "ukazka:15bceba84718",
@@ -627,12 +680,14 @@
      3416
     ]
    ],
-   "price_change": -300
+   "price_change": -300,
+   "continent": "Európa",
+   "price_exact": true
   },
   {
    "id": "ukazka:d37fa15d2d9a",
-   "source": "ukazka",
-   "source_name": "Ukážka (fake)",
+   "source": "ukazka2",
+   "source_name": "Ukážka 2 (fake)",
    "hotel": "Ukážkový hotel 11",
    "stars": 4.0,
    "rating": 9.2,
@@ -686,12 +741,15 @@
      2124
     ]
    ],
-   "price_change": 320
+   "price_change": 320,
+   "continent": "Európa",
+   "price_exact": false,
+   "price_note": "orientačne: cena za osobu pri 2 dospelých × 3"
   },
   {
    "id": "ukazka:aa8e41dc4ae8",
-   "source": "ukazka",
-   "source_name": "Ukážka (fake)",
+   "source": "ukazka3",
+   "source_name": "Ukážka 3 (fake)",
    "hotel": "Ukážkový hotel 12",
    "stars": 4.0,
    "rating": 7.8,
@@ -725,7 +783,8 @@
      2115
     ]
    ],
-   "price_change": -220
+   "price_change": -220,
+   "price_exact": true
   },
   {
    "id": "ukazka:35e579f8038a",
@@ -788,12 +847,14 @@
      2203
     ]
    ],
-   "price_change": 220
+   "price_change": 220,
+   "continent": "Európa",
+   "price_exact": true
   },
   {
    "id": "ukazka:4a437cb3146b",
-   "source": "ukazka",
-   "source_name": "Ukážka (fake)",
+   "source": "ukazka2",
+   "source_name": "Ukážka 2 (fake)",
    "hotel": "Ukážkový hotel 14",
    "stars": 3.5,
    "rating": 8.4,
@@ -855,12 +916,15 @@
      3863
     ]
    ],
-   "price_change": -120
+   "price_change": -120,
+   "continent": "Európa",
+   "price_exact": false,
+   "price_note": "orientačne: cena za osobu pri 2 dospelých × 3"
   },
   {
    "id": "ukazka:e827094f7e51",
-   "source": "ukazka",
-   "source_name": "Ukážka (fake)",
+   "source": "ukazka3",
+   "source_name": "Ukážka 3 (fake)",
    "hotel": "Ukážkový hotel 15",
    "stars": 5.0,
    "rating": null,
@@ -902,7 +966,9 @@
      2613
     ]
    ],
-   "price_change": -70
+   "price_change": -70,
+   "continent": "Európa",
+   "price_exact": true
   },
   {
    "id": "ukazka:8acba18b8dba",
@@ -957,12 +1023,13 @@
      4178
     ]
    ],
-   "price_change": 70
+   "price_change": 70,
+   "price_exact": true
   },
   {
    "id": "ukazka:cde226940c6d",
-   "source": "ukazka",
-   "source_name": "Ukážka (fake)",
+   "source": "ukazka2",
+   "source_name": "Ukážka 2 (fake)",
    "hotel": "Ukážkový hotel 17",
    "stars": 4.0,
    "rating": null,
@@ -1004,12 +1071,15 @@
      2047
     ]
    ],
-   "price_change": 40
+   "price_change": 40,
+   "continent": "Európa",
+   "price_exact": false,
+   "price_note": "orientačne: cena za osobu pri 2 dospelých × 3"
   },
   {
    "id": "ukazka:3c6ece5d3c80",
-   "source": "ukazka",
-   "source_name": "Ukážka (fake)",
+   "source": "ukazka3",
+   "source_name": "Ukážka 3 (fake)",
    "hotel": "Ukážkový hotel 18",
    "stars": 4.5,
    "rating": 9.2,
@@ -1067,7 +1137,9 @@
      1548
     ]
    ],
-   "price_change": -140
+   "price_change": -140,
+   "continent": "Európa",
+   "price_exact": true
   },
   {
    "id": "ukazka:98f8f274b74c",
@@ -1110,12 +1182,14 @@
      2120
     ]
    ],
-   "price_change": -220
+   "price_change": -220,
+   "continent": "Európa",
+   "price_exact": true
   },
   {
    "id": "ukazka:6bcfe4cf3750",
-   "source": "ukazka",
-   "source_name": "Ukážka (fake)",
+   "source": "ukazka2",
+   "source_name": "Ukážka 2 (fake)",
    "hotel": "Ukážkový hotel 20",
    "stars": 4.0,
    "rating": 9.2,
@@ -1153,12 +1227,14 @@
      2762
     ]
    ],
-   "price_change": -130
+   "price_change": -130,
+   "price_exact": false,
+   "price_note": "orientačne: cena za osobu pri 2 dospelých × 3"
   },
   {
    "id": "ukazka:c2fc49f920d4",
-   "source": "ukazka",
-   "source_name": "Ukážka (fake)",
+   "source": "ukazka3",
+   "source_name": "Ukážka 3 (fake)",
    "hotel": "Ukážkový hotel 21",
    "stars": 3.5,
    "rating": 7.8,
@@ -1188,7 +1264,9 @@
      3791
     ]
    ],
-   "price_change": null
+   "price_change": null,
+   "continent": "Európa",
+   "price_exact": true
   },
   {
    "id": "ukazka:afe8ffc30184",
@@ -1255,12 +1333,14 @@
      2597
     ]
    ],
-   "price_change": 10
+   "price_change": 10,
+   "continent": "Európa",
+   "price_exact": true
   },
   {
    "id": "ukazka:6feaedde0f29",
-   "source": "ukazka",
-   "source_name": "Ukážka (fake)",
+   "source": "ukazka2",
+   "source_name": "Ukážka 2 (fake)",
    "hotel": "Ukážkový hotel 23",
    "stars": 4.5,
    "rating": 8.9,
@@ -1302,12 +1382,15 @@
      3770
     ]
    ],
-   "price_change": -280
+   "price_change": -280,
+   "continent": "Európa",
+   "price_exact": false,
+   "price_note": "orientačne: cena za osobu pri 2 dospelých × 3"
   },
   {
    "id": "ukazka:182c2a4d97de",
-   "source": "ukazka",
-   "source_name": "Ukážka (fake)",
+   "source": "ukazka3",
+   "source_name": "Ukážka 3 (fake)",
    "hotel": "Ukážkový hotel 24",
    "stars": 4.0,
    "rating": null,
@@ -1365,7 +1448,8 @@
      2261
     ]
    ],
-   "price_change": 160
+   "price_change": 160,
+   "price_exact": true
   },
   {
    "id": "ukazka:52747f71f30c",
@@ -1428,12 +1512,14 @@
      1649
     ]
    ],
-   "price_change": 0
+   "price_change": 0,
+   "continent": "Európa",
+   "price_exact": true
   },
   {
    "id": "ukazka:86797a36e2df",
-   "source": "ukazka",
-   "source_name": "Ukážka (fake)",
+   "source": "ukazka2",
+   "source_name": "Ukážka 2 (fake)",
    "hotel": "Ukážkový hotel 26",
    "stars": 4.5,
    "rating": null,
@@ -1491,7 +1577,968 @@
      1779
     ]
    ],
-   "price_change": -150
+   "price_change": -150,
+   "continent": "Európa",
+   "price_exact": false,
+   "price_note": "orientačne: cena za osobu pri 2 dospelých × 3"
+  },
+  {
+   "id": "ukazka:a1d9043c7a53",
+   "source": "ukazka",
+   "source_name": "Ukážka (fake)",
+   "hotel": "Ukážkový resort Hurghada",
+   "stars": 3.0,
+   "rating": 8.6,
+   "country": "Egypt",
+   "country_code": "EG",
+   "region": "Červené more",
+   "place": "Hurghada",
+   "board": "UAI",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-07-13",
+   "date_to": "2027-07-22",
+   "nights": 9,
+   "price_total": 2490,
+   "price_original": null,
+   "discount_pct": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "image": null,
+   "url": "https://example.com/ukazka/daleka-1",
+   "score": 67,
+   "first_seen": "2026-10-18",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-18",
+     2490
+    ]
+   ],
+   "price_change": 140,
+   "price_exact": true,
+   "continent": "Afrika"
+  },
+  {
+   "id": "ukazka:f314d86b1f16",
+   "source": "ukazka2",
+   "source_name": "Ukážka 2 (fake)",
+   "hotel": "Ukážkový resort Marsa Alam",
+   "stars": 4.0,
+   "rating": 7.4,
+   "country": "Egypt",
+   "country_code": "EG",
+   "region": "Červené more",
+   "place": "Marsa Alam",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "BTS",
+   "date_from": "2027-07-02",
+   "date_to": "2027-07-09",
+   "nights": 7,
+   "price_total": 1590,
+   "price_original": 1939,
+   "discount_pct": 18,
+   "discount_label": "First minute",
+   "pets_allowed": null,
+   "image": null,
+   "url": "https://example.com/ukazka/daleka-2",
+   "score": 65,
+   "first_seen": "2026-10-18",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-18",
+     1590
+    ],
+    [
+     "2026-10-19",
+     1590
+    ],
+    [
+     "2026-10-20",
+     1590
+    ],
+    [
+     "2026-10-21",
+     1590
+    ]
+   ],
+   "price_change": null,
+   "price_exact": true
+  },
+  {
+   "id": "ukazka:ab273462be22",
+   "source": "ukazka3",
+   "source_name": "Ukážka 3 (fake)",
+   "hotel": "Ukážkový resort Djerba",
+   "stars": null,
+   "rating": 7.4,
+   "country": "Tunisko",
+   "country_code": "TN",
+   "region": "Djerba",
+   "place": "Djerba",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "BUD",
+   "date_from": "2027-07-27",
+   "date_to": "2027-08-06",
+   "nights": 10,
+   "price_total": 2390,
+   "price_original": null,
+   "discount_pct": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "image": null,
+   "url": "https://example.com/ukazka/daleka-3",
+   "score": 66,
+   "first_seen": "2026-10-18",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-18",
+     2450
+    ],
+    [
+     "2026-10-19",
+     2390
+    ]
+   ],
+   "price_change": -60,
+   "price_exact": false,
+   "continent": "Afrika",
+   "price_note": "orientačne: cena pre 2 dospelých prepočítaná na 1 dospelého + 2 deti"
+  },
+  {
+   "id": "ukazka:5c934d77777b",
+   "source": "ukazka",
+   "source_name": "Ukážka (fake)",
+   "hotel": "Ukážkový resort Santa Maria",
+   "stars": 5.0,
+   "rating": 8.1,
+   "country": "Kapverdy",
+   "country_code": "CV",
+   "region": "Sal",
+   "place": "Santa Maria",
+   "board": "HB",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-08-02",
+   "date_to": "2027-08-13",
+   "nights": 11,
+   "price_total": 3300,
+   "price_original": 4400,
+   "discount_pct": 25,
+   "discount_label": "Last minute",
+   "pets_allowed": null,
+   "image": null,
+   "url": "https://example.com/ukazka/daleka-4",
+   "score": 64,
+   "first_seen": "2026-10-18",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-18",
+     3480
+    ],
+    [
+     "2026-10-19",
+     3300
+    ]
+   ],
+   "price_change": -180,
+   "price_exact": true
+  },
+  {
+   "id": "ukazka:60953d0570ef",
+   "source": "ukazka2",
+   "source_name": "Ukážka 2 (fake)",
+   "hotel": "Ukážkový resort Diani Beach",
+   "stars": null,
+   "rating": 9.4,
+   "country": "Keňa",
+   "country_code": "KE",
+   "region": "Mombasa",
+   "place": "Diani Beach",
+   "board": "BB",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-08-18",
+   "date_to": "2027-08-25",
+   "nights": 7,
+   "price_total": 5290,
+   "price_original": null,
+   "discount_pct": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "image": null,
+   "url": "https://example.com/ukazka/daleka-5",
+   "score": 70,
+   "first_seen": "2026-10-18",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-18",
+     5290
+    ]
+   ],
+   "price_change": 140,
+   "price_exact": true,
+   "continent": "Afrika"
+  },
+  {
+   "id": "ukazka:5aa2fcd4f885",
+   "source": "ukazka3",
+   "source_name": "Ukážka 3 (fake)",
+   "hotel": "Ukážkový resort Nungwi",
+   "stars": null,
+   "rating": 8.1,
+   "country": "Tanzánia",
+   "country_code": "TZ",
+   "region": "Zanzibar",
+   "place": "Nungwi",
+   "board": "FB",
+   "transport": "flight",
+   "departure": "BTS",
+   "date_from": "2027-08-04",
+   "date_to": "2027-08-12",
+   "nights": 8,
+   "price_total": 4390,
+   "price_original": null,
+   "discount_pct": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "image": null,
+   "url": "https://example.com/ukazka/daleka-6",
+   "score": 61,
+   "first_seen": "2026-10-18",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-18",
+     4390
+    ],
+    [
+     "2026-10-19",
+     4390
+    ],
+    [
+     "2026-10-20",
+     4390
+    ],
+    [
+     "2026-10-21",
+     4390
+    ],
+    [
+     "2026-10-22",
+     4390
+    ]
+   ],
+   "price_change": null,
+   "price_exact": false,
+   "continent": "Afrika",
+   "price_note": "orientačne: cena pre 2 dospelých prepočítaná na 1 dospelého + 2 deti"
+  },
+  {
+   "id": "ukazka:df39bd77c14a",
+   "source": "ukazka",
+   "source_name": "Ukážka (fake)",
+   "hotel": "Ukážkový resort Dubaj",
+   "stars": 4.0,
+   "rating": 8.1,
+   "country": "SAE",
+   "country_code": "AE",
+   "region": "Dubaj",
+   "place": "Dubaj",
+   "board": "RO",
+   "transport": "flight",
+   "departure": "BUD",
+   "date_from": "2027-08-11",
+   "date_to": "2027-08-23",
+   "nights": 12,
+   "price_total": 4090,
+   "price_original": 4988,
+   "discount_pct": 18,
+   "discount_label": "First minute",
+   "pets_allowed": null,
+   "image": null,
+   "url": "https://example.com/ukazka/daleka-7",
+   "score": 74,
+   "first_seen": "2026-10-18",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-18",
+     4270
+    ],
+    [
+     "2026-10-19",
+     4270
+    ],
+    [
+     "2026-10-20",
+     4090
+    ]
+   ],
+   "price_change": -180,
+   "price_exact": true,
+   "continent": "Blízky východ"
+  },
+  {
+   "id": "ukazka:c4b598166a03",
+   "source": "ukazka2",
+   "source_name": "Ukážka 2 (fake)",
+   "hotel": "Ukážkový resort Ras Al Khaimah",
+   "stars": 5.0,
+   "rating": 8.6,
+   "country": "SAE",
+   "country_code": "AE",
+   "region": "Ras Al Khaimah",
+   "place": "Ras Al Khaimah",
+   "board": "UAI",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-07-03",
+   "date_to": "2027-07-17",
+   "nights": 14,
+   "price_total": 4449,
+   "price_original": 5932,
+   "discount_pct": 25,
+   "discount_label": "Last minute",
+   "pets_allowed": null,
+   "image": null,
+   "url": "https://example.com/ukazka/daleka-8",
+   "score": 68,
+   "first_seen": "2026-10-18",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-18",
+     4629
+    ],
+    [
+     "2026-10-19",
+     4629
+    ],
+    [
+     "2026-10-20",
+     4629
+    ],
+    [
+     "2026-10-21",
+     4449
+    ]
+   ],
+   "price_change": -180,
+   "price_exact": true
+  },
+  {
+   "id": "ukazka:7bc0d607d27e",
+   "source": "ukazka3",
+   "source_name": "Ukážka 3 (fake)",
+   "hotel": "Ukážkový resort Salalah",
+   "stars": 5.0,
+   "rating": 7.4,
+   "country": "Omán",
+   "country_code": "OM",
+   "region": "Dhofar",
+   "place": "Salalah",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-07-17",
+   "date_to": "2027-07-24",
+   "nights": 7,
+   "price_total": 3900,
+   "price_original": 4333,
+   "discount_pct": 10,
+   "discount_label": "First minute",
+   "pets_allowed": null,
+   "image": null,
+   "url": "https://example.com/ukazka/daleka-9",
+   "score": 91,
+   "first_seen": "2026-10-18",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-18",
+     4220
+    ],
+    [
+     "2026-10-19",
+     3900
+    ]
+   ],
+   "price_change": -320,
+   "price_exact": false,
+   "continent": "Blízky východ",
+   "price_note": "orientačne: cena pre 2 dospelých prepočítaná na 1 dospelého + 2 deti"
+  },
+  {
+   "id": "ukazka:5dbd9ed51308",
+   "source": "ukazka",
+   "source_name": "Ukážka (fake)",
+   "hotel": "Ukážkový resort Akaba",
+   "stars": 4.5,
+   "rating": 9.4,
+   "country": "Jordánsko",
+   "country_code": "JO",
+   "region": "Akaba",
+   "place": "Akaba",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "BTS",
+   "date_from": "2027-07-25",
+   "date_to": "2027-08-06",
+   "nights": 12,
+   "price_total": 4390,
+   "price_original": 4878,
+   "discount_pct": 10,
+   "discount_label": "First minute",
+   "pets_allowed": null,
+   "image": null,
+   "url": "https://example.com/ukazka/daleka-10",
+   "score": 61,
+   "first_seen": "2026-10-18",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-18",
+     4450
+    ],
+    [
+     "2026-10-19",
+     4450
+    ],
+    [
+     "2026-10-20",
+     4390
+    ]
+   ],
+   "price_change": -60,
+   "price_exact": true,
+   "continent": "Blízky východ"
+  },
+  {
+   "id": "ukazka:3d9ddc6d6161",
+   "source": "ukazka2",
+   "source_name": "Ukážka 2 (fake)",
+   "hotel": "Ukážkový resort Phuket",
+   "stars": 3.0,
+   "rating": 7.4,
+   "country": "Thajsko",
+   "country_code": "TH",
+   "region": "Phuket",
+   "place": "Phuket",
+   "board": "HB",
+   "transport": "flight",
+   "departure": "BUD",
+   "date_from": "2027-08-03",
+   "date_to": "2027-08-14",
+   "nights": 11,
+   "price_total": 5200,
+   "price_original": 5778,
+   "discount_pct": 10,
+   "discount_label": "First minute",
+   "pets_allowed": null,
+   "image": null,
+   "url": "https://example.com/ukazka/daleka-11",
+   "score": 76,
+   "first_seen": "2026-10-18",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-18",
+     5260
+    ],
+    [
+     "2026-10-19",
+     5260
+    ],
+    [
+     "2026-10-20",
+     5260
+    ],
+    [
+     "2026-10-21",
+     5200
+    ]
+   ],
+   "price_change": -60,
+   "price_exact": true,
+   "continent": "Ázia"
+  },
+  {
+   "id": "ukazka:1e8ea8bc7a90",
+   "source": "ukazka3",
+   "source_name": "Ukážka 3 (fake)",
+   "hotel": "Ukážkový resort Bentota",
+   "stars": 4.5,
+   "rating": 7.4,
+   "country": "Srí Lanka",
+   "country_code": "LK",
+   "region": "Západná provincia",
+   "place": "Bentota",
+   "board": "BB",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-08-19",
+   "date_to": "2027-08-31",
+   "nights": 12,
+   "price_total": 4749,
+   "price_original": 5277,
+   "discount_pct": 10,
+   "discount_label": "First minute",
+   "pets_allowed": null,
+   "image": null,
+   "url": "https://example.com/ukazka/daleka-12",
+   "score": 90,
+   "first_seen": "2026-10-18",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-18",
+     5069
+    ],
+    [
+     "2026-10-19",
+     5069
+    ],
+    [
+     "2026-10-20",
+     5069
+    ],
+    [
+     "2026-10-21",
+     5069
+    ],
+    [
+     "2026-10-22",
+     5069
+    ],
+    [
+     "2026-10-23",
+     4749
+    ]
+   ],
+   "price_change": -320,
+   "price_exact": false,
+   "continent": "Ázia",
+   "price_note": "orientačne: cena pre 2 dospelých prepočítaná na 1 dospelého + 2 deti"
+  },
+  {
+   "id": "ukazka:c83beb2ac46d",
+   "source": "ukazka",
+   "source_name": "Ukážka (fake)",
+   "hotel": "Ukážkový resort Phu Quoc",
+   "stars": 4.5,
+   "rating": 8.1,
+   "country": "Vietnam",
+   "country_code": "VN",
+   "region": "Kien Giang",
+   "place": "Phu Quoc",
+   "board": "FB",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-08-06",
+   "date_to": "2027-08-16",
+   "nights": 10,
+   "price_total": 4500,
+   "price_original": 5488,
+   "discount_pct": 18,
+   "discount_label": "First minute",
+   "pets_allowed": null,
+   "image": null,
+   "url": "https://example.com/ukazka/daleka-13",
+   "score": 77,
+   "first_seen": "2026-10-18",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-18",
+     4500
+    ]
+   ],
+   "price_change": 0,
+   "price_exact": true
+  },
+  {
+   "id": "ukazka:d4e614cb49b0",
+   "source": "ukazka2",
+   "source_name": "Ukážka 2 (fake)",
+   "hotel": "Ukážkový resort Nusa Dua",
+   "stars": null,
+   "rating": 8.6,
+   "country": "Indonézia",
+   "country_code": "ID",
+   "region": "Bali",
+   "place": "Nusa Dua",
+   "board": "RO",
+   "transport": "flight",
+   "departure": "BTS",
+   "date_from": "2027-08-13",
+   "date_to": "2027-08-21",
+   "nights": 8,
+   "price_total": 4100,
+   "price_original": null,
+   "discount_pct": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "image": null,
+   "url": "https://example.com/ukazka/daleka-14",
+   "score": 86,
+   "first_seen": "2026-10-18",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-18",
+     4420
+    ],
+    [
+     "2026-10-19",
+     4420
+    ],
+    [
+     "2026-10-20",
+     4420
+    ],
+    [
+     "2026-10-21",
+     4100
+    ]
+   ],
+   "price_change": -320,
+   "price_exact": true,
+   "continent": "Ázia"
+  },
+  {
+   "id": "ukazka:9a1eef5ee66c",
+   "source": "ukazka3",
+   "source_name": "Ukážka 3 (fake)",
+   "hotel": "Ukážkový resort Južný Male atol",
+   "stars": 5.0,
+   "rating": 8.1,
+   "country": "Maldivy",
+   "country_code": "MV",
+   "region": "Male",
+   "place": "Južný Male atol",
+   "board": "UAI",
+   "transport": "flight",
+   "departure": "BUD",
+   "date_from": "2027-08-18",
+   "date_to": "2027-08-26",
+   "nights": 8,
+   "price_total": 3490,
+   "price_original": 4256,
+   "discount_pct": 18,
+   "discount_label": "First minute",
+   "pets_allowed": null,
+   "image": null,
+   "url": "https://example.com/ukazka/daleka-15",
+   "score": 39,
+   "first_seen": "2026-10-18",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-18",
+     3550
+    ],
+    [
+     "2026-10-19",
+     3550
+    ],
+    [
+     "2026-10-20",
+     3490
+    ]
+   ],
+   "price_change": -60,
+   "price_exact": false,
+   "continent": "Indický oceán",
+   "price_note": "orientačne: cena pre 2 dospelých prepočítaná na 1 dospelého + 2 deti"
+  },
+  {
+   "id": "ukazka:e06702ed96fb",
+   "source": "ukazka",
+   "source_name": "Ukážka (fake)",
+   "hotel": "Ukážkový resort Belle Mare",
+   "stars": null,
+   "rating": 8.1,
+   "country": "Maurícius",
+   "country_code": "MU",
+   "region": "Východné pobrežie",
+   "place": "Belle Mare",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-07-05",
+   "date_to": "2027-07-12",
+   "nights": 7,
+   "price_total": 3390,
+   "price_original": null,
+   "discount_pct": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "image": null,
+   "url": "https://example.com/ukazka/daleka-16",
+   "score": 46,
+   "first_seen": "2026-10-18",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-18",
+     3390
+    ]
+   ],
+   "price_change": -320,
+   "price_exact": true,
+   "continent": "Indický oceán"
+  },
+  {
+   "id": "ukazka:d5c4589d57d4",
+   "source": "ukazka2",
+   "source_name": "Ukážka 2 (fake)",
+   "hotel": "Ukážkový resort Beau Vallon",
+   "stars": 4.5,
+   "rating": 8.1,
+   "country": "Seychely",
+   "country_code": "SC",
+   "region": "Mahé",
+   "place": "Beau Vallon",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-07-05",
+   "date_to": "2027-07-14",
+   "nights": 9,
+   "price_total": 3990,
+   "price_original": 4433,
+   "discount_pct": 10,
+   "discount_label": "First minute",
+   "pets_allowed": null,
+   "image": null,
+   "url": "https://example.com/ukazka/daleka-17",
+   "score": 74,
+   "first_seen": "2026-10-18",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-18",
+     3850
+    ],
+    [
+     "2026-10-19",
+     3850
+    ],
+    [
+     "2026-10-20",
+     3850
+    ],
+    [
+     "2026-10-21",
+     3850
+    ],
+    [
+     "2026-10-22",
+     3990
+    ]
+   ],
+   "price_change": 140,
+   "price_exact": true
+  },
+  {
+   "id": "ukazka:d331ff83c99e",
+   "source": "ukazka3",
+   "source_name": "Ukážka 3 (fake)",
+   "hotel": "Ukážkový resort Punta Cana",
+   "stars": 5.0,
+   "rating": 9.0,
+   "country": "Dominikánska republika",
+   "country_code": "DO",
+   "region": "La Altagracia",
+   "place": "Punta Cana",
+   "board": "HB",
+   "transport": "flight",
+   "departure": "BTS",
+   "date_from": "2027-07-15",
+   "date_to": "2027-07-29",
+   "nights": 14,
+   "price_total": 5090,
+   "price_original": 6787,
+   "discount_pct": 25,
+   "discount_label": "Last minute",
+   "pets_allowed": null,
+   "image": null,
+   "url": "https://example.com/ukazka/daleka-18",
+   "score": 36,
+   "first_seen": "2026-10-18",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-18",
+     5410
+    ],
+    [
+     "2026-10-19",
+     5410
+    ],
+    [
+     "2026-10-20",
+     5410
+    ],
+    [
+     "2026-10-21",
+     5090
+    ]
+   ],
+   "price_change": -320,
+   "price_exact": false,
+   "continent": "Karibik a Amerika",
+   "price_note": "orientačne: cena pre 2 dospelých prepočítaná na 1 dospelého + 2 deti"
+  },
+  {
+   "id": "ukazka:ca1c3d72576e",
+   "source": "ukazka",
+   "source_name": "Ukážka (fake)",
+   "hotel": "Ukážkový resort Cancún",
+   "stars": 3.0,
+   "rating": 8.6,
+   "country": "Mexiko",
+   "country_code": "MX",
+   "region": "Riviera Maya",
+   "place": "Cancún",
+   "board": "BB",
+   "transport": "flight",
+   "departure": "BUD",
+   "date_from": "2027-08-02",
+   "date_to": "2027-08-12",
+   "nights": 10,
+   "price_total": 3200,
+   "price_original": null,
+   "discount_pct": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "image": null,
+   "url": "https://example.com/ukazka/daleka-19",
+   "score": 68,
+   "first_seen": "2026-10-18",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-18",
+     3200
+    ],
+    [
+     "2026-10-19",
+     3200
+    ],
+    [
+     "2026-10-20",
+     3200
+    ],
+    [
+     "2026-10-21",
+     3200
+    ]
+   ],
+   "price_change": 0,
+   "price_exact": true,
+   "continent": "Karibik a Amerika"
+  },
+  {
+   "id": "ukazka:e17d906abffd",
+   "source": "ukazka2",
+   "source_name": "Ukážka 2 (fake)",
+   "hotel": "Ukážkový resort Varadero",
+   "stars": null,
+   "rating": 7.4,
+   "country": "Kuba",
+   "country_code": "CU",
+   "region": "Matanzas",
+   "place": "Varadero",
+   "board": "FB",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-07-01",
+   "date_to": "2027-07-08",
+   "nights": 7,
+   "price_total": 4400,
+   "price_original": 5867,
+   "discount_pct": 25,
+   "discount_label": "Last minute",
+   "pets_allowed": null,
+   "image": null,
+   "url": "https://example.com/ukazka/daleka-20",
+   "score": 34,
+   "first_seen": "2026-10-18",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-18",
+     4400
+    ]
+   ],
+   "price_change": -180,
+   "price_exact": true
+  },
+  {
+   "id": "ukazka:afac3d598cac",
+   "source": "ukazka3",
+   "source_name": "Ukážka 3 (fake)",
+   "hotel": "Ukážkový resort Agadir",
+   "stars": 4.5,
+   "rating": 9.4,
+   "country": "Maroko",
+   "country_code": "MA",
+   "region": "Souss-Massa",
+   "place": "Agadir",
+   "board": "RO",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-07-20",
+   "date_to": "2027-08-03",
+   "nights": 14,
+   "price_total": 2090,
+   "price_original": null,
+   "discount_pct": null,
+   "discount_label": null,
+   "pets_allowed": null,
+   "image": null,
+   "url": "https://example.com/ukazka/daleka-21",
+   "score": 53,
+   "first_seen": "2026-10-18",
+   "last_seen": "2026-10-24",
+   "price_history": [
+    [
+     "2026-10-18",
+     2270
+    ],
+    [
+     "2026-10-19",
+     2270
+    ],
+    [
+     "2026-10-20",
+     2270
+    ],
+    [
+     "2026-10-21",
+     2270
+    ],
+    [
+     "2026-10-22",
+     2270
+    ],
+    [
+     "2026-10-23",
+     2090
+    ]
+   ],
+   "price_change": -180,
+   "price_exact": false,
+   "continent": "Afrika",
+   "price_note": "orientačne: cena pre 2 dospelých prepočítaná na 1 dospelého + 2 deti"
   }
  ]
 }
