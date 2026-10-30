@@ -90,54 +90,28 @@ def cards(v, n=4):
     return out
 
 
-R = "https://pauschal.ruefa.at"
-r = fetch(R + "/index.php?page=results&level=1&adults=2&start=2027-07-01&until=2027-08-31&anzZimmer=1&airport=VIE&dauer=1024&destination=T%C3%BCrkei")
-H = {"X-Requested-With": "XMLHttpRequest", "Referer": r.url if r is not None else R}
-print("\n===== RUEFA all countries")
-p = S.get(R + "/hub/ajax/getDestination.php", params={"destination": ""}, headers=H, timeout=30); time.sleep(1.5)
-print("  empty:", p.status_code, len(p.text), p.text[:300])
-p2 = S.get(R + "/hub/ajax/getDestination.php", params={"x": "1"}, headers=H, timeout=30); time.sleep(1.5)
-print("  noparam:", p2.status_code, len(p2.text))
-lst = []
-for cand in (p2, p):
-    try:
-        lst = cand.json()
-        if len(lst) > 20:
-            break
-    except Exception:
-        pass
-ids = {x["name"]: x["id"].strip() for x in lst if x.get("country")}
-print("  countries:", len(ids))
-blob("ruefa_destinations.json", _j.dumps(lst, ensure_ascii=False))
-want = ["Türkei", "Griechenland", "Spanien", "Zypern", "Italien", "Kroatien", "Ägypten", "Malediven", "Mauritius",
-        "Vereinigte Arabische Emirate", "Thailand", "Dominikanische Republik", "Mexiko", "Kuba", "Kap Verde", "Kapverden", "Tansania"]
-print("  wanted:", {w: ids.get(w) for w in want})
 
-base = {"adults": "1", "children": "10-12", "start": "2027-07-01", "until": "2027-08-31", "hotelSearchtext": "", "level": "2",
-        "page": "1", "topGid": "", "destinationName": "", "airport": "VIE-BTS", "recommendationrate": "", "dauer": "1024",
-        "anzZimmer": "1", "sort": "price", "airline": "", "maxPrice": "", "minPrice": "", "citycodes": "", "destination_groups": "",
-        "excludeNbc": "1", "destination": "", "destinationId": "", "verpflegung": "AI AIP AIU AIR"}
-def run(name, extra, save=None):
-    d = dict(base, **extra)
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from config import CONFIG
+import ruefa_probe as RU
+R = "https://pauschal.ruefa.at"
+H = {"X-Requested-With": "XMLHttpRequest", "Referer": R + "/"}
+print("\n===== RUEFA hotel lookups")
+for q in ["Sural", "Alhambra", "Royal Alhambra", "Sural Saray"]:
+    p = S.get(R + "/hub/ajax/getDestination.php", params={"destination": q}, headers=H, timeout=30); time.sleep(1.5)
     try:
-        p = S.post(R + "/hub/ajax/deliver.php", data=d, timeout=60, headers=H); time.sleep(1.5)
-        j = p.json()
-        cs = cards(j.get("value") or "")
-        from collections import Counter
-        print(f"  [{name}] {p.status_code} {round(p.elapsed.total_seconds(),1)}s count={j.get('resultCount')} n={len(cs)} "
-              f"nights={Counter(c['nights'] for c in cs)} countries={Counter((c['region'] or '').split('/')[0] for c in cs)} "
-              f"prices={[c['price'] for c in cs][:4]}")
-        if save:
-            blob(save, p.text)
-        return cs
+        print("  ", q, [(x.get("name"), x.get("id"), x.get("field")) for x in p.json()][:15])
     except Exception as e:
-        print(f"  [{name}] fail {type(e).__name__} {e}")
-tr = ids.get("Türkei", "")
-run("TR ids AI kids", {"destinationId": tr}, save="ruefa_tr_ai_kids.json")
-run("TR ids first-id", {"destinationId": tr.split()[0] if tr else ""})
-run("TR destination name", {"destination": "Türkei"})
-for dv in ["7", "14", "714", "7-14", "0714", "128", "4096", "1014", "-1", "16384", "2048", "512"]:
-    run(f"TR dauer={dv}", {"destinationId": tr, "dauer": dv})
-run("TR page2", {"destinationId": tr, "page": "2"})
-cs = run("TR Sural search", {"destinationId": tr, "hotelSearchtext": "Sural", "dauer": "-1"})
-cs = run("TR Alhambra search", {"destinationId": tr, "hotelSearchtext": "Alhambra", "dauer": "-1"})
+        print("  ", q, p.status_code, p.text[:300])
+print("\n===== RUEFA adapter test")
+t0 = time.time()
+try:
+    offs = RU.search(CONFIG)
+    from collections import Counter
+    print("  RUEFA", len(offs), "offers in", round(time.time() - t0), "s;", Counter(o["country_code"] for o in offs).most_common(),
+          Counter(o["board"] for o in offs), Counter(o["departure"] for o in offs), Counter(o["nights"] for o in offs))
+    for o in offs:
+        if any(k in o["hotel"].lower() for k in ("sural", "alhambra")):
+            print("  HIT", o["hotel"], o["date_from"], o["nights"], o["price_total"], o["url"][:150])
+except Exception:
+    import traceback; traceback.print_exc()
