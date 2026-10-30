@@ -73,98 +73,51 @@ def devalue(arr):
     return res(0)
 
 
+
 import json as _j
 from urllib.parse import urlencode, parse_qsl
 
-print("\n===== HOFER terms")
-for u in ["https://www.hofer-reisen.at/at/service/reisebedingungen", "https://www.hofer-reisen.at/at/service/impressum"]:
-    r = fetch(u)
-    if r is not None:
-        t = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", re.sub(r"<script.*?</script>", "", r.text, flags=re.S)))
-        grep(t, r"automatisiert|scrap|data.?mining|crawl|Robot|Vervielfältig|Urheber", 6, 250)
-
-print("\n===== HOFER search variants")
-def cards(html, n=4):
-    out = []
-    for m in re.finditer(r'data-testid="ProductCard"(.*?)Zum Angebot', html, re.S):
-        c = m.group(1)
-        name = re.search(r'product-card__headline"[^>]*>([^<]+)', c)
-        price = re.search(r'price-value">([^<]+)', c)
-        opts = re.findall(r'booking-options[^"]*">(.*?)</div>', c, re.S)
-        href = re.search(r'href="([^"]+)"$', c.strip()) or re.search(r'href="(/at/hotels/[^"]+)"', c)
-        out.append((name and name.group(1), price and price.group(1), [re.sub("<[^>]+>", "", o) for o in opts],
-                    (href.group(1).replace("&amp;", "&").replace("&quot;", '"')[:600] if href else None)))
-    print("    cards:", len(out))
-    for o in out[:n]:
-        print("     ", o)
-PX = '[{"id":"0","ad":1,"ch":[10,12],"ti":[]}]'
-variants = {
-  "s_mn7mx14": {"s_dr": "270701,270831", "s_du": '{"ty":"night","mn":7,"mx":14}', "s_px": PX, "s_ap": "VIE"},
-  "s_mn7": {"s_dr": "270701,270831", "s_du": '{"ty":"night","mn":7}', "s_px": PX, "s_ap": "VIE", "s_si": "PACKAGE"},
-  "p_": {"p_dr": "270701,270831", "p_du": '{"ty":"night","mn":7}', "p_px": PX, "p_ap": "VIE", "p_si": "PACKAGE"},
-}
-for k, q in variants.items():
-    r = fetch("https://www.hofer-reisen.at/at/destination/asien/tuerkei?" + urlencode(q))
-    if r is not None:
-        print("   variant", k); cards(r.text)
-        if k == "s_mn7":
-            blob("hofer_tuerkei_party.html", r.text)
-
-print("\n===== RUEFA deliver")
-u = ("https://pauschal.ruefa.at/index.php?page=results&level=1&adults=1&children=10,12&start=2027-07-01&until=2027-08-31"
-     "&anzZimmer=1&airport=VIE&dauer=1024&destination=T%C3%BCrkei")
-r = fetch(u)
-if r is not None:
-    grep(r.text, r"suchConfig\s*=", 3, 1500, "cfg")
-    grep(r.text, r"name=\"dauer\"|dauer", 4, 300, "dauer")
+print("\n===== RUEFA js dump")
 j = fetch("https://pauschal.ruefa.at/js/min/search.min.js?id=6492")
 if j is not None:
-    grep(j.text, r"dauer", 8, 200, "jsdauer")
-    grep(j.text, r"suchConfig\.\w+=|suchConfig=", 6, 300, "jscfg")
-data = dict(parse_qsl(urlsplit(u).query)); data.update({"page": 1, "level": 1})
-try:
-    p = S.post("https://pauschal.ruefa.at/hub/ajax/deliver.php", data=data, timeout=40,
-               headers={"X-Requested-With": "XMLHttpRequest", "Referer": u}); time.sleep(1.5)
-    print("  POST deliver", p.status_code, len(p.text), p.headers.get("content-type"))
-    print("    ", p.text[:3000])
-    try:
-        d = p.json(); print("    keys:", list(d)[:40] if isinstance(d, dict) else type(d))
-        blob("ruefa_deliver.json", p.text)
-    except Exception as e:
-        print("    not json", e)
-except Exception as e:
-    print("  POST failed", e)
-
-print("\n===== BILLA global js")
-r = fetch("https://www.billareisen.at/docroot/assets/js/ITS_global.min.js?2026-10-02-1")
+    blob("ruefa_search.min.js", j.text)
+h = fetch("https://pauschal.ruefa.at/js/hotelsearch/dist/hotelsearch.min.js?id=492")
+if h is not None:
+    grep(h.text, r"children=|childAges|\.join\(\"[;,_-]\"\)", 12, 300, "hs")
+r = fetch("https://pauschal.ruefa.at/index.php?page=results&level=1&adults=2&start=2027-07-01&until=2027-08-31&anzZimmer=1&airport=VIE&dauer=1024&destination=T%C3%BCrkei")
 if r is not None:
-    grep(r.text, r"childage|tmp_num_children|psbbr|\bpnc\b|pcba|ptba", 12, 250, "g")
+    blob("ruefa_results.html", r.text)
 
-print("\n===== AIRSTOP hotel page")
-r = fetch("https://airstop.sk/dovolenka/turecko")
+print("\n===== BILLA param guesses")
+B = ("https://www.billareisen.at/Pauschalreisen/Angebote.html?ttid=PF&bdid=ib&pttid=PF&ptoj=PF&dpfebl=tr%2Cdd%2Cda"
+     "&pdf=3380096&pdaf=VIE&dft=apx&psdf=2027-07-01&pedf=2027-08-31&pnnfl=7&pnnfh=14&ptf=1&ps=pr&pdm=pp&idvfmb=1")
+def summary(html):
+    psb = re.findall(r'psbbr=([^"&]*)', html)[:1]
+    copies = re.findall(r'product-desc__copy[^>]*>([^<]+)<', html)
+    boards = {}
+    for c in copies:
+        b = c.split(",")[3].strip() if c.count(",") >= 4 else c
+        boards[b] = boards.get(b, 0) + 1
+    pages = re.findall(r'Seite 1 von (\d+)', html)[:1]
+    prices = re.findall(r'ITS_price">\s*([\d.]+)', html)[:3]
+    return f"psbbr={psb} pages={pages} n={len(copies)} boards={boards} prices={prices} first={copies[:1]}"
+for extra in ["&na=2&pna=2", "&na=2&pna=2&ppn=1", "&na=2&pna=2&pbf=ai", "&na=2&pna=2&pbtf=ai", "&na=2&pna=2&pmf=ai",
+              "&na=2&pna=2&pbof=ai", "&na=1&pna=1&nc=2&pnc=2&pcaf=10%2C12", "&na=1&pna=1&nc=2&pnc=2&pca0=10&pca1=12",
+              "&na=1&pna=1&nc=2&pnc=2&pchaf=10%2C12", "&psbbr=pna%3D1%26pnc%3D2%26pca0%3D10%26pca1%3D12"]:
+    r = fetch(B + extra)
+    if r is not None:
+        print("   ", extra, "->", summary(r.text))
+r = fetch("https://www.billareisen.at/Pauschalreisen.html")
 if r is not None:
-    m = re.search(r'<script[^>]*id="__NUXT_DATA__"[^>]*>(.*?)</script>', r.text, re.S)
-    data = devalue(_j.loads(m.group(1)))
-    big = data["data"].get("5zdtk1gWXn")
-    print("    5zd keys:", {k: (type(v).__name__, len(_j.dumps(v, ensure_ascii=False))) for k, v in big.items()} if isinstance(big, dict) else type(big))
-    print("    5zd sample:", _j.dumps(big, ensure_ascii=False)[:2500])
-    hl = [h for h in re.findall(r'href="(/dovolenka/turecko/[^"]+)"', r.text) if h.count("/") >= 5]
-    print("    hotel links:", len(hl), hl[:5])
-    sur = [h for h in hl if "sural" in h or "alhambra" in h]
-    print("    sural/alhambra links:", sur)
-    if hl:
-        h = fetch("https://airstop.sk" + (sur[0] if sur else hl[0]))
-        if h is not None:
-            m = re.search(r'<script[^>]*id="__NUXT_DATA__"[^>]*>(.*?)</script>', h.text, re.S)
-            d2 = devalue(_j.loads(m.group(1)))
-            ts = (d2.get("pinia") or {}).get("tourStore")
-            print("    tourStore:", _j.dumps(ts, ensure_ascii=False)[:2000])
-            print("    data keys:", {k: len(_j.dumps(v, ensure_ascii=False)) for k, v in d2["data"].items()})
-            grep(h.text, r"€", 4, 150, "eur")
-
-print("\n===== RESTPLATZBOERSE")
-r = fetch("https://www.restplatzboerse.at/pauschalreisen")
+    links = re.findall(r'href="(/Pauschalreisen/[^"?]+\.html)"[^>]*>([^<]{2,40})<', r.text)
+    pdfs = re.findall(r'href="([^"]*pdf=\d+[^"]*)"', r.text)
+    print("    country pages:", sorted(set(links))[:80])
+    print("    pdf links:", [re.findall(r"pdf=(\d+)", p)[0] for p in pdfs][:30])
+r = fetch("https://www.billareisen.at/Service/AGB.html")
 if r is not None:
-    print("    scripts:", re.findall(r'<script[^>]+src="([^"]+)"', r.text)[:15])
-    print("    hosts:", sorted({urlsplit(h).netloc for h in re.findall(r'(?:href|src|action)="(https?://[^"]+)"', r.text)})[:25])
-    print("    forms:", re.findall(r'<form[^>]*>', r.text)[:5])
+    t = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", re.sub(r"<script.*?</script>", "", r.text, flags=re.S)))
+    grep(t, r"automatisiert|scrap|data.?mining|crawl|Robot|Vervielfältig|Urheber|Nutzung der Website", 6, 250)
+r = fetch("https://www.billareisen.at/Service/Impressum.html")
+if r is not None:
+    t = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", re.sub(r"<script.*?</script>", "", r.text, flags=re.S)))
+    grep(t, r"automatisiert|scrap|data.?mining|crawl|Robot|Vervielfältig|Urheber|Nutzungsbedingungen", 6, 250)
