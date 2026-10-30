@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-30T16:28:39Z",
+ "generated_at": "2026-10-30T16:36:52Z",
  "criteria": {
   "adults": 1,
   "children_ages": [
@@ -64,7 +64,7 @@
   },
   "watched": [
    "Sural",
-   "Alhambra"
+   "Royal Alhambra"
   ],
   "children_birthdates": [
    "2017-06-30",
@@ -279,11 +279,11 @@
    "status": "ok",
    "count": 391,
    "error": null,
-   "duration_s": 247.0,
+   "duration_s": 279.7,
    "watch": {
     "found": 3,
     "new": 0,
-    "seconds": 29.8,
+    "seconds": 21.5,
     "error": null
    }
   },
@@ -294,11 +294,11 @@
    "status": "ok",
    "count": 743,
    "error": null,
-   "duration_s": 124.8,
+   "duration_s": 137.9,
    "watch": {
-    "found": 1,
+    "found": 0,
     "new": 0,
-    "seconds": 22.9,
+    "seconds": 13.0,
     "error": null
    }
   },
@@ -309,7 +309,7 @@
    "status": "empty",
    "count": 0,
    "error": null,
-   "duration_s": 3.9
+   "duration_s": 4.3
   },
   {
    "id": "kartago",
@@ -318,11 +318,11 @@
    "status": "ok",
    "count": 783,
    "error": null,
-   "duration_s": 110.4,
+   "duration_s": 104.6,
    "watch": {
     "found": 0,
     "new": 0,
-    "seconds": 30.0,
+    "seconds": 18.1,
     "error": null
    }
   },
@@ -333,11 +333,11 @@
    "status": "ok",
    "count": 704,
    "error": null,
-   "duration_s": 97.4,
+   "duration_s": 101.9,
    "watch": {
     "found": 0,
     "new": 0,
-    "seconds": 33.3,
+    "seconds": 16.4,
     "error": null
    }
   },
@@ -364,7 +364,7 @@
    "status": "empty",
    "count": 0,
    "error": null,
-   "duration_s": 2.1
+   "duration_s": 2.4
   },
   {
    "id": "firotour",
@@ -397,7 +397,7 @@
    "status": "ok",
    "count": 439,
    "error": null,
-   "duration_s": 107.2
+   "duration_s": 103.4
   },
   {
    "id": "billa_reisen",
@@ -406,7 +406,7 @@
    "status": "ok",
    "count": 1008,
    "error": null,
-   "duration_s": 101.5
+   "duration_s": 181.5
   },
   {
    "id": "tui_at",
@@ -16545,7 +16545,7 @@
   },
   {
    "hotel": "Tiara Beach",
-   "url": "https://www.kartago.sk/bulharsko/burgas/slnecne-pobrezie/tiara-beach?DS=65536&GIATA=32916&D=63483%7C63484%7C63485%7C63486&HID=257968&MT=5&MMT=5&DI=AI&RCS=DR02&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-07-08&DD=2027-07-01&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=BOJ21035&DPR=KARTAGO-SK-ATCOM&PC=215031095%2F2%2F2738%2F7&IFC=207903232%2F644009&OFC=207901773%2F644008",
+   "url": "https://www.kartago.sk/bulharsko/burgas/slnecne-pobrezie/tiara-beach-hotel?DS=65536&GIATA=32916&D=63483%7C63484%7C63485%7C63486&HID=257968&MT=5&MMT=5&DI=AI&RCS=DR02&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-07-08&DD=2027-07-01&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=483&TT=1&PID=BOJ21035&DPR=KARTAGO-SK-ATCOM&PC=215031095%2F2%2F2738%2F7&IFC=207903232%2F644009&OFC=207901773%2F644008",
    "image": "https://img.kartago.sk/hotels/720/bulharsko/oblast-burgas/slunecne-pobrezi/tiara-beach/559675541x.jpg",
    "stars": 4.0,
    "rating": 9.0,
@@ -24100,7 +24100,7 @@
      1963
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Lella Baya & Thalasso",
@@ -30822,7 +30822,7 @@
      2086
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Monarque Club Rivage",
@@ -38723,7 +38723,7 @@
      2131
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Club Eloro/ohne Transfer",
@@ -40149,44 +40149,6 @@
     [
      "2026-10-30",
      2644
-    ]
-   ],
-   "price_change": 0
-  },
-  {
-   "hotel": "Hotel Horizon Beach",
-   "url": "https://www.cedok.sk/dovolena/grecko/kreta/hotel-horizon-beach,HER2HOR/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgdIRVIySE9SKAQ6BEcyMTBCBgiAtKjjBkoGCICpzeMGUAJiBQoDQlRTagUKA0hFUnIDCgExegUKA0hFUoIBBQoDQlRTigEDCgExkgEGCIC0qOMGmgEGCICpzeMGogEFCgNER1aqAQMKAUHiAQkKB1Jlc2FiZWXqAQkKB1Jlc2FiZWXyAQkKB1Jlc2FiZWU%253D&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
-   "image": "https://s.content4travel.com/pim-cdk/her2hor_0_30794f2eba.jpg",
-   "stars": 4.0,
-   "rating": 8.2,
-   "country": "Grécko",
-   "country_code": "GR",
-   "region": "Kréta",
-   "place": null,
-   "board": "AI",
-   "transport": "flight",
-   "departure": "BTS",
-   "date_from": "2027-08-22",
-   "date_to": "2027-08-29",
-   "nights": 7,
-   "price_total": 2646,
-   "price_original": 3267,
-   "discount_label": "First Minute (cena za os. × 3, orientačne)",
-   "pets_allowed": null,
-   "price_note": "orientačne: cena za osobu pri 2 dospelých × 3",
-   "source": "cedok",
-   "source_name": "Čedok",
-   "continent": "Európa",
-   "discount_pct": 19,
-   "price_exact": false,
-   "id": "cedok:2550426ef80a",
-   "score": 86,
-   "first_seen": "2026-10-24",
-   "last_seen": "2026-10-30",
-   "price_history": [
-    [
-     "2026-10-30",
-     2646
     ]
    ],
    "price_change": 0
@@ -42892,7 +42854,7 @@
      2009
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Lefkoniko Beach",
@@ -43197,6 +43159,45 @@
     ]
    ],
    "price_change": 0
+  },
+  {
+   "hotel": "Hotel Horizon Beach",
+   "url": "https://www.cedok.sk/dovolena/grecko/kreta/hotel-horizon-beach,HER2HOR/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgdIRVIySE9SKAQ6BEcyMTBCBgiAtKjjBkoGCICpzeMGUAJiBQoDQlRTagUKA0hFUnIDCgExegUKA0hFUoIBBQoDQlRTigEDCgExkgEGCIC0qOMGmgEGCICpzeMGogEFCgNER1aqAQMKAUHiAQkKB1Jlc2FiZWXqAQkKB1Jlc2FiZWXyAQkKB1Jlc2FiZWU%253D&airports=BTS%2CVIE&participants%5B0%5D%5Badults%5D=1&participants%5B0%5D%5Bchildren%5D%5B0%5D=30.06.2017&participants%5B0%5D%5Bchildren%5D%5B1%5D=30.06.2015",
+   "image": "https://s.content4travel.com/pim-cdk/her2hor_0_30794f2eba.jpg",
+   "stars": 4.0,
+   "rating": 8.2,
+   "country": "Grécko",
+   "country_code": "GR",
+   "region": "Kréta",
+   "place": null,
+   "board": "AI",
+   "transport": "flight",
+   "departure": "BTS",
+   "date_from": "2027-08-22",
+   "date_to": "2027-08-29",
+   "nights": 7,
+   "price_total": 2192,
+   "price_original": null,
+   "discount_label": "First Minute",
+   "pets_allowed": null,
+   "price_note": null,
+   "source": "cedok",
+   "source_name": "Čedok",
+   "continent": "Európa",
+   "discount_pct": null,
+   "price_exact": true,
+   "id": "cedok:2550426ef80a",
+   "price_approx": 2646,
+   "score": 85,
+   "first_seen": "2026-10-24",
+   "last_seen": "2026-10-30",
+   "price_history": [
+    [
+     "2026-10-30",
+     2192
+    ]
+   ],
+   "price_change": null
   },
   {
    "hotel": "Atlas",
@@ -47020,7 +47021,6 @@
    "price_note": "orientačne: cena za osobu pri 2 dospelých × 3",
    "source": "billa_reisen",
    "source_name": "BILLA Reisen",
-   "watched": "Alhambra",
    "continent": "Afrika",
    "discount_pct": 17,
    "price_exact": false,
@@ -50414,7 +50414,7 @@
      2114
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Menaville Safaga",
@@ -53858,7 +53858,7 @@
      1781
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Evita Elite",
@@ -53934,7 +53934,7 @@
      1992
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Zita Beach Resort",
@@ -54015,6 +54015,44 @@
    "price_change": 0
   },
   {
+   "hotel": "Happy Life Village Dahab",
+   "url": "https://www.billareisen.at/Reisen/Happy+Life+Village-SSH01101P.html?bdid=ib&toid=dla&ptid=DDS&ssnid=S27&clgid=D70G2627&pttid=PF&phidf=SSH01101P&pdaf=VIE&dft=apx&psdf=2027-07-01&pedf=2027-08-31&psdsf=2026-11-01&pedsf=2026-11-22&pnnfl=7&pnnfh=14&pbtf=ai&ptf=1&ps=pr&pdm=pp&psbbr=pna%3D2%26pnc%3D0",
+   "image": "https://www.billareisen.at/pibe-media/derl_atc/hotel/SSH01101B_W26-D70G2627_1.jpg?w=580&h=468",
+   "stars": 3.0,
+   "rating": 7.3,
+   "country": "Egypt",
+   "country_code": "EG",
+   "region": "Sinai",
+   "place": "Dahab",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-08-21",
+   "date_to": "2027-08-28",
+   "nights": 7,
+   "price_total": 2076,
+   "price_original": null,
+   "discount_label": "Cena za os. × 3 (orientačne)",
+   "pets_allowed": null,
+   "price_note": "orientačne: cena za osobu pri 2 dospelých × 3",
+   "source": "billa_reisen",
+   "source_name": "BILLA Reisen",
+   "continent": "Afrika",
+   "discount_pct": null,
+   "price_exact": false,
+   "id": "billa_reisen:b1da215287c2",
+   "score": 82,
+   "first_seen": "2026-10-30",
+   "last_seen": "2026-10-30",
+   "price_history": [
+    [
+     "2026-10-30",
+     2076
+    ]
+   ],
+   "price_change": -36
+  },
+  {
    "hotel": "Minamark Resort & Spa",
    "url": "https://pauschal.ruefa.at/index.php?page=hotel&start=2027-07-01&until=2027-07-09&adults=1&cabinClass=economy&ankunftshafen=HRG&children=12-10&anzZimmer=1&abflughafen=VIE%20BTS&verpflegung=GT06-AI%20GT06-AIP%20GT06-AI%23ST06-PL%20GT06-AI%23ST06-UL&reisetag=2027-07-01&rq=1&destinationId=1031%201028%20561%201680%201030%20651%201032%201029%20562&rva=Q09S&bu=HRG326&gid=17487&pos=5",
    "image": null,
@@ -54048,44 +54086,6 @@
     [
      "2026-10-30",
      2102
-    ]
-   ],
-   "price_change": null
-  },
-  {
-   "hotel": "Happy Life Village Dahab",
-   "url": "https://www.billareisen.at/Reisen/Happy+Life+Village-SSH01101P.html?bdid=ib&toid=dla&ptid=DDS&ssnid=S27&clgid=D70G2627&pttid=PF&phidf=SSH01101P&pdaf=VIE&dft=apx&psdf=2027-07-01&pedf=2027-08-31&psdsf=2026-11-01&pedsf=2026-11-22&pnnfl=7&pnnfh=14&pbtf=ai&ptf=1&ps=pr&pdm=pp&psbbr=pna%3D2%26pnc%3D0",
-   "image": "https://www.billareisen.at/pibe-media/derl_atc/hotel/SSH01101B_W26-D70G2627_1.jpg?w=580&h=468",
-   "stars": 3.0,
-   "rating": 7.3,
-   "country": "Egypt",
-   "country_code": "EG",
-   "region": "Sinai",
-   "place": "Dahab",
-   "board": "AI",
-   "transport": "flight",
-   "departure": "VIE",
-   "date_from": "2027-08-21",
-   "date_to": "2027-08-28",
-   "nights": 7,
-   "price_total": 2112,
-   "price_original": null,
-   "discount_label": "Cena za os. × 3 (orientačne)",
-   "pets_allowed": null,
-   "price_note": "orientačne: cena za osobu pri 2 dospelých × 3",
-   "source": "billa_reisen",
-   "source_name": "BILLA Reisen",
-   "continent": "Afrika",
-   "discount_pct": null,
-   "price_exact": false,
-   "id": "billa_reisen:b1da215287c2",
-   "score": 82,
-   "first_seen": "2026-10-30",
-   "last_seen": "2026-10-30",
-   "price_history": [
-    [
-     "2026-10-30",
-     2112
     ]
    ],
    "price_change": 0
@@ -54188,7 +54188,7 @@
      2140
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Menaville Resort",
@@ -54226,7 +54226,7 @@
      2148
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Shams Safaga Resort",
@@ -54264,7 +54264,7 @@
      2162
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Royal G Hotel & Spa",
@@ -57736,7 +57736,7 @@
      1860
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Skanes Serail",
@@ -57774,7 +57774,7 @@
      1898
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Lella Baya",
@@ -57812,7 +57812,7 @@
      1909
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Riviera/Ohne TRF",
@@ -57850,7 +57850,7 @@
      1925
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Zephir & Spa",
@@ -57965,7 +57965,7 @@
      2073
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Diagoras Hotel",
@@ -58156,7 +58156,7 @@
      2173
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Alexander the Great Resort",
@@ -58253,7 +58253,7 @@
      2211
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Marbella Beach Hotel",
@@ -60620,7 +60620,7 @@
      1769
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "htop Platja Park",
@@ -62738,7 +62738,7 @@
      2043
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Evi Hotel",
@@ -67414,6 +67414,44 @@
    "price_change": 0
   },
   {
+   "hotel": "Pickalbatros Royal Grand Resort",
+   "url": "https://www.billareisen.at/Reisen/Pickalbatros+Royal+Grand+Resort-SSH12003P.html?bdid=ib&toid=dla&ptid=DDS&ssnid=S27&clgid=D70G2627&pttid=PF&phidf=SSH12003P&pdaf=VIE&dft=apx&psdf=2027-07-01&pedf=2027-08-31&psdsf=2026-11-01&pedsf=2026-11-22&pnnfl=7&pnnfh=14&pbtf=ai&ptf=1&ps=pr&pdm=pp&psbbr=pna%3D2%26pnc%3D0",
+   "image": "https://www.billareisen.at/pibe-media/derl_atc/hotel/SSH12003B_W26-D70G2627_1.jpg?w=580&h=468",
+   "stars": 5.0,
+   "rating": 9.8,
+   "country": "Egypt",
+   "country_code": "EG",
+   "region": "Sinai",
+   "place": "Sharm el-Sheikh",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-07-06",
+   "date_to": "2027-07-13",
+   "nights": 7,
+   "price_total": 2775,
+   "price_original": null,
+   "discount_label": "Cena za os. × 3 (orientačne)",
+   "pets_allowed": null,
+   "price_note": "orientačne: cena za osobu pri 2 dospelých × 3",
+   "source": "billa_reisen",
+   "source_name": "BILLA Reisen",
+   "continent": "Afrika",
+   "discount_pct": null,
+   "price_exact": false,
+   "id": "billa_reisen:18b73b2324b0",
+   "score": 77,
+   "first_seen": "2026-10-30",
+   "last_seen": "2026-10-30",
+   "price_history": [
+    [
+     "2026-10-30",
+     2775
+    ]
+   ],
+   "price_change": null
+  },
+  {
    "hotel": "Nido del Aguila",
    "url": "https://www.kartago.sk/hotely/spanielsko/gran-canaria/puerto-rico/nido-del-aguila-lara-7?DS=2&GIATA=49500&D=63213%7C63216%7C63226%7C63231%7C63241%7C63242%7C63243%7C63244%7C63245%7C63267%7C63272%7C63284%7C63312%7C63313%7C63334%7C63349%7C63350%7C63354%7C63360%7C63455%7C64430%7C74459%7C74460%7C74461%7C74462%7C74463%7C74464%7C74465%7C77806%7C211764&HID=1743&MT=5&MMT=5&DI=GT06-AI&RCS=2293.STD&NN=7&MNN=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&NNM=7%7C8%7C9%7C10%7C11%7C12%7C13%7C14&DF=2027-07-01%7C2027-08-31&RD=2027-07-08&DD=2027-07-01&ERM=0&AC1=1&KC1=2&KA1=10%7C12&IC1=0&TO=3789&TT=1&PID=1624&DPR=SUNH&PC=7-2027-07-01&IFC=0-LPAVIE-472-DT08-07-17-05-U&OFC=0-VIELPA-471-DT01-07-12-10-H",
    "image": "https://img.kartago.sk/hotels/720/spanelsko/gran-canaria/puerto-rico/nido-del-aguila/3985/29361-87838-spanelsko-gran-canaria-puerto-rico-nido-del-aguila-lara-0_800x2000-179.jpg",
@@ -69260,44 +69298,6 @@
    "price_change": 0
   },
   {
-   "hotel": "Pickalbatros Royal Grand Resort",
-   "url": "https://www.billareisen.at/Reisen/Pickalbatros+Royal+Grand+Resort-SSH12003P.html?bdid=ib&toid=dla&ptid=DDS&ssnid=S27&clgid=D70G2627&pttid=PF&phidf=SSH12003P&pdaf=VIE&dft=apx&psdf=2027-07-01&pedf=2027-08-31&psdsf=2026-11-01&pedsf=2026-11-22&pnnfl=7&pnnfh=14&pbtf=ai&ptf=1&ps=pr&pdm=pp&psbbr=pna%3D2%26pnc%3D0",
-   "image": "https://www.billareisen.at/pibe-media/derl_atc/hotel/SSH12003B_W26-D70G2627_1.jpg?w=580&h=468",
-   "stars": 5.0,
-   "rating": 9.8,
-   "country": "Egypt",
-   "country_code": "EG",
-   "region": "Sinai",
-   "place": "Sharm el-Sheikh",
-   "board": "AI",
-   "transport": "flight",
-   "departure": "VIE",
-   "date_from": "2027-07-01",
-   "date_to": "2027-07-08",
-   "nights": 7,
-   "price_total": 2799,
-   "price_original": null,
-   "discount_label": "Cena za os. × 3 (orientačne)",
-   "pets_allowed": null,
-   "price_note": "orientačne: cena za osobu pri 2 dospelých × 3",
-   "source": "billa_reisen",
-   "source_name": "BILLA Reisen",
-   "continent": "Afrika",
-   "discount_pct": null,
-   "price_exact": false,
-   "id": "billa_reisen:b549b8e7551c",
-   "score": 76,
-   "first_seen": "2026-10-30",
-   "last_seen": "2026-10-30",
-   "price_history": [
-    [
-     "2026-10-30",
-     2799
-    ]
-   ],
-   "price_change": 0
-  },
-  {
    "hotel": "Sentido Acel Beach Resort",
    "url": "https://www.billareisen.at/Reisen/Acel+Beach+Resort+Hotel-RMF00493P.html?bdid=ib&toid=iba&ptid=BTS&ssnid=S27&clgid=BXXG2627&pttid=PF&phidf=RMF00493P&pdaf=VIE&dft=apx&psdf=2027-07-01&pedf=2027-08-31&psdsf=2026-11-01&pedsf=2026-11-22&pnnfl=7&pnnfh=14&pbtf=ai&ptf=1&ps=pr&pdm=pp&psbbr=pna%3D2%26pnc%3D0",
    "image": "https://www.billareisen.at/pibe-media/itsb_atc/hotel/RMF00493B_W26-BXXG2627_1.jpg?w=580&h=468",
@@ -69510,6 +69510,44 @@
     ]
    ],
    "price_change": 0
+  },
+  {
+   "hotel": "Albatros Sharm Resort",
+   "url": "https://www.billareisen.at/Reisen/Albatros+Sharm+Resort-SSH12004P.html?bdid=ib&toid=dla&ptid=DDS&ssnid=S27&clgid=D70G2627&pttid=PF&phidf=SSH12004P&pdaf=VIE&dft=apx&psdf=2027-07-01&pedf=2027-08-31&psdsf=2026-11-01&pedsf=2026-11-22&pnnfl=7&pnnfh=14&pbtf=ai&ptf=1&ps=pr&pdm=pp&psbbr=pna%3D2%26pnc%3D0",
+   "image": "https://www.billareisen.at/pibe-media/derl_atc/hotel/SSH12004B_W26-D70G2627_1.jpg?w=580&h=468",
+   "stars": 4.0,
+   "rating": 9.7,
+   "country": "Egypt",
+   "country_code": "EG",
+   "region": "Sinai",
+   "place": "Sharm el-Sheikh",
+   "board": "AI",
+   "transport": "flight",
+   "departure": "VIE",
+   "date_from": "2027-08-21",
+   "date_to": "2027-08-28",
+   "nights": 7,
+   "price_total": 2841,
+   "price_original": null,
+   "discount_label": "Cena za os. × 3 (orientačne)",
+   "pets_allowed": null,
+   "price_note": "orientačne: cena za osobu pri 2 dospelých × 3",
+   "source": "billa_reisen",
+   "source_name": "BILLA Reisen",
+   "continent": "Afrika",
+   "discount_pct": null,
+   "price_exact": false,
+   "id": "billa_reisen:6d33e4d3d067",
+   "score": 76,
+   "first_seen": "2026-10-30",
+   "last_seen": "2026-10-30",
+   "price_history": [
+    [
+     "2026-10-30",
+     2841
+    ]
+   ],
+   "price_change": null
   },
   {
    "hotel": "Azuline Hotel Bahamas And Bahamas II",
@@ -73402,44 +73440,6 @@
    "price_change": 0
   },
   {
-   "hotel": "Club Paradisio El Gouna",
-   "url": "https://www.billareisen.at/Reisen/Club+Paradisio+El+Gouna+Red+Sea-HRG00481P.html?bdid=ib&toid=dla&ptid=DDS&ssnid=S27&clgid=D70G2627&pttid=PF&phidf=HRG00481P&pdaf=VIE&dft=apx&psdf=2027-07-01&pedf=2027-08-31&psdsf=2026-11-01&pedsf=2026-11-22&pnnfl=7&pnnfh=14&pbtf=ai&ptf=1&ps=pr&pdm=pp&psbbr=pna%3D2%26pnc%3D0",
-   "image": "https://www.billareisen.at/pibe-media/derl_atc/hotel/HRG00481B_W26-D70G2627_1.jpg?w=580&h=468",
-   "stars": 4.0,
-   "rating": 9.7,
-   "country": "Egypt",
-   "country_code": "EG",
-   "region": "Rotes Meer",
-   "place": "El Gouna",
-   "board": "AI",
-   "transport": "flight",
-   "departure": "VIE",
-   "date_from": "2027-07-01",
-   "date_to": "2027-07-08",
-   "nights": 7,
-   "price_total": 2940,
-   "price_original": null,
-   "discount_label": "Cena za os. × 3 (orientačne)",
-   "pets_allowed": null,
-   "price_note": "orientačne: cena za osobu pri 2 dospelých × 3",
-   "source": "billa_reisen",
-   "source_name": "BILLA Reisen",
-   "continent": "Afrika",
-   "discount_pct": null,
-   "price_exact": false,
-   "id": "billa_reisen:bd2f7254f429",
-   "score": 75,
-   "first_seen": "2026-10-30",
-   "last_seen": "2026-10-30",
-   "price_history": [
-    [
-     "2026-10-30",
-     2940
-    ]
-   ],
-   "price_change": 0
-  },
-  {
    "hotel": "db San Antonio Hotel & Spa",
    "url": "https://pauschal.ruefa.at/index.php?page=hotel&start=2027-07-02&until=2027-07-09&adults=1&cabinClass=economy&ankunftshafen=MLA&children=12-10&anzZimmer=1&abflughafen=VIE%20BTS&verpflegung=GT06-AI%20GT06-AIP%20GT06-AI%23ST06-PL%20GT06-AI%23ST06-UL&reisetag=2027-07-02&rq=1&destinationId=101%20716%20715&rva=SVRT&bu=MLA20006NI&gid=28071&pos=5",
    "image": null,
@@ -75678,6 +75678,44 @@
     ]
    ],
    "price_change": 0
+  },
+  {
+   "hotel": "Hotel Alhambra",
+   "url": "https://www.cedok.sk/dovolena/spanielsko/costa-brava/hotel-alhambra,GRO2ALH/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgdHUk8yQUxIKAQ6BEcyMDBCBgiAkaPjBkoGCICGyOMGUAJiBQoDQlRTagUKA0JDTnIDCgEyegUKA0JDToIBBQoDQlRTigEDCgEykgEGCICRo%252BMGmgEGCICGyOMGogEFCgNEQkyqAQMKAUjiAQkKB1Jlc2FiZWXqAQkKB1Jlc2FiZWXyAQkKB1Jlc2FiZWU%253D&participants%5B0%5D%5Badults%5D=2&airports=BTS%2CVIE",
+   "image": "https://s.content4travel.com/pim-cdk/gro2alh_0_37da840799.jpg",
+   "stars": 4.0,
+   "rating": 8.2,
+   "country": "Španielsko",
+   "country_code": "ES",
+   "region": "Costa Brava",
+   "place": null,
+   "board": "HB",
+   "transport": "flight",
+   "departure": "BTS",
+   "date_from": "2027-08-21",
+   "date_to": "2027-08-28",
+   "nights": 7,
+   "price_total": 2934,
+   "price_original": 3759,
+   "discount_label": "First Minute (cena za os. × 3, orientačne)",
+   "pets_allowed": null,
+   "price_note": "orientačne: cena za osobu pri 2 dospelých × 3",
+   "source": "cedok",
+   "source_name": "Čedok",
+   "continent": "Európa",
+   "discount_pct": 22,
+   "price_exact": false,
+   "id": "cedok:6a79d59b6d6e",
+   "score": 74,
+   "first_seen": "2026-10-30",
+   "last_seen": "2026-10-30",
+   "price_history": [
+    [
+     "2026-10-30",
+     2934
+    ]
+   ],
+   "price_change": null
   },
   {
    "hotel": "FV Hotels Itaca Nausicaa",
@@ -95290,46 +95328,6 @@
    "price_change": 0
   },
   {
-   "hotel": "Hotel Alhambra",
-   "url": "https://www.cedok.sk/dovolena/spanielsko/costa-brava/hotel-alhambra,GRO2ALH/?id=CgVDZWRvaxIEVklUQxoDQ1pLIgdHUk8yQUxIKAQ6BEcyMDBCBgiAkaPjBkoGCICGyOMGUAJiBQoDQlRTagUKA0JDTnIDCgEyegUKA0JDToIBBQoDQlRTigEDCgEykgEGCICRo%252BMGmgEGCICGyOMGogEFCgNEQkyqAQMKAUjiAQkKB1Jlc2FiZWXqAQkKB1Jlc2FiZWXyAQkKB1Jlc2FiZWU%253D&airports=BTS%2CVIE&participants%5B0%5D%5Badults%5D=1&participants%5B0%5D%5Bchildren%5D%5B0%5D=30.06.2017&participants%5B0%5D%5Bchildren%5D%5B1%5D=30.06.2015",
-   "image": "https://s.content4travel.com/pim-cdk/gro2alh_0_37da840799.jpg",
-   "stars": 4.0,
-   "rating": 8.2,
-   "country": "Španielsko",
-   "country_code": "ES",
-   "region": "Costa Brava",
-   "place": null,
-   "board": "HB",
-   "transport": "flight",
-   "departure": "BTS",
-   "date_from": "2027-08-21",
-   "date_to": "2027-08-28",
-   "nights": 7,
-   "price_total": 2774,
-   "price_original": null,
-   "discount_label": "First Minute",
-   "pets_allowed": null,
-   "price_note": null,
-   "source": "cedok",
-   "source_name": "Čedok",
-   "watched": "Alhambra",
-   "continent": "Európa",
-   "discount_pct": null,
-   "price_exact": true,
-   "id": "cedok:6a79d59b6d6e",
-   "price_approx": 2934,
-   "score": 69,
-   "first_seen": "2026-10-30",
-   "last_seen": "2026-10-30",
-   "price_history": [
-    [
-     "2026-10-30",
-     2774
-    ]
-   ],
-   "price_change": 0
-  },
-  {
    "hotel": "Akti Beach Village Resort",
    "url": "https://pauschal.ruefa.at/index.php?page=hotel&start=2027-07-01&until=2027-07-08&adults=1&cabinClass=economy&ankunftshafen=LCA&children=12-10&anzZimmer=1&abflughafen=VIE%20BTS&verpflegung=GT06-AI%20GT06-AIP%20GT06-AI%23ST06-PL%20GT06-AI%23ST06-UL&reisetag=2027-07-01&rq=1&destinationId=713%20163%20637%20632&rva=VFVJRA==&bu=PFO10044&gid=226789&pos=18",
    "image": null,
@@ -99832,7 +99830,7 @@
      2999
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Park Beach ohne Transfer",
@@ -110701,7 +110699,7 @@
      2989
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Al Hamra Village Ras Al Khaimah",
@@ -114633,7 +114631,7 @@
      3060
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Ilyssion",
@@ -118118,7 +118116,7 @@
      3015
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Duni Royal Resort Marina Beach",
@@ -118722,7 +118720,7 @@
      3277
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Sandy Beach Hotel",
@@ -122272,7 +122270,7 @@
      3055
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "El Olivar Palace & Spa",
@@ -122310,7 +122308,7 @@
      3122
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Kenzi Club Agdal Medina",
@@ -122348,7 +122346,7 @@
      3130
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Zahira Resort",
@@ -127080,7 +127078,7 @@
      3241
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Rezort Villas Rubin",
@@ -133758,7 +133756,7 @@
      3498
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Suriya Resort Kammala",
@@ -136243,7 +136241,7 @@
      3278
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Amadil Beach",
@@ -136395,7 +136393,7 @@
      3632
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Jaz Sharm Dreams Hotel",
@@ -139153,7 +139151,7 @@
      3416
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Sol Tropikal Durres",
@@ -139367,7 +139365,7 @@
      3748
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Iberostar Founty Beach",
@@ -141745,7 +141743,7 @@
      3697
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Leopard Beach Resort & Spa",
@@ -141783,7 +141781,7 @@
      3722
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Royal G Hotel & Spa",
@@ -141859,7 +141857,7 @@
      3825
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Jaz Fanara Resort & Residence",
@@ -144295,7 +144293,7 @@
      3860
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Citrus Waskaduwa Kalutara",
@@ -144447,7 +144445,7 @@
      3895
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Turyaa Kalutara",
@@ -144485,7 +144483,7 @@
      3898
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Sifawy Boutique Hotel",
@@ -144523,7 +144521,7 @@
      3928
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Cardor Holiday Complex",
@@ -147131,7 +147129,7 @@
      3906
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Sunwing Bangtao Beach",
@@ -147169,7 +147167,7 @@
      3980
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "The Suriya Resort",
@@ -147207,7 +147205,7 @@
      3989
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "The Palms Hotel",
@@ -147321,7 +147319,7 @@
      4035
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Residence Costa Azzurra",
@@ -149857,7 +149855,7 @@
      4079
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Sheraton Abu Dhabi Hotel & Resort",
@@ -150123,7 +150121,7 @@
      4128
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "UMM AL QUWAIN BEACH",
@@ -150199,7 +150197,7 @@
      4151
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Sheraton Jumeirah Beach Resort",
@@ -152647,7 +152645,7 @@
      4044
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Diani Sea Lodge",
@@ -152685,7 +152683,7 @@
      4079
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Radisson Blu Hotel & Resort Abu Dhabi Corniche",
@@ -152761,7 +152759,7 @@
      4165
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Silver Beach",
@@ -152799,7 +152797,7 @@
      4195
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "X10 Khaolak Resort",
@@ -152837,7 +152835,7 @@
      4206
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Riu Dubai",
@@ -155113,7 +155111,7 @@
      4192
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Salice Club Resort",
@@ -155189,7 +155187,7 @@
      4206
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Citrus Hikkaduwa",
@@ -155303,7 +155301,7 @@
      4218
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Khaolak Laguna Resort",
@@ -155341,7 +155339,7 @@
      4247
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Suriya Resort & Spa",
@@ -158005,7 +158003,7 @@
      4324
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Villas Mon Plaisir",
@@ -158043,7 +158041,7 @@
      4341
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Novotel Phuket Kata Avista Resort",
@@ -158081,7 +158079,7 @@
      4402
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "R Degrees Luxury Boutique Hotel",
@@ -159783,7 +159781,7 @@
      4306
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Kalima Resort & Villas Khao Lak",
@@ -159821,7 +159819,7 @@
      4414
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Andaman Seaview Hotel",
@@ -159859,7 +159857,7 @@
      4428
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel RIU Palace Tikida Taghazout",
@@ -159935,7 +159933,7 @@
      4456
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "The Eden Beruwala",
@@ -160847,7 +160845,7 @@
      5410
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Jaz Almaza Beach",
@@ -164752,7 +164750,7 @@
      4447
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Gold Beach Resort & Spa",
@@ -164790,7 +164788,7 @@
      4449
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Playabachata",
@@ -164828,7 +164826,7 @@
      4458
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Viva Tangerine by Wyndham",
@@ -164866,7 +164864,7 @@
      4525
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "VH Gran Ventana Beach Resort",
@@ -164904,7 +164902,7 @@
      4532
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Vista Sol Punta Cana/o.Tr",
@@ -164942,7 +164940,7 @@
      4571
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "EKHO Surf",
@@ -167158,7 +167156,7 @@
      4510
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hikka Tranz by Cinnamon",
@@ -167348,7 +167346,7 @@
      4766
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Royal Central Hotel and Resort The Palm",
@@ -167424,7 +167422,7 @@
      4776
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Silver Beach",
@@ -167500,7 +167498,7 @@
      4794
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hilton Dubai The Walk",
@@ -167766,7 +167764,7 @@
      4853
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Cinnamon Lodge Habarana",
@@ -169798,7 +169796,7 @@
      4610
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Ocean Villas",
@@ -169836,7 +169834,7 @@
      4688
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Barcelo Mussanah Resort",
@@ -169874,7 +169872,7 @@
      4716
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Viva Dominicus Palace",
@@ -169912,7 +169910,7 @@
      4723
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Casa Marina Sosua, Trademark by Wyndham all inclusive",
@@ -169950,7 +169948,7 @@
      4802
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Casuarina Resort & Spa",
@@ -169988,7 +169986,7 @@
      4812
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Mandarin Hotel & Resort",
@@ -170026,7 +170024,7 @@
      4846
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Veranda Tamarin",
@@ -170064,7 +170062,7 @@
      4869
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Lapita, Dubai Parks and Resorts, Autograph Collection",
@@ -172203,7 +172201,7 @@
      4812
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Zanzibar Bay Resort",
@@ -172241,7 +172239,7 @@
      4878
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Jalsa Beach Hotel & Spa",
@@ -172279,7 +172277,7 @@
      4902
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "The Blue Water Hotel and Spa",
@@ -172355,7 +172353,7 @@
      4926
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "AVANI+ Hua Hin Resort",
@@ -173927,7 +173925,7 @@
      4733
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Radisson Beach Resort",
@@ -174079,7 +174077,7 @@
      4922
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Cinnamon Citadel Kandy",
@@ -174155,7 +174153,7 @@
      5032
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Apsara Beachfront Resort & Villa",
@@ -175681,7 +175679,7 @@
      5015
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Radisson Blu Resort, Galle",
@@ -175757,7 +175755,7 @@
      5052
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Le Peninsula Bay Beach Resort & Spa",
@@ -175833,7 +175831,7 @@
      5090
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Phuket Graceland Resort & Spa",
@@ -177321,7 +177319,7 @@
      4987
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Melia Casa Maya",
@@ -177359,7 +177357,7 @@
      5023
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Holiday Inn Resort Phuket Surin Beach",
@@ -177435,7 +177433,7 @@
      5250
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "The Sands Khao Lak by Katathani",
@@ -177587,7 +177585,7 @@
      5293
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "ROBINSON NAM HOI AN",
@@ -177625,7 +177623,7 @@
      5303
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Khaolak Merlin Resort",
@@ -179047,7 +179045,7 @@
      5014
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Sunrise Beach",
@@ -179199,7 +179197,7 @@
      5196
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Le Palmiste",
@@ -179427,7 +179425,7 @@
      5315
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Pandanus Resort",
@@ -179465,7 +179463,7 @@
      5318
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Le Méridien Khao Lak Resort & Spa",
@@ -179845,7 +179843,7 @@
      5451
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Calheta Beach",
@@ -180615,7 +180613,7 @@
      5289
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Andaman Beach Hotel Phuket - Handwritten Collection",
@@ -180691,7 +180689,7 @@
      5316
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Grand Palladium Colonial Resort & Spa",
@@ -180729,7 +180727,7 @@
      5322
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Beyond Resort Kata",
@@ -181033,7 +181031,7 @@
      5481
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Allegro Playacar",
@@ -181147,7 +181145,7 @@
      5533
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Summer Island Maldives",
@@ -181679,7 +181677,7 @@
      5150
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Tasia Maris Sands",
@@ -181831,7 +181829,7 @@
      5522
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Catalonia Playa Maroma",
@@ -182767,7 +182765,7 @@
      5344
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Bluesun Alga",
@@ -182995,7 +182993,7 @@
      5581
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Dreams Aventuras Riviera Maya",
@@ -183223,7 +183221,7 @@
      5623
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "OBLU XPERIENCE Ailafushi",
@@ -183261,7 +183259,7 @@
      5644
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Coin de Mire Attitude",
@@ -183413,7 +183411,7 @@
      5674
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "The Fortress Resort and Spa",
@@ -183755,7 +183753,7 @@
      5630
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel Olympia",
@@ -183831,7 +183829,7 @@
      5639
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Sandos Cancun",
@@ -183945,7 +183943,7 @@
      5670
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "KC Grande Resort & Spa",
@@ -185237,7 +185235,7 @@
      5841
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Radisson Blu Poste Lafayette Resort & Spa",
@@ -185617,7 +185615,7 @@
      5731
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Sol by Melia Benoa Bali",
@@ -185655,7 +185653,7 @@
      5810
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "SOL Phu Quoc",
@@ -185693,7 +185691,7 @@
      5825
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Bali Garden Beach Resort",
@@ -185731,7 +185729,7 @@
      5845
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Bali Tropic Resort & Spa",
@@ -185883,7 +185881,7 @@
      5912
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Khao Lak Marriott Beach Resort & Spa",
@@ -186491,7 +186489,7 @@
      5933
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Pearle Beach Resort & Spa",
@@ -186719,7 +186717,7 @@
      5993
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Pandanus Resort",
@@ -187745,7 +187743,7 @@
      5490
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "Hotel The Ravenala Attitude",
@@ -188505,7 +188503,7 @@
      5757
     ]
    ],
-   "price_change": null
+   "price_change": 0
   },
   {
    "hotel": "La Falconeria",
@@ -189174,22 +189172,9 @@
    ]
   },
   {
-   "term": "Alhambra",
-   "count": 2,
-   "links": [
-    {
-     "label": "všetky hotely v mieste Costa Brava",
-     "url": "https://www.satur.sk/dovolenka/spanielsko/costa-brava?termin=01.07.2027-31.08.2027",
-     "source": "satur",
-     "name": "Satur.sk"
-    },
-    {
-     "label": "všetky hotely v mieste Port el Kantaoui",
-     "url": "https://www.satur.sk/dovolenka/tunisko/port-el-kantaoui?termin=01.07.2027-31.08.2027",
-     "source": "satur",
-     "name": "Satur.sk"
-    }
-   ]
+   "term": "Royal Alhambra",
+   "count": 0,
+   "links": []
   }
  ]
 }
