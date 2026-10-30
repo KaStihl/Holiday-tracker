@@ -89,48 +89,55 @@ def cards(v, n=4):
                     "pp": g(r'Preis p\. Pers\.[^\d]*([\d.]+)')})
     return out
 
+
 R = "https://pauschal.ruefa.at"
 r = fetch(R + "/index.php?page=results&level=1&adults=2&start=2027-07-01&until=2027-08-31&anzZimmer=1&airport=VIE&dauer=1024&destination=T%C3%BCrkei")
-print("\n===== RUEFA getDestination")
-h = fetch(R + "/js/hotelsearch/dist/hotelsearch.min.js?id=492")
-if h is not None:
-    grep(h.text, r"getDestination\.php", 4, 700, "gd")
-for data in [{"term": "Türkei"}, {"q": "Türkei"}, {"search": "Türkei"}, {"destination": "Türkei"}, {"value": "Türkei"}]:
-    for meth in ("post", "get"):
-        try:
-            p = getattr(S, meth)(R + "/hub/ajax/getDestination.php", **({"data": data} if meth == "post" else {"params": data}),
-                                  timeout=30, headers={"X-Requested-With": "XMLHttpRequest"}); time.sleep(1.5)
-            print("  ", meth, data, p.status_code, len(p.text), p.text[:600].replace("\n", " "))
-        except Exception as e:
-            print("  fail", e)
+H = {"X-Requested-With": "XMLHttpRequest", "Referer": r.url if r is not None else R}
+print("\n===== RUEFA all countries")
+p = S.get(R + "/hub/ajax/getDestination.php", params={"destination": ""}, headers=H, timeout=30); time.sleep(1.5)
+print("  empty:", p.status_code, len(p.text), p.text[:300])
+p2 = S.get(R + "/hub/ajax/getDestination.php", params={"x": "1"}, headers=H, timeout=30); time.sleep(1.5)
+print("  noparam:", p2.status_code, len(p2.text))
+lst = []
+for cand in (p2, p):
+    try:
+        lst = cand.json()
+        if len(lst) > 20:
+            break
+    except Exception:
+        pass
+ids = {x["name"]: x["id"].strip() for x in lst if x.get("country")}
+print("  countries:", len(ids))
+blob("ruefa_destinations.json", _j.dumps(lst, ensure_ascii=False))
+want = ["Türkei", "Griechenland", "Spanien", "Zypern", "Italien", "Kroatien", "Ägypten", "Malediven", "Mauritius",
+        "Vereinigte Arabische Emirate", "Thailand", "Dominikanische Republik", "Mexiko", "Kuba", "Kap Verde", "Kapverden", "Tansania"]
+print("  wanted:", {w: ids.get(w) for w in want})
 
-print("\n===== RUEFA deliver variants")
-base = {"adults": "2", "children": "", "start": "2027-07-01", "until": "2027-08-31", "hotelSearchtext": "", "level": "2",
-        "page": "1", "topGid": "", "destinationName": "", "airport": "VIE", "recommendationrate": "", "dauer": "1024",
-        "anzZimmer": "1", "sort": "", "airline": "", "maxPrice": "", "minPrice": "", "citycodes": "", "destination_groups": "",
-        "excludeNbc": "1", "destination": "", "destinationId": "19"}
-tests = [
-  ("base", {}),
-  ("dauer7-14", {"dauer": str(sum(2 ** n for n in range(7, 15)))}),
-  ("kids 1+2", {"adults": "1", "children": "10-12"}),
-  ("kids 1+2 comma", {"adults": "1", "children": "10,12"}),
-  ("AI", {"verpflegung": "AI AIP AIU AIR"}),
-  ("AI+sort price", {"verpflegung": "AI AIP AIU AIR", "sort": "price"}),
-  ("no destId", {"destinationId": ""}),
-  ("BTS-VIE", {"airport": "VIE-BTS"}),
-  ("page2", {"page": "2"}),
-]
-for name, extra in tests:
+base = {"adults": "1", "children": "10-12", "start": "2027-07-01", "until": "2027-08-31", "hotelSearchtext": "", "level": "2",
+        "page": "1", "topGid": "", "destinationName": "", "airport": "VIE-BTS", "recommendationrate": "", "dauer": "1024",
+        "anzZimmer": "1", "sort": "price", "airline": "", "maxPrice": "", "minPrice": "", "citycodes": "", "destination_groups": "",
+        "excludeNbc": "1", "destination": "", "destinationId": "", "verpflegung": "AI AIP AIU AIR"}
+def run(name, extra, save=None):
     d = dict(base, **extra)
     try:
-        p = S.post(R + "/hub/ajax/deliver.php", data=d, timeout=60,
-                   headers={"X-Requested-With": "XMLHttpRequest", "Referer": r.url if r is not None else R}); time.sleep(1.5)
+        p = S.post(R + "/hub/ajax/deliver.php", data=d, timeout=60, headers=H); time.sleep(1.5)
         j = p.json()
         cs = cards(j.get("value") or "")
-        print(f"  [{name}] {p.status_code} count={j.get('resultCount')} n={len(cs)} bc={str(j.get('breadcrumb'))[:80]} boards={j.get('boardTypes')}")
-        for c in cs[:3]:
-            print("     ", c)
-        if name == "kids 1+2":
-            blob("ruefa_kids.json", p.text)
+        from collections import Counter
+        print(f"  [{name}] {p.status_code} {round(p.elapsed.total_seconds(),1)}s count={j.get('resultCount')} n={len(cs)} "
+              f"nights={Counter(c['nights'] for c in cs)} countries={Counter((c['region'] or '').split('/')[0] for c in cs)} "
+              f"prices={[c['price'] for c in cs][:4]}")
+        if save:
+            blob(save, p.text)
+        return cs
     except Exception as e:
         print(f"  [{name}] fail {type(e).__name__} {e}")
+tr = ids.get("Türkei", "")
+run("TR ids AI kids", {"destinationId": tr}, save="ruefa_tr_ai_kids.json")
+run("TR ids first-id", {"destinationId": tr.split()[0] if tr else ""})
+run("TR destination name", {"destination": "Türkei"})
+for dv in ["7", "14", "714", "7-14", "0714", "128", "4096", "1014", "-1", "16384", "2048", "512"]:
+    run(f"TR dauer={dv}", {"destinationId": tr, "dauer": dv})
+run("TR page2", {"destinationId": tr, "page": "2"})
+cs = run("TR Sural search", {"destinationId": tr, "hotelSearchtext": "Sural", "dauer": "-1"})
+cs = run("TR Alhambra search", {"destinationId": tr, "hotelSearchtext": "Alhambra", "dauer": "-1"})
