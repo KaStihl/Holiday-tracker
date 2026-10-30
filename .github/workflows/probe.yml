@@ -1,0 +1,19 @@
+# TEMPORARY: endpoint discovery for watched hotels (logs only). Will be removed.
+name: Probe
+on:
+  push:
+    branches: [main]
+    paths: [".github/probe/**", ".github/workflows/probe.yml"]
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: pip install -r scraper/requirements.txt
+      - run: python .github/probe/probe.py
+        env: {DOVOLENKA_SETTINGS: scraper/tests/fixtures/nastavenia_test.yml}
