@@ -151,4 +151,22 @@ def test_country_sold_only_by_the_other_brand_is_not_paged(monkeypatch):
 
     monkeypatch.setattr(dertour, "get", fake_get)
     assert fischer.search(CONFIG) == []
-    assert len(calls) == 2 + 21  # 2 categories calls (BTS/VIE, Brno), one page per country, then nothing more
+    # 2 categories calls (BTS/VIE, Brno), one page per country, then nothing more (the Brno pass skips the
+    # countries already known to be the other brand's)
+    assert len(calls) == 2 + 21
+
+
+def test_secondary_pass_stops_when_only_the_other_brand_flies_from_there(monkeypatch):
+    cats, far = load("dertour_categories.json"), load("kartago_tours_far.json")  # all KARTAGO products
+    fis = load("fischer_tours_turecko.json")
+    calls = []
+
+    def fake_get(url, params=None, headers=None, as_json=False, **kw):
+        calls.append(params)
+        if "d" not in params:
+            return cats  # Brno: the same 21 countries
+        return dict(far if params["to"] == "4305" else fis, toursCount=5)
+
+    monkeypatch.setattr(dertour, "get", fake_get)
+    fischer.search(CONFIG)
+    assert sum(c["to"] == "4305" and "d" in c for c in calls) == dertour.SEC_MISSES

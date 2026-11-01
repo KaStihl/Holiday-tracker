@@ -22,7 +22,9 @@ Brno (BRQ, departures_secondary): the API has no airport list, but tours asked w
 departure's fromId/fromIATA (2026-11-01, Turecko/Grécko/…: TAT 3437, KSC 1837, PRG 4312, BTS 483, BUD 489, BRQ 4305,
 VIE 3789, PED 4308, …). Brno gets its own pass (to=4305: one categories call + page 1 per country, right after the
 first round), so a cheaper Brno term never replaces the BTS/VIE one of the same hotel; the 40-call cap trims the
-tail (second pages / 10–14 pass of the big countries) instead.
+tail (second pages / 10–14 pass of the big countries) instead. First run (2026-11-01): Brno flies to Turecko,
+Taliansko, Grécko, Španielsko, Bulharsko, Egypt, Tunisko (+ Čierna Hora/Albánsko listed, 0 tours) and all ~155 tours
+were KARTAGO products – Fischer's pass stops after SEC_MISSES pages without an own-brand tour.
 Kartago and Fischer search one shared inventory (both sites list ATCOM_Kartago and ATCOM_Fischer
 products at the same prices), so each adapter keeps only its own brand's products to avoid duplicates.
 """
@@ -39,6 +41,7 @@ AIRPORTS = "483|3789"  # BTS | VIE: fallback when no airport of 'departures' is 
 # departures_secondary airports searched in a pass of their own (approved 2026-11-01: Brno). BUD/KSC ids are known,
 # add them here to search them too.
 SECONDARY_ASKED = ("BRQ",)
+SEC_MISSES = 2  # secondary pass stops after this many pages with only the other brand's tours (and none of ours)
 PAGE = 50              # tours per API call (~1 MB JSON)
 MAX_CALLS = 40         # tour pages per source and run (+1 categories call)
 # (nights, max pages per country) – the 7–14 pass returns the cheapest stay (practically always 7 nights),
@@ -197,12 +200,15 @@ def search(tag, home, cfg, fischer):
     offers, errors, other = [], [], 0
     done = set()  # (nights, code, to): pass finished (last page reached or failed)
     foreign = set()  # countries whose first page had no own-brand product: the other brand sells them, skip
+    sec_own, sec_misses = 0, 0  # secondary pass: own-brand offers / pages with only the other brand's tours
     for nights, (code, name, dest, count), page, to in plan(todo, cfg, extra):
         if calls >= MAX_CALLS:
             print(f"[{tag}] call budget {MAX_CALLS} reached")
             break
         if (nights, code, to) in done or code in foreign:
             continue
+        if to and not sec_own and sec_misses >= SEC_MISSES:
+            continue  # 2026-11-01: every Brno product was KARTAGO's, Fischer pages had none – don't spend its budget
         calls += 1
         try:
             data = get(home + API, params=query(cfg, nights, dest, page * PAGE, to), headers=hdr, as_json=True)
@@ -226,6 +232,9 @@ def search(tag, home, cfg, fischer):
         offers += got
         if not own and tours and not page and not to:
             foreign.add(code)
+        if to:
+            sec_own += len(own)
+            sec_misses += bool(tours and not own)
         if len(tours) < PAGE or (page + 1) * PAGE >= (data.get("toursCount") or 0):
             done.add((nights, code, to))
     print(f"[{tag}] {calls + 1} API calls, {len(offers)} offers, {other} other-brand tours skipped"

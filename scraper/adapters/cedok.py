@@ -53,10 +53,12 @@ AIRPORTS = {"bratislava": "BTS", "vieden": "VIE", "viede": "VIE", "kosice": "KSC
 # BTS/VIE query (cheapest term per hotel) would replace BTS/VIE terms with cheaper Brno ones. KSC/BUD are not asked
 # (add them to SECONDARY_ASKED to search them too).
 SECONDARY_ASKED = ("BRQ",)
-BRQ_SLUGS = ("turecko", "grecko", "cyprus", "spanielsko", "taliansko", "malta", "chorvatsko", "egypt")
+# First run 2026-11-01 (8–15 days, Jul–Aug 2027): turecko 88, grecko 143, spanielsko 39, taliansko 14, egypt 59 rates;
+# cyprus 0, malta 0, chorvatsko 1 (no flight package) -> not asked.
+BRQ_SLUGS = ("turecko", "grecko", "spanielsko", "taliansko", "egypt")
 # (durationMin, durationMax) in days and max pages (25 rates each) per destination. One wide 8–15 query only ever
 # showed the cheapest stay, 7 nights; separate ranges give real 7, 10–11 and 14 night terms.
-# Budget (2026-11-01): ≤ 9 x (2+1+1) + 12 FAR + 8 Brno + EXACT_MAX ≈ 84 requests per run.
+# Budget (2026-11-01): ≤ 9 x (2+1+1) + 12 FAR + 5 Brno + EXACT_MAX ≈ 81 requests per run.
 DURATIONS = [((8, 10), 2), ((11, 12), 1), ((15, 15), 1)]
 ADULTS = 2  # see module docstring
 EXACT_MAX = 28  # detail pages (~1 MB each) fetched per run for exact prices of the configured party
