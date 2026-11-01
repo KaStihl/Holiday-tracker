@@ -17,6 +17,8 @@ Checked 2026-10-30 from GitHub runners:
   ids sent as destinationId are ignored -> worldwide list, a country *name* in destination -> 0 results), dauer =
   ONE stay length as a bit (2**nights: 128 = 7 nights, 1024 = 10, 16384 = 14; sums of bits are not understood,
   they fall back to 1–2 night stays), level=2 (hotel list).
+- Brno: airport=BRQ answers resultCount 0 (2026-11-01; "VIE-BTS-BRQ" gives the same cards as VIE-BTS), Ruefa sells
+  no packages from Brno, so BRQ from departures_secondary is not asked.
 
 Watched hotels (watch() hook, checked 2026-10-30 from GitHub runners):
 - The search form's autocomplete getDestination.php?destination=<text> also lists hotels: {"field": "hotelname",

@@ -68,13 +68,16 @@ def test_cedok_search_queries_each_length(monkeypatch):
     assert sorted(set(days)) == [(8, 10), (8, 15), (11, 12), (15, 15)]  # 8–15: one wide page per long-haul slug
     # 65 rates = 3 pages, capped per range; long-haul countries one page each
     near = sum(min(3, pages) for _, pages in cedok.DURATIONS) * len(cedok.DESTINATIONS)
-    far = [c for c in calls if (c["durationMin"], c["durationMax"]) == (8, 15)]
-    assert len(far) == len(cedok.FAR) and len(calls) == near + len(far)
+    far = [c for c in calls if (c["durationMin"], c["durationMax"]) == (8, 15) and c["departuresByPlane"] == "BTS,VIE"]
+    brq = [c for c in calls if c["departuresByPlane"] == "BRQ"]  # Brno: own pass, one wide page per European slug
+    assert len(far) == len(cedok.FAR) and len(brq) == len(cedok.BRQ_SLUGS)
+    assert {(c["durationMin"], c["durationMax"]) for c in brq} == {(8, 15)}
+    assert len(calls) == near + len(far) + len(brq)
     assert len(calls) + cedok.EXACT_MAX <= 85  # polite: ≤ ~80 requests per run
     # only countries listed in the settings are asked
     calls.clear()
     cedok.search(dict(CONFIG, countries={"TR": 1.0, "MV": 0.5}))
-    assert {c.get("page", 1) for c in calls} == {1, 2} and len(calls) == 4 + 1
+    assert {c.get("page", 1) for c in calls} == {1, 2} and len(calls) == 4 + 1 + 1  # + Turecko from Brno
 
 
 def test_cedok_search_reports_total_failure(monkeypatch):

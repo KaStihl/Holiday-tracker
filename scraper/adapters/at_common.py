@@ -13,7 +13,8 @@ GERMAN = {
     "kuba": "CU", "kap verde": "CV", "kapverden": "CV", "kapverdische inseln": "CV",
 }
 AIRPORTS = {"wien": "VIE", "bratislava": "BTS", "budapest": "BUD", "graz": "GRZ", "linz": "LNZ", "salzburg": "SZG",
-            "innsbruck": "INN", "klagenfurt": "KLU", "munchen": "MUC", "kosice": "KSC"}
+            "innsbruck": "INN", "klagenfurt": "KLU", "munchen": "MUC", "kosice": "KSC",
+            "brno": "BRQ", "prag": "PRG"}
 
 
 def country(name):

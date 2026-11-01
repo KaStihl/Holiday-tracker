@@ -256,5 +256,41 @@ def offer_id(source, hotel, date_from, nights, transport, departure):
     return f"{source}:{hashlib.sha1(key.encode()).hexdigest()[:12]}"
 
 
+# --- currency: ECB euro reference rates, fetched once per run -------------------------------------------------
+# robots.txt of www.ecb.europa.eu (2026-11-01) only disallows some /*_content.<lang>.html pages and movie folders
+# (Crawl-delay 5): the daily XML is allowed. One request per run, shared by every adapter (thread-safe).
+ECB_URL = "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml"
+FX_FALLBACK = {"CZK": 24.35}  # units per 1 EUR (ECB 2026-10-30: 24.353), used when the ECB file is unreachable
+_fx = {}
+_fx_lock = threading.Lock()
+
+
+def parse_ecb(xml):
+    """({currency: units per EUR}, 'YYYY-MM-DD' or None) from eurofxref-daily.xml."""
+    rates = {c: float(r) for c, r in re.findall(r"currency=['\"]([A-Z]{3})['\"]\s+rate=['\"]([\d.]+)['\"]", xml)}
+    m = re.search(r"time=['\"](\d{4}-\d\d-\d\d)['\"]", xml)
+    return rates, m[1] if m else None
+
+
+def eur_rate(cur):
+    """(units of `cur` per 1 EUR, note for price_note) – the ECB reference rate of the day, else FX_FALLBACK."""
+    with _fx_lock:
+        if not _fx:
+            try:
+                rates, day = parse_ecb(get(ECB_URL, retries=1, delay=0.5))
+                if not rates:
+                    raise ValueError("no rates in the ECB file")
+                _fx.update(rates=rates, day=day)
+                print(f"[fx] ECB reference rates of {day}: CZK {rates.get('CZK')}")
+            except Exception as e:
+                print(f"[fx] ECB rates unavailable ({type(e).__name__} {str(e)[:100]}), using fallback {FX_FALLBACK}")
+                _fx.update(rates={}, day=None)
+        rate = _fx["rates"].get(cur)
+        if rate:
+            return rate, f"prepočet z {cur} kurzom ECB {rate:.3f}".replace(".", ",") + f" {cur}/€ ({_fx['day']})"
+        rate = FX_FALLBACK[cur]
+        return rate, f"prepočet z {cur} pevným kurzom {rate:.2f}".replace(".", ",") + f" {cur}/€ (kurz ECB nedostupný)"
+
+
 def https_or_none(url):
     return url if isinstance(url, str) and url.startswith("https://") else None

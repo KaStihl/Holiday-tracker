@@ -43,7 +43,8 @@ FAR = {"EG": "egypt", "TN": "tunisko", "MA": "maroko", "AE": "spojene-arabske-em
        "MX": "mexiko"}
 
 DATES_RE = re.compile(r"(\d{1,2})\.(\d{1,2})\.(\d{4})?\s*-\s*(\d{1,2})\.(\d{1,2})\.(\d{4})")
-AIRPORTS = {"bratislava": "BTS", "viede": "VIE", "vieden": "VIE", "kosice": "KSC", "budapest": "BUD"}
+AIRPORTS = {"bratislava": "BTS", "viede": "VIE", "vieden": "VIE", "kosice": "KSC", "budapest": "BUD", "brno": "BRQ",
+            "praha": "PRG"}  # Praha/Brno: so a long-haul card from there gets its code (and run.py's airport filter)
 AIRPORT_NAMES = {"bratislava", "vieden", "kosice", "budapest", "praha", "brno"}
 
 

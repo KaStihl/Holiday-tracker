@@ -81,8 +81,11 @@ def normalise(raw, source, source_name, cfg):
     for k in ("stars", "rating", "region", "place", "departure", "discount_label", "discount_pct", "pets_allowed"):
         o.setdefault(k, None)
     o["price_exact"] = o.get("price_exact") is True
-    # price_total is for the configured party; when it is extrapolated from a per-person price, say how
-    o["price_note"] = None if o["price_exact"] else (o.get("price_note") or approx_note(cfg))
+    # price_total is for the configured party; when it is extrapolated from a per-person price, say how.
+    # fx_note: the price was converted from another currency (e.g. CZK at the ECB rate) – kept even for exact prices
+    fx = o.pop("fx_note", None)
+    note = None if o["price_exact"] else (o.get("price_note") or approx_note(cfg))
+    o["price_note"] = "; ".join(x for x in (note, fx) if x) or None
     o["id"] = offer_id(source, o["hotel"], o["date_from"], nights, o["transport"], o["departure"])
     flag_cap(o, cfg)
     return o
@@ -243,9 +246,10 @@ def _timed_watch(name, mod, cfg, hints):
         return [], f"{type(e).__name__}: {str(e)[:200]}", time.time() - t0
 
 
-def run_watch(mods, sources, offers, cfg):
+def run_watch(mods, sources, offers, cfg, link_mods=None):
     """Second phase: adapters with a watch(cfg, terms, hints) hook look up the watched hotels directly (in
-    parallel, one agency per thread as in phase 1). Returns {term: [deeplink dicts]} for the page."""
+    parallel, one agency per thread as in phase 1). Returns {term: [deeplink dicts]} for the page: watch_links()
+    of link_mods (default mods; run.py passes every adapter, link-only ones included)."""
     terms = cfg.get("watched") or []
     if not terms:
         return {}
@@ -276,7 +280,7 @@ def run_watch(mods, sources, offers, cfg):
     print(f"watch lookups took {time.time() - t0:.0f} s")
     links = {}
     for t in terms:
-        for name, mod in mods.items():
+        for name, mod in (link_mods or mods).items():
             fn = getattr(mod, "watch_links", None)
             if fn:
                 try:
@@ -296,12 +300,12 @@ def watched_summary(offers, links, cfg):
 
 def main(only=None):
     cfg = CONFIG
-    sources, deeplinks, offers, mods = [], [], {}, {}
+    sources, deeplinks, offers, mods, all_mods = [], [], {}, {}, {}
     todo = []
     for name in ADAPTERS:
         if only and name not in only:
             continue
-        mod = importlib.import_module(f"adapters.{name}")
+        mod = all_mods[name] = importlib.import_module(f"adapters.{name}")
         info = {"id": name, "name": mod.NAME, "home": mod.HOME, "status": "ok", "count": 0, "error": None}
         try:
             deeplinks += [dict(d, source=name, name=mod.NAME) for d in mod.deeplinks(cfg)]
@@ -333,7 +337,7 @@ def main(only=None):
             print(f"[{name}] {len(raw)} raw, {len(clean)} kept")
             log_drops(name, raw, cfg)
     print(f"scraping took {time.time() - t0:.0f} s")
-    watch_links = run_watch(mods, sources, offers, cfg)
+    watch_links = run_watch(mods, sources, offers, cfg, all_mods)
 
     today = datetime.now(timezone.utc).date().isoformat()
     t0 = time.time()

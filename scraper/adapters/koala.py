@@ -35,7 +35,7 @@ _ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ$_0123456789"
 CATEGORY_SEASIDE = 401  # 542 = poznávacie, 663 = púte, 10000 = exotika (other site)
 TRANSPORT = {201: "flight", 202: "car"}  # 199 = bus
 AIRPORTS = {"bratislav": "BTS", "viede": "VIE", "vieden": "VIE", "wien": "VIE", "kosic": "KSC", "košic": "KSC",
-            "budap": "BUD"}
+            "budap": "BUD", "brno": "BRQ"}
 
 
 def _key(i):

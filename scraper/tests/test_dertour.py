@@ -16,6 +16,9 @@ def test_query_asks_for_the_real_party_and_criteria():
     q = dertour.query(CONFIG, (10, 14), "1|2", 50)
     assert (q["ac1"], q["kc1"], q["ka1"]) == (1, 2, "10|12")  # without ka1 the kids would be priced as infants
     assert (q["to"], q["dd"], q["rd"], q["m"], q["tt"]) == ("483|3789", "2027-07-01", "2027-08-31", 5, 1)
+    assert dertour.secondary_to(CONFIG) == "4305"  # Brno from departures_secondary; BUD/KSC are not asked
+    assert dertour.query(CONFIG, to="4305")["to"] == "4305"
+    assert dertour.secondary_to(dict(CONFIG, departures_secondary=["BUD"])) is None
     assert q["nn"] == "10|11|12|13|14" and (q["d"], q["pitg"], q["pstg"]) == ("1|2", 50, 50)
     assert "d" not in dertour.query(CONFIG) and "pstg" not in dertour.query(CONFIG, None, "1")
 
@@ -60,6 +63,14 @@ def test_brand_split_between_kartago_and_fischer():
     assert [dertour._mine(t, False) for t in tours] == [False, False, False, True, True]
 
 
+def brno_cats(cats):
+    """Categories of the to=4305 (Brno) call: fewer countries (here just Turecko)."""
+    out = {"settings": cats["settings"], "categories": [dict(c, destinations=[d for d in c["destinations"]
+                                                                             if d["name"] == "Turecko"])
+                                                        for c in cats["categories"]]}
+    return out
+
+
 def test_search_pages_and_budget(monkeypatch):
     cats, tours = load("dertour_categories.json"), load("fischer_tours_turecko.json")
     calls = []
@@ -67,7 +78,9 @@ def test_search_pages_and_budget(monkeypatch):
     def fake_get(url, params=None, headers=None, as_json=False, **kw):
         assert url == "https://www.kartago.sk/api/searchapi/getsearchresult" and as_json
         calls.append(params)
-        return cats if "d" not in params else dict(tours, toursCount=len(tours["tours"]))
+        if "d" not in params:
+            return brno_cats(cats) if params["to"] == "4305" else cats
+        return dict(tours, toursCount=len(tours["tours"]))
 
     monkeypatch.setattr(dertour, "get", fake_get)
     offers = kartago.search(CONFIG)
@@ -75,12 +88,17 @@ def test_search_pages_and_budget(monkeypatch):
     assert {o["hotel"] for o in offers} == {"Monachus Hotel & Spa", "Kilikya Palace"}  # non-FISCHER products
     assert all(o["price_exact"] and o["url"].startswith("https://www.kartago.sk/") for o in offers)
     assert {c.get("nn") for c in calls[1:]} == {"7|8|9|10|11|12|13|14", "10|11|12|13|14"}
+    # Brno: one categories call + page 1 of each of its countries, right after the first round, 7–14 nights
+    brq = [i for i, c in enumerate(calls) if c["to"] == "4305"]
+    assert len(brq) == 2 and "d" not in calls[brq[0]] and calls[brq[1]]["d"].startswith("63260|")
+    assert calls[brq[1]]["nn"] == "7|8|9|10|11|12|13|14" and all(c["to"] == "483|3789" for c in calls if c["to"] != "4305")
 
 
 def test_deeplinks_and_exim_redirect():
     for mod in (kartago, fischer):
-        (d,) = mod.deeplinks(CONFIG)
+        d, brq = mod.deeplinks(CONFIG)
         assert d["url"].startswith(mod.HOME + mod.PATH + "?") and "ka1=10%7C12" in d["url"]
+        assert "to=4305" in brq["url"] and "z Brna" in brq["label"]
     assert eximtours.DEEPLINK_ONLY and eximtours.search(CONFIG) == []
     assert eximtours.deeplinks(CONFIG)[0]["url"].startswith("https://www.kartago.sk/")
 
@@ -91,17 +109,20 @@ def test_long_haul_countries_get_their_first_page_within_budget(monkeypatch):
 
     def fake_get(url, params=None, headers=None, as_json=False, **kw):
         calls.append(params)
-        return cats if "d" not in params else dict(tours, toursCount=500)  # always "more pages"
+        if "d" not in params:
+            return brno_cats(cats) if params["to"] == "4305" else cats
+        return dict(tours, toursCount=500)  # always "more pages"
 
     monkeypatch.setattr(dertour, "get", fake_get)
     fischer.search(CONFIG)
-    asked = {c["d"] for c in calls[1:]}
+    asked = {c["d"] for c in calls if "d" in c}
     assert len(calls) == 1 + dertour.MAX_CALLS
     for dest in ("220441", "64077", "63862|63863|63864|63865|63866"):  # Maldivy, Srí Lanka, Dominikánska rep.
         assert dest in asked
-    # round 1 = every country once, before any second page
-    first = [c["d"] for c in calls[1:22]]
-    assert len(set(first)) == 21 and all("pstg" not in c for c in calls[1:22])
+    # round 1 = every country once, before any second page (calls 0, 1 = categories BTS/VIE and Brno)
+    first = [c["d"] for c in calls[2:23]]
+    assert len(set(first)) == 21 and all("pstg" not in c and c["to"] == "483|3789" for c in calls[2:23])
+    assert calls[23]["to"] == "4305" and "pstg" not in calls[23]  # then Brno's countries
 
 
 def test_long_haul_tours_exact_party_price():
@@ -130,4 +151,4 @@ def test_country_sold_only_by_the_other_brand_is_not_paged(monkeypatch):
 
     monkeypatch.setattr(dertour, "get", fake_get)
     assert fischer.search(CONFIG) == []
-    assert len(calls) == 1 + 21  # one page per country, then nothing more
+    assert len(calls) == 2 + 21  # 2 categories calls (BTS/VIE, Brno), one page per country, then nothing more

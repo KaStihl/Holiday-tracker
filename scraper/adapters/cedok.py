@@ -7,6 +7,9 @@ Length filter: durationMin/durationMax in days (nights + 1). Children in the URL
 variants was picked up (children=N answers 500), so we ask for 2 adults and show per-person price x party size,
 labelled "orientačne" like satur.py. Each page lists the cheapest matching term per hotel.
 
+Departures: departuresByPlane=<IATA,…> (BTS,VIE from nastavenia.yml); Brno (BRQ) from departures_secondary in a
+pass of its own, see BRQ_SLUGS.
+
 Exact party prices (checked 2026-10-25): the hotel/term detail page /dovolena/<country>/<region>/<hotel>,<ID>/?id=…
 (server-rendered React Server Components payload, robots allows /dovolena/) honours
 participants[0][adults]=A&participants[0][children][i]=DD.MM.YYYY (party from nastavenia.yml) and
@@ -37,26 +40,37 @@ DESTINATIONS = {"turecko": "TR", "grecko": "GR", "cyprus": "CY", "spanielsko": "
 # Confirmed 2026-10-30 (rates found): tunisko, maroko, spojene-arabske-emiraty, maldivy, mauricius, seychely,
 # thajsko, indonezia, vietnam, zanzibar, dominikanska-republika, mexiko (= geographicalIdentifiers country ids).
 # 0 rates for Jul–Aug from BTS/VIE (every candidate tried 2026-10-30): oman, jordansko, sri-lanka/srilanka,
-# kena/kenya, kapverdske-ostrovy/kapverdy, kuba, maledivy, tanzania – kept as one cheap request each in case
-# Čedok adds them.
-FAR = {"TN": ("tunisko",), "MA": ("maroko",), "AE": ("spojene-arabske-emiraty",), "OM": ("oman",),
-       "JO": ("jordansko",), "MV": ("maldivy",), "MU": ("mauricius",), "SC": ("seychely",),
-       "LK": ("sri-lanka",), "TH": ("thajsko",), "ID": ("indonezia",), "VN": ("vietnam",),
-       "TZ": ("zanzibar", "tanzania"), "KE": ("kena",), "CV": ("kapverdske-ostrovy",),
-       "DO": ("dominikanska-republika",), "MX": ("mexiko",), "CU": ("kuba",)}
-AIRPORTS = {"bratislava": "BTS", "vieden": "VIE", "viede": "VIE", "kosice": "KSC", "budapest": "BUD"}
+# kena/kenya, kapverdske-ostrovy/kapverdy, kuba, maledivy, tanzania. Until 2026-11-01 they were still asked (one
+# request each in case Čedok adds them); dropped to pay for the Brno pass (BRQ_SLUGS) – add them back here when
+# Čedok starts selling them: "OM": ("oman",), "JO": ("jordansko",), "LK": ("sri-lanka",), "KE": ("kena",),
+# "CV": ("kapverdske-ostrovy",), "CU": ("kuba",).
+FAR = {"TN": ("tunisko",), "MA": ("maroko",), "AE": ("spojene-arabske-emiraty",), "MV": ("maldivy",),
+       "MU": ("mauricius",), "SC": ("seychely",), "TH": ("thajsko",), "ID": ("indonezia",), "VN": ("vietnam",),
+       "TZ": ("zanzibar", "tanzania"), "DO": ("dominikanska-republika",), "MX": ("mexiko",)}
+AIRPORTS = {"bratislava": "BTS", "vieden": "VIE", "viede": "VIE", "kosice": "KSC", "budapest": "BUD", "brno": "BRQ"}
+# Brno (BRQ, departures_secondary, approved 2026-11-01): departuresByPlane=BRQ works (2026-11-01: Turecko 88 rates,
+# "Brno (letisko)"). It gets a pass of its own – one wide-length page per European slug – because mixing it into the
+# BTS/VIE query (cheapest term per hotel) would replace BTS/VIE terms with cheaper Brno ones. KSC/BUD are not asked
+# (add them to SECONDARY_ASKED to search them too).
+SECONDARY_ASKED = ("BRQ",)
+BRQ_SLUGS = ("turecko", "grecko", "cyprus", "spanielsko", "taliansko", "malta", "chorvatsko", "egypt")
 # (durationMin, durationMax) in days and max pages (25 rates each) per destination. One wide 8–15 query only ever
 # showed the cheapest stay, 7 nights; separate ranges give real 7, 10–11 and 14 night terms.
-# Budget (checked 2026-10-30): ≤ 9 x (2+1+1) + 18 FAR + EXACT_MAX ≈ 84 requests per run.
+# Budget (2026-11-01): ≤ 9 x (2+1+1) + 12 FAR + 8 Brno + EXACT_MAX ≈ 84 requests per run.
 DURATIONS = [((8, 10), 2), ((11, 12), 1), ((15, 15), 1)]
 ADULTS = 2  # see module docstring
-EXACT_MAX = 30  # detail pages (~1 MB each) fetched per run for exact prices of the configured party
+EXACT_MAX = 28  # detail pages (~1 MB each) fetched per run for exact prices of the configured party
 APPROX_NOTE = re.compile(r"\s*\(cena za os\. × \d+, orientačne\)|Cena za os\. × \d+ \(orientačne\)")
 
 
-def _query(cfg, page=1, adults=ADULTS, days=None):
+def secondary(cfg):
+    """departures_secondary airports searched in a pass of their own (Brno)."""
+    return [c for c in cfg.get("departures_secondary") or [] if c in SECONDARY_ASKED and c not in cfg["departures"]]
+
+
+def _query(cfg, page=1, adults=ADULTS, days=None, airports=None):
     days = days or (cfg["nights_min"] + 1, cfg["nights_max"] + 1)
-    q = {"departuresByPlane": ",".join(cfg["departures"]), "dateFrom": f"{cfg['date_from']:%d.%m.%Y}",
+    q = {"departuresByPlane": ",".join(airports or cfg["departures"]), "dateFrom": f"{cfg['date_from']:%d.%m.%Y}",
          "dateTo": f"{cfg['date_to']:%d.%m.%Y}", "durationMin": days[0], "durationMax": days[1],
          "order": "priceAsc", "participants[0][adults]": adults}
     if page > 1:
@@ -232,20 +246,26 @@ def exact_price(offer, cfg):
 
 
 def plan(cfg):
-    """[(slug candidates, (durationMin, durationMax), max pages)] for the countries in nastavenia.yml."""
+    """[(slug candidates, (durationMin, durationMax), max pages, airports or None)] for the countries in
+    nastavenia.yml; airports None = 'departures'."""
     if "flight" not in cfg["transports"]:
         return []
-    out = [((slug,), days, pages) for days, pages in DURATIONS
+    out = [((slug,), days, pages, None) for days, pages in DURATIONS
            for slug, code in DESTINATIONS.items() if code in cfg["countries"]]
     wide = (cfg["nights_min"] + 1, cfg["nights_max"] + 1)
-    return out + [(slugs, wide, 1) for code, slugs in FAR.items() if code in cfg["countries"]]
+    out += [(slugs, wide, 1, None) for code, slugs in FAR.items() if code in cfg["countries"]]
+    sec = tuple(secondary(cfg))
+    if sec:
+        out += [((slug,), wide, 1, sec) for slug in BRQ_SLUGS if DESTINATIONS[slug] in cfg["countries"]]
+    return out
 
 
-def _search_slug(cfg, slug, days, pages, far, offers, errors):
+def _search_slug(cfg, slug, days, pages, far, offers, errors, airports=None):
     """Pages of one destination slug into offers; False when the site had no rate at all for it."""
     for page in range(1, pages + 1):
         try:
-            html = get(f"{HOME}/vysledky-vyhladavania/dovolenky/{slug}/", params=_query(cfg, page, days=days))
+            html = get(f"{HOME}/vysledky-vyhladavania/dovolenky/{slug}/",
+                       params=_query(cfg, page, days=days, airports=airports))
         except Exception as e:
             print(f"[cedok] {slug} {days} p{page}: {type(e).__name__} {str(e)[:120]}")
             errors.append(f"{type(e).__name__}: {str(e)[:120]}")
@@ -253,7 +273,9 @@ def _search_slug(cfg, slug, days, pages, far, offers, errors):
         rates, count, links = parse_page(html)
         got = [o for o in (to_offer(r, links, cfg) for r in rates) if o]
         nights = sorted({o["nights"] for o in got})
-        print(f"[cedok] {slug} {days} p{page}: {len(rates)}/{count} rates, {len(got)} offers, nights={nights}"
+        print(f"[cedok] {slug} {days} p{page}{' ' + ','.join(airports) if airports else ''}: {len(rates)}/{count} "
+              f"rates, {len(got)} offers, nights={nights}"
+              + (f", departures={sorted({o['departure'] or '?' for o in got})}" if airports else "")
               + (f", countries={sorted({o['country_code'] or '?' for o in got})}, "
                  f"prices={sorted(o['price_total'] for o in got)[:3]}" if far else ""))
         offers += got
@@ -267,9 +289,9 @@ def _search_slug(cfg, slug, days, pages, far, offers, errors):
 def search(cfg):
     offers, errors = [], []
     far = {s for slugs in FAR.values() for s in slugs}
-    for slugs, days, pages in plan(cfg):
+    for slugs, days, pages, airports in plan(cfg):
         for slug in slugs:
-            if _search_slug(cfg, slug, days, pages, slug in far, offers, errors):
+            if _search_slug(cfg, slug, days, pages, slug in far and not airports, offers, errors, airports):
                 break
     if errors and not offers:
         raise RuntimeError(f"all {len(errors)} cedok.sk requests failed, first: {errors[0]}")
@@ -297,6 +319,7 @@ def watch(cfg, terms, hints):
             if h.get("country_code") in COUNTRY_SLUG and h["country_code"] not in codes:
                 codes.append(h["country_code"])
     wide = (cfg["nights_min"] + 1, cfg["nights_max"] + 1)
+    airports = cfg["departures"] + secondary(cfg)  # any asked airport, Brno included
     offers, calls = [], 0
     for code in codes:
         slug = COUNTRY_SLUG[code]
@@ -306,7 +329,8 @@ def watch(cfg, terms, hints):
                 return offers
             calls += 1
             try:
-                html = get(f"{HOME}/vysledky-vyhladavania/dovolenky/{slug}/", params=_query(cfg, page, days=wide))
+                html = get(f"{HOME}/vysledky-vyhladavania/dovolenky/{slug}/", params=_query(cfg, page, days=wide,
+                                                                                       airports=airports))
             except Exception as e:
                 print(f"[cedok] watch {slug} p{page}: {type(e).__name__} {str(e)[:120]}")
                 break

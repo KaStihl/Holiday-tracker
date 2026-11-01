@@ -26,10 +26,10 @@ budget: 3000
 # Vyšší strop (napr. 6000) nechá v zozname aj vzdialené destinácie (Maldivy, Mexiko, Thajsko…).
 price_cap: 6000
 
-# Letiská odletu (IATA kódy): BTS = Bratislava, VIE = Viedeň, BUD = Budapešť, KSC = Košice, PRG = Praha.
+# Letiská odletu (IATA kódy): BTS = Bratislava, VIE = Viedeň, BUD = Budapešť, KSC = Košice, BRQ = Brno, PRG = Praha.
 departures: [BTS, VIE]
 # Záložné letiská – ponuky odtiaľ sa ponechajú, ale primárne sa hľadá z 'departures'.
-departures_secondary: [BUD, KSC]
+departures_secondary: [BUD, KSC, BRQ]
 
 # Spôsob dopravy: flight = letecky, car = vlastným autom. Jedno alebo oboje.
 transports: [flight, car]
