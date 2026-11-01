@@ -180,92 +180,87 @@ def shape(o, depth=0, maxd=3):
     if isinstance(o, list): return [shape(o[0], depth+1, maxd), f"len={len(o)}"] if o else []
     return o if not isinstance(o, str) else o[:60]
 
-def itaka2():
-    home = get(IT + "/")
-    m = re.search(r'departureCities\\":\{\\"airports\\":(\[.*?\])', home)
-    if m:
-        p("   airports:", m[1].replace('\\"', '"')[:3000])
-    links = sorted(set(re.findall(r'href="(/[^"]*(?:vysledky|departuresByPlane|dovolena/)[^"]*)"', home)))
-    p("   links:", links[:60])
-    for path in ("/terms", "/pravidla-a-podminky", "/regulamin/", "/dohoda"):
-        try:
-            t = get(IT + path)
-        except Exception as e:
-            p(f"   {path}: {e}"); continue
-        txt = re.sub(r"<[^>]+>", " ", t)
-        p(f"   {path}: len {len(t)}")
-        ctx(txt, r"(?i)vytěž|vytez|výhrad|robot|automati|crawl|scrap|data mining|tdm|strojov|kopírov|stahov", 220, 10)
+from collections import Counter
 
-def itaka_results():
-    for path in ("/vysledky-vyhledavani/dovolena/turecko/", "/vysledky-vyhledavani/dovolena/"):
-        q = {"departuresByPlane": "BTS,VIE,BRQ,PRG,OSR,KTW", "dateFrom": "01.07.2027", "dateTo": "31.08.2027",
-             "durationMin": 8, "durationMax": 15, "order": "priceAsc", "participants[0][adults]": 2}
-        try:
-            html = get(IT + path, params=q)
-        except Exception as e:
-            p(f"   {path}: {e}"); continue
-        d = nd_queries(html)
-        p(f"   {path}: len {len(html)} nextdata={d is not None}")
-        if d:
-            pp = d["props"]["pageProps"]
-            p("   pageProps keys:", list(pp))
-            for qq in pp.get("initialQueryState", {}).get("queries", []):
-                p("    query key:", json.dumps(qq.get("queryKey"))[:300])
-            rates, count, links = C.parse_page(html)
-            p(f"   rates {len(rates)}/{count}, links {len(links)}")
-            if rates:
-                p("   rate0:", json.dumps(shape(rates[0], maxd=4), ensure_ascii=False)[:5000])
-                for r in rates[:25]:
-                    f = next((s for s in r.get('segments', []) if s.get('type') == 'flight'), {})
-                    h = next((s for s in r.get('segments', []) if s.get('type') == 'hotel'), {})
-                    p("     ", (h.get("content") or {}).get("title"), r.get("price"), r.get("currency"), (f.get("departure") or {}).get("title"), h.get("beginDate"), (r.get("duration") or {}).get("days"), len(r.get("participants") or []))
-                p("   links sample:", list(links.items())[:3])
-            ctx(html, r"(?i)K[čc]\b|CZK", 100, 3)
-            break
+def C_query(deps, days=(8, 15), adults=2, kids=()):
+    q = {"departuresByPlane": deps, "dateFrom": "01.07.2027", "dateTo": "31.08.2027",
+         "durationMin": days[0], "durationMax": days[1], "order": "priceAsc", "participants[0][adults]": adults}
+    for i, k in enumerate(kids):
+        q[f"participants[0][children][{i}]"] = k
+    return q
 
-def itaka_hotel():
-    q = {"departuresByPlane": "BTS,VIE,BRQ", "dateFrom": "01.07.2027", "dateTo": "31.08.2027",
-         "durationMin": 8, "durationMax": 15, "participants[0][adults]": 1,
-         "participants[0][children][0]": "01.07.2017", "participants[0][children][1]": "01.07.2015"}
-    html = get(IT + "/dovolena/turecko/side/royal-alhambra-palace,AYTALHA/", params=q)
+def summarize(html, label):
     d = nd_queries(html)
-    p(f"   hotel len {len(html)} nextdata={d is not None}")
-    v = C.parse_detail(html)
-    p("   rsc variants:", v[:5])
+    rates, count, links = C.parse_page(html)
+    qk = None
     if d:
-        pp = d["props"]["pageProps"]
-        p("   pageProps keys:", list(pp))
-        for qq in pp.get("initialQueryState", {}).get("queries", []):
-            p("    query key:", json.dumps(qq.get("queryKey"))[:400])
-            p("    data shape:", json.dumps(shape(qq.get("state", {}).get("data"), maxd=5), ensure_ascii=False)[:3000])
-    ctx(html, r'"totalPrice"|"adultNumber"|childrenBirthDates', 300, 4)
-    ctx(html, r"(?i)brno|bratislav|v[ií]de[nň]", 150, 6)
+        for qq in d["props"]["pageProps"].get("initialQueryState", {}).get("queries", []):
+            if qq.get("queryKey", [None])[0] == "rates":
+                qk = qq["queryKey"]
+    types = Counter(r.get("rateType") for r in rates)
+    deps = Counter((next((s for s in r.get('segments', []) if s.get('type') == 'flight'), {}).get("departure") or {}).get("title") for r in rates)
+    p(f"   {label}: {len(rates)}/{count} types={dict(types)} deps={dict(deps)}")
+    if qk: p("      qk:", json.dumps(qk, ensure_ascii=False)[:600])
+    for r in rates[:4]:
+        h = next((s for s in r.get('segments', []) if s.get('type') == 'hotel'), {})
+        c = h.get("content") or {}
+        p("      ", c.get("title"), r.get("price"), r.get("currency"), r.get("rateType"), h.get("beginDate"), h.get("endDate"), (r.get("duration") or {}).get("days"),
+          [(x.get("type"), x.get("price")) for x in r.get("participants") or []], {g["type"]: g["title"] for g in c.get("geographicalIdentifiers", [])}, (h.get("meal") or {}).get("title"))
+    return rates, links
 
-def coral2():
-    for u in ("https://www.coraltravel.cz/sitemap.xml", "https://coraltravel.cz/", "https://www.coraltravel.cz/obchodni-podminky/"):
-        r = raw(u, n=0)
-        if r is not None:
-            p("    title:", re.findall(r"<title>([^<]*)", r.text)[:2], "imperva/reese:", "reese84" in r.text or "Pardon Our Interruption" in r.text)
+def itaka3():
+    for code in ("BTS", "VIE", "BRQ", "BUD", "KSC", "PRG", "OSR", "KTW"):
+        try:
+            summarize(get(IT + "/vysledky-vyhledavani/dovolena/turecko/", params=C_query(code)), f"TR {code}")
+        except Exception as e:
+            p(f"   TR {code}: {e}")
+    try:
+        summarize(get(IT + "/vysledky-vyhledavani/dovolena/", params=C_query("BTS,VIE,BRQ,BUD,KSC")), "ALL sk-airports")
+    except Exception as e:
+        p("   ALL:", e)
+    rates, links = summarize(get(IT + "/vysledky-vyhledavani/dovolena/turecko/", params=C_query("PRG", adults=1, kids=("01.07.2017", "01.07.2015"))), "TR PRG 1+2")
+    for q in ({}, {"participants[0][adults]": 1, "participants[0][children][0]": "01.07.2017", "participants[0][children][1]": "01.07.2015"}):
+        html = get(IT + "/dovolena/turecko/side/royal-alhambra-palace,AYTALHA/", params=q)
+        d = nd_queries(html)
+        for qq in d["props"]["pageProps"].get("initialQueryState", {}).get("queries", []):
+            if qq["queryKey"][0] in ("variants", "similar-products-in-region"):
+                p("    hotel", bool(q), json.dumps(qq["queryKey"], ensure_ascii=False)[:300])
+                p("      ->", json.dumps(shape(qq["state"].get("data"), maxd=6), ensure_ascii=False)[:2500])
+    hol = [r for r in rates if r.get("rateType") == "holidays" and r.get("supplierObjectId") in links]
+    if hol:
+        href = links[hol[0]["supplierObjectId"]]
+        html = get(IT + href)
+        d = nd_queries(html)
+        p("   detail", href[:120], "nextdata", d is not None, "len", len(html))
+        if d:
+            for qq in d["props"]["pageProps"].get("initialQueryState", {}).get("queries", []):
+                p("    qk:", json.dumps(qq["queryKey"], ensure_ascii=False)[:400])
+                p("      ->", json.dumps(shape(qq["state"].get("data"), maxd=6), ensure_ascii=False)[:2500])
+        else:
+            p("   rsc variants:", C.parse_detail(html)[:4])
+            ctx(html, r'totalPrice', 300, 3)
 
-def dertour2():
+def dertour3():
+    from adapters import dertour as D
     home = "https://www.kartago.sk"
     html = get(home + "/vysledky-vyhladavania")
-    ss = re.findall(r'<script[^>]+src="([^"]+)"', html)
-    p("   scripts:", ss)
-    for s in ss:
-        if not ("Scripts" in s or "/scripts/" in s.lower()):
-            continue
-        url = s if s.startswith("http") else home + ("" if s.startswith("/") else "/") + s
-        try:
-            js = get(url)
-        except Exception as e:
-            p("  js fail", url, e); continue
-        p(f"   js {url} len={len(js)}")
-        ctx(js, r"(?i)brno|fromId|airportId|departureAirport|/api/[a-z]+/[a-z]+", 160, 15, label="js ")
-    ctx(html, r"(?i)letisk|airport|odlet", 160, 10)
+    ctx(html, r"(?i)Scripts/web|index\.[a-z0-9]+\.js|type=\"module\"", 160, 6)
+    hdr = {"Accept": "application/json", "Referer": home + "/"}
+    cats = get(home + D.API, params=D.query(CONFIG), headers=hdr, as_json=True)
+    tr = [c for c in D.countries(cats, CONFIG) if c[0] == "TR"][0]
+    for label, to in (("no to", None), ("483|3789", "483|3789")):
+        q = D.query(CONFIG, None, tr[2], 0)
+        q["pitg"] = 100
+        q.pop("m", None)
+        if to is None:
+            q.pop("to")
+        data = get(home + D.API, params=q, headers=hdr, as_json=True)
+        cnt = Counter()
+        for t in data.get("tours") or []:
+            seg = ((((t.get("tour") or {}).get("flight") or {}).get("departure") or {}).get("segments") or [{}])[0]
+            a = seg.get("airport") or {}
+            cnt[(a.get("fromId"), a.get("fromIATA"), a.get("from"))] += 1
+        p(f"   kartago TR {label}: {data.get('toursCount')} tours, from: {dict(cnt)}")
 
-section("ITAKA2", itaka2)
-section("ITAKA RESULTS", itaka_results)
-section("ITAKA HOTEL", itaka_hotel)
-section("CORAL2", coral2)
-section("DERTOUR2", dertour2)
+section("ITAKA3", itaka3)
+section("DERTOUR3", dertour3)
