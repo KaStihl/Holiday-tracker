@@ -1,5 +1,7 @@
 /* Dovolenka tracker – vanilla JS, no dependencies.
  * Data contract: scraper/run.py writes ./data/offers.json ({generated_at, criteria, sources, deeplinks, offers}).
+ * Parties (criteria.parties, criteria.default_party): every offer has "party"; offers of the extra parties may be
+ * stored as differences to the primary party's offer ("base": <id>) and are merged back by expandOffers().
  * Everything coming from the data file is treated as untrusted: DOM is built with
  * textContent / setAttribute only and URLs must start with https://.
  */
@@ -38,7 +40,11 @@
   var DATA_URL = isSample ? "./data/offers.sample.json" : "./data/offers.json";
 
   var data = null;
-  var allOffers = [];
+  var everyOffer = []; // offers of every party
+  var allOffers = [];  // offers of the selected party (state.osoby)
+  var PARTIES = [];    // [{id, nazov, adults, kids, persons}]
+  var PARTY_BY_ID = {};
+  var DEFAULT_PARTY = "";
   var CFG = null;      // derived from data.criteria + data
   var DEFAULTS = null; // filter state on first visit (criteria-based)
   var OPEN = null;     // "no filter at all" state
@@ -132,7 +138,7 @@
     if (budget === null || budget <= 0) budget = 3000;
     var cap = num(c.price_cap); if (cap === null || cap <= 0) cap = 6000;
     var maxP = 0, minN = null, maxN = null, minD = "", maxD = "";
-    allOffers.forEach(function (o) {
+    everyOffer.forEach(function (o) {
       if (o.price_total > maxP) maxP = o.price_total;
       if (o.nights !== null) { minN = minN === null ? o.nights : Math.min(minN, o.nights); maxN = maxN === null ? o.nights : Math.max(maxN, o.nights); }
       if (isDay(o.date_from)) { if (!minD || o.date_from < minD) minD = o.date_from; if (!maxD || o.date_from > maxD) maxD = o.date_from; }
@@ -167,15 +173,105 @@
   function watchedTerms(c) {
     var list = Array.isArray(data.watched) ? data.watched.filter(function (w) { return w && typeof w.term === "string"; })
       .map(function (w) { return w.term; }) : strList(c.watched, 20);
-    allOffers.forEach(function (o) { if (o.watched && list.indexOf(o.watched) < 0) list.push(o.watched); });
+    everyOffer.forEach(function (o) { if (o.watched && list.indexOf(o.watched) < 0) list.push(o.watched); });
     return list.filter(function (t) { return t.length && t.length <= 80; }).slice(0, 20);
   }
+  // ---------- parties (👥 Osoby) ----------
+  function partyText(a, kids) {
+    var s = a + " " + plural(a, "dospelý", "dospelí", "dospelých");
+    if (kids.length) s += " + " + kids.length + " " + plural(kids.length, "dieťa", "deti", "detí") + " (" + kids.join(", ") + " r.)";
+    return s;
+  }
+  function partyShortOf(p) { return p.kids.length ? p.adults + "+" + p.kids.length : p.adults + " dosp."; }
+  function readParties() {
+    var c = data && data.criteria && typeof data.criteria === "object" ? data.criteria : {};
+    var out = [];
+    (Array.isArray(c.parties) ? c.parties : []).forEach(function (p) {
+      if (!p || typeof p !== "object" || typeof p.id !== "string" || !/^[a-z0-9-]{1,40}$/.test(p.id) || PARTY_BY_ID[p.id]) return;
+      var a = num(p.adults);
+      if (a === null || a < 1 || a > 20) return;
+      var kids = Array.isArray(p.children_ages) ? p.children_ages.map(num).filter(function (x) { return x !== null && x >= 0 && x < 30; }).map(Math.round) : [];
+      var q = { id: p.id, adults: Math.round(a), kids: kids, persons: Math.round(a) + kids.length };
+      q.nazov = typeof p.nazov === "string" && p.nazov.trim() ? p.nazov.trim().slice(0, 40) : partyText(q.adults, kids);
+      PARTY_BY_ID[q.id] = q;
+      out.push(q);
+    });
+    if (!out.length) { // older files / sample without parties: the one party of criteria
+      var a0 = num(c.adults);
+      var k0 = Array.isArray(c.children_ages) ? c.children_ages.map(num).filter(function (x) { return x !== null && x >= 0 && x < 30; }).map(Math.round) : [];
+      var q0 = a0 !== null && a0 >= 1 && a0 <= 20
+        ? { id: "a" + Math.round(a0) + (k0.length ? "-c" + k0.slice().sort(function (x, y) { return x - y; }).join("-") : ""), adults: Math.round(a0), kids: k0, persons: Math.round(a0) + k0.length }
+        : { id: "default", adults: null, kids: [], persons: null };
+      q0.nazov = q0.adults !== null ? partyText(q0.adults, k0) : "Skupina";
+      PARTY_BY_ID[q0.id] = q0;
+      out.push(q0);
+    }
+    PARTIES = out;
+    DEFAULT_PARTY = typeof c.default_party === "string" && PARTY_BY_ID[c.default_party] ? c.default_party : out[0].id;
+  }
+  // offers.json stores extra-party offers as {id, base, <changed fields>}: merge them with their base offer
+  function expandOffers(list) {
+    var byId = {};
+    list.forEach(function (o) { if (o && typeof o === "object" && !o.base && typeof o.id === "string") byId[o.id] = o; });
+    return list.map(function (o) {
+      if (!o || typeof o !== "object" || !o.base) return o;
+      var b = byId[o.base];
+      if (!b) return null;
+      var e = {};
+      [b, o].forEach(function (src) {
+        Object.keys(src).forEach(function (k) { if (k !== "base" && k !== "__proto__") e[k] = src[k]; });
+      });
+      return e;
+    });
+  }
+  function currentParty() { return PARTY_BY_ID[state && state.osoby] || PARTY_BY_ID[DEFAULT_PARTY]; }
+  // select the party's offers and its size (per-person divisor, labels)
+  function applyParty() {
+    var p = currentParty();
+    CFG.adults = p.adults; CFG.kids = p.kids; CFG.persons = p.persons; CFG.party = p;
+    allOffers = everyOffer.filter(function (o) { return o.party === p.id; });
+  }
+  function renderPartySwitch() {
+    var many = PARTIES.length > 1;
+    $("party-switch").hidden = !many;
+    $("f-party-wrap").hidden = !many;
+    if (!many) return;
+    var counts = {};
+    everyOffer.forEach(function (o) { counts[o.party] = (counts[o.party] || 0) + 1; });
+    var cur = currentParty().id;
+    var box = $("party-opts");
+    var focused = box.contains(document.activeElement) ? document.activeElement.getAttribute("data-party") : null;
+    clear(box);
+    PARTIES.forEach(function (p) {
+      var b = el("button");
+      b.type = "button";
+      b.setAttribute("role", "radio");
+      b.setAttribute("data-party", p.id);
+      b.setAttribute("aria-checked", p.id === cur ? "true" : "false");
+      b.tabIndex = p.id === cur ? 0 : -1;
+      b.appendChild(el("span", "", p.nazov));
+      b.appendChild(el("small", "", (p.adults !== null ? partyShortOf(p) + " · " : "") + nf.format(counts[p.id] || 0) + " " + offersWord(counts[p.id] || 0)));
+      b.title = p.adults !== null ? "Ceny pre " + partyText(p.adults, p.kids) : p.nazov;
+      box.appendChild(b);
+    });
+    if (focused) { var f = box.querySelector('[data-party="' + focused + '"]'); if (f) f.focus(); }
+    var fb = $("f-party");
+    withFocus(fb, function () {
+      PARTIES.forEach(function (p) {
+        fb.appendChild(chipBtn(p.nazov + (p.adults !== null ? " (" + partyShortOf(p) + ")" : ""), p.id === cur,
+          function () { setParty(p.id); }, counts[p.id] || 0, "party:" + p.id));
+      });
+    });
+  }
+  function setParty(id) {
+    if (!PARTY_BY_ID[id] || id === state.osoby) return;
+    state.osoby = id;
+    update();
+  }
+
   function partyLong() {
     if (!CFG || CFG.adults === null) return "skupina neuvedená";
-    var a = CFG.adults, k = CFG.kids.length;
-    var s = a + " " + plural(a, "dospelý", "dospelí", "dospelých");
-    if (k) s += " + " + k + " " + plural(k, "dieťa", "deti", "detí") + " (" + CFG.kids.join(", ") + " r.)";
-    return s;
+    return partyText(CFG.adults, CFG.kids);
   }
   function partyShort() {
     if (!CFG || CFG.adults === null) return "";
@@ -194,7 +290,7 @@
     DEFAULTS = {
       t: "all", ct: [], c: [], pmin: 0, pmax: Math.min(CFG.budget, CFG.priceMax), df: "", dt: "",
       nmin: CFG.nLo, nmax: CFG.nHi, b: CFG.boardsPref.slice(), st: 0, r: 0, d: [], src: [],
-      ex: false, z: false, dog: false, dr: false, w: false, q: "", s: "score", pp: false
+      ex: false, z: false, dog: false, dr: false, w: false, q: "", s: "score", pp: false, osoby: DEFAULT_PARTY
     };
     OPEN = clone(DEFAULTS);
     OPEN.pmax = CFG.priceMax;
@@ -229,6 +325,7 @@
     ["ex", "z", "dog", "dr", "w", "pp"].forEach(function (k) { if (typeof s[k] === "boolean") o[k] = s[k]; });
     if (typeof s.q === "string") o.q = s.q.slice(0, 80);
     if (SORTS[s.s]) o.s = s.s;
+    if (typeof s.osoby === "string" && PARTY_BY_ID[s.osoby]) o.osoby = s.osoby;
     return o;
   }
   var ARR_KEYS = ["ct", "c", "b", "d", "src"];
@@ -310,7 +407,8 @@
       first_seen: str(o.first_seen), last_seen: str(o.last_seen),
       price_history: hist,
       price_change: num(o.price_change),
-      watched: typeof o.watched === "string" && o.watched.length <= 80 ? o.watched : ""
+      watched: typeof o.watched === "string" && o.watched.length <= 80 ? o.watched : "",
+      party: typeof o.party === "string" && PARTY_BY_ID[o.party] ? o.party : DEFAULT_PARTY
     };
     n._text = fold([n.hotel, n.place, n.region, n.country].join(" "));
     return n;
@@ -432,13 +530,15 @@
       CFG.kids.forEach(function (a) { box.appendChild(el("span", "person kid", "🧒 " + a + " r.")); });
       if (CFG.adults > 8) box.appendChild(el("span", "person", "… spolu " + CFG.adults + " dospelých"));
     }
-    $("party-text").textContent = partyLong() + (CFG.persons ? " · spolu " + CFG.persons + " " + plural(CFG.persons, "osoba", "osoby", "osôb") : "");
+    $("party-text").textContent = (PARTIES.length > 1 && CFG.party ? CFG.party.nazov + " – " : "") + partyLong() + (CFG.persons ? " · spolu " + CFG.persons + " " + plural(CFG.persons, "osoba", "osoby", "osôb") : "");
     var ex = allOffers.filter(function (o) { return o.price_exact; }).length;
     $("party-exact").textContent = allOffers.length
-      ? ex + " z " + allOffers.length + " " + offersWord(allOffers.length) + " má presnú cenu, ktorú cestovka vypočítala priamo pre túto skupinu. Ostatné ceny sú orientačné (prepočet z ceny za osobu) – pri takej ponuke je poznámka „≈ orientačne“."
+      ? ex + " z " + allOffers.length + " " + offersWord(allOffers.length) + " má presnú cenu, ktorú cestovka vypočítala priamo pre túto skupinu. Ostatné ceny sú orientačné (prepočet z ceny za osobu) – pri takej ponuke je poznámka „≈ orientačne“." +
+        (PARTIES.length > 1 && CFG.party && CFG.party.id !== DEFAULT_PARTY ? " Pre túto skupinu sa presné ceny pýtajú len v najlepších destináciách, preto je ponúk menej ako pre hlavnú skupinu." : "")
       : "Ponuky zatiaľ nie sú stiahnuté.";
     var a = $("party-edit");
     a.href = SETTINGS_URL;
+    $("party-how-switch").hidden = PARTIES.length < 2;
     var dis = !CFG.persons;
     [].forEach.call(document.querySelectorAll("[data-view]"), function (b) {
       b.disabled = dis && b.getAttribute("data-view") === "pp";
@@ -545,7 +645,7 @@
   function indexData() {
     var deps = {};
     CFG.departures.forEach(function (d) { deps[d] = 1; });
-    allOffers.forEach(function (o) {
+    everyOffer.forEach(function (o) {
       if (!countryCont[o.country]) countryCont[o.country] = o.continent;
       if (o.country_code && !countryCode[o.country]) countryCode[o.country] = o.country_code;
       if (o.departure && o.transport === "flight") deps[o.departure] = 1;
@@ -578,6 +678,21 @@
       if (b) { state.t = b.getAttribute("data-transport"); update(); return; }
       var v = e.target.closest && e.target.closest("[data-view]");
       if (v && !v.disabled) { state.pp = v.getAttribute("data-view") === "pp"; update(); }
+    });
+    $("party-opts").addEventListener("click", function (e) {
+      var b = e.target.closest && e.target.closest("[data-party]");
+      if (b) setParty(b.getAttribute("data-party"));
+    });
+    $("party-opts").addEventListener("keydown", function (e) {
+      if (["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].indexOf(e.key) < 0) return;
+      var btns = [].slice.call(this.querySelectorAll("button"));
+      var i = btns.indexOf(document.activeElement);
+      if (i < 0) return;
+      e.preventDefault();
+      var j = (i + (e.key === "ArrowLeft" || e.key === "ArrowUp" ? -1 : 1) + btns.length) % btns.length;
+      setParty(btns[j].getAttribute("data-party"));
+      var n = $("party-opts").querySelector('[data-party="' + btns[j].getAttribute("data-party") + '"]');
+      if (n) n.focus();
     });
     $("transport").addEventListener("keydown", function (e) {
       if (["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].indexOf(e.key) < 0) return;
@@ -640,16 +755,17 @@
     }
     update();
   }
+  // the selected party, sort and per-person view are not filters: resetting the filters keeps them
   function clearAll() {
-    var keep = { s: state.s, pp: state.pp };
+    var keep = { s: state.s, pp: state.pp, osoby: state.osoby };
     state = clone(OPEN);
-    state.s = keep.s; state.pp = keep.pp;
+    state.s = keep.s; state.pp = keep.pp; state.osoby = keep.osoby;
     update();
   }
   function restoreDefaults() {
-    var keep = { s: state.s, pp: state.pp };
+    var keep = { s: state.s, pp: state.pp, osoby: state.osoby };
     state = clone(DEFAULTS);
-    state.s = keep.s; state.pp = keep.pp;
+    state.s = keep.s; state.pp = keep.pp; state.osoby = keep.osoby;
     update();
   }
   function setVal(id, v) { var n = $(id); if (String(n.value) !== String(v)) n.value = v; }
@@ -735,7 +851,7 @@
     $("pills-bar").hidden = !allOffers.length;
     $("pills-empty").hidden = !!pills.length;
     $("f-reset").hidden = !pills.length;
-    $("f-defaults").hidden = stateToHash(state).replace(/(^|&)(s|pp)=[^&]*/g, "") === "";
+    $("f-defaults").hidden = stateToHash(state).replace(/(^|&)(s|pp|osoby)=[^&]*/g, "") === "";
     $("filter-count").textContent = pills.length ? "aktívne: " + pills.length : "žiadne";
     $("result-count").textContent = allOffers.length ? list.length + " " + offersWord(list.length) + " z " + allOffers.length : "";
     $("filter-results").textContent = allOffers.length ? "→ " + list.length + " " + offersWord(list.length) : "";
@@ -1145,6 +1261,7 @@
       tb.appendChild(tr0);
       return;
     }
+    var pid = CFG && CFG.party ? CFG.party.id : "";
     src.forEach(function (s) {
       if (!s) return;
       var tr = el("tr");
@@ -1160,7 +1277,8 @@
       var tdS = el("td");
       tdS.appendChild(el("span", "status st-" + st, (st === "ok" ? "✓ " : st === "error" ? "✕ " : st === "empty" ? "∅ " : "– ") + STATUS_LABEL[st]));
       tr.appendChild(tdS);
-      tr.appendChild(el("td", "num", num(s.count) !== null ? num(s.count) : "—"));
+      var cnt = s.counts && typeof s.counts === "object" && num(s.counts[pid]) !== null ? num(s.counts[pid]) : num(s.count);
+      tr.appendChild(el("td", "num", cnt !== null ? cnt : "—"));
       var d = num(s.duration_s);
       tr.appendChild(el("td", "num", d !== null ? d.toFixed(1).replace(".", ",") + " s" : "—"));
       tr.appendChild(el("td", "err col-err", s.error ? str(s.error).slice(0, 240) : ""));
@@ -1173,6 +1291,11 @@
   function update(fromHash) {
     shown = PAGE;
     qWords = fold(state.q).split(/\s+/).filter(Boolean);
+    applyParty();
+    renderPartySwitch();
+    renderCriteria();
+    renderParty();
+    renderSources();
     renderTransport();
     renderGeo();
     renderMulti("f-boards", "b", BOARDS, function (v) { return v; }, function (v) { return BOARD_LABEL[v]; });
@@ -1192,7 +1315,9 @@
 
   function start(json) {
     data = json && typeof json === "object" ? json : {};
-    allOffers = (Array.isArray(data.offers) ? data.offers : []).map(normOffer).filter(Boolean);
+    readParties();
+    everyOffer = expandOffers(Array.isArray(data.offers) ? data.offers : []).map(normOffer).filter(Boolean);
+    allOffers = everyOffer;
     CFG = buildConfig();
     makeDefaults();
     indexData();
@@ -1200,11 +1325,9 @@
     $("filters-box").hidden = !allOffers.length;
     if (window.matchMedia && window.matchMedia("(max-width: 720px)").matches) $("filters-box").open = false;
     state = loadState();
+    applyParty();
     initControls();
-    renderCriteria();
-    renderParty();
     renderTimes();
-    renderSources();
     update();
     setInterval(renderTimes, 60000);
   }

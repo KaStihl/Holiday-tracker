@@ -42,6 +42,20 @@ zisťuje z detailu ponuky **presnú cenu pre nastavenú zostavu** (v e-maile ✓
 odhad v `price_approx`). Každá ponuka má aj `continent` (Európa, Afrika, Blízky východ, Ázia, Indický oceán,
 Karibik a Amerika).
 
+## Skupiny osôb (👥 Osoby)
+`skupiny` v `nastavenia.yml` = najviac 4 skupiny `{nazov, adults, children_ages}` (bez `skupiny` platí staré
+`adults` + `children_ages` ako jediná skupina). Na stránke sa medzi nimi prepína tlačidlami **👥 Osoby** (hore aj vo
+filtroch; výber sa pamätá a je v odkaze `#osoby=<id>`). Každá ponuka má `party` (id zloženia, napr. `a1-c10-12`,
+`a2-c10-12`, `a2`); `criteria.parties` a `criteria.default_party` ich popisujú.
+- **Prvá (hlavná) skupina** sa sťahuje ako doteraz a jej ponuky majú pôvodné `id` (história cien pokračuje).
+- **Ďalšie skupiny:** Kartago/Fischer a Ruefa sa pýtajú zvlášť, ale úsporne – len najlepšie destinácie z behu hlavnej
+  skupiny (Kartago/Fischer ≤ 8, Ruefa ≤ 5 požiadaviek na skupinu, Ruefa aj sledované hotely), Čedok zistí presnú cenu
+  pre ~6 najlepších ponúk; orientačné ceny (Satur, Čedok, BILLA Reisen, …) sa bez ďalších požiadaviek prepočítajú
+  (cena za osobu × počet osôb skupiny). Id ponuky je `<id>@<skupina>` – vlastná história cien.
+- V `offers.json` majú ponuky ďalších skupín len polia, ktoré sa líšia od ponuky hlavnej skupiny (`base`); ak by súbor
+  presiahol ~8 MB, ďalšie skupiny si nechajú len najlepšie ponuky (`party_cap`).
+- Týždenný e-mail je len pre hlavnú skupinu.
+
 ## Sledované hotely
 `sledovane_hotely` v `nastavenia.yml` = zoznam názvov (stačí časť, bez ohľadu na diakritiku/veľkosť písmen; slová
 hotel/resort/spa/& sa ignorujú – `scraper/watch.py`). Zhodné ponuky dostanú v dátach `watched: "<názov>"`, zostávajú aj

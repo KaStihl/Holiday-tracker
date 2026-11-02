@@ -23,3 +23,8 @@ def search(cfg):
 def watch(cfg, terms, hints):
     """run.py hook for sledovane_hotely – see dertour.watch()."""
     return dertour.watch("kartago", HOME, cfg, False, terms, hints)
+
+
+def search_party(cfg, primary):
+    """run.py hook for an extra party (skupiny) – see dertour.search_party()."""
+    return dertour.search_party("kartago", HOME, cfg, False, primary)

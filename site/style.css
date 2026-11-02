@@ -119,6 +119,23 @@ a { color: var(--accent); }
 .transport button:hover { background: rgba(255, 255, 255, .08); }
 .transport button[aria-checked="true"] { background: var(--flap); color: #1a1300; }
 .transport button[aria-checked="true"] small { color: #4d3b00; }
+.party-switch {
+  display: inline-flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-top: 14px;
+  background: rgba(255, 201, 64, .08); border: 1px solid rgba(255, 201, 64, .35); border-radius: 14px; padding: 8px 10px;
+  max-width: 100%;
+}
+.ps-label { font-weight: 800; color: var(--flap); font-size: .95rem; white-space: nowrap; }
+.ps-opts { display: flex; flex-wrap: wrap; gap: 4px; min-width: 0; }
+.ps-opts button {
+  font: inherit; font-weight: 600; font-size: .92rem; color: var(--board-text); text-align: left;
+  background: rgba(0, 0, 0, .25); border: 1px solid rgba(255, 255, 255, .14); border-radius: 9px;
+  padding: 6px 12px; cursor: pointer; min-height: 40px; display: inline-flex; flex-direction: column; justify-content: center;
+}
+.ps-opts button small { font-weight: 400; font-size: .74rem; color: var(--board-muted); }
+.ps-opts button:hover { background: rgba(255, 255, 255, .08); }
+.ps-opts button[aria-checked="true"] { background: var(--flap); border-color: var(--flap); color: #1a1300; }
+.ps-opts button[aria-checked="true"] small { color: #4d3b00; }
+.ps-opts button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
 
 /* ---------- Notes ---------- */
 .note { margin: 16px 0 0; padding: 10px 14px; border-radius: 10px; background: var(--warn-bg); color: var(--warn); font-size: .9rem; }
@@ -426,6 +443,9 @@ table.sources { width: 100%; border-collapse: collapse; font-size: .9rem; }
   .time-label { font-size: .64rem; }
   .board-times { width: 100%; }
   .transport { display: flex; width: 100%; }
+  .party-switch { display: flex; width: 100%; }
+  .ps-opts { width: 100%; }
+  .ps-opts button { flex: 1 1 calc(50% - 4px); min-width: 0; }
   .transport button { flex: 1 1 auto; padding: 8px 10px; }
   .transport button small { display: block; font-size: .72rem; }
   .price-total { font-size: 1.5rem; }

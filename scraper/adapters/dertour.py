@@ -295,3 +295,41 @@ def watch(tag, home, cfg, fischer, terms, hints):
             if len(tours) < WATCH_PAGE:
                 break
     return offers
+
+
+# --- extra parties (skupiny in nastavenia.yml) -------------------------------------------------------------------
+# Prices depend on the party (ac1/kc1/ka1), so another party needs its own requests. To stay cheap it reuses what the
+# primary pass found: one categories call (destination ids for this party) and page 1 (50 cheapest tours, 7–14
+# nights, BTS/VIE) of the countries where this brand had primary offers, best preference weight first,
+# ≤ EXTRA_CALLS requests per party (2 extra parties: ≤ 16 calls on top of the ≤ 52 of search() + watch()).
+EXTRA_CALLS = 8
+
+
+def extra_plan(cats, cfg, primary):
+    """[(code, name, destination ids, count)] for a party pass: countries this brand sold in the primary pass."""
+    from collections import Counter
+    have = Counter(o.get("country_code") for o in primary)
+    todo = [c for c in countries(cats, cfg) if have[c[0]]]
+    return sorted(todo, key=lambda c: (-cfg["countries"][c[0]], -have[c[0]]))[:EXTRA_CALLS - 1]
+
+
+def search_party(tag, home, cfg, fischer, primary):
+    """run.py hook for an extra party: exact prices for cfg's party, ≤ EXTRA_CALLS API calls."""
+    if "flight" not in cfg["transports"] or not primary:
+        return []
+    hdr = {"Accept": "application/json", "Referer": home + "/"}
+    cats = get(home + API, params=query(cfg), headers=hdr, as_json=True)
+    offers = []
+    for code, name, dest, count in extra_plan(cats, cfg, primary):
+        try:
+            data = get(home + API, params=query(cfg, PASSES[0][0], dest), headers=hdr, as_json=True)
+        except Exception as e:
+            print(f"[{tag}] party {party_label(cfg)} {name}: {type(e).__name__} {str(e)[:120]}")
+            if "403" in str(e) or "429" in str(e):
+                break
+            continue
+        got = [o for o in (to_offer(t, home, cfg) for t in data.get("tours") or [] if _mine(t, fischer)) if o]
+        print(f"[{tag}] party {party_label(cfg)} {name}: {len(data.get('tours') or [])} tours, {len(got)} own-brand "
+              f"offers ({sum(bool(o.get('price_exact')) for o in got)} exact)")
+        offers += got
+    return offers

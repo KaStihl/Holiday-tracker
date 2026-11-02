@@ -32,6 +32,10 @@
           </div>
         </div>
       </div>
+      <div class="party-switch" id="party-switch" hidden>
+        <span class="ps-label" id="ps-label"><span aria-hidden="true">👥</span> Osoby</span>
+        <div class="ps-opts" role="radiogroup" aria-labelledby="ps-label" id="party-opts"></div>
+      </div>
       <ul class="criteria" id="criteria" aria-label="Kritériá vyhľadávania"></ul>
       <div class="transport" role="radiogroup" aria-label="Spôsob dopravy" id="transport">
         <button type="button" role="radio" data-transport="all" aria-checked="true">Všetko</button>
@@ -67,7 +71,8 @@
       <div class="party-side">
         <div class="party-how">
           <h3>Ako zmeniť počet osôb?</h3>
-          <p>Ceny sa sťahujú z cestoviek priamo pre túto skupinu, preto sa tu nedá prepnúť iný počet osôb. Zmeníte ho v súbore <code>nastavenia.yml</code> v GitHub repozitári (riadky <code>adults</code> = počet dospelých a <code>children_ages</code> = veky detí) a uložíte <em>Commit changes</em> – ceny sa stiahnu nanovo a stránka sa obnoví zhruba do 10 minút.</p>
+          <p id="party-how-switch">Medzi skupinami prepínate tlačidlami <strong>👥 Osoby</strong> hore (aj vo filtroch) – každá skupina má vlastné ceny.</p>
+          <p>Skupiny (najviac 4) sa nastavujú v súbore <code>nastavenia.yml</code> v GitHub repozitári (časť <code>skupiny</code>: názov, <code>adults</code> = počet dospelých, <code>children_ages</code> = veky detí; prvá je hlavná). Po uložení (<em>Commit changes</em>) sa ceny stiahnu nanovo a stránka sa obnoví zhruba do 15 minút.</p>
           <a class="btn" id="party-edit" href="https://github.com/KaStihl/Holiday-tracker/edit/main/nastavenia.yml" target="_blank" rel="noopener noreferrer">✏️ Upraviť nastavenia.yml ↗</a>
         </div>
         <div class="view-toggle" role="group" aria-label="Zobrazenie cien">
@@ -91,6 +96,10 @@
     <details class="filters" id="filters-box" open>
       <summary><h2>Filtre</h2> <span class="filter-count" id="filter-count"></span> <span class="filter-results mono" id="filter-results"></span></summary>
       <form id="filters" class="filters-grid" onsubmit="return false" role="search">
+        <fieldset class="f-wide" id="f-party-wrap" hidden>
+          <legend>👥 Osoby – ceny pre skupinu</legend>
+          <div class="chips" id="f-party"></div>
+        </fieldset>
         <div class="f-item f-wide">
           <label for="f-q">Hľadať hotel, miesto alebo oblasť</label>
           <input type="search" id="f-q" placeholder="napr. Hurghada, Rixos, Kréta…" autocomplete="off" maxlength="80">
@@ -207,7 +216,7 @@
   </main>
 
   <footer class="wrap foot">
-    <p>Ceny sú za celú skupinu (<span id="foot-party">podľa nastavení</span>) a pochádzajú z verejných stránok cestoviek – pred rezerváciou ich vždy overte priamo u predajcu. Dáta sa obnovujú automaticky 2× denne (ráno a večer).</p>
+    <p>Ceny sú za celú skupinu (<span id="foot-party">podľa nastavení</span>; skupinu prepnete tlačidlami 👥 Osoby) a pochádzajú z verejných stránok cestoviek – pred rezerváciou ich vždy overte priamo u predajcu. Dáta sa obnovujú automaticky 2× denne (ráno a večer).</p>
   </footer>
 
   <template id="tpl-offer">

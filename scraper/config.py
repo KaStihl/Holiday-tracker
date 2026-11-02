@@ -96,28 +96,42 @@ def birthdate(age, on):
     return (d - timedelta(days=1)).isoformat()
 
 
+def _plural(n, one, few, many):
+    return one if n == 1 else few if 2 <= n <= 4 else many
+
+
+def _party_text(a, kids, case="nom"):
+    if case == "gen":
+        s = f"{a} {_plural(a, 'dospelého', 'dospelých', 'dospelých')}"
+    else:
+        s = f"{a} {_plural(a, 'dospelý', 'dospelí', 'dospelých')}"
+    if kids:
+        n = len(kids)
+        word = (_plural(n, "dieťaťa", "detí", "detí") if case == "gen" else _plural(n, "dieťa", "deti", "detí"))
+        ages = " a ".join(str(x) for x in kids) if n <= 2 else ", ".join(str(x) for x in kids)
+        s += f" + {n} {word} ({ages} r.)"
+    return s
+
+
 def validate(raw):
     """nastavenia.yml dict -> CONFIG dict; raises SettingsError with a message the user can act on."""
     if not isinstance(raw, dict):
         raise SettingsError("súbor musí obsahovať položky v tvare 'kľúč: hodnota'")
-    required = ("adults", "children_ages", "date_from", "date_to", "nights_min", "nights_max", "budget",
-                "price_cap", "departures", "destinations")
+    required = ("date_from", "date_to", "nights_min", "nights_max", "budget", "price_cap", "departures",
+                "destinations")
+    # the party: 'skupiny' (list of parties) and/or the older single-party keys adults + children_ages
+    if "skupiny" not in raw:
+        required = ("adults", "children_ages") + required
     missing = [k for k in required if k not in raw]
     if missing:
         raise SettingsError(f"chýbajú položky: {', '.join(missing)}")
-    known = set(required) | {"departures_secondary", "transports", "dogs", "boards_preferred", "car_start",
-                             "sledovane_hotely"}
+    known = set(required) | {"adults", "children_ages", "skupiny", "departures_secondary", "transports", "dogs",
+                             "boards_preferred", "car_start", "sledovane_hotely"}
     unknown = sorted(set(raw) - known)
     if unknown:
         raise SettingsError(f"neznáme položky (preklep?): {', '.join(unknown)}")
 
-    c = {"adults": _int(raw["adults"], "adults", 1, 6)}
-    ages = raw["children_ages"] if raw["children_ages"] is not None else []
-    if not isinstance(ages, list):
-        raise SettingsError("children_ages: čakám zoznam vekov, napr. [10, 12] alebo [] bez detí")
-    c["children_ages"] = [_int(a, "children_ages", 0, 17) for a in ages]
-    if c["adults"] + len(c["children_ages"]) > 8:
-        raise SettingsError("spolu najviac 8 osôb")
+    c = {}
     c["date_from"] = _date(raw["date_from"], "date_from")
     c["date_to"] = _date(raw["date_to"], "date_to")
     if c["date_to"] < c["date_from"]:
@@ -164,8 +178,93 @@ def validate(raw):
             raise SettingsError(f"destinations: váha pri {code} musí byť od 0.1 do 1.0")
         c["countries"][code] = w
     c["watched"] = _watched(raw.get("sledovane_hotely"))
-    c["children_birthdates"] = [birthdate(a, c["date_from"]) for a in c["children_ages"]]
+    c["parties"] = _parties(raw, c["date_from"])
+    primary = c["parties"][0]
+    c["party_id"] = primary["id"]
+    c["adults"], c["children_ages"] = primary["adults"], primary["children_ages"]
+    c["children_birthdates"] = primary["children_birthdates"]
     return c
+
+
+PARTIES_MAX = 4
+
+
+def party_id(adults, ages):
+    """Stable id of a party composition: 'a1-c10-12', 'a2-c10-12', 'a2' (URL-safe; offer ids and the price history
+    of extra parties carry it, so renaming a party in nastavenia.yml keeps its history)."""
+    return f"a{adults}" + ("-c" + "-".join(str(a) for a in sorted(ages)) if ages else "")
+
+
+def _party(adults, ages, nazov, key, on):
+    a = _int(adults, f"{key}: adults", 1, 6)
+    if ages is None:
+        ages = []
+    if not isinstance(ages, list):
+        raise SettingsError(f"{key}: children_ages – čakám zoznam vekov, napr. [10, 12] alebo [] bez detí")
+    ages = [_int(x, f"{key}: children_ages", 0, 17) for x in ages]
+    if a + len(ages) > 8:
+        raise SettingsError(f"{key}: spolu najviac 8 osôb")
+    p = {"id": party_id(a, ages), "nazov": None, "adults": a, "children_ages": ages,
+         "children_birthdates": [birthdate(x, on) for x in ages]}
+    p["nazov"] = nazov or _party_text(a, ages)
+    return p
+
+
+def _parties(raw, on):
+    """[primary party, extra parties…]. Without 'skupiny' the top-level adults/children_ages are the only party; with
+    both, the top-level party is the default one (the matching skupina, or an extra first entry)."""
+    top = None
+    if "adults" in raw or "children_ages" in raw:
+        if "adults" not in raw or "children_ages" not in raw:
+            raise SettingsError("adults a children_ages patria k sebe – zadajte obe alebo ani jednu "
+                                "(skupiny sa zadávajú v 'skupiny')")
+        top = _party(raw["adults"], raw["children_ages"], None, "adults/children_ages", on)
+    if "skupiny" not in raw:
+        return [top]
+    sk = raw["skupiny"]
+    if not isinstance(sk, list) or not sk:
+        raise SettingsError("skupiny: čakám zoznam skupín, každá na novom riadku začínajúcom '- ', napr. "
+                            "- {nazov: Ja + 2 deti, adults: 1, children_ages: [10, 12]}")
+    out = []
+    for i, x in enumerate(sk, 1):
+        key = f"skupiny ({i}.)"
+        if not isinstance(x, dict):
+            raise SettingsError(f"{key}: čakám {{nazov: ..., adults: N, children_ages: [...]}}")
+        bad = sorted(set(map(str, x)) - {"nazov", "adults", "children_ages"})
+        if bad:
+            raise SettingsError(f"{key}: neznáme položky (preklep?): {', '.join(bad)}")
+        if "adults" not in x:
+            raise SettingsError(f"{key}: chýba adults (počet dospelých)")
+        nazov = " ".join(str(x.get("nazov") or "").split())
+        if len(nazov) > 30:
+            raise SettingsError(f"{key}: názov '{nazov[:20]}…' je príliš dlhý (najviac 30 znakov)")
+        p = _party(x["adults"], x.get("children_ages"), nazov, key, on)
+        if any(q["id"] == p["id"] for q in out):
+            raise SettingsError(f"{key}: rovnaké zloženie ({party_label(p)}) už má iná skupina")
+        if any(q["nazov"].lower() == p["nazov"].lower() for q in out):
+            raise SettingsError(f"{key}: názov '{p['nazov']}' už má iná skupina")
+        out.append(p)
+    if top:
+        same = next((q for q in out if q["id"] == top["id"]), None)
+        if same:
+            out.remove(same)
+            top = same
+        out.insert(0, top)
+    if len(out) > PARTIES_MAX:
+        raise SettingsError(f"skupiny: najviac {PARTIES_MAX} skupiny" +
+                            (" (vrátane adults/children_ages)" if top else ""))
+    return out
+
+
+def party_cfg(cfg, party):
+    """cfg for one party of cfg['parties']: the party's adults/children_ages/birthdates, everything else shared."""
+    return dict(cfg, adults=party["adults"], children_ages=list(party["children_ages"]),
+                children_birthdates=list(party["children_birthdates"]), party_id=party["id"])
+
+
+def extra_parties(cfg):
+    """[(party, party cfg)] of the parties other than the primary (default) one."""
+    return [(p, party_cfg(cfg, p)) for p in cfg.get("parties", [])[1:]]
 
 
 WATCH_MAX = 20
@@ -225,23 +324,9 @@ def party_short(cfg=CONFIG):
     return f"{cfg['adults']}+{len(cfg['children_ages'])}"
 
 
-def _plural(n, one, few, many):
-    return one if n == 1 else few if 2 <= n <= 4 else many
-
-
 def party_label(cfg=CONFIG, case="nom"):
     """'1 dospelý + 2 deti (10 a 12 r.)'; case='gen' -> '1 dospelého + 2 detí (10 a 12 r.)'."""
-    a, kids = cfg["adults"], cfg["children_ages"]
-    if case == "gen":
-        s = f"{a} {_plural(a, 'dospelého', 'dospelých', 'dospelých')}"
-    else:
-        s = f"{a} {_plural(a, 'dospelý', 'dospelí', 'dospelých')}"
-    if kids:
-        n = len(kids)
-        word = (_plural(n, "dieťaťa", "detí", "detí") if case == "gen" else _plural(n, "dieťa", "deti", "detí"))
-        ages = " a ".join(str(x) for x in kids) if n <= 2 else ", ".join(str(x) for x in kids)
-        s += f" + {n} {word} ({ages} r.)"
-    return s
+    return _party_text(cfg["adults"], cfg["children_ages"], case)
 
 
 def approx_note(cfg=CONFIG, basis="pri 2 dospelých"):
@@ -274,4 +359,8 @@ def criteria_for_display(cfg=CONFIG):
     c["continents"] = list(CONTINENTS)
     c["party_size"] = party_size(cfg)
     c["party_label"] = party_label(cfg)
+    c.pop("party_id", None)
+    c["parties"] = [{"id": p["id"], "nazov": p["nazov"], "adults": p["adults"], "children_ages": p["children_ages"],
+                     "party_size": party_size(p), "label": party_label(p)} for p in cfg.get("parties") or []]
+    c["default_party"] = cfg.get("party_id") or (c["parties"][0]["id"] if c["parties"] else None)
     return c

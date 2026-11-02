@@ -151,7 +151,7 @@ def test_run_watch_merges_new_offers(monkeypatch, tmp_path):
     assert sources[0]["watch"]["new"] == 1 and sources[0]["count"] == 2
     summary = run.watched_summary(list(offers.values()), links, CONFIG)
     assert summary[0]["term"] == "Sural" and summary[0]["count"] == 2 and summary[0]["links"][0]["source"] == "satur"
-    assert summary[1] == {"term": "Alhambra", "count": 0, "links": []}
+    assert summary[1] == {"term": "Alhambra", "count": 0, "counts": {}, "links": []}
 
 
 # --- adapters ---------------------------------------------------------------------------------------------------

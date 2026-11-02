@@ -3,13 +3,23 @@
 # je v dovolenka.html o ~10–15 minút. Riadky začínajúce '#' sú len vysvetlivky.
 # Pri chybe (napr. preklep v dátume) beh skončí červenou chybou s popisom, čo opraviť.
 
-# Počet dospelých (1–6).
-adults: 1
-
-# Vek detí počas dovolenky, v rokoch (0–17), v hranatých zátvorkách oddelené čiarkou.
-# Bez detí: children_ages: []
+# Skupiny osôb (najviac 4) – na stránke sa medzi nimi prepína tlačidlami 👥 Osoby. Ceny závisia od počtu osôb,
+# preto sa sťahujú pre každú skupinu zvlášť. Každá skupina na samostatnom riadku začínajúcom '- ':
+#   nazov         = ako sa skupina volá na stránke (najviac 30 znakov), napr. "2 dospelí + 2 deti"
+#   adults        = počet dospelých (1–6)
+#   children_ages = vek detí počas dovolenky v rokoch (0–17), napr. [10, 12]; bez detí: []
+# PRVÁ skupina je hlavná: predvolená na stránke, v týždennom e-maile a hľadá sa pre ňu najviac ponúk.
+# Ďalšie skupiny: cestovky s presnými cenami (Kartago, Fischer, Ruefa, Čedok) sa pýtajú na menej ponúk
+# (najlepšie destinácie), ostatné ceny sa prepočítajú z ceny za osobu (orientačne).
 # Dátumy narodenia, ktoré niektoré cestovky chcú, sa odvodia z veku a z date_from.
-children_ages: [10, 12]
+# Príklady ďalších skupín:
+#   - {nazov: "Ja + 1 dieťa", adults: 1, children_ages: [12]}
+#   - {nazov: "Celá rodina", adults: 2, children_ages: [4, 10, 12]}
+# (Staršie nastavenie adults: 1 a children_ages: [10, 12] namiesto skupín stále funguje – je to jedna skupina.)
+skupiny:
+  - {nazov: "Ja + 2 deti", adults: 1, children_ages: [10, 12]}
+  - {nazov: "2 dospelí + 2 deti", adults: 2, children_ages: [10, 12]}
+  - {nazov: "2 dospelí", adults: 2, children_ages: []}
 
 # Najskorší a najneskorší deň odchodu (RRRR-MM-DD).
 date_from: 2027-07-01
@@ -19,10 +29,10 @@ date_to: 2027-08-31
 nights_min: 7
 nights_max: 14
 
-# Rozpočet za celú rodinu v eurách (ponuky do neho sú zvýraznené a dostanú lepšie skóre).
+# Rozpočet za celú skupinu v eurách, rovnaký pre všetky skupiny (ponuky do neho sú zvýraznené a dostanú lepšie skóre).
 budget: 3000
 
-# Strop ceny za celú rodinu v eurách – drahšie ponuky sa vôbec nezobrazia.
+# Strop ceny za celú skupinu v eurách – drahšie ponuky sa vôbec nezobrazia.
 # Vyšší strop (napr. 6000) nechá v zozname aj vzdialené destinácie (Maldivy, Mexiko, Thajsko…).
 price_cap: 6000
 

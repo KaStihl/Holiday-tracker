@@ -90,10 +90,27 @@ def watched_section(prev, offers, cfg=CONFIG):
     return parts + [""]
 
 
+def primary_offers(cur, cfg=CONFIG):
+    """Offers of the primary (default) party only – the digest is about that party. Older files have no "party"."""
+    default = (cur.get("criteria") or {}).get("default_party") or cfg.get("party_id")
+    return [o for o in cur.get("offers", []) if not o.get("base") and (o.get("party") or default) == default]
+
+
+def parties_line(cfg=CONFIG):
+    """'Prehľad je pre hlavnú skupinu …' when nastavenia.yml has more parties, else None."""
+    parties = cfg.get("parties") or []
+    if len(parties) < 2:
+        return None
+    others = ", ".join(f"„{p['nazov']}“" for p in parties[1:])
+    return (f"👥 Prehľad je len pre hlavnú skupinu „{parties[0]['nazov']}“ ({party_label(cfg)}). "
+            f"Ceny pre {others} nájdete v dovolenka.html (prepínač 👥 Osoby).")
+
+
 def digest(prev, cur, budget, cfg=CONFIG):
-    """Returns (title, markdown). prev is the snapshot of the previous digest ({} on the first one)."""
+    """Returns (title, markdown). prev is the snapshot of the previous digest ({} on the first one).
+    Only the primary party's offers (first of 'skupiny') count; the snapshot keeps only those too."""
     old = {o["id"]: o for o in prev.get("offers", [])}
-    offers = cur.get("offers", [])
+    offers = primary_offers(cur, cfg)
     first_run = not old
     ai = [o for o in offers if o.get("board") in cfg["boards_preferred"] and o["price_total"] <= budget]
     new = [] if first_run else [o for o in ai if o["id"] not in old]
@@ -105,7 +122,8 @@ def digest(prev, cur, budget, cfg=CONFIG):
     new.sort(key=lambda o: (-o.get("score", 0), o["price_total"]))
     drops.sort(key=lambda o: o["price_total"] - old[o["id"]]["price_total"])
 
-    parts = watched_section(prev, offers, cfg)
+    line = parties_line(cfg)
+    parts = ([line, ""] if line else []) + watched_section(prev, offers, cfg)
     parts += [f"### ⭐ Top {len(top)} ponúk {boards_title(cfg['boards_preferred'])} do {eur(budget)} ({len(ai)} spolu)", ""]
     parts += [row(o) for o in top] or ["Zatiaľ žiadna."]
     if drops:
@@ -138,9 +156,10 @@ def digest(prev, cur, budget, cfg=CONFIG):
 def snapshot(cur, sent=None, cfg=CONFIG):
     """Only what next week's comparison needs, to keep the committed file small."""
     keep = ("id", "price_total", "price_exact")
-    best = {t: {k: o.get(k) for k in keep} for t, o in watched_best(cur.get("offers", []), cfg).items() if o}
+    offers = primary_offers(cur, cfg)
+    best = {t: {k: o.get(k) for k in keep} for t, o in watched_best(offers, cfg).items() if o}
     return {"generated_at": cur.get("generated_at"), "sent": sent,
-            "offers": [{k: o.get(k) for k in keep} for o in cur.get("offers", [])], "watched": best}
+            "offers": [{k: o.get(k) for k in keep} for o in offers], "watched": best}
 
 
 def main(snap_path, cur_path, out_path, sent=None):

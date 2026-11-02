@@ -46,6 +46,9 @@ IBE = "https://pauschal.ruefa.at"
 AIRPORTS = "VIE-BTS"
 AI_CODES = "AI AIP AIU AIR"
 MAX_CALLS = 60
+EXTRA_CALLS = 5  # per extra party (skupiny): see search_party()
+_IDS = {}  # region ids per country, filled by search() (incl. run-time lookups), reused by search_party()
+_WATCH_GIDS = []  # hotel ids of the watched hotels found by watch(), reused by search_party()
 WATCH_CALLS = 10  # extra requests of the watch() hook: id lookups + deliver.php calls
 # Hotel ids the autocomplete gave on 2026-10-30, used only when the run-time lookup fails or finds nothing
 # (keys: normalised watch terms, see watch.norm_name). Sural Saray (4924) had no offer for 1+2 in Jul–Aug 2027.
@@ -218,7 +221,9 @@ def search(cfg):
     if "flight" not in cfg["transports"]:
         return []
     hdr = {"X-Requested-With": "XMLHttpRequest", "Referer": IBE + "/index.php?page=results"}
-    ids, offers, calls, errors, empty = dict(DEST_IDS), [], 0, [], set()
+    ids, offers, calls, errors, empty = _IDS, [], 0, [], set()
+    ids.clear()
+    ids.update(DEST_IDS)
     for code, nights, page in plan(cfg):
         if calls >= MAX_CALLS:
             print(f"[ruefa] call budget {MAX_CALLS} reached")
@@ -318,6 +323,7 @@ def watch(cfg, terms, hints=None):
                                           f"autocomplete found nothing, cached ids {ids}"))
         for g in ids:
             gids.setdefault(g, t)
+    _WATCH_GIDS[:] = list(gids)
     if not gids:
         return []
     hdr = {"X-Requested-With": "XMLHttpRequest", "Referer": IBE + "/index.php?page=results"}
@@ -341,4 +347,49 @@ def watch(cfg, terms, hints=None):
             print(f"[ruefa] watch {nights}n {start}..{until}: {data.get('resultCount')} results, {len(got)} watched: "
                   + ", ".join(f"{o['hotel']} {o['date_from']} {o['price_total']}" for o in got))
             offers += got
+    return offers
+
+
+# --- extra parties (skupiny in nastavenia.yml) -------------------------------------------------------------------
+# Cards are priced for the party in the form (adults/children), so another party needs its own requests. Cheap
+# pass reusing the primary run: page 1 (10 cheapest hotels, shortest stay) of the countries with primary offers,
+# best preference weight first, plus one gid call for the watched hotels found by watch(); ≤ EXTRA_CALLS per party
+# (2 extra parties: ≤ 10 requests on top of the ≤ 70 of search() + watch()).
+
+def search_party(cfg, primary):
+    """run.py hook for an extra party: exact prices for cfg's party."""
+    from collections import Counter
+    if "flight" not in cfg["transports"] or not primary:
+        return []
+    hdr = {"X-Requested-With": "XMLHttpRequest", "Referer": IBE + "/index.php?page=results"}
+    ids = {**DEST_IDS, **{k: v for k, v in _IDS.items() if v}}
+    have = Counter(o.get("country_code") for o in primary if not o.get("watched"))
+    codes = sorted((c for c in have if c in ids and c in cfg["countries"]),
+                   key=lambda c: (-cfg["countries"][c], -have[c]))
+    budget = EXTRA_CALLS - (1 if _WATCH_GIDS else 0)
+    offers = []
+    for code in codes[:budget]:
+        nights = stays(cfg)[0] + (0 if continent(code) == "Európa" else 1)
+        try:
+            data = get(IBE + "/hub/ajax/deliver.php", method="POST", data=form(cfg, ids[code], nights), headers=hdr,
+                       as_json=True)
+        except Exception as e:
+            print(f"[ruefa] party {code}: {type(e).__name__} {str(e)[:120]}")
+            if "403" in str(e) or "429" in str(e):
+                return offers
+            continue
+        mine = [o for o in parse(data, cfg) if o["country_code"] == code]
+        print(f"[ruefa] party {cfg['adults']}+{len(cfg['children_ages'])} {code} {nights}n: "
+              f"{data.get('resultCount')} results, {len(mine)} in {code}")
+        offers += mine
+    if _WATCH_GIDS:
+        try:
+            data = get(IBE + "/hub/ajax/deliver.php", method="POST", headers=hdr, as_json=True,
+                       data=watch_form(cfg, _WATCH_GIDS, stays(cfg)[0], cfg["date_from"], cfg["date_to"]))
+            got = watch_parse(data, cfg, set(_WATCH_GIDS))
+            print(f"[ruefa] party {cfg['adults']}+{len(cfg['children_ages'])} watched: {len(got)}: "
+                  + ", ".join(f"{o['hotel']} {o['price_total']}" for o in got))
+            offers += got
+        except Exception as e:
+            print(f"[ruefa] party watch: {type(e).__name__} {str(e)[:120]}")
     return offers

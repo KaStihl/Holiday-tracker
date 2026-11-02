@@ -294,3 +294,42 @@ def eur_rate(cur):
 
 def https_or_none(url):
     return url if isinstance(url, str) and url.startswith("https://") else None
+
+
+# --- offers.json: offers of the extra parties stored as differences to the primary party's offer -----------------
+# Every party has its own offers (prices depend on the party). An extra party's offer of the same hotel/term as a
+# primary offer (id '<primary id>@<party id>') repeats hotel, url, image, place, … – in offers.json it keeps only
+# the fields that differ plus "base": <primary id>; expand_offers() (and site/app.js) merge them back.
+# A field the base has but the party's offer lacks is written as null.
+
+def compact_offers(offers):
+    full = {o["id"]: o for o in offers if "@" not in o["id"]}
+    out = []
+    for o in offers:
+        base = full.get(o["id"].split("@")[0]) if "@" in o["id"] else None
+        if not base:
+            out.append(o)
+            continue
+        c = {"id": o["id"], "base": base["id"]}
+        for k in list(base) + [k for k in o if k not in base]:
+            if k == "id":
+                continue
+            v = o.get(k)
+            if k not in base or base[k] != v:
+                c[k] = v
+        out.append(c)
+    return out
+
+
+def expand_offers(offers):
+    """Inverse of compact_offers(); offers without "base" are returned as they are (copies)."""
+    full = {o["id"]: o for o in offers if not o.get("base")}
+    out = []
+    for o in offers:
+        b = full.get(o.get("base")) if o.get("base") else None
+        if o.get("base") and not b:
+            continue  # base missing (never written that way): unusable
+        e = dict(b, **o) if b else dict(o)
+        e.pop("base", None)
+        out.append(e)
+    return out

@@ -6,6 +6,7 @@
 
 import importlib
 import json
+import re
 import sys
 import time
 import traceback
@@ -16,9 +17,9 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from adapters import ADAPTERS  # noqa: E402
-from common import https_or_none, norm_board, norm_country, offer_id  # noqa: E402
-from config import (CONFIG, COUNTRY_NAMES, approx_note, continent, criteria_for_display, party_short,  # noqa: E402
-                    party_size)
+from common import compact_offers, expand_offers, https_or_none, norm_board, norm_country, offer_id  # noqa: E402
+from config import (CONFIG, COUNTRY_NAMES, approx_note, continent, criteria_for_display, extra_parties,  # noqa: E402
+                    party_id, party_short, party_size)
 from watch import keep_limit, match  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -27,6 +28,9 @@ OFFERS = DATA / "offers.json"
 HISTORY = DATA / "history.json"
 
 HISTORY_POINTS = 90
+# offers.json is embedded in dovolenka.html: above this size the extra parties keep only their best offers
+SIZE_LIMIT = 8_000_000
+EXTRA_EXACT_MAX = 6  # exact_price() lookups (Čedok detail pages) per extra party and source
 HISTORY_KEEP_DAYS = 60
 BOARD_SCORE = {"UAI": 1.0, "AI": 0.95, "FB": 0.6, "HB": 0.45, "BB": 0.25, "RO": 0.1, None: 0.2}
 
@@ -87,8 +91,53 @@ def normalise(raw, source, source_name, cfg):
     note = None if o["price_exact"] else (o.get("price_note") or approx_note(cfg))
     o["price_note"] = "; ".join(x for x in (note, fx) if x) or None
     o["id"] = offer_id(source, o["hotel"], o["date_from"], nights, o["transport"], o["departure"])
+    set_party(o, cfg)
     flag_cap(o, cfg)
     return o
+
+
+def party_of(cfg):
+    return cfg.get("party_id") or party_id(cfg["adults"], cfg["children_ages"])
+
+
+def is_primary(cfg):
+    """The default party (first of 'skupiny') keeps the offer ids it always had, so its price history goes on."""
+    parties = cfg.get("parties")
+    return not parties or party_of(cfg) == parties[0]["id"]
+
+
+def set_party(o, cfg):
+    """o["party"] = party id; offers of an extra party get '@<party id>' on their id (own price history)."""
+    o["party"] = party_of(cfg)
+    base = o["id"].split("@")[0]
+    o["id"] = base if is_primary(cfg) else f"{base}@{o['party']}"
+
+
+_TIMES = re.compile(r"× \d+")
+
+
+def scale_offer(o, cfg, pcfg):
+    """An approximated offer of the primary party (per-person price × party size) re-derived for another party:
+    no extra request, the same per-person price × the other party's size. None when the price leaves the limit."""
+    if o.get("price_exact"):
+        return None
+    n0, n1 = party_size(cfg), party_size(pcfg)
+    s = dict(o)
+    for k in ("price_total", "price_original"):
+        if s.get(k):
+            s[k] = round(s[k] * n1 / n0)
+    if s.get("price_original") and s["price_original"] <= s["price_total"]:
+        s["price_original"] = None
+    for k in ("price_note", "discount_label"):
+        if s.get(k):
+            s[k] = _TIMES.sub(f"× {n1}", s[k])
+    if not s.get("price_note"):
+        s["price_note"] = approx_note(pcfg)
+    set_party(s, pcfg)
+    if not within_limit(s, pcfg):
+        return None
+    flag_cap(s, pcfg)
+    return s
 
 
 def flag_cap(o, cfg):
@@ -124,7 +173,7 @@ def score(o, cfg):
     return round(100 * s)
 
 
-def refine_exact(offers, mods, cfg):
+def refine_exact(offers, mods, cfg, limit=None):
     """Ask adapters with an exact_price(offer, cfg) hook for the real total of the configured party for their best
     offers with a preferred board (top mod.EXACT_MAX by score). Offers the site doesn't confirm keep the
     per-person x party-size approximation."""
@@ -136,7 +185,9 @@ def refine_exact(offers, mods, cfg):
                 and (o["board"] in cfg["boards_preferred"] or o.get("watched"))]
         # watched hotels first (any board), then the best-scoring ones
         todo = sorted(todo, key=lambda o: (not o.get("watched"), -score(o, cfg), o["price_total"]))
-        todo = todo[:getattr(mod, "EXACT_MAX", 35)]
+        todo = todo[:getattr(mod, "EXACT_MAX", 35) if limit is None else limit]
+        if not todo:
+            continue
         done = failed = 0
         for o in todo:
             try:
@@ -173,13 +224,18 @@ def load(path, default):
 
 
 def merge_history(offers, today, cfg=CONFIG):
+    """Price history per offer id. Every party has its own ids (primary: the old ones, others '…@<party id>'), so
+    each party has its own series; a series restarts when the party behind an id changes (nastavenia.yml)."""
     hist = load(HISTORY, {})
-    party = party_signature(cfg)
     prev_doc = load(OFFERS, {})
-    same_party = party_signature_of(prev_doc.get("criteria") or {}) in (None, party)
-    prev = {o["id"]: o for o in prev_doc.get("offers", [])} if same_party else {}
+    prev_default = party_signature_of(prev_doc.get("criteria") or {})
+    prev = {}
+    for o in expand_offers(prev_doc.get("offers", [])):
+        sig = signature_of_id(o["party"]) if o.get("party") else prev_default
+        prev[o["id"]] = (o, sig)
     prev_price = {}
     for o in offers:
+        party = signature_of_id(o["party"]) if o.get("party") else party_signature(cfg)
         h = hist.setdefault(o["id"], {"first_seen": today, "points": []})
         exact = bool(o.get("price_exact"))
         if bool(h.get("exact")) != exact or h.get("party", party) != party:
@@ -187,8 +243,8 @@ def merge_history(offers, today, cfg=CONFIG):
             # start a new series
             h["points"] = []
         else:
-            p = prev.get(o["id"])
-            if p and bool(p.get("price_exact")) == exact:
+            p, sig = prev.get(o["id"], (None, None))
+            if p and sig in (None, party) and bool(p.get("price_exact")) == exact:
                 prev_price[o["id"]] = p["price_total"]
         h["exact"], h["party"] = exact, party
         pts = [p for p in h["points"] if p[0] != today] + [[today, o["price_total"]]]
@@ -203,6 +259,14 @@ def merge_history(offers, today, cfg=CONFIG):
 
 def party_signature(cfg):
     return f"{cfg['adults']}|" + ",".join(str(a) for a in sorted(cfg["children_ages"]))
+
+
+def signature_of_id(pid):
+    """party_signature() of a party id ('a2-c10-12' -> '2|10,12', 'a2' -> '2|'); None when it isn't one."""
+    m = re.fullmatch(r"a(\d+)(?:-c([\d-]+))?", str(pid or ""))
+    if not m:
+        return None
+    return f"{m[1]}|" + ",".join(str(a) for a in sorted(int(x) for x in (m[2] or "").split("-") if x))
 
 
 def party_signature_of(criteria):
@@ -253,7 +317,7 @@ def run_watch(mods, sources, offers, cfg, link_mods=None):
     terms = cfg.get("watched") or []
     if not terms:
         return {}
-    hints = watch_hints(offers.values(), load(OFFERS, {}).get("offers", []), cfg)
+    hints = watch_hints(offers.values(), expand_offers(load(OFFERS, {}).get("offers", [])), cfg)
     print("watched hotels seen at: " + "; ".join(
         f"{t}: " + (", ".join(f"{h['country_code']} {h['place'] or ''}/{h['region'] or ''}" for h in hs) or "nowhere yet")
         for t, hs in hints.items()))
@@ -293,9 +357,103 @@ def run_watch(mods, sources, offers, cfg, link_mods=None):
 
 def watched_summary(offers, links, cfg):
     """offers.json "watched": one entry per term with its offer count and term-specific search links."""
-    return [{"term": t, "count": sum(o.get("watched") == t for o in offers),
-             "links": [d for d in links.get(t, []) if https_or_none(d.get("url"))]}
-            for t in cfg.get("watched") or []]
+    primary = party_of(cfg)
+    out = []
+    for t in cfg.get("watched") or []:
+        counts = {}
+        for o in offers:
+            if o.get("watched") == t:
+                counts[o.get("party") or primary] = counts.get(o.get("party") or primary, 0) + 1
+        out.append({"term": t, "count": counts.get(primary, 0), "counts": counts,
+                    "links": [d for d in links.get(t, []) if https_or_none(d.get("url"))]})
+    return out
+
+
+def _timed_party(name, mod, cfg, primary):
+    """Extra parties of one source: mod.search_party(party cfg, this source's primary offers) per party, in a
+    worker thread (one agency per thread, one request at a time). -> ({party id: [normalised offers]}, log)."""
+    out, log = {}, {}
+    for party, pcfg in extra_parties(cfg):
+        t0 = time.time()
+        try:
+            raw = mod.search_party(pcfg, primary)
+            err = None
+        except Exception as e:
+            raw, err = [], f"{type(e).__name__}: {str(e)[:200]}"
+            print(f"[{name}] party {party['id']} failed: {err}")
+        clean = [n for n in (normalise(r, name, mod.NAME, pcfg) for r in raw or []) if n]
+        out[party["id"]] = clean
+        log[party["id"]] = {"raw": len(raw or []), "kept": len(clean), "seconds": round(time.time() - t0, 1),
+                            "error": err}
+        print(f"[{name}] party {party['id']} ({party['nazov']}): {len(raw or [])} raw, {len(clean)} kept, "
+              f"{time.time() - t0:.0f} s")
+    return out, log
+
+
+def extra_party_offers(mods, sources, offers, cfg):
+    """{party id: {offer id: offer}} for every extra party: exact passes of adapters with a search_party() hook (in
+    parallel) + the primary party's approximated offers re-scaled to the party size (no request)."""
+    extras = extra_parties(cfg)
+    if not extras:
+        return {}
+    ok = {s["id"] for s in sources if s["status"] == "ok"}
+    todo = [(n, m) for n, m in mods.items() if n in ok and getattr(m, "search_party", None)]
+    by_party = {p["id"]: {} for p, _ in extras}
+    t0 = time.time()
+    with ThreadPoolExecutor(max_workers=max(len(todo), 1)) as pool:
+        futures = [(n, pool.submit(_timed_party, n, m, cfg, [o for o in offers.values() if o["source"] == n]))
+                   for n, m in todo]
+        for name, fut in futures:
+            got, log = fut.result()
+            next(s for s in sources if s["id"] == name)["parties"] = log
+            for pid, clean in got.items():
+                for o in clean:
+                    cur = by_party[pid].get(o["id"])
+                    if not cur or o["price_total"] < cur["price_total"]:
+                        by_party[pid][o["id"]] = o
+    print(f"extra party passes took {time.time() - t0:.0f} s")
+    for party, pcfg in extras:
+        scaled = 0
+        for o in offers.values():
+            s = scale_offer(o, cfg, pcfg)
+            if s and s["id"] not in by_party[party["id"]]:
+                by_party[party["id"]][s["id"]] = s
+                scaled += 1
+        print(f"party {party['id']}: {len(by_party[party['id']]) - scaled} exact-pass offers, {scaled} re-scaled "
+              f"approximations")
+    return by_party
+
+
+def fit_size(offers, cfg, limit=SIZE_LIMIT):
+    """Compacted offers list; when its JSON is above limit, every extra party keeps only its best offers by score
+    (watched hotels always stay). Returns (offers, cap or None)."""
+    primary = party_of(cfg)
+    rest = [o for o in offers if (o.get("party") or primary) != primary]
+    out = compact_offers(offers)
+    size = len(json.dumps(out, ensure_ascii=False, separators=(",", ":")).encode())
+    cap = None
+    if size > limit and rest:
+        per = {}
+        for o in rest:
+            per.setdefault(o["party"], []).append(o)
+        cap = max(len(v) for v in per.values())
+        while size > limit and cap > 50:
+            cap = int(cap * 0.8)
+            keep = set()
+            for v in per.values():
+                v = sorted(v, key=lambda o: (not o.get("watched"), -o.get("score", 0), o["price_total"]))
+                keep |= {o["id"] for o in v[:cap]} | {o["id"] for o in v if o.get("watched")}
+            out = compact_offers([o for o in offers if (o.get("party") or primary) == primary or o["id"] in keep])
+            size = len(json.dumps(out, ensure_ascii=False, separators=(",", ":")).encode())
+        print(f"offers.json above {limit / 1e6:.0f} MB: extra parties capped to their best {cap} offers")
+    return out, cap
+
+
+def dump(out):
+    """offers.json text: indented, but one offer per line (small diffs, ~20 % smaller than indent=1)."""
+    head = json.dumps(dict(out, offers=["@OFFERS@"]), ensure_ascii=False, indent=1)
+    rows = ",\n".join(json.dumps(o, ensure_ascii=False, separators=(",", ":")) for o in out["offers"])
+    return head.replace('[\n  "@OFFERS@"\n ]', "[\n" + rows + "\n ]" if rows else "[]", 1)
 
 
 def main(only=None):
@@ -338,21 +496,31 @@ def main(only=None):
             log_drops(name, raw, cfg)
     print(f"scraping took {time.time() - t0:.0f} s")
     watch_links = run_watch(mods, sources, offers, cfg, all_mods)
+    for info in sources:
+        info.setdefault("counts", {})[party_of(cfg)] = info["count"]
+    # extra parties (skupiny): before the exact-price refinement, so their re-scaled offers start from the
+    # per-person approximations, not from the primary party's confirmed totals
+    party_offers = extra_party_offers(mods, sources, offers, cfg)
 
     today = datetime.now(timezone.utc).date().isoformat()
     t0 = time.time()
     exact_src = {n: m for n, m in mods.items() if any(s["id"] == n and s["status"] == "ok" for s in sources)}
     result = refine_exact(list(offers.values()), exact_src, cfg)
+    for party, pcfg in extra_parties(cfg):
+        result += refine_exact(list(party_offers.get(party["id"], {}).values()), exact_src, pcfg, EXTRA_EXACT_MAX)
     print(f"exact prices took {time.time() - t0:.0f} s")
     result = sorted(result, key=lambda o: (-score(o, cfg), o["price_total"]))
     for o in result:
         o["score"] = score(o, cfg)
+    for info in sources:
+        for pid in [p["id"] for p in cfg["parties"]]:
+            info["counts"][pid] = sum(o["source"] == info["id"] and o["party"] == pid for o in result)
     hist = merge_history(result, today, cfg)
 
     DATA.mkdir(parents=True, exist_ok=True)
     out = {
         "generated_at": datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
-        "criteria": criteria_for_display(),
+        "criteria": criteria_for_display(cfg),
         "sources": sources,
         "deeplinks": deeplinks,
         "offers": result,
@@ -364,17 +532,22 @@ def main(only=None):
     if not result and any(s["status"] == "ok" for s in load(OFFERS, {}).get("sources", [])):
         # Every scraper failed this run: keep yesterday's offers on the page instead of blanking it.
         prev = load(OFFERS, {})
-        out["offers"] = prev.get("offers", [])
+        out["offers"] = expand_offers(prev.get("offers", []))
         for o in out["offers"]:  # older files predate these fields
             o.setdefault("continent", continent(o.get("country_code")))
             o.setdefault("price_note", None if o.get("price_exact") else approx_note(cfg))
+            o.setdefault("party", party_of(cfg))
         out["stale"] = True
         out["watched"] = watched_summary(out["offers"], watch_links, cfg)
-    OFFERS.write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
+    out["offers"], cap = fit_size(out["offers"], cfg)
+    if cap:
+        out["party_cap"] = cap
+    text = dump(out)
+    OFFERS.write_text(text, encoding="utf-8")
     HISTORY.write_text(json.dumps(hist, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     print(f"wrote {len(out['offers'])} offers from {sum(s['status'] == 'ok' for s in sources)} sources "
-          f"(party {party_short(cfg)}, {party_size(cfg)} persons)")
-    summary(out["offers"])
+          f"(party {party_short(cfg)}, {party_size(cfg)} persons), offers.json {len(text.encode()) / 1e6:.2f} MB")
+    summary(expand_offers(out["offers"]), cfg)
 
 
 def log_drops(name, raw, cfg):
@@ -393,9 +566,15 @@ def log_drops(name, raw, cfg):
           + ", ".join(f"{k} {v}" + (f" ({over[k]})" if over[k] else "") for k, v in seen.most_common()))
 
 
-def summary(offers):
-    """Counts by continent and by source x country for the job log."""
+def summary(offers, cfg=CONFIG):
+    """Counts by party x source (exact/approx), by continent and by source x country for the job log."""
     from collections import Counter
+    for p in cfg.get("parties") or []:
+        mine = [o for o in offers if (o.get("party") or cfg["party_id"]) == p["id"]]
+        by = Counter((o["source"], "exact" if o.get("price_exact") else "approx") for o in mine)
+        print(f"party {p['id']} ({p['nazov']}): {len(mine)} offers: "
+              + ", ".join(f"{s} {k} {v}" for (s, k), v in sorted(by.items())))
+    offers = [o for o in offers if (o.get("party") or party_of(cfg)) == party_of(cfg)]
     print("by continent: " + ", ".join(f"{k} {v}" for k, v in Counter(o["continent"] for o in offers).most_common()))
     by_src = {}
     for o in offers:

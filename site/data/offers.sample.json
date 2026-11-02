@@ -30,7 +30,41 @@
   "watched": [
    "Sural",
    "Alhambra"
-  ]
+  ],
+  "parties": [
+   {
+    "id": "a1-c10-12",
+    "nazov": "Ja + 2 deti",
+    "adults": 1,
+    "children_ages": [
+     10,
+     12
+    ],
+    "party_size": 3,
+    "label": "1 dospelý + 2 deti (10 a 12 r.)"
+   },
+   {
+    "id": "a2-c10-12",
+    "nazov": "2 dospelí + 2 deti",
+    "adults": 2,
+    "children_ages": [
+     10,
+     12
+    ],
+    "party_size": 4,
+    "label": "2 dospelí + 2 deti (10 a 12 r.)"
+   },
+   {
+    "id": "a2",
+    "nazov": "2 dospelí",
+    "adults": 2,
+    "children_ages": [],
+    "party_size": 2,
+    "label": "2 dospelí"
+   }
+  ],
+  "default_party": "a1-c10-12",
+  "party_size": 3
  },
  "sources": [
   {
@@ -172,7 +206,8 @@
    ],
    "price_change": 0,
    "continent": "Európa",
-   "price_exact": true
+   "price_exact": true,
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:fa94ac07f561",
@@ -234,7 +269,8 @@
    "price_change": 130,
    "continent": "Európa",
    "price_exact": false,
-   "price_note": "orientačne: cena za osobu pri 2 dospelých × 3"
+   "price_note": "orientačne: cena za osobu pri 2 dospelých × 3",
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:db60bdda0355",
@@ -303,7 +339,8 @@
    ],
    "price_change": 160,
    "continent": "Európa",
-   "price_exact": true
+   "price_exact": true,
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:69a8637f6b34",
@@ -359,7 +396,8 @@
     ]
    ],
    "price_change": -250,
-   "price_exact": true
+   "price_exact": true,
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:48d7c9cd6c18",
@@ -401,7 +439,8 @@
    "price_change": -150,
    "continent": "Európa",
    "price_exact": false,
-   "price_note": "orientačne: cena za osobu pri 2 dospelých × 3"
+   "price_note": "orientačne: cena za osobu pri 2 dospelých × 3",
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:60bde284604a",
@@ -458,7 +497,8 @@
    ],
    "price_change": -210,
    "continent": "Európa",
-   "price_exact": true
+   "price_exact": true,
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:a3705fcb2be1",
@@ -523,7 +563,8 @@
    ],
    "price_change": -250,
    "continent": "Európa",
-   "price_exact": true
+   "price_exact": true,
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:e3990d2293a4",
@@ -584,7 +625,8 @@
    ],
    "price_change": 50,
    "price_exact": false,
-   "price_note": "orientačne: cena za osobu pri 2 dospelých × 3"
+   "price_note": "orientačne: cena za osobu pri 2 dospelých × 3",
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:319ad1af24ab",
@@ -629,7 +671,8 @@
    ],
    "price_change": 40,
    "continent": "Európa",
-   "price_exact": true
+   "price_exact": true,
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:15bceba84718",
@@ -686,7 +729,8 @@
    ],
    "price_change": -300,
    "continent": "Európa",
-   "price_exact": true
+   "price_exact": true,
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:d37fa15d2d9a",
@@ -748,7 +792,8 @@
    "price_change": 320,
    "continent": "Európa",
    "price_exact": false,
-   "price_note": "orientačne: cena za osobu pri 2 dospelých × 3"
+   "price_note": "orientačne: cena za osobu pri 2 dospelých × 3",
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:aa8e41dc4ae8",
@@ -788,7 +833,8 @@
     ]
    ],
    "price_change": -220,
-   "price_exact": true
+   "price_exact": true,
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:35e579f8038a",
@@ -853,7 +899,8 @@
    ],
    "price_change": 220,
    "continent": "Európa",
-   "price_exact": true
+   "price_exact": true,
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:4a437cb3146b",
@@ -923,7 +970,8 @@
    "price_change": -120,
    "continent": "Európa",
    "price_exact": false,
-   "price_note": "orientačne: cena za osobu pri 2 dospelých × 3"
+   "price_note": "orientačne: cena za osobu pri 2 dospelých × 3",
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:e827094f7e51",
@@ -972,7 +1020,8 @@
    ],
    "price_change": -70,
    "continent": "Európa",
-   "price_exact": true
+   "price_exact": true,
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:8acba18b8dba",
@@ -1028,7 +1077,8 @@
     ]
    ],
    "price_change": 70,
-   "price_exact": true
+   "price_exact": true,
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:cde226940c6d",
@@ -1078,7 +1128,8 @@
    "price_change": 40,
    "continent": "Európa",
    "price_exact": false,
-   "price_note": "orientačne: cena za osobu pri 2 dospelých × 3"
+   "price_note": "orientačne: cena za osobu pri 2 dospelých × 3",
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:3c6ece5d3c80",
@@ -1143,7 +1194,8 @@
    ],
    "price_change": -140,
    "continent": "Európa",
-   "price_exact": true
+   "price_exact": true,
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:98f8f274b74c",
@@ -1188,7 +1240,8 @@
    ],
    "price_change": -220,
    "continent": "Európa",
-   "price_exact": true
+   "price_exact": true,
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:6bcfe4cf3750",
@@ -1233,7 +1286,8 @@
    ],
    "price_change": -130,
    "price_exact": false,
-   "price_note": "orientačne: cena za osobu pri 2 dospelých × 3"
+   "price_note": "orientačne: cena za osobu pri 2 dospelých × 3",
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:c2fc49f920d4",
@@ -1270,7 +1324,8 @@
    ],
    "price_change": null,
    "continent": "Európa",
-   "price_exact": true
+   "price_exact": true,
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:afe8ffc30184",
@@ -1339,7 +1394,8 @@
    ],
    "price_change": 10,
    "continent": "Európa",
-   "price_exact": true
+   "price_exact": true,
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:6feaedde0f29",
@@ -1389,7 +1445,8 @@
    "price_change": -280,
    "continent": "Európa",
    "price_exact": false,
-   "price_note": "orientačne: cena za osobu pri 2 dospelých × 3"
+   "price_note": "orientačne: cena za osobu pri 2 dospelých × 3",
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:182c2a4d97de",
@@ -1453,7 +1510,8 @@
     ]
    ],
    "price_change": 160,
-   "price_exact": true
+   "price_exact": true,
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:52747f71f30c",
@@ -1518,7 +1576,8 @@
    ],
    "price_change": 0,
    "continent": "Európa",
-   "price_exact": true
+   "price_exact": true,
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:86797a36e2df",
@@ -1584,7 +1643,8 @@
    "price_change": -150,
    "continent": "Európa",
    "price_exact": false,
-   "price_note": "orientačne: cena za osobu pri 2 dospelých × 3"
+   "price_note": "orientačne: cena za osobu pri 2 dospelých × 3",
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:a1d9043c7a53",
@@ -1621,7 +1681,8 @@
    ],
    "price_change": 140,
    "price_exact": true,
-   "continent": "Afrika"
+   "continent": "Afrika",
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:f314d86b1f16",
@@ -1669,7 +1730,8 @@
     ]
    ],
    "price_change": null,
-   "price_exact": true
+   "price_exact": true,
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:ab273462be22",
@@ -1711,7 +1773,8 @@
    "price_change": -60,
    "price_exact": false,
    "continent": "Afrika",
-   "price_note": "orientačne: cena pre 2 dospelých prepočítaná na 1 dospelého + 2 deti"
+   "price_note": "orientačne: cena pre 2 dospelých prepočítaná na 1 dospelého + 2 deti",
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:5c934d77777b",
@@ -1751,7 +1814,8 @@
     ]
    ],
    "price_change": -180,
-   "price_exact": true
+   "price_exact": true,
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:60953d0570ef",
@@ -1788,7 +1852,8 @@
    ],
    "price_change": 140,
    "price_exact": true,
-   "continent": "Afrika"
+   "continent": "Afrika",
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:5aa2fcd4f885",
@@ -1842,7 +1907,8 @@
    "price_change": null,
    "price_exact": false,
    "continent": "Afrika",
-   "price_note": "orientačne: cena pre 2 dospelých prepočítaná na 1 dospelého + 2 deti"
+   "price_note": "orientačne: cena pre 2 dospelých prepočítaná na 1 dospelého + 2 deti",
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:df39bd77c14a",
@@ -1887,7 +1953,8 @@
    ],
    "price_change": -180,
    "price_exact": true,
-   "continent": "Blízky východ"
+   "continent": "Blízky východ",
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:c4b598166a03",
@@ -1935,7 +2002,8 @@
     ]
    ],
    "price_change": -180,
-   "price_exact": true
+   "price_exact": true,
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:7bc0d607d27e",
@@ -1977,7 +2045,8 @@
    "price_change": -320,
    "price_exact": false,
    "continent": "Blízky východ",
-   "price_note": "orientačne: cena pre 2 dospelých prepočítaná na 1 dospelého + 2 deti"
+   "price_note": "orientačne: cena pre 2 dospelých prepočítaná na 1 dospelého + 2 deti",
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:5dbd9ed51308",
@@ -2022,7 +2091,8 @@
    ],
    "price_change": -60,
    "price_exact": true,
-   "continent": "Blízky východ"
+   "continent": "Blízky východ",
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:3d9ddc6d6161",
@@ -2071,7 +2141,8 @@
    ],
    "price_change": -60,
    "price_exact": true,
-   "continent": "Ázia"
+   "continent": "Ázia",
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:1e8ea8bc7a90",
@@ -2129,7 +2200,8 @@
    "price_change": -320,
    "price_exact": false,
    "continent": "Ázia",
-   "price_note": "orientačne: cena pre 2 dospelých prepočítaná na 1 dospelého + 2 deti"
+   "price_note": "orientačne: cena pre 2 dospelých prepočítaná na 1 dospelého + 2 deti",
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:c83beb2ac46d",
@@ -2165,7 +2237,8 @@
     ]
    ],
    "price_change": 0,
-   "price_exact": true
+   "price_exact": true,
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:d4e614cb49b0",
@@ -2214,7 +2287,8 @@
    ],
    "price_change": -320,
    "price_exact": true,
-   "continent": "Ázia"
+   "continent": "Ázia",
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:9a1eef5ee66c",
@@ -2260,7 +2334,8 @@
    "price_change": -60,
    "price_exact": false,
    "continent": "Indický oceán",
-   "price_note": "orientačne: cena pre 2 dospelých prepočítaná na 1 dospelého + 2 deti"
+   "price_note": "orientačne: cena pre 2 dospelých prepočítaná na 1 dospelého + 2 deti",
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:e06702ed96fb",
@@ -2297,7 +2372,8 @@
    ],
    "price_change": -320,
    "price_exact": true,
-   "continent": "Indický oceán"
+   "continent": "Indický oceán",
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:d5c4589d57d4",
@@ -2349,7 +2425,8 @@
     ]
    ],
    "price_change": 140,
-   "price_exact": true
+   "price_exact": true,
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:d331ff83c99e",
@@ -2399,7 +2476,8 @@
    "price_change": -320,
    "price_exact": false,
    "continent": "Karibik a Amerika",
-   "price_note": "orientačne: cena pre 2 dospelých prepočítaná na 1 dospelého + 2 deti"
+   "price_note": "orientačne: cena pre 2 dospelých prepočítaná na 1 dospelého + 2 deti",
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:ca1c3d72576e",
@@ -2448,7 +2526,8 @@
    ],
    "price_change": 0,
    "price_exact": true,
-   "continent": "Karibik a Amerika"
+   "continent": "Karibik a Amerika",
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:e17d906abffd",
@@ -2484,7 +2563,8 @@
     ]
    ],
    "price_change": -180,
-   "price_exact": true
+   "price_exact": true,
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:afac3d598cac",
@@ -2542,7 +2622,8 @@
    "price_change": -180,
    "price_exact": false,
    "continent": "Afrika",
-   "price_note": "orientačne: cena pre 2 dospelých prepočítaná na 1 dospelého + 2 deti"
+   "price_note": "orientačne: cena pre 2 dospelých prepočítaná na 1 dospelého + 2 deti",
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:watch1",
@@ -2585,7 +2666,8 @@
    "continent": "Európa",
    "price_exact": false,
    "price_note": "orientačne: cena za osobu pri 2 dospelých × 3",
-   "watched": "Sural"
+   "watched": "Sural",
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:watch2",
@@ -2624,7 +2706,8 @@
    "continent": "Európa",
    "price_exact": false,
    "price_note": "orientačne: cena za osobu pri 2 dospelých × 3",
-   "watched": "Sural"
+   "watched": "Sural",
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka2:watch3",
@@ -2663,7 +2746,8 @@
    "continent": "Európa",
    "price_exact": true,
    "price_note": null,
-   "watched": "Sural"
+   "watched": "Sural",
+   "party": "a1-c10-12"
   },
   {
    "id": "ukazka:watch4",
@@ -2703,14 +2787,1885 @@
    "price_exact": false,
    "price_note": "orientačne: cena za osobu pri 2 dospelých × 3",
    "watched": "Sural",
-   "over_cap": true
+   "over_cap": true,
+   "party": "a1-c10-12"
+  },
+  {
+   "id": "ukazka:9f7c2b48a898@a2-c10-12",
+   "base": "ukazka:9f7c2b48a898",
+   "price_total": 2314,
+   "price_history": [
+    [
+     "2026-10-15",
+     2314
+    ],
+    [
+     "2026-10-16",
+     2314
+    ]
+   ],
+   "party": "a2-c10-12"
+  },
+  {
+   "id": "ukazka:fa94ac07f561@a2-c10-12",
+   "base": "ukazka:fa94ac07f561",
+   "price_total": 3580,
+   "price_history": [
+    [
+     "2026-10-15",
+     3580
+    ],
+    [
+     "2026-10-16",
+     3460
+    ],
+    [
+     "2026-10-17",
+     3500
+    ],
+    [
+     "2026-10-18",
+     3380
+    ],
+    [
+     "2026-10-19",
+     3327
+    ],
+    [
+     "2026-10-20",
+     3407
+    ],
+    [
+     "2026-10-21",
+     3580
+    ]
+   ],
+   "price_change": 173,
+   "price_note": "orientačne: cena za osobu pri 2 dospelých × 4",
+   "party": "a2-c10-12"
+  },
+  {
+   "id": "ukazka:db60bdda0355@a2-c10-12",
+   "base": "ukazka:db60bdda0355",
+   "price_total": 2739,
+   "price_original": 3340,
+   "price_history": [
+    [
+     "2026-10-21",
+     2666
+    ],
+    [
+     "2026-10-22",
+     2556
+    ],
+    [
+     "2026-10-23",
+     2592
+    ],
+    [
+     "2026-10-24",
+     2592
+    ],
+    [
+     "2026-10-25",
+     2629
+    ],
+    [
+     "2026-10-26",
+     2702
+    ],
+    [
+     "2026-10-27",
+     2654
+    ],
+    [
+     "2026-10-28",
+     2544
+    ],
+    [
+     "2026-10-29",
+     2739
+    ]
+   ],
+   "price_change": 195,
+   "party": "a2-c10-12"
+  },
+  {
+   "id": "ukazka:69a8637f6b34@a2-c10-12",
+   "base": "ukazka:69a8637f6b34",
+   "price_total": 2704,
+   "price_history": [
+    [
+     "2026-10-17",
+     2972
+    ],
+    [
+     "2026-10-18",
+     2972
+    ],
+    [
+     "2026-10-19",
+     3009
+    ],
+    [
+     "2026-10-20",
+     3009
+    ],
+    [
+     "2026-10-21",
+     3009
+    ],
+    [
+     "2026-10-22",
+     2704
+    ]
+   ],
+   "price_change": -305,
+   "party": "a2-c10-12"
+  },
+  {
+   "id": "ukazka:48d7c9cd6c18@a2-c10-12",
+   "base": "ukazka:48d7c9cd6c18",
+   "price_total": 4717,
+   "price_history": [
+    [
+     "2026-10-14",
+     4917
+    ],
+    [
+     "2026-10-15",
+     4717
+    ]
+   ],
+   "price_change": -200,
+   "price_note": "orientačne: cena za osobu pri 2 dospelých × 4",
+   "party": "a2-c10-12"
+  },
+  {
+   "id": "ukazka:60bde284604a@a2-c10-12",
+   "base": "ukazka:60bde284604a",
+   "price_total": 2461,
+   "price_original": 3001,
+   "price_history": [
+    [
+     "2026-10-12",
+     2644
+    ],
+    [
+     "2026-10-13",
+     2680
+    ],
+    [
+     "2026-10-14",
+     2680
+    ],
+    [
+     "2026-10-15",
+     2717
+    ],
+    [
+     "2026-10-16",
+     2717
+    ],
+    [
+     "2026-10-17",
+     2461
+    ]
+   ],
+   "price_change": -256,
+   "party": "a2-c10-12"
+  },
+  {
+   "id": "ukazka:a3705fcb2be1@a2-c10-12",
+   "base": "ukazka:a3705fcb2be1",
+   "price_total": 3621,
+   "price_original": 4115,
+   "price_history": [
+    [
+     "2026-10-13",
+     3889
+    ],
+    [
+     "2026-10-14",
+     3889
+    ],
+    [
+     "2026-10-15",
+     3963
+    ],
+    [
+     "2026-10-16",
+     3963
+    ],
+    [
+     "2026-10-17",
+     4036
+    ],
+    [
+     "2026-10-18",
+     4036
+    ],
+    [
+     "2026-10-19",
+     3926
+    ],
+    [
+     "2026-10-20",
+     3621
+    ]
+   ],
+   "price_change": -305,
+   "party": "a2-c10-12"
+  },
+  {
+   "id": "ukazka:e3990d2293a4@a2-c10-12",
+   "base": "ukazka:e3990d2293a4",
+   "price_total": 3616,
+   "price_history": [
+    [
+     "2026-10-17",
+     3723
+    ],
+    [
+     "2026-10-18",
+     3723
+    ],
+    [
+     "2026-10-19",
+     3603
+    ],
+    [
+     "2026-10-20",
+     3549
+    ],
+    [
+     "2026-10-21",
+     3549
+    ],
+    [
+     "2026-10-22",
+     3549
+    ],
+    [
+     "2026-10-23",
+     3616
+    ]
+   ],
+   "price_change": 67,
+   "price_note": "orientačne: cena za osobu pri 2 dospelých × 4",
+   "party": "a2-c10-12"
+  },
+  {
+   "id": "ukazka:319ad1af24ab@a2-c10-12",
+   "base": "ukazka:319ad1af24ab",
+   "price_total": 3227,
+   "price_original": 3797,
+   "price_history": [
+    [
+     "2026-10-21",
+     3227
+    ],
+    [
+     "2026-10-22",
+     3178
+    ],
+    [
+     "2026-10-23",
+     3227
+    ]
+   ],
+   "price_change": 49,
+   "party": "a2-c10-12"
+  },
+  {
+   "id": "ukazka:15bceba84718@a2-c10-12",
+   "base": "ukazka:15bceba84718",
+   "price_total": 4168,
+   "price_history": [
+    [
+     "2026-10-18",
+     4436
+    ],
+    [
+     "2026-10-19",
+     4387
+    ],
+    [
+     "2026-10-20",
+     4460
+    ],
+    [
+     "2026-10-21",
+     4497
+    ],
+    [
+     "2026-10-22",
+     4534
+    ],
+    [
+     "2026-10-23",
+     4168
+    ]
+   ],
+   "price_change": -366,
+   "party": "a2-c10-12"
+  },
+  {
+   "id": "ukazka:d37fa15d2d9a@a2-c10-12",
+   "base": "ukazka:d37fa15d2d9a",
+   "price_total": 2832,
+   "price_history": [
+    [
+     "2026-10-13",
+     2752
+    ],
+    [
+     "2026-10-14",
+     2632
+    ],
+    [
+     "2026-10-15",
+     2579
+    ],
+    [
+     "2026-10-16",
+     2459
+    ],
+    [
+     "2026-10-17",
+     2405
+    ],
+    [
+     "2026-10-18",
+     2405
+    ],
+    [
+     "2026-10-19",
+     2832
+    ]
+   ],
+   "price_change": 427,
+   "price_note": "orientačne: cena za osobu pri 2 dospelých × 4",
+   "party": "a2-c10-12"
+  },
+  {
+   "id": "ukazka:aa8e41dc4ae8@a2-c10-12",
+   "base": "ukazka:aa8e41dc4ae8",
+   "price_total": 2580,
+   "price_original": 3146,
+   "price_history": [
+    [
+     "2026-10-23",
+     2849
+    ],
+    [
+     "2026-10-24",
+     2580
+    ]
+   ],
+   "price_change": -268,
+   "party": "a2-c10-12"
+  },
+  {
+   "id": "ukazka:35e579f8038a@a2-c10-12",
+   "base": "ukazka:35e579f8038a",
+   "price_total": 2688,
+   "price_history": [
+    [
+     "2026-10-16",
+     2688
+    ],
+    [
+     "2026-10-17",
+     2688
+    ],
+    [
+     "2026-10-18",
+     2688
+    ],
+    [
+     "2026-10-19",
+     2688
+    ],
+    [
+     "2026-10-20",
+     2578
+    ],
+    [
+     "2026-10-21",
+     2529
+    ],
+    [
+     "2026-10-22",
+     2419
+    ],
+    [
+     "2026-10-23",
+     2688
+    ]
+   ],
+   "price_change": 268,
+   "party": "a2-c10-12"
+  },
+  {
+   "id": "ukazka:4a437cb3146b@a2-c10-12",
+   "base": "ukazka:4a437cb3146b",
+   "price_total": 5151,
+   "price_original": 5853,
+   "price_history": [
+    [
+     "2026-10-21",
+     5351
+    ],
+    [
+     "2026-10-22",
+     5231
+    ],
+    [
+     "2026-10-23",
+     5271
+    ],
+    [
+     "2026-10-24",
+     5271
+    ],
+    [
+     "2026-10-25",
+     5351
+    ],
+    [
+     "2026-10-26",
+     5231
+    ],
+    [
+     "2026-10-27",
+     5311
+    ],
+    [
+     "2026-10-28",
+     5311
+    ],
+    [
+     "2026-10-29",
+     5151
+    ]
+   ],
+   "price_change": -160,
+   "price_note": "orientačne: cena za osobu pri 2 dospelých × 4",
+   "party": "a2-c10-12"
+  },
+  {
+   "id": "ukazka:e827094f7e51@a2-c10-12",
+   "base": "ukazka:e827094f7e51",
+   "price_total": 3188,
+   "price_original": 3750,
+   "price_history": [
+    [
+     "2026-10-17",
+     3285
+    ],
+    [
+     "2026-10-18",
+     3237
+    ],
+    [
+     "2026-10-19",
+     3273
+    ],
+    [
+     "2026-10-20",
+     3188
+    ]
+   ],
+   "price_change": -85,
+   "party": "a2-c10-12"
+  },
+  {
+   "id": "ukazka:8acba18b8dba@a2-c10-12",
+   "base": "ukazka:8acba18b8dba",
+   "price_total": 5097,
+   "price_history": [
+    [
+     "2026-10-16",
+     5280
+    ],
+    [
+     "2026-10-17",
+     5280
+    ],
+    [
+     "2026-10-18",
+     5170
+    ],
+    [
+     "2026-10-19",
+     5122
+    ],
+    [
+     "2026-10-20",
+     5012
+    ],
+    [
+     "2026-10-21",
+     5097
+    ]
+   ],
+   "price_change": 85,
+   "party": "a2-c10-12"
+  },
+  {
+   "id": "ukazka:cde226940c6d@a2-c10-12",
+   "base": "ukazka:cde226940c6d",
+   "price_total": 2729,
+   "price_history": [
+    [
+     "2026-10-17",
+     2729
+    ],
+    [
+     "2026-10-18",
+     2729
+    ],
+    [
+     "2026-10-19",
+     2676
+    ],
+    [
+     "2026-10-20",
+     2729
+    ]
+   ],
+   "price_change": 53,
+   "price_note": "orientačne: cena za osobu pri 2 dospelých × 4",
+   "party": "a2-c10-12"
+  },
+  {
+   "id": "ukazka:3c6ece5d3c80@a2-c10-12",
+   "base": "ukazka:3c6ece5d3c80",
+   "price_total": 1889,
+   "price_original": 2222,
+   "price_history": [
+    [
+     "2026-10-21",
+     1889
+    ],
+    [
+     "2026-10-22",
+     1962
+    ],
+    [
+     "2026-10-23",
+     1913
+    ],
+    [
+     "2026-10-24",
+     1950
+    ],
+    [
+     "2026-10-25",
+     1986
+    ],
+    [
+     "2026-10-26",
+     1986
+    ],
+    [
+     "2026-10-27",
+     2059
+    ],
+    [
+     "2026-10-28",
+     1889
+    ]
+   ],
+   "price_change": -171,
+   "party": "a2-c10-12"
+  },
+  {
+   "id": "ukazka:98f8f274b74c@a2-c10-12",
+   "base": "ukazka:98f8f274b74c",
+   "price_total": 2586,
+   "price_history": [
+    [
+     "2026-10-12",
+     2855
+    ],
+    [
+     "2026-10-13",
+     2855
+    ],
+    [
+     "2026-10-14",
+     2586
+    ]
+   ],
+   "price_change": -268,
+   "party": "a2-c10-12"
+  },
+  {
+   "id": "ukazka:6bcfe4cf3750@a2-c10-12",
+   "base": "ukazka:6bcfe4cf3750",
+   "price_total": 3683,
+   "price_history": [
+    [
+     "2026-10-17",
+     3976
+    ],
+    [
+     "2026-10-18",
+     3856
+    ],
+    [
+     "2026-10-19",
+     3683
+    ]
+   ],
+   "price_change": -173,
+   "price_note": "orientačne: cena za osobu pri 2 dospelých × 4",
+   "party": "a2-c10-12"
+  },
+  {
+   "id": "ukazka:c2fc49f920d4@a2-c10-12",
+   "base": "ukazka:c2fc49f920d4",
+   "price_total": 4625,
+   "price_original": 5139,
+   "price_history": [
+    [
+     "2026-10-21",
+     4625
+    ]
+   ],
+   "party": "a2-c10-12"
+  },
+  {
+   "id": "ukazka:afe8ffc30184@a2-c10-12",
+   "base": "ukazka:afe8ffc30184",
+   "price_total": 3168,
+   "price_history": [
+    [
+     "2026-10-15",
+     3437
+    ],
+    [
+     "2026-10-16",
+     3437
+    ],
+    [
+     "2026-10-17",
+     3327
+    ],
+    [
+     "2026-10-18",
+     3364
+    ],
+    [
+     "2026-10-19",
+     3254
+    ],
+    [
+     "2026-10-20",
+     3205
+    ],
+    [
+     "2026-10-21",
+     3156
+    ],
+    [
+     "2026-10-22",
+     3156
+    ],
+    [
+     "2026-10-23",
+     3168
+    ]
+   ],
+   "price_change": 12,
+   "party": "a2-c10-12"
+  },
+  {
+   "id": "ukazka:6feaedde0f29@a2-c10-12",
+   "base": "ukazka:6feaedde0f29",
+   "price_total": 5027,
+   "price_history": [
+    [
+     "2026-10-15",
+     5320
+    ],
+    [
+     "2026-10-16",
+     5400
+    ],
+    [
+     "2026-10-17",
+     5400
+    ],
+    [
+     "2026-10-18",
+     5027
+    ]
+   ],
+   "price_change": -373,
+   "price_note": "orientačne: cena za osobu pri 2 dospelých × 4",
+   "party": "a2-c10-12"
+  },
+  {
+   "id": "ukazka:182c2a4d97de@a2-c10-12",
+   "base": "ukazka:182c2a4d97de",
+   "price_total": 2758,
+   "price_original": 3537,
+   "price_history": [
+    [
+     "2026-10-17",
+     2758
+    ],
+    [
+     "2026-10-18",
+     2758
+    ],
+    [
+     "2026-10-19",
+     2649
+    ],
+    [
+     "2026-10-20",
+     2722
+    ],
+    [
+     "2026-10-21",
+     2673
+    ],
+    [
+     "2026-10-22",
+     2673
+    ],
+    [
+     "2026-10-23",
+     2563
+    ],
+    [
+     "2026-10-24",
+     2758
+    ]
+   ],
+   "price_change": 195,
+   "party": "a2-c10-12"
+  },
+  {
+   "id": "ukazka:52747f71f30c@a2-c10-12",
+   "base": "ukazka:52747f71f30c",
+   "price_total": 2012,
+   "price_history": [
+    [
+     "2026-10-17",
+     2012
+    ],
+    [
+     "2026-10-18",
+     1963
+    ],
+    [
+     "2026-10-19",
+     2036
+    ],
+    [
+     "2026-10-20",
+     1987
+    ],
+    [
+     "2026-10-21",
+     1939
+    ],
+    [
+     "2026-10-22",
+     2012
+    ],
+    [
+     "2026-10-23",
+     2012
+    ],
+    [
+     "2026-10-24",
+     2012
+    ]
+   ],
+   "party": "a2-c10-12"
+  },
+  {
+   "id": "ukazka:86797a36e2df@a2-c10-12",
+   "base": "ukazka:86797a36e2df",
+   "price_total": 2372,
+   "price_history": [
+    [
+     "2026-10-15",
+     2572
+    ],
+    [
+     "2026-10-16",
+     2572
+    ],
+    [
+     "2026-10-17",
+     2652
+    ],
+    [
+     "2026-10-18",
+     2532
+    ],
+    [
+     "2026-10-19",
+     2532
+    ],
+    [
+     "2026-10-20",
+     2532
+    ],
+    [
+     "2026-10-21",
+     2572
+    ],
+    [
+     "2026-10-22",
+     2372
+    ]
+   ],
+   "price_change": -200,
+   "price_note": "orientačne: cena za osobu pri 2 dospelých × 4",
+   "party": "a2-c10-12"
+  },
+  {
+   "id": "ukazka:a1d9043c7a53@a2-c10-12",
+   "base": "ukazka:a1d9043c7a53",
+   "price_total": 3038,
+   "price_history": [
+    [
+     "2026-10-18",
+     3038
+    ]
+   ],
+   "price_change": 171,
+   "party": "a2-c10-12"
+  },
+  {
+   "id": "ukazka:f314d86b1f16@a2-c10-12",
+   "base": "ukazka:f314d86b1f16",
+   "price_total": 1940,
+   "price_original": 2366,
+   "price_history": [
+    [
+     "2026-10-18",
+     1940
+    ],
+    [
+     "2026-10-19",
+     1940
+    ],
+    [
+     "2026-10-20",
+     1940
+    ],
+    [
+     "2026-10-21",
+     1940
+    ]
+   ],
+   "party": "a2-c10-12"
+  },
+  {
+   "id": "ukazka:ab273462be22@a2-c10-12",
+   "base": "ukazka:ab273462be22",
+   "price_total": 3187,
+   "price_history": [
+    [
+     "2026-10-18",
+     3267
+    ],
+    [
+     "2026-10-19",
+     3187
+    ]
+   ],
+   "price_change": -80,
+   "party": "a2-c10-12"
+  },
+  {
+   "id": "ukazka:5c934d77777b@a2-c10-12",
+   "base": "ukazka:5c934d77777b",
+   "price_total": 4026,
+   "price_original": 5368,
+   "price_history": [
+    [
+     "2026-10-18",
+     4246
+    ],
+    [
+     "2026-10-19",
+     4026
+    ]
+   ],
+   "price_change": -220,
+   "party": "a2-c10-12"
+  },
+  {
+   "id": "ukazka:df39bd77c14a@a2-c10-12",
+   "base": "ukazka:df39bd77c14a",
+   "price_total": 4990,
+   "price_original": 6085,
+   "price_history": [
+    [
+     "2026-10-18",
+     5209
+    ],
+    [
+     "2026-10-19",
+     5209
+    ],
+    [
+     "2026-10-20",
+     4990
+    ]
+   ],
+   "price_change": -220,
+   "party": "a2-c10-12"
+  },
+  {
+   "id": "ukazka:c4b598166a03@a2-c10-12",
+   "base": "ukazka:c4b598166a03",
+   "price_total": 5428,
+   "price_original": 7237,
+   "price_history": [
+    [
+     "2026-10-18",
+     5647
+    ],
+    [
+     "2026-10-19",
+     5647
+    ],
+    [
+     "2026-10-20",
+     5647
+    ],
+    [
+     "2026-10-21",
+     5428
+    ]
+   ],
+   "price_change": -220,
+   "party": "a2-c10-12"
+  },
+  {
+   "id": "ukazka:7bc0d607d27e@a2-c10-12",
+   "base": "ukazka:7bc0d607d27e",
+   "price_total": 5200,
+   "price_original": 5777,
+   "price_history": [
+    [
+     "2026-10-18",
+     5627
+    ],
+    [
+     "2026-10-19",
+     5200
+    ]
+   ],
+   "price_change": -427,
+   "party": "a2-c10-12"
+  },
+  {
+   "id": "ukazka:5dbd9ed51308@a2-c10-12",
+   "base": "ukazka:5dbd9ed51308",
+   "price_total": 5356,
+   "price_original": 5951,
+   "price_history": [
+    [
+     "2026-10-18",
+     5429
+    ],
+    [
+     "2026-10-19",
+     5429
+    ],
+    [
+     "2026-10-20",
+     5356
+    ]
+   ],
+   "price_change": -73,
+   "party": "a2-c10-12"
+  },
+  {
+   "id": "ukazka:c83beb2ac46d@a2-c10-12",
+   "base": "ukazka:c83beb2ac46d",
+   "price_total": 5490,
+   "price_original": 6695,
+   "price_history": [
+    [
+     "2026-10-18",
+     5490
+    ]
+   ],
+   "party": "a2-c10-12"
+  },
+  {
+   "id": "ukazka:d4e614cb49b0@a2-c10-12",
+   "base": "ukazka:d4e614cb49b0",
+   "price_total": 5002,
+   "price_history": [
+    [
+     "2026-10-18",
+     5392
+    ],
+    [
+     "2026-10-19",
+     5392
+    ],
+    [
+     "2026-10-20",
+     5392
+    ],
+    [
+     "2026-10-21",
+     5002
+    ]
+   ],
+   "price_change": -390,
+   "party": "a2-c10-12"
+  },
+  {
+   "id": "ukazka:9a1eef5ee66c@a2-c10-12",
+   "base": "ukazka:9a1eef5ee66c",
+   "price_total": 4653,
+   "price_original": 5675,
+   "price_history": [
+    [
+     "2026-10-18",
+     4733
+    ],
+    [
+     "2026-10-19",
+     4733
+    ],
+    [
+     "2026-10-20",
+     4653
+    ]
+   ],
+   "price_change": -80,
+   "party": "a2-c10-12"
+  },
+  {
+   "id": "ukazka:e06702ed96fb@a2-c10-12",
+   "base": "ukazka:e06702ed96fb",
+   "price_total": 4136,
+   "price_history": [
+    [
+     "2026-10-18",
+     4136
+    ]
+   ],
+   "price_change": -390,
+   "party": "a2-c10-12"
+  },
+  {
+   "id": "ukazka:d5c4589d57d4@a2-c10-12",
+   "base": "ukazka:d5c4589d57d4",
+   "price_total": 4868,
+   "price_original": 5408,
+   "price_history": [
+    [
+     "2026-10-18",
+     4697
+    ],
+    [
+     "2026-10-19",
+     4697
+    ],
+    [
+     "2026-10-20",
+     4697
+    ],
+    [
+     "2026-10-21",
+     4697
+    ],
+    [
+     "2026-10-22",
+     4868
+    ]
+   ],
+   "price_change": 171,
+   "party": "a2-c10-12"
+  },
+  {
+   "id": "ukazka:ca1c3d72576e@a2-c10-12",
+   "base": "ukazka:ca1c3d72576e",
+   "price_total": 3904,
+   "price_history": [
+    [
+     "2026-10-18",
+     3904
+    ],
+    [
+     "2026-10-19",
+     3904
+    ],
+    [
+     "2026-10-20",
+     3904
+    ],
+    [
+     "2026-10-21",
+     3904
+    ]
+   ],
+   "party": "a2-c10-12"
+  },
+  {
+   "id": "ukazka:e17d906abffd@a2-c10-12",
+   "base": "ukazka:e17d906abffd",
+   "price_total": 5368,
+   "price_original": 7158,
+   "price_history": [
+    [
+     "2026-10-18",
+     5368
+    ]
+   ],
+   "price_change": -220,
+   "party": "a2-c10-12"
+  },
+  {
+   "id": "ukazka:afac3d598cac@a2-c10-12",
+   "base": "ukazka:afac3d598cac",
+   "price_total": 2787,
+   "price_history": [
+    [
+     "2026-10-18",
+     3027
+    ],
+    [
+     "2026-10-19",
+     3027
+    ],
+    [
+     "2026-10-20",
+     3027
+    ],
+    [
+     "2026-10-21",
+     3027
+    ],
+    [
+     "2026-10-22",
+     3027
+    ],
+    [
+     "2026-10-23",
+     2787
+    ]
+   ],
+   "price_change": -240,
+   "party": "a2-c10-12"
+  },
+  {
+   "id": "ukazka:watch1@a2-c10-12",
+   "base": "ukazka:watch1",
+   "price_total": 3853,
+   "price_history": [
+    [
+     "2026-10-28",
+     3987
+    ],
+    [
+     "2026-10-30",
+     3853
+    ]
+   ],
+   "price_change": -133,
+   "price_note": "orientačne: cena za osobu pri 2 dospelých × 4",
+   "party": "a2-c10-12"
+  },
+  {
+   "id": "ukazka:watch2@a2-c10-12",
+   "base": "ukazka:watch2",
+   "price_total": 5320,
+   "price_history": [
+    [
+     "2026-10-30",
+     5320
+    ]
+   ],
+   "price_note": "orientačne: cena za osobu pri 2 dospelých × 4",
+   "party": "a2-c10-12"
+  },
+  {
+   "id": "ukazka2:watch3@a2-c10-12",
+   "base": "ukazka2:watch3",
+   "price_total": 3806,
+   "price_history": [
+    [
+     "2026-10-30",
+     3806
+    ]
+   ],
+   "party": "a2-c10-12"
+  },
+  {
+   "id": "ukazka:watch4@a2-c10-12",
+   "base": "ukazka:watch4",
+   "price_total": 8533,
+   "price_history": [
+    [
+     "2026-10-30",
+     8533
+    ]
+   ],
+   "price_note": "orientačne: cena za osobu pri 2 dospelých × 4",
+   "party": "a2-c10-12"
+  },
+  {
+   "id": "ukazka:9f7c2b48a898@a2",
+   "base": "ukazka:9f7c2b48a898",
+   "price_total": 1404,
+   "price_history": [
+    [
+     "2026-10-15",
+     1404
+    ],
+    [
+     "2026-10-16",
+     1404
+    ]
+   ],
+   "party": "a2"
+  },
+  {
+   "id": "ukazka:db60bdda0355@a2",
+   "base": "ukazka:db60bdda0355",
+   "price_total": 1661,
+   "price_original": 2026,
+   "price_history": [
+    [
+     "2026-10-21",
+     1617
+    ],
+    [
+     "2026-10-22",
+     1550
+    ],
+    [
+     "2026-10-23",
+     1572
+    ],
+    [
+     "2026-10-24",
+     1572
+    ],
+    [
+     "2026-10-25",
+     1595
+    ],
+    [
+     "2026-10-26",
+     1639
+    ],
+    [
+     "2026-10-27",
+     1610
+    ],
+    [
+     "2026-10-28",
+     1543
+    ],
+    [
+     "2026-10-29",
+     1661
+    ]
+   ],
+   "price_change": 118,
+   "party": "a2"
+  },
+  {
+   "id": "ukazka:48d7c9cd6c18@a2",
+   "base": "ukazka:48d7c9cd6c18",
+   "price_total": 2359,
+   "price_history": [
+    [
+     "2026-10-14",
+     2459
+    ],
+    [
+     "2026-10-15",
+     2359
+    ]
+   ],
+   "price_change": -100,
+   "price_note": "orientačne: cena za osobu pri 2 dospelých × 2",
+   "party": "a2"
+  },
+  {
+   "id": "ukazka:a3705fcb2be1@a2",
+   "base": "ukazka:a3705fcb2be1",
+   "price_total": 2196,
+   "price_original": 2496,
+   "price_history": [
+    [
+     "2026-10-13",
+     2359
+    ],
+    [
+     "2026-10-14",
+     2359
+    ],
+    [
+     "2026-10-15",
+     2404
+    ],
+    [
+     "2026-10-16",
+     2404
+    ],
+    [
+     "2026-10-17",
+     2448
+    ],
+    [
+     "2026-10-18",
+     2448
+    ],
+    [
+     "2026-10-19",
+     2381
+    ],
+    [
+     "2026-10-20",
+     2196
+    ]
+   ],
+   "price_change": -185,
+   "party": "a2"
+  },
+  {
+   "id": "ukazka:319ad1af24ab@a2",
+   "base": "ukazka:319ad1af24ab",
+   "price_total": 1957,
+   "price_original": 2303,
+   "price_history": [
+    [
+     "2026-10-21",
+     1957
+    ],
+    [
+     "2026-10-22",
+     1928
+    ],
+    [
+     "2026-10-23",
+     1957
+    ]
+   ],
+   "price_change": 30,
+   "party": "a2"
+  },
+  {
+   "id": "ukazka:d37fa15d2d9a@a2",
+   "base": "ukazka:d37fa15d2d9a",
+   "price_total": 1416,
+   "price_history": [
+    [
+     "2026-10-13",
+     1376
+    ],
+    [
+     "2026-10-14",
+     1316
+    ],
+    [
+     "2026-10-15",
+     1289
+    ],
+    [
+     "2026-10-16",
+     1229
+    ],
+    [
+     "2026-10-17",
+     1203
+    ],
+    [
+     "2026-10-18",
+     1203
+    ],
+    [
+     "2026-10-19",
+     1416
+    ]
+   ],
+   "price_change": 213,
+   "price_note": "orientačne: cena za osobu pri 2 dospelých × 2",
+   "party": "a2"
+  },
+  {
+   "id": "ukazka:35e579f8038a@a2",
+   "base": "ukazka:35e579f8038a",
+   "price_total": 1630,
+   "price_history": [
+    [
+     "2026-10-16",
+     1630
+    ],
+    [
+     "2026-10-17",
+     1630
+    ],
+    [
+     "2026-10-18",
+     1630
+    ],
+    [
+     "2026-10-19",
+     1630
+    ],
+    [
+     "2026-10-20",
+     1564
+    ],
+    [
+     "2026-10-21",
+     1534
+    ],
+    [
+     "2026-10-22",
+     1467
+    ],
+    [
+     "2026-10-23",
+     1630
+    ]
+   ],
+   "price_change": 163,
+   "party": "a2"
+  },
+  {
+   "id": "ukazka:e827094f7e51@a2",
+   "base": "ukazka:e827094f7e51",
+   "price_total": 1934,
+   "price_original": 2275,
+   "price_history": [
+    [
+     "2026-10-17",
+     1993
+    ],
+    [
+     "2026-10-18",
+     1963
+    ],
+    [
+     "2026-10-19",
+     1985
+    ],
+    [
+     "2026-10-20",
+     1934
+    ]
+   ],
+   "price_change": -52,
+   "party": "a2"
+  },
+  {
+   "id": "ukazka:cde226940c6d@a2",
+   "base": "ukazka:cde226940c6d",
+   "price_total": 1365,
+   "price_history": [
+    [
+     "2026-10-17",
+     1365
+    ],
+    [
+     "2026-10-18",
+     1365
+    ],
+    [
+     "2026-10-19",
+     1338
+    ],
+    [
+     "2026-10-20",
+     1365
+    ]
+   ],
+   "price_change": 27,
+   "price_note": "orientačne: cena za osobu pri 2 dospelých × 2",
+   "party": "a2"
+  },
+  {
+   "id": "ukazka:98f8f274b74c@a2",
+   "base": "ukazka:98f8f274b74c",
+   "price_total": 1569,
+   "price_history": [
+    [
+     "2026-10-12",
+     1732
+    ],
+    [
+     "2026-10-13",
+     1732
+    ],
+    [
+     "2026-10-14",
+     1569
+    ]
+   ],
+   "price_change": -163,
+   "party": "a2"
+  },
+  {
+   "id": "ukazka:c2fc49f920d4@a2",
+   "base": "ukazka:c2fc49f920d4",
+   "price_total": 2805,
+   "price_original": 3117,
+   "price_history": [
+    [
+     "2026-10-21",
+     2805
+    ]
+   ],
+   "party": "a2"
+  },
+  {
+   "id": "ukazka:6feaedde0f29@a2",
+   "base": "ukazka:6feaedde0f29",
+   "price_total": 2513,
+   "price_history": [
+    [
+     "2026-10-15",
+     2660
+    ],
+    [
+     "2026-10-16",
+     2700
+    ],
+    [
+     "2026-10-17",
+     2700
+    ],
+    [
+     "2026-10-18",
+     2513
+    ]
+   ],
+   "price_change": -187,
+   "price_note": "orientačne: cena za osobu pri 2 dospelých × 2",
+   "party": "a2"
+  },
+  {
+   "id": "ukazka:52747f71f30c@a2",
+   "base": "ukazka:52747f71f30c",
+   "price_total": 1220,
+   "price_history": [
+    [
+     "2026-10-17",
+     1220
+    ],
+    [
+     "2026-10-18",
+     1191
+    ],
+    [
+     "2026-10-19",
+     1235
+    ],
+    [
+     "2026-10-20",
+     1205
+    ],
+    [
+     "2026-10-21",
+     1176
+    ],
+    [
+     "2026-10-22",
+     1220
+    ],
+    [
+     "2026-10-23",
+     1220
+    ],
+    [
+     "2026-10-24",
+     1220
+    ]
+   ],
+   "party": "a2"
+  },
+  {
+   "id": "ukazka:a1d9043c7a53@a2",
+   "base": "ukazka:a1d9043c7a53",
+   "price_total": 1843,
+   "price_history": [
+    [
+     "2026-10-18",
+     1843
+    ]
+   ],
+   "price_change": 104,
+   "party": "a2"
+  },
+  {
+   "id": "ukazka:ab273462be22@a2",
+   "base": "ukazka:ab273462be22",
+   "price_total": 1593,
+   "price_history": [
+    [
+     "2026-10-18",
+     1633
+    ],
+    [
+     "2026-10-19",
+     1593
+    ]
+   ],
+   "price_change": -40,
+   "party": "a2"
+  },
+  {
+   "id": "ukazka:60953d0570ef@a2",
+   "base": "ukazka:60953d0570ef",
+   "price_total": 3915,
+   "price_history": [
+    [
+     "2026-10-18",
+     3915
+    ]
+   ],
+   "price_change": 104,
+   "party": "a2"
+  },
+  {
+   "id": "ukazka:df39bd77c14a@a2",
+   "base": "ukazka:df39bd77c14a",
+   "price_total": 3027,
+   "price_original": 3691,
+   "price_history": [
+    [
+     "2026-10-18",
+     3160
+    ],
+    [
+     "2026-10-19",
+     3160
+    ],
+    [
+     "2026-10-20",
+     3027
+    ]
+   ],
+   "price_change": -133,
+   "party": "a2"
+  },
+  {
+   "id": "ukazka:7bc0d607d27e@a2",
+   "base": "ukazka:7bc0d607d27e",
+   "price_total": 2600,
+   "price_original": 2889,
+   "price_history": [
+    [
+     "2026-10-18",
+     2813
+    ],
+    [
+     "2026-10-19",
+     2600
+    ]
+   ],
+   "price_change": -213,
+   "party": "a2"
+  },
+  {
+   "id": "ukazka:3d9ddc6d6161@a2",
+   "base": "ukazka:3d9ddc6d6161",
+   "price_total": 3848,
+   "price_original": 4276,
+   "price_history": [
+    [
+     "2026-10-18",
+     3892
+    ],
+    [
+     "2026-10-19",
+     3892
+    ],
+    [
+     "2026-10-20",
+     3892
+    ],
+    [
+     "2026-10-21",
+     3848
+    ]
+   ],
+   "price_change": -44,
+   "party": "a2"
+  },
+  {
+   "id": "ukazka:c83beb2ac46d@a2",
+   "base": "ukazka:c83beb2ac46d",
+   "price_total": 3330,
+   "price_original": 4061,
+   "price_history": [
+    [
+     "2026-10-18",
+     3330
+    ]
+   ],
+   "party": "a2"
+  },
+  {
+   "id": "ukazka:9a1eef5ee66c@a2",
+   "base": "ukazka:9a1eef5ee66c",
+   "price_total": 2327,
+   "price_original": 2837,
+   "price_history": [
+    [
+     "2026-10-18",
+     2367
+    ],
+    [
+     "2026-10-19",
+     2367
+    ],
+    [
+     "2026-10-20",
+     2327
+    ]
+   ],
+   "price_change": -40,
+   "party": "a2"
+  },
+  {
+   "id": "ukazka:d5c4589d57d4@a2",
+   "base": "ukazka:d5c4589d57d4",
+   "price_total": 2953,
+   "price_original": 3280,
+   "price_history": [
+    [
+     "2026-10-18",
+     2849
+    ],
+    [
+     "2026-10-19",
+     2849
+    ],
+    [
+     "2026-10-20",
+     2849
+    ],
+    [
+     "2026-10-21",
+     2849
+    ],
+    [
+     "2026-10-22",
+     2953
+    ]
+   ],
+   "price_change": 104,
+   "party": "a2"
+  },
+  {
+   "id": "ukazka:ca1c3d72576e@a2",
+   "base": "ukazka:ca1c3d72576e",
+   "price_total": 2368,
+   "price_history": [
+    [
+     "2026-10-18",
+     2368
+    ],
+    [
+     "2026-10-19",
+     2368
+    ],
+    [
+     "2026-10-20",
+     2368
+    ],
+    [
+     "2026-10-21",
+     2368
+    ]
+   ],
+   "party": "a2"
+  },
+  {
+   "id": "ukazka:afac3d598cac@a2",
+   "base": "ukazka:afac3d598cac",
+   "price_total": 1393,
+   "price_history": [
+    [
+     "2026-10-18",
+     1513
+    ],
+    [
+     "2026-10-19",
+     1513
+    ],
+    [
+     "2026-10-20",
+     1513
+    ],
+    [
+     "2026-10-21",
+     1513
+    ],
+    [
+     "2026-10-22",
+     1513
+    ],
+    [
+     "2026-10-23",
+     1393
+    ]
+   ],
+   "price_change": -120,
+   "party": "a2"
+  },
+  {
+   "id": "ukazka:watch2@a2",
+   "base": "ukazka:watch2",
+   "price_total": 2660,
+   "price_history": [
+    [
+     "2026-10-30",
+     2660
+    ]
+   ],
+   "price_note": "orientačne: cena za osobu pri 2 dospelých × 2",
+   "party": "a2"
+  },
+  {
+   "id": "ukazka:watch4@a2",
+   "base": "ukazka:watch4",
+   "price_total": 4267,
+   "price_history": [
+    [
+     "2026-10-30",
+     4267
+    ]
+   ],
+   "price_note": "orientačne: cena za osobu pri 2 dospelých × 2",
+   "party": "a2"
   }
  ],
  "watched": [
   {
    "term": "Sural",
    "count": 4,
-   "links": []
+   "links": [],
+   "counts": {
+    "a1-c10-12": 4,
+    "a2-c10-12": 4,
+    "a2": 2
+   }
   },
   {
    "term": "Alhambra",
@@ -2722,7 +4677,12 @@
      "label": "všetky hotely v mieste Side",
      "url": "https://www.satur.sk/dovolenka/turecko/side?termin=01.07.2027-31.08.2027"
     }
-   ]
+   ],
+   "counts": {
+    "a1-c10-12": 0,
+    "a2-c10-12": 0,
+    "a2": 0
+   }
   }
  ]
 }
