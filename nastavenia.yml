@@ -113,10 +113,10 @@ sledovane_hotely:
   # Za názov môžete pridať @ a kód krajiny (napr. @TR), ak rovnaký názov majú hotely aj inde.
   # Hotely s vlastnými kolotočmi / lunaparkom (podľa recenzií – pred rezerváciou overiť, či sú v lete 2027 v cene):
   - Royal Dragon      # Çolaklı (Side) – sesterský hotel Royal Alhambra, kolotoče pri aquaparku
-  - Long Beach Resort @TR  # Avsallar (Alanya) – aquaparky, zábavný park, zoo
+  - Long Beach Alanya @TR  # Long Beach Resort, Avsallar (Alanya) – aquaparky, zábavný park, zoo
+  - Nickelodeon Antalya  # Nickelodeon Hotels & Resorts Antalya (Belek) – vstup do Land of Legends v cene
   - Land of Legends   # The Land of Legends Kingdom Hotel (Belek) – vstup do zábavného parku v cene
-  - Nickelodeon       # Nickelodeon Hotels & Resorts Antalya (Belek) – vstup do Land of Legends v cene
-  - Granada Luxury    # Granada Luxury Belek – vlastný mini lunapark
+  - Granada Luxury Belek  # Granada Luxury Belek – vlastný mini lunapark
   - Maxx Royal Belek  # Maxx Royal Belek Golf Resort – retro lunapark
   - Green Palace      # IC Hotels Green Palace (Lara) – aquapark + lunapark
 
