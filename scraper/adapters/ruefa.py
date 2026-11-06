@@ -37,7 +37,7 @@ from urllib.parse import parse_qs, urlencode, urlsplit
 from bs4 import BeautifulSoup
 
 from adapters import at_common
-from common import get, parse_price
+from common import facilities, get, parse_price
 from config import continent, period_label
 
 NAME = "Ruefa"
@@ -184,6 +184,9 @@ def parse(data, cfg):
             "nights": nights, "price_total": round(total),
             "price_original": orig if orig and orig > total else None,
             "discount_label": None, "pets_allowed": None, "price_exact": True,
+            **({"fac": ["fr"]} if facilities(_txt(card.select_one(".room")), ("fr",)) else {}),
+            **({"gid": gid} if (gid := re.sub(r"\D", "", card.get("data-giataid") or "")) and
+               at_common.country(region[0] if region else "") == "TR" else {}),
         })
     return out
 
@@ -393,3 +396,61 @@ def search_party(cfg, primary):
         except Exception as e:
             print(f"[ruefa] party watch: {type(e).__name__} {str(e)[:120]}")
     return offers
+
+
+# --- hotel attributes for the Side tab (side.py) -------------------------------------------------------------------
+# The results page filters by hotel attributes (checked 2026-11-06 from a runner): checkboxes globalTypebox /
+# zimmerbox whose codes the page sends to deliver.php as globalType=<codes> / zimmer=<codes> (search.min.js lists
+# both among the search parameters). Asked together with gid=<the hotels' GIATA ids>, the answer lists only the asked
+# hotels that have the attribute (and an offer for the party/term). A baseline call without the filter shows which
+# hotels answer at all; if a filter returns every baseline hotel it was evidently ignored and is discarded.
+ATTR_FILTERS = {"aq": ("globalType", "GT03-WASL"), "fr": ("zimmer", "ST04-FA"), "pl": ("globalType", "GT03-DIBE#ST03-DIRE")}
+ATTR_CALLS = 16
+ATTR_PAGE = 10  # cards per deliver.php answer
+
+
+def side_attributes(cfg, gids, max_calls=ATTR_CALLS):
+    """{gid: [codes]} for the given GIATA ids (Side hotels Ruefa sells), ≤ max_calls requests; codes as in
+    common.facilities (aq water slide, fr family room, pl directly on the beach)."""
+    gids = [g for g in dict.fromkeys(str(g) for g in gids if str(g).isdigit())]
+    if not gids:
+        return {}
+    hdr = {"X-Requested-With": "XMLHttpRequest", "Referer": IBE + "/index.php?page=results"}
+    calls, found = 0, {}
+
+    def ask(field=None, code=None):
+        nonlocal calls
+        got = set()
+        for i in range(0, len(gids), ATTR_PAGE):
+            if calls >= max_calls:
+                return got, False
+            chunk = gids[i:i + ATTR_PAGE]
+            f = watch_form(cfg, chunk, stays(cfg)[0], cfg["date_from"], cfg["date_to"])
+            if field:
+                f[field] = code
+            calls += 1
+            try:
+                data = get(IBE + "/hub/ajax/deliver.php", method="POST", headers=hdr, as_json=True, data=f)
+            except Exception as e:
+                print(f"[ruefa] side attributes {code or 'baseline'}: {type(e).__name__} {str(e)[:120]}")
+                return got, False
+            if int((data or {}).get("resultCount") or 0):
+                soup = BeautifulSoup(data.get("value") or "", "lxml")
+                got |= {re.sub(r"\D", "", c.get("data-giataid") or "") for c in soup.select("div.card-hotel")} & set(chunk)
+        return got, True
+
+    base, ok = ask()
+    print(f"[ruefa] side attributes: {len(gids)} hotels asked, {len(base)} answer without a filter")
+    if not ok or not base:
+        return {}
+    for fac, (field, code) in ATTR_FILTERS.items():
+        got, ok = ask(field, code)
+        if not ok:
+            break
+        if got and got >= base and len(base) > 2:
+            print(f"[ruefa] side attributes {code}: all {len(got)} hotels -> filter ignored, discarded")
+            continue
+        print(f"[ruefa] side attributes {code} ({fac}): {len(got)} of {len(base)} hotels")
+        for g in got:
+            found.setdefault(g, []).append(fac)
+    return {g: sorted(v) for g, v in found.items()}

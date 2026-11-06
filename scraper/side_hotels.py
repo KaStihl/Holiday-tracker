@@ -1,7 +1,7 @@
 """Side – hotels near the beach (second tab of dovolenka.html, "🏨 Side – hotely pri pláži").
 
-OpenStreetMap part: one Overpass API query (overpass-api.de, usage policy: https://dev.overpass-api.de/overpass-doc/en/
-preface/commons.html – few queries, honest User-Agent) for a bounding box around Side, at most once a week; the
+OpenStreetMap part: one Overpass API query for a bounding box around Side, at most once a week (usage policy of the
+public instances: few queries, honest User-Agent – common.UA names the project); the
 result is reduced to the hotels within max_vzdialenost_od_plaze_m of a beach and cached in site/data/side_hotels.json
 (committed with the other data files). Between refreshes every run reuses the cache.
 
@@ -22,7 +22,10 @@ from datetime import datetime, timezone
 
 from watch import norm_name
 
-OVERPASS = "https://overpass-api.de/api/interpreter"
+# overpass-api.de (the main instance) disallows /api/ for every user agent in its robots.txt (checked 2026-11-06), so
+# common.get() refuses it. The other public instances listed on wiki.openstreetmap.org/wiki/Overpass_API have no
+# robots.txt (404 = allowed, checked 2026-11-06): kumi.systems first, private.coffee as fallback.
+OVERPASS = ["https://overpass.kumi.systems/api/interpreter", "https://overpass.private.coffee/api/interpreter"]
 # south, west, north, east: Kızılağaç/Çolaklı in the west to the Manavgat river mouth / Kızılot road in the east
 BBOX = (36.70, 31.18, 36.86, 31.60)
 OSM_MAX_AGE_DAYS = 7
@@ -63,9 +66,23 @@ out;"""
 
 
 def fetch_overpass(scfg=None, bbox=BBOX):
-    """The raw Overpass JSON (one POST). robots.txt and the polite delay come from common.get()."""
+    """The raw Overpass JSON (one POST; the next instance only when the first fails). robots.txt and the polite delay
+    come from common.get()."""
     from common import get
-    return get(OVERPASS, method="POST", data={"data": overpass_query(bbox)}, as_json=True, retries=1, delay=2)
+    last = None
+    for url in OVERPASS:
+        try:
+            data = get(url, method="POST", data={"data": overpass_query(bbox)}, as_json=True, retries=0, delay=2,
+                       timeout=150)
+            if isinstance(data, dict) and data.get("elements") is not None:
+                print(f"[side] Overpass {url.split('/')[2]}: {len(data['elements'])} elements"
+                      + (f" ({data.get('remark')})" if data.get("remark") else ""))
+                return data
+            last = ValueError(f"no elements from {url}")
+        except Exception as e:
+            last = e
+            print(f"[side] Overpass {url.split('/')[2]}: {type(e).__name__} {str(e)[:160]}")
+    raise last
 
 
 # --- geometry -----------------------------------------------------------------------------------------------------

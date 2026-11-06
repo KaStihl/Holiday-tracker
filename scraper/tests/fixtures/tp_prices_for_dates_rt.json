@@ -1,0 +1,8 @@
+{"_note": "Travelpayouts v3 prices_for_dates, one_way=false, VIE->AYT 2027-07/2027-07. Shape as answered on 2026-11-06 (GitHub runner, probe); rows trimmed/edited (link shortened, values made up), no token.",
+ "success": true, "currency": "eur",
+ "data": [
+  {"origin": "VIE", "destination": "AYT", "origin_airport": "VIE", "destination_airport": "AYT", "price": 219, "airline": "LX", "flight_number": "147", "departure_at": "2027-07-01T20:05:00+02:00", "return_at": "2027-07-10T18:45:00+03:00", "transfers": 1, "return_transfers": 1, "duration": 1735, "duration_to": 275, "duration_back": 300, "link": "/search/VIE0107AYT10071?t=x"},
+  {"origin": "VIE", "destination": "AYT", "origin_airport": "VIE", "destination_airport": "AYT", "price": 248, "airline": "PC", "flight_number": "1032", "departure_at": "2027-07-05T06:10:00+02:00", "return_at": "2027-07-19T22:30:00+03:00", "transfers": 0, "return_transfers": 0, "duration": 300, "link": "/search/VIE0507AYT19071?t=y"},
+  {"origin": "VIE", "destination": "AYT", "origin_airport": "VIE", "destination_airport": "AYT", "price": 199, "airline": "PC", "flight_number": "1032", "departure_at": "2027-06-28T06:10:00+02:00", "return_at": "2027-07-05T22:30:00+03:00", "transfers": 0, "return_transfers": 0, "link": "/search/x"},
+  {"origin": "VIE", "destination": "AYT", "origin_airport": "VIE", "destination_airport": "AYT", "price": 180, "airline": "XQ", "departure_at": "2027-07-08T06:10:00+02:00", "return_at": "2027-07-11T22:30:00+03:00", "transfers": 0, "return_transfers": 0, "link": "/search/y"}
+ ]}

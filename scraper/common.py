@@ -116,7 +116,7 @@ def allowed(url):
 
 
 def get(url, *, params=None, headers=None, retries=2, delay=1.5, as_json=False, method="GET", json_body=None,
-        data=None):
+        data=None, timeout=30):
     """GET/POST with robots check, small retry loop and a pause between calls."""
     if not allowed(url):
         raise RobotsDisallowed(url)
@@ -124,7 +124,7 @@ def get(url, *, params=None, headers=None, retries=2, delay=1.5, as_json=False, 
     for attempt in range(retries + 1):
         try:
             r = session().request(method, url, params=params, headers=headers, json=json_body, data=data,
-                                  timeout=30)
+                                  timeout=timeout)
             dump(r.url if method == "GET" else url, r.status_code, r.text)
             if 400 <= r.status_code < 500 and r.status_code != 429:
                 time.sleep(delay)
@@ -333,3 +333,23 @@ def expand_offers(offers):
         e.pop("base", None)
         out.append(e)
     return out
+
+
+# --- hotel facilities the agencies' result cards show (used by the Side tab, side.py) ---------------------------------
+# Compact codes, stored as offer["fac"] (sorted list) only when something matched:
+#   aq = aquapark / water slides, kc = kids club / animation, pl = directly on the beach, fr = family room (room name)
+_FAC = {
+    "aq": r"aqua\s*park|aquapark|tobog[a]?n|water\s*slide|wasserrutsch|rutschen|rutsche\b|wasserpark|vodn[ýy] park",
+    "kc": r"detsk\w*\s+klub|klub\s+detsk\w*|mini\s*-?\s*club|mini\s*-?\s*klub|kids?\s*club|kinderclub|kinderbetreuung|"
+          r"planet\s*fun|anim[aá]ci|anima[čc]n|anim[aá]tor|unterhaltung|animation|entertainment",
+    "pl": r"priamo (na|pri) (piesočnatej |piesocnatej )?pl[aá][žz]i|beachfront|direkt am strand|direkte strandlage",
+    "fr": r"rodinn\w*\s+(izb|apart|suit)|family\s*(room|suite|apart)|famil(ien|y)\s*zimmer|familienzimmer|famil\w*\s*suite|"
+          r"rodinn\w*\s+pokoj|\bfamily\b|\bfamilien",
+}
+_FAC_RX = {k: re.compile(v, re.I) for k, v in _FAC.items()}
+
+
+def facilities(text, only=None):
+    """Sorted facility codes found in a card's text (see _FAC), e.g. ['aq', 'kc']."""
+    t = str(text or "")
+    return sorted(k for k, rx in _FAC_RX.items() if (only is None or k in only) and rx.search(t))

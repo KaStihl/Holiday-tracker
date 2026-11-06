@@ -1,0 +1,687 @@
+{
+ "generated_at": "2026-11-06T10:00:00Z",
+ "enabled": true,
+ "max_m": 300,
+ "transfer_eur": 60,
+ "kriteria": [
+  "rodinna_izba",
+  "aquapark",
+  "detsky_klub",
+  "all_inclusive"
+ ],
+ "areas": [
+  {
+   "id": "side",
+   "name": "Side"
+  },
+  {
+   "id": "kumkoy",
+   "name": "Kumköy"
+  },
+  {
+   "id": "colakli",
+   "name": "Çolaklı"
+  },
+  {
+   "id": "evrenseki",
+   "name": "Evrenseki"
+  },
+  {
+   "id": "titreyengol",
+   "name": "Titreyengöl"
+  },
+  {
+   "id": "sorgun",
+   "name": "Sorgun"
+  },
+  {
+   "id": "kizilagac",
+   "name": "Kızılağaç"
+  },
+  {
+   "id": "manavgat",
+   "name": "Manavgat (pobrežie)"
+  }
+ ],
+ "parties": [
+  {
+   "id": "a1-c10-12",
+   "nazov": "Ja + 2 deti",
+   "adults": 1,
+   "kids": [
+    10,
+    12
+   ],
+   "persons": 3
+  },
+  {
+   "id": "a2-c10-12",
+   "nazov": "2 dospelí + 2 deti",
+   "adults": 2,
+   "kids": [
+    10,
+    12
+   ],
+   "persons": 4
+  },
+  {
+   "id": "a2",
+   "nazov": "2 dospelí",
+   "adults": 2,
+   "kids": [],
+   "persons": 2
+  }
+ ],
+ "date_from": "2027-07-01",
+ "date_to": "2027-08-31",
+ "stays": [
+  7,
+  10,
+  14
+ ],
+ "osm": {
+  "status": "ukážka",
+  "fetched_at": "2026-11-06T10:00:00Z"
+ },
+ "src": {
+  "fischer": "Fischer",
+  "satur": "Satur.sk",
+  "ruefa": "Ruefa",
+  "kartago": "Kartago Tours",
+  "billa_reisen": "BILLA Reisen"
+ },
+ "stats": {
+  "osm_hotels": 6,
+  "side_offers": 15,
+  "matched_offers": 15,
+  "agency_only_beach": 0,
+  "agency_unmatched_hotels": 0,
+  "hotel_only_hotels": 2,
+  "ruefa_attr_hotels": 0
+ },
+ "flights": {
+  "status": "ok",
+  "error": null,
+  "dest": "AYT",
+  "origins": [
+   "VIE",
+   "BTS",
+   "BRQ"
+  ],
+  "list": [
+   {
+    "o": "BTS",
+    "dep": "2027-07-10",
+    "ret": "2027-07-17",
+    "n": 7,
+    "p": 275,
+    "al": "PC",
+    "tr": 0,
+    "k": "ow"
+   },
+   {
+    "o": "BTS",
+    "dep": "2027-07-01",
+    "ret": "2027-07-10",
+    "n": 9,
+    "p": 244,
+    "al": "LX",
+    "tr": 2,
+    "k": "rt"
+   },
+   {
+    "o": "BTS",
+    "dep": "2027-07-10",
+    "ret": "2027-07-20",
+    "n": 10,
+    "p": 295,
+    "al": "PC/XQ",
+    "tr": 1,
+    "k": "ow"
+   },
+   {
+    "o": "BTS",
+    "dep": "2027-07-03",
+    "ret": "2027-07-17",
+    "n": 14,
+    "p": 254,
+    "al": "W6/PC",
+    "tr": 0,
+    "k": "ow"
+   },
+   {
+    "o": "BTS",
+    "dep": "2027-07-05",
+    "ret": "2027-07-19",
+    "n": 14,
+    "p": 273,
+    "al": "PC",
+    "tr": 0,
+    "k": "rt"
+   },
+   {
+    "o": "BTS",
+    "dep": "2027-07-10",
+    "ret": "2027-07-24",
+    "n": 14,
+    "p": 235,
+    "al": "PC/W6",
+    "tr": 0,
+    "k": "ow"
+   },
+   {
+    "o": "VIE",
+    "dep": "2027-07-10",
+    "ret": "2027-07-17",
+    "n": 7,
+    "p": 250,
+    "al": "PC",
+    "tr": 0,
+    "k": "ow"
+   },
+   {
+    "o": "VIE",
+    "dep": "2027-07-01",
+    "ret": "2027-07-10",
+    "n": 9,
+    "p": 219,
+    "al": "LX",
+    "tr": 2,
+    "k": "rt"
+   },
+   {
+    "o": "VIE",
+    "dep": "2027-07-10",
+    "ret": "2027-07-20",
+    "n": 10,
+    "p": 270,
+    "al": "PC/XQ",
+    "tr": 1,
+    "k": "ow"
+   },
+   {
+    "o": "VIE",
+    "dep": "2027-07-03",
+    "ret": "2027-07-17",
+    "n": 14,
+    "p": 229,
+    "al": "W6/PC",
+    "tr": 0,
+    "k": "ow"
+   },
+   {
+    "o": "VIE",
+    "dep": "2027-07-05",
+    "ret": "2027-07-19",
+    "n": 14,
+    "p": 248,
+    "al": "PC",
+    "tr": 0,
+    "k": "rt"
+   },
+   {
+    "o": "VIE",
+    "dep": "2027-07-10",
+    "ret": "2027-07-24",
+    "n": 14,
+    "p": 210,
+    "al": "PC/W6",
+    "tr": 0,
+    "k": "ow"
+   }
+  ]
+ },
+ "hotel_only": {
+  "sources": [
+   {
+    "id": "billa_reisen",
+    "name": "BILLA Reisen (Nur Hotel)",
+    "status": "ok",
+    "requests": 0,
+    "note": "ukážka"
+   },
+   {
+    "id": "hotellook",
+    "name": "Travelpayouts / Hotellook",
+    "status": "unavailable",
+    "note": "API Hotellook už neexistuje (engine.hotellook.com odpovedá 404, overené 6. 11. 2026)",
+    "requests": 0
+   },
+   {
+    "id": "dertour",
+    "name": "Kartago / Fischer",
+    "status": "unavailable",
+    "note": "Turecko predávajú len s letenkou",
+    "requests": 0
+   },
+   {
+    "id": "ruefa",
+    "name": "Ruefa",
+    "status": "unavailable",
+    "note": "len zájazdy s letenkou (pauschal.ruefa.at)",
+    "requests": 0
+   }
+  ],
+  "fetched_at": "2026-11-06T10:00:00Z"
+ },
+ "hotels": [
+  {
+   "id": "n9001",
+   "n": "Ukážka Family Beach",
+   "a": "side",
+   "d": 45,
+   "dk": "b",
+   "lat": 36.766,
+   "lon": 31.392,
+   "st": 4.0,
+   "pools": 3,
+   "fac": {
+    "aq": [
+     "Kartago Tours"
+    ],
+    "kc": [
+     "Kartago Tours"
+    ],
+    "pl": [
+     "Kartago Tours"
+    ]
+   },
+   "fit": {
+    "a1-c10-12": [
+     "Kartago Tours"
+    ],
+    "a2-c10-12": [
+     "Kartago Tours"
+    ],
+    "a2": [
+     "Kartago Tours"
+    ]
+   },
+   "ai": [
+    "Kartago Tours"
+   ],
+   "of": {
+    "a1-c10-12": [
+     [
+      "kartago",
+      1990,
+      "AI",
+      "2027-07-09",
+      7,
+      "VIE",
+      1,
+      "https://example.com/kartago/Ukážka-Family-Beach"
+     ]
+    ],
+    "a2-c10-12": [
+     [
+      "kartago",
+      2686,
+      "AI",
+      "2027-07-09",
+      7,
+      "VIE",
+      1,
+      "https://example.com/kartago/Ukážka-Family-Beach"
+     ]
+    ],
+    "a2": [
+     [
+      "kartago",
+      1393,
+      "AI",
+      "2027-07-09",
+      7,
+      "VIE",
+      1,
+      "https://example.com/kartago/Ukážka-Family-Beach"
+     ]
+    ]
+   },
+   "ho": {
+    "a1-c10-12": [
+     [
+      "billa_reisen",
+      1560,
+      "2027-07-09",
+      7,
+      "AI",
+      "https://www.billareisen.at/"
+     ]
+    ],
+    "a2-c10-12": [
+     [
+      "billa_reisen",
+      2080,
+      "2027-07-09",
+      7,
+      "AI",
+      "https://www.billareisen.at/"
+     ]
+    ],
+    "a2": [
+     [
+      "billa_reisen",
+      1040,
+      "2027-07-09",
+      7,
+      "AI",
+      "https://www.billareisen.at/"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "n9002",
+   "n": "Ukážka Kumköy Resort",
+   "a": "kumkoy",
+   "d": 180,
+   "dk": "b",
+   "lat": 36.778,
+   "lon": 31.36,
+   "st": 5.0,
+   "w": "https://example.com",
+   "aqo": [
+    "Aqua"
+   ]
+  },
+  {
+   "id": "w202",
+   "n": "Süral Resort",
+   "a": "colakli",
+   "d": 22,
+   "dk": "b",
+   "lat": 36.79232,
+   "lon": 31.3012,
+   "aqo": [
+    "Süral Aqua"
+   ],
+   "pools": 1,
+   "fac": {
+    "fr": [
+     "Ruefa"
+    ]
+   },
+   "fit": {
+    "a1-c10-12": [
+     "Ruefa"
+    ],
+    "a2-c10-12": [
+     "Ruefa"
+    ],
+    "a2": [
+     "Ruefa"
+    ]
+   },
+   "ai": [
+    "Ruefa"
+   ],
+   "of": {
+    "a1-c10-12": [
+     [
+      "ruefa",
+      2390,
+      "AI",
+      "2027-07-12",
+      7,
+      "VIE",
+      1,
+      "https://example.com/ruefa/Süral-Resort"
+     ]
+    ],
+    "a2-c10-12": [
+     [
+      "ruefa",
+      3226,
+      "AI",
+      "2027-07-12",
+      7,
+      "VIE",
+      1,
+      "https://example.com/ruefa/Süral-Resort"
+     ]
+    ],
+    "a2": [
+     [
+      "ruefa",
+      1673,
+      "AI",
+      "2027-07-12",
+      7,
+      "VIE",
+      1,
+      "https://example.com/ruefa/Süral-Resort"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "n101",
+   "n": "Royal Alhambra Palace",
+   "a": "colakli",
+   "d": 111,
+   "dk": "b",
+   "lat": 36.7925,
+   "lon": 31.295,
+   "st": 5.0,
+   "w": "https://www.royalalhambrapalace.example",
+   "fac": {
+    "aq": [
+     "Satur.sk"
+    ],
+    "kc": [
+     "Fischer",
+     "Satur.sk"
+    ],
+    "pl": [
+     "Satur.sk"
+    ]
+   },
+   "fit": {
+    "a1-c10-12": [
+     "Fischer"
+    ],
+    "a2-c10-12": [
+     "Fischer"
+    ],
+    "a2": [
+     "Fischer"
+    ]
+   },
+   "ai": [
+    "Fischer",
+    "Satur.sk"
+   ],
+   "of": {
+    "a1-c10-12": [
+     [
+      "satur",
+      2490,
+      "AI",
+      "2027-07-24",
+      10,
+      "VIE",
+      0,
+      "https://example.com/satur/Royal-Alhambra-Palace"
+     ],
+     [
+      "fischer",
+      2650,
+      "AI",
+      "2027-07-10",
+      7,
+      "VIE",
+      1,
+      "https://example.com/fischer/Royal-Alhambra-Palace"
+     ]
+    ],
+    "a2-c10-12": [
+     [
+      "satur",
+      3362,
+      "AI",
+      "2027-07-24",
+      10,
+      "VIE",
+      0,
+      "https://example.com/satur/Royal-Alhambra-Palace"
+     ],
+     [
+      "fischer",
+      3578,
+      "AI",
+      "2027-07-10",
+      7,
+      "VIE",
+      1,
+      "https://example.com/fischer/Royal-Alhambra-Palace"
+     ]
+    ],
+    "a2": [
+     [
+      "satur",
+      1743,
+      "AI",
+      "2027-07-24",
+      10,
+      "VIE",
+      0,
+      "https://example.com/satur/Royal-Alhambra-Palace"
+     ],
+     [
+      "fischer",
+      1855,
+      "AI",
+      "2027-07-10",
+      7,
+      "VIE",
+      1,
+      "https://example.com/fischer/Royal-Alhambra-Palace"
+     ]
+    ]
+   },
+   "ho": {
+    "a1-c10-12": [
+     [
+      "billa_reisen",
+      2070,
+      "2027-07-10",
+      7,
+      "AI",
+      "https://www.billareisen.at/"
+     ],
+     [
+      "billa_reisen",
+      2940,
+      "2027-07-10",
+      10,
+      "AI",
+      "https://www.billareisen.at/"
+     ]
+    ],
+    "a2-c10-12": [
+     [
+      "billa_reisen",
+      2760,
+      "2027-07-10",
+      7,
+      "AI",
+      "https://www.billareisen.at/"
+     ],
+     [
+      "billa_reisen",
+      3920,
+      "2027-07-10",
+      10,
+      "AI",
+      "https://www.billareisen.at/"
+     ]
+    ],
+    "a2": [
+     [
+      "billa_reisen",
+      1380,
+      "2027-07-10",
+      7,
+      "AI",
+      "https://www.billareisen.at/"
+     ],
+     [
+      "billa_reisen",
+      1960,
+      "2027-07-10",
+      10,
+      "AI",
+      "https://www.billareisen.at/"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "n104",
+   "n": "Sueno Hotels Beach Side",
+   "a": "colakli",
+   "d": 221,
+   "dk": "b",
+   "lat": 36.793,
+   "lon": 31.31
+  },
+  {
+   "id": "n9003",
+   "n": "Ukážka Sorgun Club",
+   "a": "sorgun",
+   "d": 0,
+   "dk": "b",
+   "lat": 36.765,
+   "lon": 31.425,
+   "st": 5.0,
+   "fac": {
+    "aq": [
+     "BILLA Reisen"
+    ]
+   },
+   "ai": [
+    "BILLA Reisen"
+   ],
+   "of": {
+    "a1-c10-12": [
+     [
+      "billa_reisen",
+      2890,
+      "UAI",
+      "2027-08-02",
+      14,
+      "VIE",
+      0,
+      "https://example.com/billa_reisen/Ukážka-Sorgun-Club"
+     ]
+    ],
+    "a2-c10-12": [
+     [
+      "billa_reisen",
+      3902,
+      "UAI",
+      "2027-08-02",
+      14,
+      "VIE",
+      0,
+      "https://example.com/billa_reisen/Ukážka-Sorgun-Club"
+     ]
+    ],
+    "a2": [
+     [
+      "billa_reisen",
+      2023,
+      "UAI",
+      "2027-08-02",
+      14,
+      "VIE",
+      0,
+      "https://example.com/billa_reisen/Ukážka-Sorgun-Club"
+     ]
+    ]
+   }
+  }
+ ],
+ "_note": "UKÁŽKOVÉ dáta pre ?sample=1 – hotely, ceny a letenky sú vymyslené (scraper/tests: fixtures)."
+}

@@ -32,6 +32,11 @@
           </div>
         </div>
       </div>
+      <div class="tabs" role="tablist" aria-label="Časti stránky" id="tabs">
+        <button type="button" role="tab" id="tab-offers" aria-controls="main" aria-selected="true">🏖️ Zájazdy</button>
+        <button type="button" role="tab" id="tab-side" aria-controls="side-main" aria-selected="false" tabindex="-1">🏨 Side – hotely pri pláži</button>
+      </div>
+      <div class="offers-head" id="offers-head">
       <div class="party-switch" id="party-switch" hidden>
         <span class="ps-label" id="ps-label"><span aria-hidden="true">👥</span> Osoby</span>
         <div class="ps-opts" role="radiogroup" aria-labelledby="ps-label" id="party-opts"></div>
@@ -41,6 +46,7 @@
         <button type="button" role="radio" data-transport="all" aria-checked="true">Všetko</button>
         <button type="button" role="radio" data-transport="flight" aria-checked="false">✈️ Letecky <small id="t-flight-note"></small></button>
         <button type="button" role="radio" data-transport="car" aria-checked="false">🚗 Autom <small id="t-car-note"></small></button>
+      </div>
       </div>
     </div>
   </header>
@@ -215,6 +221,51 @@
     </section>
   </main>
 
+
+  <main class="wrap side" id="side-main" role="tabpanel" aria-labelledby="tab-side" hidden>
+    <div id="side-sample-note" class="note" hidden>Zobrazujú sa <strong>ukážkové dáta</strong> (?sample=1) – hotely, ceny a letenky sú vymyslené.</div>
+    <div id="side-error" class="note note-err" role="alert" hidden></div>
+    <section class="block side-intro" aria-labelledby="h-side">
+      <h2 id="h-side">🏨 Side a okolie – rodinné hotely pri pláži</h2>
+      <p class="muted" id="side-sub"></p>
+    </section>
+
+    <section class="side-panel" aria-label="Výber termínu a osôb">
+      <div class="side-ctl">
+        <div class="side-ctl-item"><span class="side-label" id="sl-party">👥 Osoby</span><div class="chips" id="side-party" role="group" aria-labelledby="sl-party"></div></div>
+        <div class="side-ctl-item"><span class="side-label" id="sl-nights">🌙 Počet nocí</span><div class="chips" id="side-nights" role="group" aria-labelledby="sl-nights"></div></div>
+        <div class="side-ctl-item"><label class="side-label" for="side-date">📅 Príchod (odlet)</label><input type="date" id="side-date"></div>
+        <div class="side-ctl-item"><span class="side-label" id="sl-dep">✈️ Odlet z</span><div class="chips" id="side-deps" role="group" aria-labelledby="sl-dep"></div></div>
+      </div>
+      <div class="side-flights" id="side-flights" aria-live="polite"></div>
+    </section>
+
+    <details class="filters side-filters" id="side-filters" open>
+      <summary><h2>Filtre hotelov</h2> <span class="filter-results mono" id="side-count"></span></summary>
+      <div class="filters-grid">
+        <fieldset class="f-wide"><legend>Oblasť</legend><div class="chips" id="side-areas"></div></fieldset>
+        <fieldset class="f-wide"><legend>Rodinné kritériá (zapnuté = musí byť potvrdené; „?“ = neznáme, nie „nie“)</legend><div class="chips" id="side-crit"></div></fieldset>
+        <div class="f-item"><label for="side-sort">Zoradiť</label><select id="side-sort"></select></div>
+        <div class="f-item"><label for="side-q">Hľadať hotel</label><input type="search" id="side-q" placeholder="napr. Alhambra, Süral…" maxlength="60" autocomplete="off"></div>
+        <fieldset class="f-wide"><legend>Ďalšie</legend><div class="f-checks">
+          <label class="check"><input type="checkbox" id="side-only-offers"> Len hotely so zájazdom od cestovky</label>
+          <label class="check"><input type="checkbox" id="side-only-ho"> Len hotely s cenou ubytovania</label>
+        </div></fieldset>
+      </div>
+    </details>
+
+    <section class="block" aria-labelledby="h-side-list">
+      <div class="block-head"><h2 id="h-side-list">Hotely</h2><span class="muted" id="side-list-sub"></span></div>
+      <div class="side-list" id="side-list"></div>
+      <button type="button" class="btn-ghost side-more" id="side-more" hidden>Zobraziť ďalšie hotely</button>
+    </section>
+
+    <section class="block side-how" aria-labelledby="h-side-how">
+      <h2 id="h-side-how">Odkiaľ sú údaje a ako sa počíta balík</h2>
+      <ul class="side-notes" id="side-notes"></ul>
+    </section>
+  </main>
+
   <footer class="wrap foot">
     <p>Ceny sú za celú skupinu (<span id="foot-party">podľa nastavení</span>; skupinu prepnete tlačidlami 👥 Osoby) a pochádzajú z verejných stránok cestoviek – pred rezerváciou ich vždy overte priamo u predajcu. Dáta sa obnovujú automaticky 2× denne (ráno a večer).</p>
   </footer>
@@ -246,5 +297,6 @@
   </template>
 
   <script src="app.js" defer></script>
+  <script src="side.js" defer></script>
 </body>
 </html>

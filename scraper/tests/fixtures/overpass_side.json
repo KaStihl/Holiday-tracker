@@ -1,0 +1,209 @@
+{
+"_note": "Overpass API JSON ([out:json], out tags geom / out geom / out center / out) – CONSTRUCTED from the documented response shape (this container cannot reach Overpass); coordinates are made up around Çolaklı.",
+"version": 0.6,
+"generator": "Overpass API (constructed)",
+"osm3s": {
+"timestamp_osm_base": "2026-11-06T00:00:00Z"
+},
+"elements": [
+{
+"type": "node",
+"id": 101,
+"lat": 36.7925,
+"lon": 31.295,
+"tags": {
+"tourism": "hotel",
+"name": "Royal Alhambra Palace",
+"stars": "5",
+"website": "www.royalalhambrapalace.example"
+}
+},
+{
+"type": "way",
+"id": 202,
+"bounds": {},
+"geometry": [
+{
+"lat": 36.7912,
+"lon": 31.3
+},
+{
+"lat": 36.7912,
+"lon": 31.303
+},
+{
+"lat": 36.794,
+"lon": 31.303
+},
+{
+"lat": 36.794,
+"lon": 31.3
+},
+{
+"lat": 36.7912,
+"lon": 31.3
+}
+],
+"tags": {
+"tourism": "hotel",
+"name": "Süral Resort",
+"addr:suburb": "Çolaklı"
+}
+},
+{
+"type": "node",
+"id": 103,
+"lat": 36.798,
+"lon": 31.29,
+"tags": {
+"tourism": "hotel",
+"name": "Far Inland Hotel"
+}
+},
+{
+"type": "node",
+"id": 104,
+"lat": 36.793,
+"lon": 31.31,
+"tags": {
+"tourism": "hotel",
+"name": "Sueno Hotels Beach Side"
+}
+},
+{
+"type": "node",
+"id": 105,
+"lat": 36.792,
+"lon": 31.295,
+"tags": {
+"tourism": "hotel",
+"name": "Royal Alhambra Palace Hotel"
+}
+},
+{
+"type": "node",
+"id": 106,
+"lat": 36.6,
+"lon": 31.2,
+"tags": {
+"tourism": "hotel",
+"name": "Outside Hotel"
+}
+},
+{
+"type": "way",
+"id": 301,
+"geometry": [
+{
+"lat": 36.79,
+"lon": 31.285
+},
+{
+"lat": 36.79,
+"lon": 31.315
+},
+{
+"lat": 36.791,
+"lon": 31.315
+},
+{
+"lat": 36.791,
+"lon": 31.285
+},
+{
+"lat": 36.79,
+"lon": 31.285
+}
+],
+"tags": {
+"natural": "beach"
+}
+},
+{
+"type": "way",
+"id": 302,
+"geometry": [
+{
+"lat": 36.79,
+"lon": 31.28
+},
+{
+"lat": 36.79,
+"lon": 31.285
+},
+{
+"lat": 36.79,
+"lon": 31.290000000000003
+},
+{
+"lat": 36.79,
+"lon": 31.295
+},
+{
+"lat": 36.79,
+"lon": 31.3
+},
+{
+"lat": 36.79,
+"lon": 31.305
+},
+{
+"lat": 36.79,
+"lon": 31.310000000000002
+},
+{
+"lat": 36.79,
+"lon": 31.315
+},
+{
+"lat": 36.79,
+"lon": 31.32
+}
+],
+"tags": {
+"natural": "coastline"
+}
+},
+{
+"type": "way",
+"id": 401,
+"center": {
+"lat": 36.793,
+"lon": 31.3015
+},
+"tags": {
+"leisure": "water_park",
+"name": "Süral Aqua"
+}
+},
+{
+"type": "node",
+"id": 402,
+"lat": 36.7926,
+"lon": 31.301,
+"tags": {
+"leisure": "swimming_pool"
+}
+},
+{
+"type": "node",
+"id": 501,
+"lat": 36.8,
+"lon": 31.298,
+"tags": {
+"place": "village",
+"name": "Çolaklı"
+}
+},
+{
+"type": "node",
+"id": 502,
+"lat": 36.788,
+"lon": 31.33,
+"tags": {
+"place": "village",
+"name": "Evrenseki"
+}
+}
+]
+}

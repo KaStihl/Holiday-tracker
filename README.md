@@ -70,6 +70,25 @@ Kartago/Fischer API názov ignoruje). Preto sa číta celá ponuka **miesta/kraj
 Evrenseki), Čedok – všetky strany krajiny, Kartago/Fischer – všetky hotely krajiny bez filtra stravy. Hotel, ktorý ešte
 nikde nebol videný, sa ukáže, keď sa objaví v bežne sťahovaných zoznamoch.
 
+## 🏨 Side – hotely pri pláži (druhá záložka)
+Hore na stránke prepínač **Zájazdy | Side – hotely pri pláži** (pamätá sa; `?tab=side` otvorí rovno Side). Nastavenia:
+`side_hotely` v `nastavenia.yml` (oblasti, max. vzdialenosť od pláže, kritériá, odhad transferu). Kód: `scraper/side.py`
+(po `run.py`), `side_hotels.py` (OSM), `flights.py` (letenky), `hotel_only.py` (len ubytovanie); stránka `site/side.js`.
+- **Hotely a vzdialenosť od pláže:** OpenStreetMap cez Overpass API – 1 dotaz najviac raz týždenne, cache
+  `site/data/side_hotels.json`. Hlavná inštancia overpass-api.de má v robots.txt `Disallow: /api/`, preto sa používa
+  verejná inštancia overpass.kumi.systems (záloha overpass.private.coffee; obe bez robots.txt).
+- **Rodinné kritériá** (rodinná izba, aquapark, detský klub/animácie, All Inclusive) s uvedeným zdrojom: popis/ikony
+  hotela v API Kartago/Fischer (aj GPS a „Vzdialenosť k pláži“), ikony na kartách Satur a BILLA, názvy izieb, filtre Ruefa
+  (Wasserrutsche, Familienzimmer, Direkte Strandlage), OSM (vodný park/tobogan v areáli). „?“ = neznáme, nie „nie“.
+- **Ceny zájazdov** z `offers.json` (všetky skupiny), priradené k hotelom podľa názvu (alebo GPS z Kartago/Fischer).
+- **Letenky** VIE/BTS/BRQ → AYT: Travelpayouts Data API (`TRAVELPAYOUTS_TOKEN` v Actions secrets), cache Aviasales,
+  cena za 1 os. × počet osôb – orientačne; spiatočné aj 2× jednosmerné. Bez tokenu sa ukáže návod.
+- **Len ubytovanie:** BILLA Reisen „Nur Hotel“ (najviac raz denne, cache `site/data/side_daily.json`; cena za os. pri
+  2 dospelých × osoby – orientačne). Hotellook (Travelpayouts) už neexistuje (404), Kartago/Fischer/Ruefa predávajú
+  Turecko len s letenkou. Bez ceny: „cena len ubytovania nedostupná“.
+- **Vlastný balík** = letenky + ubytovanie + 2 × `transfer_eur` vedľa najlacnejšieho zájazdu toho hotela (rozdiel v €).
+- **Booking.com** sa nesťahuje (podmienky) – len odkaz „Overiť na Booking.com“ s menom hotela, termínom a osobami.
+
 ## E-maily
 **Raz týždenne, v pondelok ráno** príde súhrn: top 10 ponúk All Inclusive do budgetu, nové ponuky a
 zlacnenia o ≥ 50 € od minulého súhrnu. Workflow ho vytvorí ako **GitHub issue** so štítkom `dovolenka`

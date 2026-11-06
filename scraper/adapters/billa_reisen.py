@@ -21,7 +21,7 @@ from urllib.parse import urlencode
 from bs4 import BeautifulSoup
 
 from adapters import at_common
-from common import get, parse_price
+from common import facilities, get, parse_price
 from config import approx_label, party_size, period_label
 
 NAME = "BILLA Reisen"
@@ -129,6 +129,8 @@ def parse_page(html, cfg):
                 pass
         pct = re.sub(r"[^\d]", "", callout.get_text()) if callout else ""
         promo = f"Zľava {pct} %" if pct else None
+        tips = " · ".join(" ".join(t.get_text(" ").split()) for t in card.select(".ITS_OBJ_ui-globaltype .ITS_OBJ_ui-tooltip"))
+        fac = sorted(set(facilities(tips, ("aq", "kc")) + facilities(parts[2] if len(parts) > 2 else "", ("fr",))))
         offers.append({
             "hotel": " ".join(a.get_text(" ").split()), "url": _abs(a["href"]), "image": _abs(img["src"]) if img else None,
             "stars": float(stars["content"]) if stars and stars.get("content") else None, "rating": rating,
@@ -140,6 +142,7 @@ def parse_page(html, cfg):
             "price_original": orig_pp * party if orig_pp and orig_pp > pp else None,
             "discount_label": approx_label(cfg, promo), "pets_allowed": None,
             "price_note": f"orientačne: cena za osobu pri {ADULTS} dospelých × {party}",
+            **({"fac": fac} if fac else {}),
         })
     return offers, pages
 

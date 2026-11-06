@@ -9,7 +9,7 @@ from datetime import date
 
 from bs4 import BeautifulSoup
 
-from common import get, norm_board, norm_country, parse_price, strip_accents
+from common import facilities, get, norm_board, norm_country, parse_price, strip_accents
 from config import party_size
 
 NAME = "Satur.sk"
@@ -111,6 +111,8 @@ def parse_cards(html):
             "transport_text": transport, "board": board, "nights": nights,
             "price_person": pp, "price_person_original": pp_orig, "price_group": pg, "price_group_original": pg_orig,
             "image": img["src"] if img else None, "pets": "so psom" in perks,
+            "fac": facilities(" · ".join(b.get("title", "") for b in art.select("[title]")) + " · " + " · ".join(tags),
+                              ("aq", "kc", "pl")),
         })
     return out
 
@@ -156,6 +158,7 @@ def to_offer(c, transport, pets, party):
                            else f"Cena za os. × {party} (orientačne)"),
         "price_note": f"orientačne: cena za osobu pri 2 dospelých × {party}",
         "pets_allowed": (pets or c.get("pets") or None) if car else None,
+        **({"fac": c["fac"]} if c.get("fac") else {}),
     }
 
 

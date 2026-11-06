@@ -30,9 +30,10 @@ products at the same prices), so each adapter keeps only its own brand's product
 """
 
 import math
+import re
 from urllib.parse import urlencode
 
-from common import get, norm_board, norm_country
+from common import facilities, get, norm_board, norm_country
 from config import approx_label, party_label, party_size, period_label
 
 API = "/api/searchapi/getsearchresult"
@@ -150,7 +151,37 @@ def to_offer(t, home, cfg):
         "discount_label": fm if exact else approx_label(cfg, fm),
         "pets_allowed": None,
         **({"price_exact": True} if exact else {"price_note": f"orientačne: cena za dospelého × {party}"}),
+        **hotel_facts(h, room),
     }
+
+
+BEACH_RE = re.compile(r"vzdialenos\w*\s+k\s+pl[aá][žz]i\s+(\d+)\s*m", re.I)
+
+
+def hotel_facts(h, room):
+    """Hotel attributes the API exposes (checked 2026-11-06 from a runner): hotel.tags ('Vzdialenosť k pláži 0 m',
+    'Aquapark v hotelu', …), hotel.descriptions[].name ('Aquapark s tobogánmi', 'Detský klub s … animátorom',
+    'Priamo pri piesočnatej pláži', …), hotel.gps {latitude, longitude}; the room name tells a family room.
+    -> {"fac": [...codes], "beach_m": int, "gps": [lat, lon]} (only keys that are known). Used by the Side tab."""
+    text = " · ".join([str(t) for t in h.get("tags") or []] +
+                      [str(d.get("name") or "") for d in h.get("descriptions") or [] if isinstance(d, dict)])
+    fac = set(facilities(text, ("aq", "kc", "pl"))) | set(facilities(room.get("name"), ("fr",)))
+    out = {}
+    m = BEACH_RE.search(text)
+    if m:
+        out["beach_m"] = int(m[1])
+        if int(m[1]) <= 50:
+            fac.add("pl")
+    if fac:
+        out["fac"] = sorted(fac)
+    g = h.get("gps") or {}
+    try:
+        lat, lon = float(g["latitude"]), float(g["longitude"])
+        if lat and lon and (h.get("countryId") == "TR" or "turec" in str((h.get("breadcrumbs") or {}).get("country", "")).lower()):
+            out["gps"] = [round(lat, 5), round(lon, 5)]  # Turkey only (the Side tab), keeps offers.json small
+    except (KeyError, TypeError, ValueError):
+        pass
+    return out
 
 
 def _mine(t, fischer):

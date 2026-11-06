@@ -1,0 +1,7 @@
+{"_note": "Travelpayouts v3 prices_for_dates, one_way=true, VIE->AYT 2027-07 (shape as on 2026-11-06; values made up, trimmed).",
+ "success": true, "currency": "eur",
+ "data": [
+  {"origin": "VIE", "destination": "AYT", "origin_airport": "VIE", "destination_airport": "AYT", "price": 120, "airline": "PC", "flight_number": "1032", "departure_at": "2027-07-10T06:10:00+02:00", "transfers": 0, "link": "/search/a"},
+  {"origin": "VIE", "destination": "AYT", "origin_airport": "VIE", "destination_airport": "AYT", "price": 140, "airline": "XQ", "flight_number": "191", "departure_at": "2027-07-10T09:00:00+02:00", "transfers": 0, "link": "/search/b"},
+  {"origin": "VIE", "destination": "AYT", "origin_airport": "VIE", "destination_airport": "AYT", "price": 99, "airline": "W6", "departure_at": "2027-07-03T09:00:00+02:00", "transfers": 0, "link": "/search/c"}
+ ]}

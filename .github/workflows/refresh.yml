@@ -54,8 +54,12 @@ jobs:
         run: python -m pytest -q scraper/tests
 
       - name: Scrape travel agencies
+        env:
+          # Travelpayouts Data API (flights VIE/BTS/BRQ -> AYT for the Side tab); without it the run still passes
+          TRAVELPAYOUTS_TOKEN: ${{ secrets.TRAVELPAYOUTS_TOKEN }}
         run: |
           python scraper/run.py
+          python scraper/side.py
           python scraper/build_html.py
 
       - name: Build weekly e-mail digest
@@ -78,7 +82,7 @@ jobs:
         run: |
           git config user.name "dovolenka-bot"
           git config user.email "dovolenka-bot@users.noreply.github.com"
-          git add site/data/offers.json site/data/history.json site/data/digest_snapshot.json dovolenka.html
+          git add site/data/*.json dovolenka.html
           if git diff --cached --quiet; then echo "no changes"; exit 0; fi
           git commit -m "Refresh offers $(date -u +%Y-%m-%dT%H:%MZ)"
           # -X theirs: if an overlapping run pushed data meanwhile, keep this (newer) run's generated files
