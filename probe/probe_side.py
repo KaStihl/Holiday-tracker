@@ -1,154 +1,115 @@
-"""TEMPORARY probe (deleted after use): what the Side-hotels feature can use. Prints only short snippets."""
-import json, re, sys, time
+"""TEMPORARY probe #2 (deleted after use)."""
+import json, os, re, sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scraper"))
-import requests
-from common import get, session, allowed
+from common import get, session, allowed, Robots, UA
 from config import CONFIG as cfg
 from adapters import dertour
 
-def snip(text, pats, width=90, maxn=25):
-    n = 0
-    for p in pats:
-        for m in re.finditer(p, text, re.I):
-            s = text[max(0, m.start() - width): m.end() + width].replace("\n", " ")
-            print("   ..", s)
-            n += 1
-            if n >= maxn:
-                return
-
-def sec(t):
-    print("\n=====", t, flush=True)
-
+def sec(t): print("\n=====", t, flush=True)
 def tryit(fn):
-    try:
-        fn()
-    except Exception as e:
-        print("   ERROR", type(e).__name__, str(e)[:300])
+    try: fn()
+    except Exception as e: print("   ERROR", type(e).__name__, str(e)[:300])
 
-# 1 overpass robots + tiny query
 def ov():
-    r = session().get("https://overpass-api.de/robots.txt", timeout=20)
-    print("   robots", r.status_code, r.text[:400].replace("\n", " | "))
-    print("   allowed /api/interpreter:", allowed("https://overpass-api.de/api/interpreter"))
-    r = session().get("https://overpass-api.de/api/status", timeout=20)
-    print("   status", r.status_code, r.text[:300].replace("\n", " | "))
-sec("overpass"); tryit(ov)
+    for base, path in [("https://overpass-api.de", "/api/interpreter"), ("https://z.overpass-api.de", "/api/interpreter"),
+                       ("https://lz4.overpass-api.de", "/api/interpreter"), ("https://overpass.kumi.systems", "/api/interpreter"),
+                       ("https://overpass.private.coffee", "/api/interpreter"), ("https://maps.mail.ru", "/osm/tools/overpass/api/interpreter"),
+                       ("https://overpass.openstreetmap.ru", "/api/interpreter")]:
+        try:
+            r = session().get(base + "/robots.txt", timeout=15)
+            txt = r.text if r.ok else ""
+            ok = Robots(txt, UA).can_fetch(base + path)
+            print(f"   {base}: robots {r.status_code} allowed={ok} :: {txt[:160]!r}")
+        except Exception as e:
+            print(f"   {base}: {type(e).__name__} {str(e)[:100]}")
+sec("overpass instances"); tryit(ov)
 
-# 2 DERTOUR transport types + JS bundle filters
 def dt():
     home = "https://www.kartago.sk"
     hdr = {"Accept": "application/json", "Referer": home + "/"}
-    for tt in (0, 2, 3, 4, 5):
-        q = dertour.query(cfg); q["tt"] = tt; q.pop("to", None); q.pop("m", None)
-        try:
-            d = get(home + dertour.API, params=q, headers=hdr, as_json=True)
-            cats = [(x.get("name"), x.get("hotelCount")) for c in d.get("categories") or [] for x in c.get("destinations") or []]
-            print(f"   tt={tt}: {cats[:12]}")
-        except Exception as e:
-            print(f"   tt={tt}: {type(e).__name__} {str(e)[:150]}")
-    html = get(home + "/vysledky-vyhladavania")
-    js = re.findall(r'src="([^"]*index[^"]*\.js[^"]*)"', html) + re.findall(r'src="(/Scripts/[^"]+\.js)"', html)
-    print("   scripts:", js[:8])
-    for u in js[:3]:
-        u = u if u.startswith("http") else home + u
-        t = get(u)
-        print("   JS", u, len(t))
-        snip(t, [r"aquapark", r"tobog", r"facilit", r"detsk", r"miniklub|miniclub|kids", r"beach|plaz|pláž", r"rodinn|family", r'"/api/[a-z/]+'], 70, 40)
-    # tour JSON of Side destination: every key seen
     q = dertour.query(cfg); q.pop("m", None)
     cats = get(home + dertour.API, params=q, headers=hdr, as_json=True)
-    tr = [x for c in cats.get("categories") or [] for x in c.get("destinations") or [] if x.get("name") == "Turecko"]
-    if tr:
-        q2 = dertour.query(cfg, None, tr[0]["destinationIds"]); q2.pop("m", None); q2["pitg"] = 5
-        d = get(home + dertour.API, params=q2, headers=hdr, as_json=True)
-        print("   top keys", list(d.keys()))
-        for k, v in d.items():
-            if k not in ("tours",):
-                print("   ", k, json.dumps(v, ensure_ascii=False)[:600])
-        t = (d.get("tours") or [{}])[0]
-        print("   hotel keys", list((t.get("hotel") or {}).keys()), "tour keys", list((t.get("tour") or {}).keys()))
-        print("   tags", [x.get("tour", {}).get("tags") for x in d.get("tours") or []], [x.get("hotel", {}).get("badgeId") for x in d.get("tours") or []])
-sec("dertour"); tryit(dt)
+    tr = [x for c in cats.get("categories") or [] for x in c.get("destinations") or [] if x.get("name") == "Turecko"][0]
+    q2 = dertour.query(cfg, None, tr["destinationIds"]); q2.pop("m", None); q2["pitg"] = 100
+    d = get(home + dertour.API, params=q2, headers=hdr, as_json=True)
+    tours = d.get("tours") or []
+    side = [t for t in tours if re.search(r"side|colakli|kumkoy|evrenseki|titreyen|sorgun|kizilagac|manavgat", json.dumps(t["hotel"].get("breadcrumbs"), ensure_ascii=False), re.I)]
+    print(f"   {len(tours)} tours, {len(side)} in Side area")
+    for t in side[:3]:
+        h = t["hotel"]
+        print("   HOTEL", h["name"], "gps", h.get("gps"), "tags", h.get("tags"), "iconTags", json.dumps(h.get("iconTags"), ensure_ascii=False)[:400])
+        print("     imageTags", json.dumps(h.get("imageTags"), ensure_ascii=False)[:200])
+        print("     extendedAttribues", json.dumps(h.get("extendedAttribues"), ensure_ascii=False)[:1500])
+        print("     descriptions", json.dumps(h.get("descriptions"), ensure_ascii=False)[:600])
+        print("     rooms", [r.get("name") for r in t["tour"]["rooms"]])
+    from collections import Counter
+    c = Counter()
+    for t in tours:
+        for a in (t["hotel"].get("extendedAttribues") or []):
+            c[json.dumps(a, ensure_ascii=False)[:80]] += 1
+        for a in (t["hotel"].get("iconTags") or []):
+            c["ICON " + json.dumps(a, ensure_ascii=False)[:80]] += 1
+    for k, v in c.most_common(60): print("   ATTR", v, k)
+    def walk(f, depth=0):
+        if depth > 3: return
+        items = f.get("items") or []
+        print("   " + "  " * depth + f"FILTER id={f.get('id')} type={f.get('type')} title={f.get('title')!r} items=" + json.dumps([(i.get("title") or i.get("name"), i.get("id"), i.get("value"), i.get("count")) for i in items][:25], ensure_ascii=False)[:700])
+        for c2 in (f.get("categories") or [])[:6]:
+            if f.get("type") != "areas": walk(c2, depth + 1)
+    for f in d.get("filters") or []: walk(f)
+    for a in d.get("aggregateResultItems") or []:
+        print("   AGG", a.get("categoryName"), json.dumps([(i.get("name"), i.get("values"), i.get("count")) for i in a.get("items") or []][:40], ensure_ascii=False)[:600])
+    # tt=0 transport types in Turkey
+    q3 = dict(q2); q3["tt"] = 0; q3.pop("to", None)
+    d3 = get(home + dertour.API, params=q3, headers=hdr, as_json=True)
+    print("   tt=0 Turkey transportType", Counter(t["tour"].get("transportType") for t in d3.get("tours") or []), d3.get("toursCount"))
+sec("dertour attrs"); tryit(dt)
 
-# 3 Ruefa: filters and hotel-only IBE
 def ru():
     h = get("https://pauschal.ruefa.at/index.php?page=results&level=2&adults=2&children=10-12")
-    print("   results page", len(h))
-    snip(h, [r"Kinderclub|Kinderbetreuung|Miniclub", r"Rutsche|Aquapark|Wasserpark", r"Familienzimmer", r"Strandlage|Strandnah|direkt am Strand", r"name=\"[a-zA-Z_]*(attr|facil|ausst|merkmal|kategorie)[a-zA-Z_]*\"", r"nur.?hotel|hotelonly|reiseart|Eigenanreise"], 80, 40)
-    w = get("https://www.ruefa.at/")
-    hrefs = sorted(set(re.findall(r'href="(https?://[^"]+)"', w)))
-    print("   ruefa.at hosts:", sorted({re.sub(r"(https?://[^/]+).*", r"\1", x) for x in hrefs})[:40])
-    snip(w, [r"nur.?hotel", r"Eigenanreise", r"hotel\.ruefa"], 80, 10)
+    for name in ("globalTypebox", "zimmerbox"):
+        vals = re.findall(r'name="%s"[^>]*data-filtername="([^"]+)"[^>]*value="([^"]+)"' % name, h)
+        print("   ", name, sorted(set(vals))[:80])
+    for m in list(re.finditer(r"globalType|zimmer(?!box)", h))[:0]: pass
+    js = re.findall(r'<script[^>]+src="([^"]+)"', h)
+    print("   scripts", js[:15])
+    for m in re.finditer(r".{120}globalTypebox.{200}", h.replace("\n", " ")):
+        if "input" not in m.group(0): print("   ..", m.group(0)[:320])
+    for u in js:
+        if "pauschal" in u or u.startswith("/") or "ruefa" in u:
+            u2 = u if u.startswith("http") else "https://pauschal.ruefa.at/" + u.lstrip("/")
+            try:
+                t = get(u2)
+            except Exception as e:
+                print("   js fail", u2, e); continue
+            for m in list(re.finditer(r".{150}(globalType|zimmerbox|suchConfig\.zimmer|suchConfig\.global).{200}", t.replace("\n", " ")))[:6]:
+                print("   JS", u2[-40:], "..", m.group(0)[:360])
+    r = session().get("https://hotels.ruefa.at/robots.txt", timeout=15)
+    print("   hotels.ruefa.at robots", r.status_code, r.text[:300].replace("\n", " | "))
+    t = get("https://hotels.ruefa.at/")
+    print("   hotels.ruefa.at home", len(t), re.findall(r"<title>([^<]*)", t)[:1])
+    for m in list(re.finditer(r".{100}(Nur Hotel|deliver|ajax|index\.php\?page=|api/).{150}", t.replace("\n", " ")))[:8]:
+        print("   ..", m.group(0)[:260])
 sec("ruefa"); tryit(ru)
 
-# 4 BILLA: hotel-only + globaltypes
 def bi():
-    w = get("https://www.billareisen.at/")
-    snip(w, [r'href="[^"]*(Hotel|Nur)[^"]*"'], 40, 15)
-    snip(w, [r"Nur Hotel|Eigenanreise"], 80, 6)
-sec("billa"); tryit(bi)
+    w = get("https://www.billareisen.at/Hotels.html")
+    print("   Hotels.html", len(w))
+    for m in list(re.finditer(r".{200}Nur Hotel.{200}", w.replace("\n", " ")))[:3]:
+        print("   ..", m.group(0)[:420])
+    for m in list(re.finditer(r'href="(/[^"]*(Hotel|Angebote)[^"]*ttid=[^"]*)"', w))[:6]:
+        print("   link", m.group(1)[:300])
+    print("   ttid values", sorted(set(re.findall(r"ttid=([A-Za-z]+)", w)))[:20], sorted(set(re.findall(r'(?:name|value)="(ttid|PF|NH|HO|H)"', w)))[:10])
+sec("billa hotel-only"); tryit(bi)
 
-# 5 Cedok: transport facets
-def ce():
-    h = get("https://www.cedok.sk/dovolenka/turecko/?dateFrom=01.07.2027&dateTo=31.08.2027&durationMin=8&durationMax=8&participants[0][adults]=2")
-    m = re.search(r'<script id="__NEXT_DATA__"[^>]*>(.*?)</script>', h, re.S)
-    print("   next data", bool(m))
-    if m:
-        t = m.group(1)
-        snip(t, [r'"transport[A-Za-z]*"', r"vlastn", r"OWN_TRANSPORT|ownTransport|individual"], 80, 20)
-sec("cedok"); tryit(ce)
-
-# 6 Hotellook + Travelpayouts (token from env; never printed)
-def hl():
-    import os
+def tp():
     tok = os.environ.get("TRAVELPAYOUTS_TOKEN") or ""
     print("   token present:", "yes" if tok else "no")
-    hdr = {"X-Access-Token": tok} if tok else {}
-    tests = [
-        ("hotellook lookup", "https://engine.hotellook.com/api/v2/lookup.json", {"query": "Side", "lang": "en", "lookFor": "both", "limit": 3}),
-        ("hotellook cache", "https://engine.hotellook.com/api/v2/cache.json", {"location": "Side", "checkIn": "2027-07-10", "checkOut": "2027-07-17", "currency": "eur", "limit": 5, "adults": 2, "children": "10,12"}),
-        ("hotellook cache near", "https://engine.hotellook.com/api/v2/cache.json", {"location": "Antalya", "checkIn": "2027-01-10", "checkOut": "2027-01-17", "currency": "eur", "limit": 3}),
-        ("tp v3 VIE jul/jul", "https://api.travelpayouts.com/aviasales/v3/prices_for_dates", {"origin": "VIE", "destination": "AYT", "departure_at": "2027-07", "return_at": "2027-07", "currency": "eur", "limit": 1000, "one_way": "false", "sorting": "price", "unique": "false"}),
-        ("tp v3 BTS jul/jul", "https://api.travelpayouts.com/aviasales/v3/prices_for_dates", {"origin": "BTS", "destination": "AYT", "departure_at": "2027-07", "return_at": "2027-07", "currency": "eur", "limit": 1000, "one_way": "false"}),
-        ("tp v3 BRQ aug/aug", "https://api.travelpayouts.com/aviasales/v3/prices_for_dates", {"origin": "BRQ", "destination": "AYT", "departure_at": "2027-08", "return_at": "2027-08", "currency": "eur", "limit": 1000, "one_way": "false"}),
-        ("tp v3 VIE no dates", "https://api.travelpayouts.com/aviasales/v3/prices_for_dates", {"origin": "VIE", "destination": "AYT", "currency": "eur", "limit": 30, "one_way": "false"}),
-        ("tp v1 cheap VIE 2027-07", "https://api.travelpayouts.com/v1/prices/cheap", {"origin": "VIE", "destination": "AYT", "depart_date": "2027-07", "return_date": "2027-07", "currency": "eur"}),
-        ("tp v2 month-matrix VIE 2027-07", "https://api.travelpayouts.com/v2/prices/month-matrix", {"origin": "VIE", "destination": "AYT", "month": "2027-07-01", "currency": "eur", "show_to_affiliates": "true"}),
-    ]
-    for name, u, q in tests:
-        try:
-            r = session().get(u, params=dict(q, token=tok) if tok else q, headers=hdr, timeout=30)
-            body = r.text
-            info = ""
-            try:
-                j = r.json()
-                d = j.get("data") if isinstance(j, dict) else j
-                if isinstance(d, list):
-                    info = f"list {len(d)}; first: " + json.dumps(d[0], ensure_ascii=False)[:400] if d else "list 0"
-                    if d and isinstance(d[0], dict) and "departure_at" in d[0]:
-                        from datetime import date
-                        nn = [(date.fromisoformat(x["return_at"][:10]) - date.fromisoformat(x["departure_at"][:10])).days for x in d if x.get("return_at")]
-                        info += f" | nights dist {sorted(set(nn))[:30]} min price {min(x['price'] for x in d)}"
-                elif isinstance(d, dict):
-                    info = f"dict keys {list(d)[:10]}; " + json.dumps(d, ensure_ascii=False)[:400]
-                else:
-                    info = json.dumps(j, ensure_ascii=False)[:400]
-            except ValueError:
-                info = body[:300].replace("\n", " ")
-            if tok:
-                info = info.replace(tok, "***")
-            print(f"   {name}: HTTP {r.status_code} {info}")
-        except Exception as e:
-            print(f"   {name}: {type(e).__name__} {str(e)[:200].replace(tok or '@@', '***')}")
-sec("hotellook/travelpayouts"); tryit(hl)
-
-# 7 overpass real query via side module (if present)
-def osm():
-    import side_hotels
-    t0 = time.time()
-    raw = side_hotels.fetch_overpass(side_hotels.side_cfg(cfg))
-    print(f"   elements {len(raw.get('elements', []))} in {time.time()-t0:.0f}s")
-    hotels = side_hotels.process_osm(raw, side_hotels.side_cfg(cfg))
-    side_hotels.print_summary(hotels, side_hotels.side_cfg(cfg))
-sec("overpass query"); tryit(osm)
+    hdr = {"X-Access-Token": tok}
+    for o, d, m in [("VIE", "AYT", "2027-07"), ("AYT", "VIE", "2027-07"), ("VIE", "AYT", "2027-08"), ("BTS", "AYT", "2027-07"), ("AYT", "BTS", "2027-07"), ("BRQ", "AYT", "2027-07")]:
+        r = session().get("https://api.travelpayouts.com/aviasales/v3/prices_for_dates", params={"origin": o, "destination": d, "departure_at": m, "one_way": "true", "sorting": "price", "unique": "false", "limit": 1000, "currency": "eur"}, headers=hdr, timeout=30)
+        j = r.json(); data = j.get("data") or []
+        days = sorted({x["departure_at"][:10] for x in data})
+        print(f"   one-way {o}->{d} {m}: HTTP {r.status_code} {len(data)} rows, {len(days)} days, min {min([x['price'] for x in data], default=None)}; first {json.dumps(data[0], ensure_ascii=False)[:200] if data else ''}")
+sec("travelpayouts one-way"); tryit(tp)
