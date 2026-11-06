@@ -267,8 +267,8 @@ def search(cfg):
 
 def watch_lookup(term):
     """[(gid, hotel name)] of the hotels the autocomplete lists for a watch term (only names the term matches)."""
-    from watch import match
-    res = get(IBE + "/hub/ajax/getDestination.php", params={"destination": term}, as_json=True,
+    from watch import match, split_term
+    res = get(IBE + "/hub/ajax/getDestination.php", params={"destination": split_term(term)[0]}, as_json=True,
               headers={"X-Requested-With": "XMLHttpRequest", "Referer": IBE + "/"})
     out = []
     for x in res if isinstance(res, list) else []:

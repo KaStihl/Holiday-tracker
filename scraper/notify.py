@@ -59,7 +59,7 @@ def watched_best(offers, cfg=CONFIG):
     """{term: cheapest current offer} for every watched hotel (any board, also above price_cap); None = no offer."""
     best = {t: None for t in cfg.get("watched") or []}
     for o in offers:
-        t = o.get("watched") if o.get("watched") in best else match(o.get("hotel"), cfg.get("watched"))
+        t = o.get("watched") if o.get("watched") in best else match(o.get("hotel"), cfg.get("watched"), o.get("country_code"))
         if t and (best[t] is None or o["price_total"] < best[t]["price_total"]):
             best[t] = o
     return best

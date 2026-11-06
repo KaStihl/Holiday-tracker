@@ -23,12 +23,21 @@ def norm_name(s):
     return " ".join(w for w in words if w not in STOPWORDS)
 
 
-def match(hotel, terms):
-    """The first watch term (as written) whose normalised form occurs in the hotel name at a word start."""
+def split_term(term):
+    """'Long Beach Resort @TR' -> ('Long Beach Resort', 'TR'); a term without '@XX' has no country limit."""
+    m = re.fullmatch(r"(.*?)\s*@\s*([A-Za-z]{2})", str(term or "").strip())
+    return (m.group(1), m.group(2).upper()) if m else (str(term or "").strip(), None)
+
+
+def match(hotel, terms, country=None):
+    """The first watch term (as written) whose normalised form occurs in the hotel name at a word start.
+    A term limited to a country ('… @TR') only matches when `country` is that code; callers that don't know
+    the country (adapters' watch lookups) pass None and get name-only matching – run.py re-checks with it."""
     name = " " + norm_name(hotel)
     for term in terms or ():
-        n = norm_name(term)
-        if n and (" " + n) in name:
+        base, cc = split_term(term)
+        n = norm_name(base)
+        if n and (" " + n) in name and not (cc and country is not None and country != cc):
             return term
     return None
 

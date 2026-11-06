@@ -51,7 +51,8 @@ def normalise(raw, source, source_name, cfg):
     if not o.get("hotel") or price <= 0:
         return None
     # watched hotels (sledovane_hotely) stay even above price_cap, up to keep_limit(), flagged over_cap
-    o["watched"] = match(o["hotel"], cfg.get("watched"))
+    o["watched"] = match(o["hotel"], cfg.get("watched"),
+                         o.get("country_code") or norm_country(o.get("country")) or norm_country(o.get("region")))
     if price > (keep_limit(cfg) if o["watched"] else cfg["price_cap"]):
         return None
     if not (cfg["nights_min"] <= nights <= cfg["nights_max"]):
@@ -292,7 +293,7 @@ def watch_hints(offers, prev_offers, cfg):
     the previous offers.json (re-matched, so a term added to nastavenia.yml uses older data too)."""
     out = {t: [] for t in cfg.get("watched", [])}
     for o in list(offers) + list(prev_offers):
-        term = match(o.get("hotel"), cfg.get("watched"))
+        term = match(o.get("hotel"), cfg.get("watched"), o.get("country_code"))
         if not term:
             continue
         h = {"country_code": o.get("country_code"), "place": o.get("place"), "region": o.get("region")}

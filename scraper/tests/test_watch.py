@@ -258,3 +258,13 @@ def test_snapshot_keeps_cheapest_per_watched_term(tmp_path):
     cur = {"generated_at": "x", "offers": [_o("a", "Hotel Sural Hotel", 3300), _o("b", "Sural Saray", 3100)]}
     snap = notify.snapshot(cur, "2026-11-02")
     assert snap["watched"] == {"Sural": {"id": "b", "price_total": 3100, "price_exact": False}}
+
+
+def test_country_limited_term():
+    from watch import match, split_term
+    assert split_term("Long Beach Resort @TR") == ("Long Beach Resort", "TR")
+    terms = ["Long Beach Resort @TR"]
+    assert match("Long Beach Resort Hotel & Spa", terms, "TR") == "Long Beach Resort @TR"
+    assert match("Long Beach Resort", terms, "EG") is None
+    assert match("Long Beach Mauritius", terms, "MU") is None
+    assert match("Long Beach Resort", terms) == "Long Beach Resort @TR"  # adapters don't know the country

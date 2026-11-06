@@ -11,7 +11,7 @@ from pathlib import Path
 
 import yaml
 
-from watch import norm_name
+from watch import norm_name, split_term
 
 ROOT = Path(__file__).resolve().parents[1]
 SETTINGS = Path(os.environ.get("DOVOLENKA_SETTINGS") or ROOT / "nastavenia.yml")
@@ -334,8 +334,11 @@ def _watched(v):
             continue
         if len(name) > 60:
             raise SettingsError(f"sledovane_hotely: '{name[:30]}…' je príliš dlhý názov (najviac 60 znakov)")
-        key = norm_name(name)
-        if not key:
+        base, cc = split_term(name)
+        if "@" in name and not cc:
+            raise SettingsError(f"sledovane_hotely: '{name}' – krajinu píšte ako @ a dvojpísmenový kód, napr. @TR")
+        key = norm_name(base) + ("@" + cc if cc else "")
+        if not norm_name(base):
             raise SettingsError(f"sledovane_hotely: '{name}' – zadajte aj vlastný názov hotela, nie len "
                                 "slová ako hotel/resort/spa")
         if key not in seen:
