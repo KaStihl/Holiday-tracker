@@ -1,0 +1,21 @@
+# TEMPORARY probe for the Side-hotels feature – deleted after use.
+name: Probe side
+on:
+  push:
+    branches: [main]
+    paths: ["probe/**", ".github/workflows/probe-side.yml"]
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r scraper/requirements.txt
+      - run: python probe/probe_side.py
+        env:
+          TRAVELPAYOUTS_TOKEN: ${{ secrets.TRAVELPAYOUTS_TOKEN }}

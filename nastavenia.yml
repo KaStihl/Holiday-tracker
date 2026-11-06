@@ -110,3 +110,19 @@ destinations:
 sledovane_hotely:
   - Sural
   - Royal Alhambra   # Royal Alhambra Palace, Çolaklı (Side)
+
+# Side – hotely pri pláži (druhá záložka na stránke „🏨 Side – hotely pri pláži“): rodinné hotely v okolí Side
+# blízko pláže (podľa OpenStreetMap), ceny zájazdov z cestoviek, letenky do Antalye (AYT) a výpočet „vlastného balíka“
+# (letenky + ubytovanie + transfer). Celú sekciu môžete vynechať – platia hodnoty nižšie.
+side_hotely:
+  enabled: true                     # false = záložka sa skryje a nič z toho sa nesťahuje
+  max_vzdialenost_od_plaze_m: 300   # najviac metrov od pláže (zo súradníc v OpenStreetMap), 50–1000
+  # Oblasti (stačí vymazať riadok/názov): Side, Kumköy, Çolaklı, Evrenseki, Titreyengöl, Sorgun, Kızılağaç, Manavgat
+  oblasti: [Side, Kumköy, Çolaklı, Evrenseki, Titreyengöl, Sorgun, Kızılağaç, Manavgat]
+  # Rodinné kritériá, ktoré sa na stránke ukazujú ako odznaky a filtre:
+  #   rodinna_izba = izba pre 3–4 osoby, aquapark = aquapark/tobogany, detsky_klub = detský klub/animácie,
+  #   all_inclusive = All Inclusive. Neznáme ≠ nie (cestovka ani mapa to neuvádza).
+  kriteria: [rodinna_izba, aquapark, detsky_klub, all_inclusive]
+  # ODHAD ceny transferu letisko Antalya (AYT) → hotel v € za JEDNU cestu pre celú skupinu (spolu tam aj späť = 2×).
+  # Je to len orientačná suma pre výpočet vlastného balíka – skutočnú cenu si overte (taxi/súkromný transfer).
+  transfer_eur: 60

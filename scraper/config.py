@@ -126,7 +126,7 @@ def validate(raw):
     if missing:
         raise SettingsError(f"chýbajú položky: {', '.join(missing)}")
     known = set(required) | {"adults", "children_ages", "skupiny", "departures_secondary", "transports", "dogs",
-                             "boards_preferred", "car_start", "sledovane_hotely"}
+                             "boards_preferred", "car_start", "sledovane_hotely", "side_hotely"}
     unknown = sorted(set(raw) - known)
     if unknown:
         raise SettingsError(f"neznáme položky (preklep?): {', '.join(unknown)}")
@@ -178,6 +178,7 @@ def validate(raw):
             raise SettingsError(f"destinations: váha pri {code} musí byť od 0.1 do 1.0")
         c["countries"][code] = w
     c["watched"] = _watched(raw.get("sledovane_hotely"))
+    c["side"] = _side(raw.get("side_hotely"))
     c["parties"] = _parties(raw, c["date_from"])
     primary = c["parties"][0]
     c["party_id"] = primary["id"]
@@ -265,6 +266,52 @@ def party_cfg(cfg, party):
 def extra_parties(cfg):
     """[(party, party cfg)] of the parties other than the primary (default) one."""
     return [(p, party_cfg(cfg, p)) for p in cfg.get("parties", [])[1:]]
+
+
+SIDE_CRITERIA = ("rodinna_izba", "aquapark", "detsky_klub", "all_inclusive")
+SIDE_DEFAULT = {"enabled": True, "max_vzdialenost_od_plaze_m": 300,
+                "oblasti": ["Side", "Kumköy", "Çolaklı", "Evrenseki", "Titreyengöl", "Sorgun", "Kızılağaç", "Manavgat"],
+                "kriteria": list(SIDE_CRITERIA), "transfer_eur": 60}
+
+
+def _side(v):
+    """side_hotely (tab "Side – hotely pri pláži") -> {enabled, max_m, oblasti: [area keys], kriteria, transfer_eur}.
+    Missing section = defaults; missing keys inside it = their defaults."""
+    from side_hotels import AREAS, area_key
+    if v is None:
+        v = {}
+    if not isinstance(v, dict):
+        raise SettingsError("side_hotely: čakám položky v tvare 'kľúč: hodnota' (enabled, max_vzdialenost_od_plaze_m, "
+                            "oblasti, kriteria, transfer_eur)")
+    bad = sorted(set(map(str, v)) - set(SIDE_DEFAULT))
+    if bad:
+        raise SettingsError(f"side_hotely: neznáme položky (preklep?): {', '.join(bad)}")
+    r = dict(SIDE_DEFAULT, **v)
+    en = r["enabled"]
+    if not isinstance(en, bool):
+        raise SettingsError("side_hotely: enabled musí byť true alebo false")
+    ob = r["oblasti"]
+    if isinstance(ob, str):
+        ob = [ob]
+    if not isinstance(ob, list) or not ob:
+        raise SettingsError("side_hotely: oblasti – čakám zoznam, napr. [Side, Kumköy, Çolaklı]")
+    keys = []
+    for x in ob:
+        k = area_key(str(x))
+        if k not in AREAS:
+            raise SettingsError(f"side_hotely: neznáma oblasť '{x}' (známe: "
+                                f"{', '.join(a[0] for a in AREAS.values())})")
+        if k not in keys:
+            keys.append(k)
+    kr = r["kriteria"] if r["kriteria"] is not None else []
+    if isinstance(kr, str):
+        kr = [kr]
+    if not isinstance(kr, list) or any(str(x) not in SIDE_CRITERIA for x in kr):
+        raise SettingsError(f"side_hotely: kriteria – povolené sú {', '.join(SIDE_CRITERIA)}")
+    return {"enabled": en, "max_m": _int(r["max_vzdialenost_od_plaze_m"], "side_hotely: max_vzdialenost_od_plaze_m",
+                                         50, 1000),
+            "oblasti": keys, "kriteria": [k for k in SIDE_CRITERIA if k in kr],
+            "transfer_eur": _int(r["transfer_eur"], "side_hotely: transfer_eur", 0, 1000)}
 
 
 WATCH_MAX = 20
