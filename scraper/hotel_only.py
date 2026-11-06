@@ -8,9 +8,11 @@ Checked 2026-11-06 from a GitHub runner (temporary probe):
 - Ruefa: pauschal.ruefa.at is packages only; hotels.ruefa.at is the generic home page (no hotel-only search found).
 - Čedok: not used – the Turkey listings the tracker reads are flight packages; no hotel-only / own-transport search
   for Turkey was found (not probed further).
-- BILLA Reisen: sells "Nur Hotel" (hotel only): /Hotels/Angebote.html with pttid=PH / ptoj=PH, the same server-
-  rendered result cards as the packages ("Nur Hotel · z.B. 7 Nächte, ab 2.7.2027, Doppelzimmer, Alles Inklusive",
-  "p.P. ab € …" for 2 adults); robots.txt only disallows /buchen/. -> USED: Turkey (pdf=3380096), All Inclusive when
+- BILLA Reisen sells "Nur Hotel" (pttid=PH), but /Hotels/Angebote.html renders an empty shell
+  (ITS_ajax_tt_search_results, filled by JavaScript/AJAX) – 0 result cards for every parameter variant tried on
+  2026-11-06 – and /Hotels/Tuerkei.html only has teaser "z.B." prices for random dates (e.g. April, 5 nights), not for
+  the travel window. -> NOT USED (BILLA_ENABLED = False, no requests). The code below is what was tried: Turkey
+  (pdf=3380096), All Inclusive when
   boards_preferred is AI-only, 7/10/14 nights, cheapest first, ≤ MAX_CALLS pages per refresh, at most once per
   REFRESH_HOURS (side.py caches it in site/data/side_daily.json). Children are ignored by the list (as for the packages), so
   the party price is per person at 2 adults × persons – "orientačne".
@@ -19,6 +21,7 @@ Checked 2026-11-06 from a GitHub runner (temporary probe):
 import time
 from urllib.parse import urlencode
 
+BILLA_ENABLED = False  # see the module docstring: the hotel-only list is filled client-side, nothing to read
 MAX_CALLS = 18
 REFRESH_HOURS = 20
 PATH = "/Hotels/Angebote.html"
@@ -97,8 +100,14 @@ SOURCES_INFO = [
 ]
 
 
+BILLA_OFF = {"id": "billa_reisen", "name": "BILLA Reisen (Nur Hotel)", "status": "unavailable", "requests": 0,
+             "note": "zoznam „Nur Hotel“ sa načítava JavaScriptom – zo stránky nie je čo prečítať (overené 6. 11. 2026)"}
+
+
 def fetch(cfg, get=None):
     """{"sources": [{id, name, status, note, requests}], "rows": {source id: [rows]}} – network, no cache."""
+    if not BILLA_ENABLED:
+        return {"sources": [BILLA_OFF] + [dict(x, requests=0) for x in SOURCES_INFO], "rows": {}}
     t0 = time.time()
     rows, calls, err = fetch_billa(cfg, get)
     status = "ok" if rows else ("error" if err else "empty")

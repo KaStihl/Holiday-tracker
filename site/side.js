@@ -126,17 +126,22 @@
     flights().forEach(function (f) { if (f.n === n && (!dep || f.o === dep) && (!best || f.p < best.p)) best = f; });
     return best ? best.dep : null;
   }
-  // the flight used for the package: nights = selected, departure within ±3 days of the chosen date (cheapest),
-  // else the cheapest of those nights anywhere in the window (flagged "iný termín")
+  // the flight used for the package: nights = selected and departure within ±3 days of the chosen date (cheapest);
+  // else the cheapest of those nights anywhere in the window ("iný termín"); else – the 2027 cache is thin – the
+  // cheapest with the nearest stay length (±3 nights, "N nocí"), labelled on the page
   function pickFlight(dep) {
-    var near = null, any = null;
+    var near = null, any = null, close = null;
     flights().forEach(function (f) {
-      if (f.n !== S.n || (dep && f.o !== dep)) return;
-      var dd = diffDays(f.dep, S.d);
-      if (dd !== null && Math.abs(dd) <= 3 && (!near || f.p < near.p || (f.p === near.p && Math.abs(dd) < Math.abs(diffDays(near.dep, S.d))))) near = f;
-      if (!any || f.p < any.p) any = f;
+      if (dep && f.o !== dep) return;
+      var dn = Math.abs(f.n - S.n);
+      if (f.n === S.n) {
+        var dd = diffDays(f.dep, S.d);
+        if (dd !== null && Math.abs(dd) <= 3 && (!near || f.p < near.p)) near = f;
+        if (!any || f.p < any.p) any = f;
+      } else if (dn <= 3 && (!close || dn < Math.abs(close.n - S.n) || (dn === Math.abs(close.n - S.n) && f.p < close.p))) close = f;
     });
-    return near ? { f: near, exact: true } : any ? { f: any, exact: false } : null;
+    return near ? { f: near, exact: true, nights: true } : any ? { f: any, exact: false, nights: true } :
+      close ? { f: close, exact: false, nights: false } : null;
   }
   // airline passenger types: 12+ = adult, 2–11 child, under 2 infant
   function paxOf(p) {
@@ -284,12 +289,18 @@
       var pick = pickFlight(o);
       var c = el("div", "sf-item");
       c.appendChild(el("div", "sf-o", o + " " + (AIRPORT[o] || "")));
-      if (!pick) { c.appendChild(el("div", "muted", "bez ceny v cache pre " + S.n + " nocí")); row.appendChild(c); return; }
+      if (!pick) {
+        c.appendChild(el("div", "muted", "bez ceny v cache pre " + S.n + " nocí"));
+        c.appendChild(link(aviasales({ o: o, dep: S.d, ret: addDays(S.d, S.n) }, p), "Hľadať " + short(S.d) + " na Aviasales ↗", "sf-link"));
+        row.appendChild(c);
+        return;
+      }
       any = true;
       var f = pick.f;
       c.appendChild(el("div", "sf-p mono", eur(f.p * p.persons)));
       c.appendChild(el("div", "sf-d", eur(f.p) + "/os. · " + short(f.dep) + " – " + short(f.ret) + (f.k === "ow" ? " · 2× jednosmerná" : "") + (f.tr ? " · prestup" : " · priamy") + (f.al ? " · " + f.al : "")));
-      if (!pick.exact) c.appendChild(el("div", "sf-other", "iný termín ako " + short(S.d) + " (±3 dni bez ceny)"));
+      if (!pick.nights) c.appendChild(el("div", "sf-other", f.n + " nocí (na " + S.n + " nocí cache nemá cenu)"));
+      else if (!pick.exact) c.appendChild(el("div", "sf-other", "iný termín ako " + short(S.d) + " (±3 dni bez ceny)"));
       c.appendChild(link(aviasales(f, p), "Aviasales ↗", "sf-link"));
       row.appendChild(c);
     });
@@ -370,11 +381,11 @@
     }
     if (own.flight) {
       var f = own.flight.f;
-      line("✈️ Letenky " + f.o + " " + short(f.dep) + "–" + short(f.ret), eur(own.fsum), "orientačne (cache, cena za 1 os. × " + p.persons + ")" + (own.flight.exact ? "" : " · iný termín"));
+      line("✈️ Letenky " + f.o + " " + short(f.dep) + "–" + short(f.ret), eur(own.fsum), "orientačne (cache, cena za 1 os. × " + p.persons + ")" + (!own.flight.nights ? " · " + f.n + " nocí, iná dĺžka" : own.flight.exact ? "" : " · iný termín"));
     } else line("✈️ Letenky", "?", D.flights && D.flights.status === "no_token" ? "chýba TRAVELPAYOUTS_TOKEN" : "v cache bez ceny na " + S.n + " nocí");
     if (own.ho) {
       var hr = own.ho.r;
-      line("🏨 Ubytovanie " + short(hr[2]) + ", " + hr[3] + " n." + (hr[4] ? ", " + hr[4] : ""), eur(hr[1]), srcName(hr[0]) + " – orientačne (os. pri 2 dosp. × " + p.persons + ")" + (own.ho.how === "term" ? "" : " · iný dátum"));
+      line("🏨 Ubytovanie " + short(hr[2]) + ", " + hr[3] + " n." + (hr[4] ? ", " + hr[4] : ""), eur(hr[1]), srcName(hr[0]) + " – orientačne" + (own.ho.how === "term" ? "" : " · iný dátum"));
     } else line("🏨 Ubytovanie", "?", "cena len ubytovania nedostupná");
     line("🚐 Transfer AYT ↔ hotel", eur(own.transfer), "odhad " + eur(D.transfer_eur) + " za cestu (nastavenia.yml)");
     colB.appendChild(lines);
@@ -387,13 +398,13 @@
     } else if (own.partial !== null) {
       colB.appendChild(el("div", "sh-small muted", "letenky + transfer: " + eur(own.partial) + " + ubytovanie ?"));
     }
-    if (ho0(h, p)) colB.appendChild(link(own.ho ? own.ho.r[5] : ho0(h, p)[5], "Ubytovanie (BILLA) ↗", "sh-link"));
+    if (ho0(h, p)) colB.appendChild(link(own.ho ? own.ho.r[5] : ho0(h, p)[5], "Ubytovanie (" + srcName((own.ho ? own.ho.r : ho0(h, p))[0]) + ") ↗", "sh-link"));
     pr.appendChild(colB);
     c.appendChild(pr);
 
     var links = el("div", "sh-links");
     links.appendChild(link(booking(h, p), "Overiť na Booking.com ↗", "btn-ghost btn-sm"));
-    if (own.flight) links.appendChild(link(aviasales(own.flight.f, p), "Letenky na Aviasales ↗", "btn-ghost btn-sm"));
+    links.appendChild(link(aviasales({ o: S.dep || (own.flight ? own.flight.f.o : "VIE"), dep: S.d, ret: addDays(S.d, S.n) }, p), "Letenky na Aviasales ↗", "btn-ghost btn-sm"));
     if (h.w) links.appendChild(link(h.w, "Web hotela ↗", "btn-ghost btn-sm"));
     if (num(h.lat) !== null && num(h.lon) !== null) links.appendChild(link("https://www.openstreetmap.org/?mlat=" + h.lat + "&mlon=" + h.lon + "#map=17/" + h.lat + "/" + h.lon, "Mapa ↗", "btn-ghost btn-sm"));
     c.appendChild(links);
@@ -423,7 +434,7 @@
       "Hotely a vzdialenosť od pláže: © OpenStreetMap prispievatelia (ODbL), cez Overpass API, obnova najviac raz týždenne" + (osm.fetched_at ? " (posledná " + short(osm.fetched_at) + str(osm.fetched_at).slice(0, 4) + ")" : "") + ". Vzdialenosť je od budovy/areálu hotela k najbližšej pláži (natural=beach) alebo k pobrežiu – orientačná. Limit: " + (num(D.max_m) || 300) + " m (nastavenia.yml → side_hotely).",
       "Rodinné kritériá: ✓ = potvrdené cestovkou (ikony/popis hotela v Kartago/Fischer, Satur, BILLA, názov izby, filter Ruefa) alebo mapou OSM (vodný park/tobogan v areáli); zdroj je pri odznaku. „?“ = nikto to neuvádza – neznamená to „nie“. Rodinná izba: aj keď cestovka ponúka presnú cenu pre celú skupinu v 1 izbe.",
       "Zájazd od cestovky: najlacnejšia ponuka hotela pre zvolenú skupinu a počet nocí s odletom ±3 dni od zvoleného dňa (inak iný termín, je to označené).",
-      "Vlastný balík = letenky (cache Travelpayouts/Aviasales, cena za 1 os. × počet osôb – orientačne) + ubytovanie (BILLA Reisen „Nur Hotel“, cena za os. pri 2 dospelých × počet osôb – orientačne) + transfer letisko Antalya ↔ hotel 2 × " + eur(D.transfer_eur) + " (odhad z nastavení). Všetky časti sú odhady – pred rezerváciou overte.",
+      "Vlastný balík = letenky (cache Travelpayouts/Aviasales, cena za 1 os. × počet osôb – orientačne) + cena len ubytovania (ak ju má niektorý legitímny zdroj – zoznam nižšie; inak „cena len ubytovania nedostupná“ a súčet je bez ubytovania – overte cez „Overiť na Booking.com“) + transfer letisko Antalya ↔ hotel 2 × " + eur(D.transfer_eur) + " (odhad z nastavení). Všetky časti sú odhady – pred rezerváciou overte.",
       "Booking.com sa nesťahuje (podmienky to zakazujú) – tlačidlo „Overiť na Booking.com“ otvorí ich vyhľadávanie s menom hotela, termínom a osobami."
     ];
     var hos = D.hotel_only && Array.isArray(D.hotel_only.sources) ? D.hotel_only.sources : [];

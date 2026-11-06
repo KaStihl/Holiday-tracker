@@ -7,7 +7,7 @@
    their facility flags (offer["fac"]: Satur/BILLA card icons, DERTOUR/Ruefa room names), boards and exact
    one-room prices give the family criteria with their source.
 3. Flights VIE/BTS/BRQ -> AYT from the Travelpayouts cache (flights.py, needs TRAVELPAYOUTS_TOKEN).
-4. Accommodation-only prices where a legitimate source has them (hotel_only.py: BILLA Reisen "Nur Hotel") and
+4. Accommodation-only prices where a legitimate source has them (hotel_only.py – none works as of 2026-11-06) and
    Ruefa's attribute filters (water slide / family room / direct beach) – both at most once a day, cached in
    site/data/side_daily.json – otherwise the page says "cena len ubytovania nedostupná".
 The page computes the own package (flights × persons + hotel + 2 × transfer_eur) next to the agency package.
@@ -37,6 +37,7 @@ OUT = DATA / "side.json"
 OFFERS = DATA / "offers.json"
 DAILY = DATA / "side_daily.json"
 DAILY_HOURS = 20
+DAILY_VERSION = 2  # bump when the hotel-only sources change, so the cache is not reused
 GPS_MATCH_M = 150  # an agency hotel without a name match goes to the OSM hotel within this distance of its GPS
 
 # words that don't tell two hotels apart (on top of watch.STOPWORDS)
@@ -195,7 +196,7 @@ def daily(cfg, gids, now=None):
         cache = json.loads(DAILY.read_text(encoding="utf-8"))
     except (OSError, ValueError):
         cache = None
-    if cache and cache.get("window") == window and cache.get("fetched_at"):
+    if cache and cache.get("window") == window and cache.get("fetched_at") and cache.get("v") == DAILY_VERSION:
         try:
             age = now - datetime.fromisoformat(cache["fetched_at"].replace("Z", "+00:00"))
             if age.total_seconds() < DAILY_HOURS * 3600:
@@ -217,7 +218,7 @@ def daily(cfg, gids, now=None):
     if not any(ho["rows"].values()) and cache and any((cache.get("rows") or {}).values()):
         ho = {"sources": cache["sources"], "rows": cache["rows"]}  # keep yesterday's prices over nothing
     out = {"fetched_at": now.replace(microsecond=0).isoformat().replace("+00:00", "Z"), "window": window,
-           "sources": ho["sources"], "rows": ho["rows"], "ruefa_attr": attr}
+           "v": DAILY_VERSION, "sources": ho["sources"], "rows": ho["rows"], "ruefa_attr": attr}
     if any(x.get("status") == "error" for x in ho["sources"]):
         print("[side] hotel-only source failed – not cached, the next run tries again")
         out["fetched_at"] = (cache or {}).get("fetched_at")

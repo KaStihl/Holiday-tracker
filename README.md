@@ -83,9 +83,11 @@ Hore na stránke prepínač **Zájazdy | Side – hotely pri pláži** (pamätá
 - **Ceny zájazdov** z `offers.json` (všetky skupiny), priradené k hotelom podľa názvu (alebo GPS z Kartago/Fischer).
 - **Letenky** VIE/BTS/BRQ → AYT: Travelpayouts Data API (`TRAVELPAYOUTS_TOKEN` v Actions secrets), cache Aviasales,
   cena za 1 os. × počet osôb – orientačne; spiatočné aj 2× jednosmerné. Bez tokenu sa ukáže návod.
-- **Len ubytovanie:** BILLA Reisen „Nur Hotel“ (najviac raz denne, cache `site/data/side_daily.json`; cena za os. pri
-  2 dospelých × osoby – orientačne). Hotellook (Travelpayouts) už neexistuje (404), Kartago/Fischer/Ruefa predávajú
-  Turecko len s letenkou. Bez ceny: „cena len ubytovania nedostupná“.
+- **Len ubytovanie:** zatiaľ žiadny legitímny zdroj (overené 6. 11. 2026): Hotellook (Travelpayouts) už neexistuje (404),
+  Kartago/Fischer/Ruefa predávajú Turecko len s letenkou, zoznam BILLA „Nur Hotel“ sa načítava JavaScriptom
+  (`hotel_only.py`, `BILLA_ENABLED = False`). Stránka preto píše „cena len ubytovania nedostupná“ a vlastný balík je
+  letenky + transfer + „ubytovanie ?“ – cenu hotela si overíte tlačidlom „Overiť na Booking.com“. Ruefa filtre
+  a prípadné ďalšie zdroje sa obnovujú najviac raz denne (cache `site/data/side_daily.json`).
 - **Vlastný balík** = letenky + ubytovanie + 2 × `transfer_eur` vedľa najlacnejšieho zájazdu toho hotela (rozdiel v €).
 - **Booking.com** sa nesťahuje (podmienky) – len odkaz „Overiť na Booking.com“ s menom hotela, termínom a osobami.
 

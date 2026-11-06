@@ -235,6 +235,12 @@ def test_billa_hotel_only_query_and_parse():
     assert hotel_only.in_side({"place": "Çolakli"}) and not hotel_only.in_side({"place": "Alanya"})
 
 
+def test_hotel_only_sources_off_without_requests():
+    res = hotel_only.fetch(CONFIG, get=lambda *a, **k: pytest.fail("BILLA hotel-only is switched off"))
+    assert res["rows"] == {} and {s["id"]: s["status"] for s in res["sources"]} == {
+        "billa_reisen": "unavailable", "hotellook": "unavailable", "dertour": "unavailable", "ruefa": "unavailable"}
+
+
 def test_ruefa_side_attributes(monkeypatch):
     def card(g):
         return f'<div class="card-hotel" data-giataid="{g}p" data-href="x"></div>'
