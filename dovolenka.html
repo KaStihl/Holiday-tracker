@@ -2337,16 +2337,27 @@ table.sources { width: 100%; border-collapse: collapse; font-size: .9rem; }
     var pax = String(x.a) + (x.c || x.i ? String(x.c) : "") + (x.i ? String(x.i) : "");
     return "https://www.aviasales.com/search/" + f.o + ddmm(f.dep) + str(D.flights.dest || "AYT") + ddmm(f.ret) + pax;
   }
+  // Booking redirects a bare searchresults URL to its home page; these extra fields are the ones its own
+  // search form sends (sb/src/src_elem), which makes it apply ss + dates + party.
   function booking(h, p) {
     var q = new URLSearchParams();
-    q.set("ss", h.n + ", Side");
+    q.set("ss", h.n + ", Side, Antalya");
     q.set("checkin", S.d);
     q.set("checkout", addDays(S.d, S.n));
     q.set("group_adults", String(p.adults));
     q.set("group_children", String((p.kids || []).length));
     (p.kids || []).forEach(function (a) { q.append("age", String(a)); });
     q.set("no_rooms", "1");
+    q.set("sb", "1");
+    q.set("src", "index");
+    q.set("src_elem", "sb");
+    q.set("lang", "sk");
+    q.set("selected_currency", "EUR");
     return "https://www.booking.com/searchresults.html?" + q.toString();
+  }
+  // Fallback that always lands on the hotel's own Booking page (first Google hit); dates are set there.
+  function bookingViaGoogle(h) {
+    return "https://www.google.com/search?q=" + encodeURIComponent(h.n + " Side site:booking.com/hotel");
   }
 
   // ---------- per hotel ----------
@@ -2587,6 +2598,7 @@ table.sources { width: 100%; border-collapse: collapse; font-size: .9rem; }
 
     var links = el("div", "sh-links");
     links.appendChild(link(booking(h, p), "Overiť na Booking.com ↗", "btn-ghost btn-sm"));
+    links.appendChild(link(bookingViaGoogle(h), "Hotel na Booking (cez Google) ↗", "btn-ghost btn-sm"));
     links.appendChild(link(aviasales({ o: S.dep || (own.flight ? own.flight.f.o : "VIE"), dep: S.d, ret: addDays(S.d, S.n) }, p), "Letenky na Aviasales ↗", "btn-ghost btn-sm"));
     if (h.w) links.appendChild(link(h.w, "Web hotela ↗", "btn-ghost btn-sm"));
     if (num(h.lat) !== null && num(h.lon) !== null) links.appendChild(link("https://www.openstreetmap.org/?mlat=" + h.lat + "&mlon=" + h.lon + "#map=17/" + h.lat + "/" + h.lon, "Mapa ↗", "btn-ghost btn-sm"));
