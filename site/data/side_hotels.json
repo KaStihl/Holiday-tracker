@@ -1,5 +1,5 @@
 {
-"fetched_at": "2026-11-06T16:02:09Z",
+"fetched_at": "2026-11-13T22:05:49Z",
 "bbox": [
 36.7,
 31.18,
@@ -8,7 +8,7 @@
 ],
 "source": "© OpenStreetMap contributors (ODbL), Overpass API",
 "keep_m": 1000,
-"elements": 1382,
+"elements": 1397,
 "hotels": [
 {
 "osm": "w215036087",
@@ -116,6 +116,19 @@
 "area": "side",
 "stars": null,
 "website": "https://ozlemgardenhotel.com/",
+"aquapark_osm": null,
+"pools": null
+},
+{
+"osm": "n13959289401",
+"name": "Tropic On The Beach",
+"lat": 36.77526,
+"lon": 31.39126,
+"dist_m": 11,
+"dist_kind": "beach",
+"area": "side",
+"stars": null,
+"website": null,
 "aquapark_osm": null,
 "pools": null
 },
@@ -414,6 +427,19 @@
 "pools": null
 },
 {
+"osm": "n14025207801",
+"name": "Side Temple Hotel",
+"lat": 36.77459,
+"lon": 31.39369,
+"dist_m": 206,
+"dist_kind": "beach",
+"area": "side",
+"stars": null,
+"website": "https://www.booking.com/hotel/tr/temple-side.html?aid=808251#availability_target",
+"aquapark_osm": null,
+"pools": 2
+},
+{
 "osm": "w440865202",
 "name": "Hotel Side Star Park",
 "lat": 36.7789,
@@ -566,6 +592,19 @@
 "lat": 36.78541,
 "lon": 31.39924,
 "dist_m": 376,
+"dist_kind": "beach",
+"area": "side",
+"stars": null,
+"website": null,
+"aquapark_osm": null,
+"pools": 8
+},
+{
+"osm": "n10973302605",
+"name": "Akdore Elite & Spa",
+"lat": 36.78279,
+"lon": 31.39031,
+"dist_m": 380,
 "dist_kind": "beach",
 "area": "side",
 "stars": null,
@@ -2013,8 +2052,8 @@
 {
 "osm": "w377155979",
 "name": "Bella Resort",
-"lat": 36.81741,
-"lon": 31.30275,
+"lat": 36.81738,
+"lon": 31.30267,
 "dist_m": 63,
 "dist_kind": "beach",
 "area": "colakli",
@@ -2040,14 +2079,14 @@
 },
 {
 "osm": "w279054422",
-"name": "Adalya Resort",
+"name": "Adalya Bliss",
 "lat": 36.80912,
 "lon": 31.33678,
 "dist_m": 80,
 "dist_kind": "beach",
 "area": "colakli",
 "stars": null,
-"website": null,
+"website": "https://adalyahotels.com",
 "aquapark_osm": null,
 "pools": 2
 },
@@ -2229,7 +2268,7 @@
 "name": "VONRESORT Golden Beach",
 "lat": 36.81987,
 "lon": 31.30208,
-"dist_m": 227,
+"dist_m": 226,
 "dist_kind": "beach",
 "area": "colakli",
 "stars": null,
@@ -2452,7 +2491,7 @@
 },
 {
 "osm": "w433249190",
-"name": "Nergos garden",
+"name": "Orfeus Armin Hotel",
 "lat": 36.81962,
 "lon": 31.30835,
 "dist_m": 412,
@@ -2461,7 +2500,7 @@
 "stars": null,
 "website": null,
 "aquapark_osm": null,
-"pools": 1
+"pools": 2
 },
 {
 "osm": "w377155962",
@@ -2474,7 +2513,7 @@
 "stars": 4.0,
 "website": null,
 "aquapark_osm": null,
-"pools": 1
+"pools": 2
 },
 {
 "osm": "n11959508018",
@@ -2513,7 +2552,7 @@
 "stars": null,
 "website": null,
 "aquapark_osm": null,
-"pools": 3
+"pools": 4
 },
 {
 "osm": "w377155959",
@@ -2739,6 +2778,19 @@
 "pools": null
 },
 {
+"osm": "w1532322446",
+"name": "Aletris Deluxe Hotel & Spa",
+"lat": 36.8249,
+"lon": 31.29664,
+"dist_m": 721,
+"dist_kind": "beach",
+"area": "colakli",
+"stars": null,
+"website": null,
+"aquapark_osm": null,
+"pools": 3
+},
+{
 "osm": "w1324353042",
 "name": "Side Sunset Hotel",
 "lat": 36.82121,
@@ -2849,8 +2901,8 @@
 {
 "osm": "w734359090",
 "name": "Blue Waters Hotel & Club",
-"lat": 36.75695,
-"lon": 31.43347,
+"lat": 36.7572,
+"lon": 31.43358,
 "dist_m": 0,
 "dist_kind": "beach",
 "area": "titreyengol",
@@ -3199,7 +3251,7 @@
 "name": "Side Moon Palace Hotel",
 "lat": 36.76594,
 "lon": 31.41541,
-"dist_m": 815,
+"dist_m": 733,
 "dist_kind": "beach",
 "area": "sorgun",
 "stars": null,
@@ -3223,15 +3275,15 @@
 {
 "osm": "w36587289",
 "name": "Felicia Village",
-"lat": 36.71584,
-"lon": 31.55503,
+"lat": 36.71591,
+"lon": 31.55514,
 "dist_m": 0,
 "dist_kind": "beach",
 "area": "kizilagac",
 "stars": null,
 "website": "https://www.feliciavillage.com/",
 "aquapark_osm": null,
-"pools": 2
+"pools": 5
 },
 {
 "osm": "w36587290",
@@ -3244,7 +3296,7 @@
 "stars": null,
 "website": "https://www.serrapalace.com.tr/",
 "aquapark_osm": null,
-"pools": 8
+"pools": 10
 },
 {
 "osm": "w442552499",
