@@ -1,4 +1,4 @@
-"""TEMPORARY probe of hydrotour.sk – prints to the job log only, deleted after use. Iteration 4."""
+"""TEMPORARY probe of hydrotour.sk – prints to the job log only, deleted after use. Iteration 5."""
 import re
 import sys
 from pathlib import Path
@@ -20,31 +20,21 @@ def fetch(url, **kw):
 
 
 def grep(t, rx, ctx=150, n=12):
-    for m in list(re.finditer(rx, t, re.I))[:n]:
+    for m in list(re.finditer(rx, t))[:n]:
         print("  ~", re.sub(r"\s+", " ", t[max(0, m.start() - ctx): m.end() + ctx]))
 
 
-print(fetch(H + "/assets/IWebKatalog-D2wfQnmo.js").text)
-print(fetch(H + "/assets/searchResultsUtils-CPkTUGK9.js").text[:6000])
-j = fetch(H + "/assets/SearchResults-Dk8V_xZG.js").text
-print(j[:14700])
 idx = fetch(H + "/assets/index-DIcXCF-s.js").text
-grep(idx, r"katalog|baseURL|https?://[\w.-]+hydrotour[\w./-]*|/api|\.hydrotour", 200, 30)
-grep(idx, r"query\.\w+|URLSearchParams|terminOd|datumOd|odlet|letiska|cestujuci|deti|vek", 120, 30)
+grep(idx, r"fetch\(", 400, 10)
+grep(idx, r"Vv=\(e,t\)=>", 50, 1)
+m = idx.find("Vv=(e,t)=>")
+print("VV:", idx[m:m + 2500])
+grep(idx, r"location\.hash|createWebHistory|createWebHashHistory|router\.(push|replace)", 200, 8)
+grep(idx, r"\bbh as\b|as bh\b", 300, 3)
+grep(idx, r"hdtSearch|vyhladaj|searchTerm|terminy\b", 200, 10)
 
-
-def cards(url):
-    r = fetch(url)
-    if r is None:
-        return
-    s = BeautifulSoup(r.text, "lxml")
-    cs = s.select(".card-hotel")
-    names = [c.select_one(".hotel-name a").get_text(" ", strip=True)[:30] for c in cs if c.select_one(".hotel-name a")]
-    terms = [t.get_text(" ", strip=True)[:40] for t in s.select(".next-term-timespan")][:6]
-    print("cards", len(cs), names[:8], "terms", terms, "pager", [a.get('href') for a in s.select('a[href*="strana"], a[href*="page"], .pagination a')][:8])
-
-
-cards(H + "/dovolenky?staty=9&oblasti=1021")
-cards(H + "/dovolenky/turecko")
-cards(H + "/dovolenky/turecko?strana=2")
-cards(H + "/vyhladavanie")
+r = fetch(H + "/dovolenky/turecko/side")
+s = BeautifulSoup(r.text, "lxml")
+for sc in s.select("script:not([src])"):
+    x = sc.string or ""
+    print("INLINE", len(x), sc.attrs, x[:300].replace("\n", " "))
