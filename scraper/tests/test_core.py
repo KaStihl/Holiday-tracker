@@ -66,3 +66,17 @@ def test_merge_history(tmp_path, monkeypatch):
     run.merge_history([o2], "2026-10-25")
     assert o2["price_history"] == [["2026-10-24", 2500], ["2026-10-25", 2400]]
     assert o2["price_change"] == -100 and o2["first_seen"] == "2026-10-24"
+
+
+def test_carry_over_failed_source(tmp_path, monkeypatch):
+    import json
+    monkeypatch.setattr(run, "OFFERS", tmp_path / "o.json")
+    prev = [{"id": "satur:a", "source": "satur", "last_seen": "2026-11-13", "price_total": 2500},
+            {"id": "satur:old", "source": "satur", "last_seen": "2026-11-01", "price_total": 2500},
+            {"id": "cedok:b", "source": "cedok", "last_seen": "2026-11-13", "price_total": 2000}]
+    (tmp_path / "o.json").write_text(json.dumps({"offers": prev}))
+    sources = [{"id": "satur", "status": "error", "error": "403"}, {"id": "cedok", "status": "ok", "error": None}]
+    kept = run.carry_over_failed(sources, set(), "2026-11-14")
+    assert [o["id"] for o in kept] == ["satur:a"] and kept[0]["stale"] is True
+    assert sources[0]["carried"] == 1 and "ponechané 1" in sources[0]["error"]
+    assert run.carry_over_failed([{"id": "cedok", "status": "ok"}], set(), "2026-11-14") == []

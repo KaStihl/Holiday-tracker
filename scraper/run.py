@@ -457,6 +457,35 @@ def dump(out):
     return head.replace('[\n  "@OFFERS@"\n ]', "[\n" + rows + "\n ]" if rows else "[]", 1)
 
 
+CARRY_DAYS = 2
+
+
+def carry_over_failed(sources, have_ids, today):
+    """Offers of a source that failed this run (403/429/timeout) are kept from the previous offers.json for up to
+    CARRY_DAYS since they were last seen, flagged stale – one blocked run shouldn't wipe an agency off the page.
+    They get no new price-history point (nothing was observed today)."""
+    failed = {s["id"]: s for s in sources if s["status"] == "error"}
+    if not failed:
+        return []
+    limit = date.fromisoformat(today).toordinal() - CARRY_DAYS
+    kept = []
+    for o in expand_offers(load(OFFERS, {}).get("offers", [])):
+        if o.get("source") not in failed or o.get("id") in have_ids:
+            continue
+        try:
+            seen = date.fromisoformat(str(o.get("last_seen"))[:10]).toordinal()
+        except ValueError:
+            continue
+        if seen >= limit:
+            kept.append(dict(o, stale=True))
+    for sid, info in failed.items():
+        n = sum(o["source"] == sid for o in kept)
+        if n:
+            info["carried"] = n
+            info["error"] = f"{info['error']} – ponechané {n} ponúk z predchádzajúcich behov"
+    return kept
+
+
 def main(only=None):
     cfg = CONFIG
     sources, deeplinks, offers, mods, all_mods = [], [], {}, {}, {}
@@ -517,6 +546,7 @@ def main(only=None):
         for pid in [p["id"] for p in cfg["parties"]]:
             info["counts"][pid] = sum(o["source"] == info["id"] and o["party"] == pid for o in result)
     hist = merge_history(result, today, cfg)
+    result += carry_over_failed(sources, {o["id"] for o in result}, today)
 
     DATA.mkdir(parents=True, exist_ok=True)
     out = {
