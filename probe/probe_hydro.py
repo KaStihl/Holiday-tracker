@@ -1,4 +1,4 @@
-"""TEMPORARY probe of hydrotour.sk – prints to the job log only, deleted after use. Iteration 3."""
+"""TEMPORARY probe of hydrotour.sk – prints to the job log only, deleted after use. Iteration 4."""
 import re
 import sys
 from pathlib import Path
@@ -24,41 +24,27 @@ def grep(t, rx, ctx=150, n=12):
         print("  ~", re.sub(r"\s+", " ", t[max(0, m.start() - ctx): m.end() + ctx]))
 
 
-def clean(el, n=2500):
-    for x in el.select("svg,path,img"):
-        x.decompose()
-    return re.sub(r"\s+", " ", str(el))[:n]
+print(fetch(H + "/assets/IWebKatalog-D2wfQnmo.js").text)
+print(fetch(H + "/assets/searchResultsUtils-CPkTUGK9.js").text[:6000])
+j = fetch(H + "/assets/SearchResults-Dk8V_xZG.js").text
+print(j[:14700])
+idx = fetch(H + "/assets/index-DIcXCF-s.js").text
+grep(idx, r"katalog|baseURL|https?://[\w.-]+hydrotour[\w./-]*|/api|\.hydrotour", 200, 30)
+grep(idx, r"query\.\w+|URLSearchParams|terminOd|datumOd|odlet|letiska|cestujuci|deti|vek", 120, 30)
 
 
-r = fetch(H + "/dovolenky/turecko/side")
-soup = BeautifulSoup(r.text, "lxml")
-c = soup.select_one(".card-hotel .next-terms")
-print("NEXT-TERMS:", clean(c, 3000))
-mods = re.findall(r'/assets/[\w-]+\.js', r.text)
-print("modules:", mods)
+def cards(url):
+    r = fetch(url)
+    if r is None:
+        return
+    s = BeautifulSoup(r.text, "lxml")
+    cs = s.select(".card-hotel")
+    names = [c.select_one(".hotel-name a").get_text(" ", strip=True)[:30] for c in cs if c.select_one(".hotel-name a")]
+    terms = [t.get_text(" ", strip=True)[:40] for t in s.select(".next-term-timespan")][:6]
+    print("cards", len(cs), names[:8], "terms", terms, "pager", [a.get('href') for a in s.select('a[href*="strana"], a[href*="page"], .pagination a')][:8])
 
-r = fetch(H + "/dovolenky/turecko/side/royal-alhambra-palace")
-t = r.text
-soup = BeautifulSoup(t, "lxml")
-print("title:", soup.title.get_text(strip=True) if soup.title else None)
-print("term ids:", len(set(re.findall(r'#(\d{6})', t))), "classes with term:", sorted({c for el in soup.select('[class]') for c in el['class'] if 'term' in c.lower()})[:40])
-for sel in (".term", ".terms", ".term-row", "table", ".hotel-terms"):
-    els = soup.select(sel)
-    if els:
-        print(sel, len(els), "FIRST:", clean(els[0], 2500))
-inl = [s.string or "" for s in soup.select("script:not([src])")]
-print("inline scripts:", [len(x) for x in inl])
-for x in inl:
-    if '"@type"' in x[:200]:
-        print("LD:", x[:1500])
-grep(t, r"€", 200, 6)
-grep(t, r"term[ií]n", 150, 6)
 
-seen = set()
-for m in mods:
-    if any(k in m for k in ("SearchResults", "IWebKatalog", "CardHotel", "HotelDetail", "Termin", "Term", "Search")) and m not in seen:
-        seen.add(m)
-        r = fetch(H + m)
-        j = r.text
-        print("strings with / :", sorted(set(s for s in re.findall(r'["\'`]([^"\'`\s]{2,120})["\'`]', j) if "/" in s and not s.startswith("./")))[:120])
-        grep(j, r"fetch\(|axios|XMLHttpRequest|\.get\(|baseURL|endpoint|\bapi\b", 150, 20)
+cards(H + "/dovolenky?staty=9&oblasti=1021")
+cards(H + "/dovolenky/turecko")
+cards(H + "/dovolenky/turecko?strana=2")
+cards(H + "/vyhladavanie")
