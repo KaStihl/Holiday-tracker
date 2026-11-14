@@ -1,61 +1,74 @@
-"""TEMPORARY probe of hydrotour.sk – prints to the job log only, deleted after use. Iteration 7."""
+"""TEMPORARY probe of hydrotour.sk – prints to the job log only, deleted after use. Iteration 8."""
 import json
 import re
 import sys
+from collections import Counter
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scraper"))
 from common import allowed, session  # noqa: E402
 
 H = "https://www.hydrotour.sk"
+U = H + "/japi/ISearchApi/searchTerminyRaw"
 
 
-def fetch(url, method="GET", body=None):
-    if not allowed(url):
-        print(f"\n### {url}: ROBOTS DISALLOWS")
-        return None
-    r = session().request(method, url, json=body, timeout=40,
-                          headers={"Content-Type": "application/json"} if body is not None else None)
-    print(f"\n### {method} {r.url} {json.dumps(body)[:300] if body else ''} -> {r.status_code} len={len(r.text)}")
-    return r
-
-
-r = fetch(H + "/assets/SearchResults-Dk8V_xZG.js")
-j = r.text
-m = re.search(r"\bOe as\b|as Oe\b", j)
-print("imports:", j[:1200])
-idx = fetch(H + "/assets/index-DIcXCF-s.js").text
-# the transform the search page applies before searchTerminyRaw
-for name in ("ax", "aw", "av", "au"):
-    mm = re.search(r"\b(\w+) as " + name + r"\b", idx)
-    if mm:
-        k = idx.find(f"{mm[1]}=")
-        while k != -1 and idx[k - 1].isalnum():
-            k = idx.find(f"{mm[1]}=", k + 1)
-        print(f"EXPORT {name} = {mm[1]}:", idx[k:k + 900] if k != -1 else None)
-
-base = {"hotely": [], "staty": [9], "oblasti": [1021], "dni": [], "datumOd": "2027-07-01", "datumDo": "2027-08-31",
-        "letiska": [], "strava": [], "hviezdy": [], "ostatne": []}
-tries = [
-    ("raw-min-staty", "searchTerminyRaw", {"staty": [9]}),
-    ("raw-side-2ad", "searchTerminyRaw", dict(base, cestujuci=[[18, 18]])),
-    ("raw-side-1+2", "searchTerminyRaw", dict(base, cestujuci=[[18, 10, 12]])),
-    ("raw-side-1+2-strings", "searchTerminyRaw", dict(base, staty=None, oblasti=None, cestujuci=[[18, 10, 12]])),
-]
-for label, fn, body in tries:
-    r = fetch(f"{H}/japi/ISearchApi/{fn}", "POST", [body])
+def post(label, body):
+    assert allowed(U)
+    r = session().post(U, json=[body], timeout=60, headers={"Content-Type": "application/json"})
     try:
         d = r.json()
     except ValueError:
-        print(label, "NOT JSON", r.text[:800])
-        continue
-    hs, ts = d.get("hotely") or [], d.get("terminy") or []
-    print(label, "hotely", len(hs), "terminy", len(ts), "vynechane", d.get("vynechaneFiltre"),
-          "dates", sorted({t.get("datumOd", "")[:7] for t in ts})[:12])
-    if ts and label.startswith("raw-side-1+2"):
-        print("HOTEL0:", json.dumps(hs[0], ensure_ascii=False)[:3000])
-        print("TERM0:", json.dumps(ts[0], ensure_ascii=False)[:3000])
-        alh = [h for h in hs if re.search("alhambra|dragon|sural", h.get("nazov", ""), re.I)]
-        print("WATCHED:", [(h.get("nazov"), h.get("hotelId")) for h in alh])
-        for h in alh[:2]:
-            print("W-TERMS:", json.dumps([t for t in ts if t.get("hotelId") == h["hotelId"]][:3], ensure_ascii=False)[:3000])
+        print(f"\n## {label} {r.status_code} NOT JSON {r.text[:600]}")
+        return None
+    hs = d.get("hotely") or []
+    ts = d.get("terminy") or []
+    nested = [t for h in hs for t in (h.get("terminy") or [])]
+    allt = ts or nested
+    print(f"\n## {label} {json.dumps(body)[:260]} -> {r.status_code} len={len(r.text)} hotely={len(hs)} terminy={len(ts)} "
+          f"nested={len(nested)} vynechane={d.get('vynechaneFiltre')} keys={list(d)}")
+    if allt:
+        print("   months", sorted(Counter(str(t.get('datumOd'))[:7] for t in allt).items())[:20],
+              "dni", sorted(Counter(t.get('dni') for t in allt).items())[:12])
+    return d
+
+
+def trim(x, n=200):
+    if isinstance(x, dict):
+        return {k: trim(v, n) for k, v in x.items() if k not in ("popis", "obrazky", "vybavenie", "popisy", "vylety")}
+    if isinstance(x, list):
+        return [trim(v, n) for v in x[:4]]
+    if isinstance(x, str):
+        return x[:n]
+    return x
+
+
+d = post("staty9-pocet10", {"staty": [9], "terminyPocet": 10})
+if d and d.get("hotely"):
+    h0 = d["hotely"][0]
+    print("HOTEL0 keys:", list(h0))
+    print("HOTEL0:", json.dumps(trim(h0), ensure_ascii=False)[:4500])
+    if d.get("terminy"):
+        print("TERM0:", json.dumps(trim(d["terminy"][0]), ensure_ascii=False)[:3500])
+for lab, extra in [
+    ("dates-iso", {"datumOd": "2027-07-01", "datumDo": "2027-08-31"}),
+    ("dates-T", {"datumOd": "2027-07-01T00:00:00", "datumDo": "2027-08-31T00:00:00"}),
+    ("dateOd-only", {"datumOd": "2027-07-01"}),
+    ("cest-1+2", {"cestujuci": [[18, 10, 12]]}),
+    ("cest-2", {"cestujuci": [[18, 18]]}),
+    ("dni8", {"dni": [8]}),
+]:
+    post(lab, dict({"staty": [9], "oblasti": [1021], "terminyPocet": 3}, **extra))
+d = post("side-jul-aug-1+2-pocet50", {"oblasti": [1021], "datumOd": "2027-07-01", "datumDo": "2027-08-31",
+                                       "cestujuci": [[18, 10, 12]], "terminyPocet": 50})
+if d:
+    hs = d.get("hotely") or []
+    print("names:", [(h.get("nazov"), h.get("hotelId"), len(h.get("terminy") or [])) for h in hs][:40])
+    for h in hs:
+        if re.search("alhambra|dragon|sural", h.get("nazov") or "", re.I):
+            print("WATCHED:", json.dumps(trim(h), ensure_ascii=False)[:3500])
+    if d.get("terminy"):
+        print("TERM0-1+2:", json.dumps(trim(d["terminy"][0]), ensure_ascii=False)[:3500])
+        print("TERM1-1+2:", json.dumps(trim(d["terminy"][1]), ensure_ascii=False)[:2000])
+post("all-jul-aug-1+2-pocet3", {"datumOd": "2027-07-01", "datumDo": "2027-08-31", "cestujuci": [[18, 10, 12]],
+                                "terminyPocet": 3})
+post("hotel215", {"hotely": [215], "terminyPocet": 50})
