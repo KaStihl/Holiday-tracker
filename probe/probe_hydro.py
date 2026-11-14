@@ -1,72 +1,68 @@
-"""TEMPORARY probe of hydrotour.sk / hydrotour.cz – prints to the job log only, deleted after use."""
+"""TEMPORARY probe of hydrotour.sk – prints to the job log only, deleted after use. Iteration 2."""
 import re
 import sys
 from pathlib import Path
-from urllib.parse import urljoin, urlsplit
+from urllib.parse import urljoin
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scraper"))
 from bs4 import BeautifulSoup  # noqa: E402
 from common import allowed, session  # noqa: E402
 
-BLOCK = re.compile(r"cf-chl|challenge-platform|Just a moment|Pardon Our Interruption|captcha|reese84|_Incapsula|datadome|perimeterx", re.I)
+H = "https://www.hydrotour.sk"
 
 
-def fetch(url, n=0, grep=None, ctx=160, show_robots=False, **kw):
-    try:
-        ok = allowed(url)
-    except Exception as e:
-        ok = f"robots-error {e}"
-    if ok is not True:
-        print(f"\n### {url}: ROBOTS DISALLOWS ({ok})")
+def fetch(url, **kw):
+    if not allowed(url):
+        print(f"\n### {url}: ROBOTS DISALLOWS")
         return None
-    try:
-        r = session().get(url, timeout=30, **kw)
-    except Exception as e:
-        print(f"\n### {url}: {type(e).__name__} {str(e)[:200]}")
-        return None
-    t = r.text
-    soup = BeautifulSoup(t, "lxml") if "<" in t[:2000] else None
-    title = soup.title.get_text(strip=True)[:120] if soup and soup.title else None
-    hdr = {k: v[:120] for k, v in r.headers.items() if k.lower() in ("server", "content-type", "x-powered-by", "cf-ray", "x-cache", "via", "x-robots-tag")}
-    print(f"\n### {url} -> {r.status_code} {r.url} len={len(t)} title={title!r} hdr={hdr} cookies={list(r.cookies.keys())} "
-          f"block={bool(BLOCK.search(t[:20000]))}")
-    if show_robots or n < 0:
-        print(t[:3000])
-    if n and soup:
-        host = urlsplit(r.url).netloc
-        links = []
-        for a in soup.select("a[href]"):
-            h = urljoin(r.url, a["href"])
-            if urlsplit(h).netloc.endswith(host.replace("www.", "")) and h not in links:
-                links.append(h)
-        print(f"links ({len(links)}):", " | ".join(x.replace("https://" + host, "") for x in links[:n]))
-        print("scripts:", [s.get("src") for s in soup.select("script[src]")][:30])
-        inl = " ".join(s.string or "" for s in soup.select("script:not([src])"))
-        print("inline script len", len(inl), "markers:", sorted(set(re.findall(r"__NEXT_DATA__|__NUXT__|window\.__[A-Z_]+|/api/[\w/.-]+|ajax[\w/.-]*|graphql|\.json\b", t)))[:40])
-        for f in soup.select("form"):
-            print("form", f.get("action"), f.get("method"), [i.get("name") for i in f.select("input,select")][:30])
-    if grep:
-        for m in list(re.finditer(grep, t, re.I))[:12]:
-            s = t[max(0, m.start() - ctx): m.end() + ctx]
-            print("  ~", re.sub(r"\s+", " ", s))
+    r = session().get(url, timeout=30, **kw)
+    print(f"\n### {r.url} -> {r.status_code} len={len(r.text)} ct={r.headers.get('content-type')}")
     return r
 
 
-TERMS = r"scrap|robot|automati|vyt[eě]ž|vytaz|data.?mining|dolov|vytěžov|text.{0,6}dat|TDM|extrakc|kopírov|kopirov|strojov"
+def grep(t, rx, ctx=150, n=12):
+    for m in list(re.finditer(rx, t, re.I))[:n]:
+        print("  ~", re.sub(r"\s+", " ", t[max(0, m.start() - ctx): m.end() + ctx]))
 
-for base in ("https://www.hydrotour.sk", "https://hydrotour.sk", "https://www.hydrotour.cz", "https://hydrotour.cz"):
-    fetch(base + "/robots.txt", -1)
-for base in ("https://www.hydrotour.sk", "https://www.hydrotour.cz"):
-    r = fetch(base + "/", 200, grep=r"alhambra|letisk|odlet|bratislav|ko[sš]ic|brno|vied|api")
-    if r is None:
-        continue
-    soup = BeautifulSoup(r.text, "lxml")
-    terms = []
-    for a in soup.select("a[href]"):
-        if re.search(r"podmien|podmín|vop|obchod|pravidl|ochrana|gdpr|pouzi|použí|terms|cookies", a.get("href", "") + " " + a.get_text(), re.I):
-            h = urljoin(r.url, a["href"])
-            if h not in terms:
-                terms.append(h)
-    print("terms candidates:", terms)
-    for h in terms[:5]:
-        fetch(h, 0, grep=TERMS, ctx=300)
+
+def clean(el, n=2500):
+    for x in el.select("svg,path"):
+        x.decompose()
+    return re.sub(r"\s+", " ", str(el))[:n]
+
+
+r = fetch(H + "/vseobecne-podmienky")
+soup = BeautifulSoup(r.text, "lxml")
+body = soup.get_text(" ", strip=True)
+grep(body, r"autorsk|obsah (webov|stránk)|internetov\w+ stránk|webov\w+ stránk|databáz|kopír|rozmnož", 200, 10)
+
+r = fetch(H + "/dovolenky/turecko/side")
+t = r.text
+soup = BeautifulSoup(t, "lxml")
+cards = soup.select(".card-hotel")
+print("cards:", len(cards))
+for c in cards[:2]:
+    print("CARD:", clean(c, 3500))
+inl = [s.string or "" for s in soup.select("script:not([src])")]
+print("inline scripts:", [len(x) for x in inl])
+for x in inl:
+    if len(x) > 2000:
+        print("INLINE START:", x[:1500].replace("\n", " "))
+        grep(x, r"price|cena|termin|alhambra", 200, 8)
+grep(t, r"alhambra", 200, 5)
+grep(t, r"str[aá]nk|page=|dal[sš]ie|zobrazi[tť] viac|load", 120, 8)
+print("pager/links:", sorted({a['href'] for a in soup.select('a[href]') if '?' in a['href'] or '#' in a['href']})[:60])
+
+js = re.search(r'/assets/index-[\w-]+\.js', t)
+if js:
+    r = fetch(H + js[0])
+    j = r.text
+    print("api paths:", sorted(set(re.findall(r'["\'`](/api/[\w/${}.:-]*)', j)))[:120])
+    print("other abs paths:", sorted(set(re.findall(r'["\'`](/(?:dovolenky|hotel|vyhlad|search|termin)[\w/${}.:-]*)', j)))[:60])
+    grep(j, r"/api/", 120, 25)
+    grep(j, r"cestujuci|vekDeti|deti|children|dospel|adults", 100, 15)
+
+r = fetch(H + "/sitemap.xml")
+if r is not None:
+    print(r.text[:1500])
+    grep(r.text, r"alhambra|royal|sural|dragon", 120, 10)
