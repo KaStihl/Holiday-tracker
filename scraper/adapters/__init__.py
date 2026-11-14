@@ -7,4 +7,6 @@ ADAPTERS = ["invia", "satur", "cedok", "tiptravel", "kartago", "fischer", "eximt
             "ruefa", "billa_reisen", "tui_at", "hofer_reisen", "lidl_reisen", "ab_in_den_urlaub", "weg_de",
             "holidaycheck", "check24", "urlaubsguru", "gruber_reisen", "airstop",
             # added 2026-11-01: Czech sites (Itaka: real adapter, CZK at the ECB rate; Coral Travel: link-only, bot wall)
-            "itaka", "coral_travel"]
+            "itaka", "coral_travel",
+            # added 2026-11-14: Hydrotour (hydrotour.sk; hydrotour.cz redirects there), the site's own search JSON
+            "hydrotour"]
