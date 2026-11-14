@@ -579,6 +579,7 @@ table.sources { width: 100%; border-collapse: collapse; font-size: .9rem; }
   <main class="wrap" id="main">
     <div id="sample-note" class="note" hidden>Zobrazujú sa <strong>ukážkové dáta</strong> (?sample=1) – hotely a ceny sú vymyslené.</div>
     <div id="load-error" class="note note-err" role="alert" hidden></div>
+    <div id="update-note" class="note" role="status" hidden></div>
 
     <section aria-labelledby="h-watch" class="block watch" id="watch-block" hidden>
       <div class="block-head">
@@ -2157,10 +2158,43 @@ table.sources { width: 100%; border-collapse: collapse; font-size: .9rem; }
     setInterval(renderTimes, 60000);
   }
 
+  // A downloaded dovolenka.html is a snapshot: ask GitHub for the date of the latest data (tiny file written by
+  // build_html.py, refreshed twice a day) and offer the current version when this copy is older.
+  var VERSION_URL = "https://raw.githubusercontent.com/KaStihl/Holiday-tracker/main/site/data/version.json";
+  var LIVE_URL = "https://raw.githack.com/KaStihl/Holiday-tracker/main/dovolenka.html";
+  var DOWNLOAD_URL = "https://github.com/KaStihl/Holiday-tracker/raw/main/dovolenka.html";
+  function checkNewer(mine) {
+    if (!window.fetch || isSample) return;
+    fetch(VERSION_URL, { cache: "no-store" })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (v) {
+        var latest = v && typeof v.generated_at === "string" ? Date.parse(v.generated_at) : NaN;
+        var have = typeof mine === "string" ? Date.parse(mine) : NaN;
+        if (isNaN(latest) || (!isNaN(have) && latest <= have)) return;
+        var box = $("update-note");
+        if (!box) return;
+        box.textContent = "";
+        box.appendChild(document.createTextNode("Tento súbor má dáta z " + (isNaN(have) ? "?" : dtFmt.format(new Date(have))) +
+          ". Novšie sú z " + dtFmt.format(new Date(latest)) + ". "));
+        var a = document.createElement("a");
+        a.href = LIVE_URL; a.target = "_blank"; a.rel = "noopener noreferrer"; a.textContent = "Otvoriť aktuálnu verziu ↗";
+        box.appendChild(a);
+        box.appendChild(document.createTextNode(" · "));
+        var d = document.createElement("a");
+        d.href = DOWNLOAD_URL; d.textContent = "Stiahnuť nový súbor";
+        box.appendChild(d);
+        box.hidden = false;
+      })
+      .catch(function () { /* offline: nothing to compare against */ });
+  }
+
   // dovolenka.html (single local file) carries the data inline; site/index.html fetches it.
   var inline = document.getElementById("offers-data");
   if (inline && !isSample) {
-    try { start(JSON.parse(inline.textContent)); } catch (e) { start(null); }
+    var json = null;
+    try { json = JSON.parse(inline.textContent); } catch (e) { json = null; }
+    start(json);
+    checkNewer(json && json.generated_at);
     return;
   }
 

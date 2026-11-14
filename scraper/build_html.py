@@ -35,6 +35,8 @@ def build(site=SITE, out=OUT):
         f'<script id="side-data" type="application/json">{side_blob}</script>\n<script>\n{side_js}\n</script>',
     )
     out.write_text(html, encoding="utf-8")
+    # tiny file the page fetches from GitHub to tell a downloaded (older) copy that newer data exists
+    (site / "data" / "version.json").write_text(json.dumps({"generated_at": data.get("generated_at")}), encoding="utf-8")
     return out
 
 
