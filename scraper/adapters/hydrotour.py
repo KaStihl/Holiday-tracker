@@ -47,6 +47,13 @@ NAME = "Hydrotour"
 HOME = "https://www.hydrotour.sk"
 SEARCH = HOME + "/japi/ISearchApi/searchTerminyRaw"
 WINDOWS = 9  # weekly datumOd steps through Jul–Aug; per party
+# offers.json is embedded in dovolenka.html and capped at 8 MB (run.SIZE_LIMIT): the first live run (2026-11-14) gave
+# ~4 000 offers for the default party alone (164 hotels × up to 27 terms × 2 airports) and squeezed every other
+# source's extra-party offers down to 45. So: one offer per term (the first configured airport it flies from), only
+# AI/UAI when boards_preferred asks for nothing else (as Kartago/Fischer), and the PER_HOTEL cheapest terms of each
+# hotel (watched hotels: all).
+PER_HOTEL = 3
+PER_HOTEL_EXTRA = 2
 TERMS_PER_HOTEL = 3  # what the site answers per hotel and request anyway
 # Board texts in order of "less included" first: a hotel with several boards gets its cheapest one, which is the
 # one its "od" (from) price is for.
@@ -127,7 +134,29 @@ def to_offers(data, cfg):
     return out
 
 
-def _windows_search(cfg, tag):
+def trim(offers, cfg, per_hotel):
+    """See PER_HOTEL: one offer per term, preferred boards, the cheapest terms per hotel; watched hotels untouched."""
+    airports = cfg["departures"] + [c for c in cfg.get("departures_secondary") or [] if c not in cfg["departures"]]
+    rank = {a: i for i, a in enumerate(airports)}
+    by_term = {}
+    for o in sorted(offers, key=lambda o: (rank.get(o["departure"], 99), o["price_total"])):
+        if o["departure"] in rank:
+            by_term.setdefault((o["hotel"], o["date_from"], o["nights"]), o)
+    ai_only = set(cfg["boards_preferred"]) <= {"AI", "UAI"}
+    per = {}
+    for o in by_term.values():
+        watched = match(o["hotel"], cfg.get("watched"))
+        if ai_only and o["board"] not in ("AI", "UAI") and not watched:
+            continue
+        per.setdefault((o["hotel"], bool(watched)), []).append(o)
+    out = []
+    for (_, watched), lst in per.items():
+        lst.sort(key=lambda o: (o["price_total"], o["date_from"]))
+        out += lst if watched else lst[:per_hotel]
+    return out
+
+
+def _windows_search(cfg, tag, per_hotel=PER_HOTEL):
     offers, errors = [], []
     for start in windows(cfg):
         try:
@@ -147,7 +176,9 @@ def _windows_search(cfg, tag):
     if errors and not offers:
         raise RuntimeError(f"all hydrotour.sk search requests failed, first: {type(errors[0]).__name__}: "
                            f"{str(errors[0])[:150]}")
-    return offers
+    kept = trim(offers, cfg, per_hotel)
+    print(f"[hydrotour] {tag}: {len(offers)} offers from {len(windows(cfg))} requests, {len(kept)} kept after trim()")
+    return kept
 
 
 def search(cfg):
@@ -161,7 +192,7 @@ def search_party(cfg, primary):
     and which hotels have a room for it differ by party); still per-adult price × party size."""
     if "flight" not in cfg["transports"] or not primary:
         return []
-    return _windows_search(cfg, party_label(cfg))
+    return _windows_search(cfg, party_label(cfg), PER_HOTEL_EXTRA)
 
 
 # --- watched hotels (sledovane_hotely) ---------------------------------------------------------------------------
@@ -199,7 +230,7 @@ def watch(cfg, terms, hints=None):
     q = dict(body(cfg, cfg["date_from"]), hotely=[i for _, i, _ in hits])
     data = get(SEARCH, method="POST", json_body=[q], as_json=True, timeout=60,
                headers={"Content-Type": "application/json"})
-    got = to_offers(data or {}, cfg)
+    got = trim(to_offers(data or {}, cfg), cfg, PER_HOTEL)
     on_sale = {h.get("hotelId") for h in data.get("hotely") or []}
     for p, i, _ in hits:
         mine = [o for o in got if o["url"].startswith(HOME + p + "#")]

@@ -69,3 +69,15 @@ def test_deeplinks():
     links = hydrotour.deeplinks(CONFIG)
     assert all(d["url"].startswith("https://www.hydrotour.sk/") for d in links)
     assert "cestujuci=dospely%2Cdieta-10%2Cdieta-12" in links[0]["url"]
+
+
+def test_trim_one_offer_per_term_preferred_boards_cheapest_per_hotel():
+    offers = hydrotour.to_offers(DATA, CONFIG)
+    kept = hydrotour.trim(offers, CONFIG, 1)
+    # the KSC copies of the BTS terms go; Diamond keeps its cheapest term only; Azure (UAI) stays
+    assert sorted((o["hotel"], o["departure"]) for o in kept) == [("Azure by Yelken", "BTS"),
+                                                                 ("Diamond De Luxe Hotel & SPA", "BTS")]
+    hb = [dict(o, board="HB") for o in offers]
+    assert hydrotour.trim(hb, CONFIG, 4) == []  # boards_preferred [UAI, AI]: half board dropped
+    watched = [dict(o, hotel="Royal Alhambra Palace") for o in hb]
+    assert len(hydrotour.trim(watched, dict(CONFIG, watched=["Royal Alhambra"]), 1)) == 3  # watched: every term
