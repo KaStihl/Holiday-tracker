@@ -1,4 +1,4 @@
-"""TEMPORARY probe of hydrotour.sk – prints to the job log only, deleted after use. Iteration 6."""
+"""TEMPORARY probe of hydrotour.sk – prints to the job log only, deleted after use. Iteration 7."""
 import json
 import re
 import sys
@@ -16,47 +16,46 @@ def fetch(url, method="GET", body=None):
         return None
     r = session().request(method, url, json=body, timeout=40,
                           headers={"Content-Type": "application/json"} if body is not None else None)
-    print(f"\n### {method} {r.url} -> {r.status_code} len={len(r.text)} ct={r.headers.get('content-type')}")
+    print(f"\n### {method} {r.url} {json.dumps(body)[:300] if body else ''} -> {r.status_code} len={len(r.text)}")
     return r
 
 
-def grep(t, rx, ctx=150, n=12):
-    for m in list(re.finditer(rx, t))[:n]:
-        print("  ~", re.sub(r"\s+", " ", t[max(0, m.start() - ctx): m.end() + ctx]))
-
-
-def shape(x, d=0, maxd=3):
-    if isinstance(x, dict):
-        return {k: shape(v, d + 1, maxd) if d < maxd else type(v).__name__ for k, v in list(x.items())[:60]}
-    if isinstance(x, list):
-        return [f"len={len(x)}", shape(x[0], d + 1, maxd)] if x else []
-    return x if not isinstance(x, str) else x[:60]
-
-
+r = fetch(H + "/assets/SearchResults-Dk8V_xZG.js")
+j = r.text
+m = re.search(r"\bOe as\b|as Oe\b", j)
+print("imports:", j[:1200])
 idx = fetch(H + "/assets/index-DIcXCF-s.js").text
-grep(idx, r"searchTerminy(Raw)?\(", 700, 6)
-for mod in ("SearchResults-Dk8V_xZG", "HotelDetail-CNmdGM0T"):
-    r = fetch(f"{H}/assets/{mod}.js")
-    if r is not None and r.ok:
-        grep(r.text, r"searchTerminy|hotelDetail\(|hotelKarta\(|\.bl\(|Fc\.", 600, 6)
+# the transform the search page applies before searchTerminyRaw
+for name in ("ax", "aw", "av", "au"):
+    mm = re.search(r"\b(\w+) as " + name + r"\b", idx)
+    if mm:
+        k = idx.find(f"{mm[1]}=")
+        while k != -1 and idx[k - 1].isalnum():
+            k = idx.find(f"{mm[1]}=", k + 1)
+        print(f"EXPORT {name} = {mm[1]}:", idx[k:k + 900] if k != -1 else None)
 
-r = fetch(H + "/sapi/hotel-detail/215")
-if r is not None and r.ok:
+base = {"hotely": [], "staty": [9], "oblasti": [1021], "dni": [], "datumOd": "2027-07-01", "datumDo": "2027-08-31",
+        "letiska": [], "strava": [], "hviezdy": [], "ostatne": []}
+tries = [
+    ("raw-min-staty", "searchTerminyRaw", {"staty": [9]}),
+    ("raw-side-2ad", "searchTerminyRaw", dict(base, cestujuci=[[18, 18]])),
+    ("raw-side-1+2", "searchTerminyRaw", dict(base, cestujuci=[[18, 10, 12]])),
+    ("raw-side-1+2-strings", "searchTerminyRaw", dict(base, staty=None, oblasti=None, cestujuci=[[18, 10, 12]])),
+]
+for label, fn, body in tries:
+    r = fetch(f"{H}/japi/ISearchApi/{fn}", "POST", [body])
     try:
         d = r.json()
-        print(json.dumps(shape(d, maxd=2), ensure_ascii=False)[:5000])
-        for k in ("terminy", "terms"):
-            if isinstance(d, dict) and d.get(k):
-                print("TERM0:", json.dumps(d[k][0], ensure_ascii=False)[:3000])
     except ValueError:
-        print(r.text[:1500])
-
-f = {"hotely": [], "staty": [9], "oblasti": [1021], "dni": [], "datumOd": "2027-07-01", "datumDo": "2027-08-31",
-     "cestujuci": [[18, 10, 12]], "letiska": [], "strava": [], "hviezdy": [], "ostatne": []}
-r = fetch(H + "/japi/ISearchApi/searchTerminy", "POST", [f])
-if r is not None:
-    try:
-        d = r.json()
-        print(json.dumps(shape(d, maxd=3), ensure_ascii=False)[:5000])
-    except ValueError:
-        print(r.text[:2000])
+        print(label, "NOT JSON", r.text[:800])
+        continue
+    hs, ts = d.get("hotely") or [], d.get("terminy") or []
+    print(label, "hotely", len(hs), "terminy", len(ts), "vynechane", d.get("vynechaneFiltre"),
+          "dates", sorted({t.get("datumOd", "")[:7] for t in ts})[:12])
+    if ts and label.startswith("raw-side-1+2"):
+        print("HOTEL0:", json.dumps(hs[0], ensure_ascii=False)[:3000])
+        print("TERM0:", json.dumps(ts[0], ensure_ascii=False)[:3000])
+        alh = [h for h in hs if re.search("alhambra|dragon|sural", h.get("nazov", ""), re.I)]
+        print("WATCHED:", [(h.get("nazov"), h.get("hotelId")) for h in alh])
+        for h in alh[:2]:
+            print("W-TERMS:", json.dumps([t for t in ts if t.get("hotelId") == h["hotelId"]][:3], ensure_ascii=False)[:3000])
