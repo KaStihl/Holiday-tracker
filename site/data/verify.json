@@ -1,4 +1,14 @@
 {
+ "ruefa:145bc5802412": {
+  "checked": 1,
+  "checked_at": "2026-11-15T21:10:43Z",
+  "listed": 1496,
+  "listing": 1496,
+  "options": 18,
+  "price": 1863,
+  "room": "STANDARD EINZELZIMMER (13) (Weitere Zimmertypen), All Inclusive inkl. Transfer, TUI",
+  "status": "available"
+ },
  "ruefa:1d2217a5c1bb": {
   "checked": 1,
   "checked_at": "2026-11-15T15:29:50Z",
@@ -7,6 +17,16 @@
   "options": 78,
   "price": 3156,
   "room": "Doppelzimmer Landbl., All Inclusive ohne Transfer, Coral Travel",
+  "status": "available"
+ },
+ "ruefa:2802c212666d": {
+  "checked": 1,
+  "checked_at": "2026-11-15T21:11:08Z",
+  "listed": 1802,
+  "listing": 1802,
+  "options": 18,
+  "price": 2262,
+  "room": "STANDARD EINZELZIMMER (13) (Weitere Zimmertypen), All Inclusive inkl. Transfer, TUI",
   "status": "available"
  },
  "ruefa:2eb058ca24e0": {
@@ -19,6 +39,27 @@
   "room": "Deluxe Room (Doppelzimmer), All Inclusive inkl. Transfer, TUI",
   "status": "available"
  },
+ "ruefa:631f309b89c0": {
+  "checked": 1,
+  "checked_at": "2026-11-15T21:11:33Z",
+  "listed": 1524,
+  "listing": 1524,
+  "options": 7,
+  "price": 1902,
+  "room": "DELUXE SEA VIEW SINGLE (Weitere Zimmertypen), All Inclusive inkl. Transfer, TUI",
+  "status": "available"
+ },
+ "ruefa:69827361681e": {
+  "checked": 4,
+  "checked_at": "2026-11-15T21:10:32Z",
+  "listed": 8651,
+  "listing": 8651,
+  "options": 142,
+  "partial": true,
+  "price": null,
+  "room": null,
+  "status": "unavailable"
+ },
  "ruefa:7d437269777c": {
   "checked": 1,
   "checked_at": "2026-11-15T15:29:40Z",
@@ -27,6 +68,16 @@
   "options": 34,
   "price": 2403,
   "room": "DZ Landbl. BK (Doppelzimmer), All Inclusive ohne Transfer, Coral Travel",
+  "status": "available"
+ },
+ "ruefa:7efc14decc0d": {
+  "checked": 1,
+  "checked_at": "2026-11-15T21:11:02Z",
+  "listed": 1423,
+  "listing": 1423,
+  "options": 8,
+  "price": 1695,
+  "room": "STANDARD EINZELZIMMER (13) (Weitere Zimmertypen), All Inclusive inkl. Transfer, TUI",
   "status": "available"
  },
  "ruefa:80464af75d32": {
@@ -61,6 +112,36 @@
   "room": null,
   "status": "unavailable"
  },
+ "ruefa:a5fbb83082ca": {
+  "checked": 1,
+  "checked_at": "2026-11-15T21:10:50Z",
+  "listed": 1527,
+  "listing": 1527,
+  "options": 7,
+  "price": 1527,
+  "room": "DOUBLE STANDARD ROOM WITH BALCONY (Doppelzimmer), All Inclusive inkl. Transfer, TUI",
+  "status": "available"
+ },
+ "ruefa:ab3e0c9e8025": {
+  "checked": 1,
+  "checked_at": "2026-11-15T21:11:39Z",
+  "listed": 1662,
+  "listing": 1662,
+  "options": 36,
+  "price": 1662,
+  "room": "STANDARD NEBENGEBÄUDE DOPPEL ZIMMER MIT BALKON (Doppelzimmer), All Inclusive inkl. Transfer, TUI",
+  "status": "available"
+ },
+ "ruefa:adcdd62890ab": {
+  "checked": 1,
+  "checked_at": "2026-11-15T21:11:14Z",
+  "listed": 1757,
+  "listing": 1757,
+  "options": 8,
+  "price": 2136,
+  "room": "STANDARD EINZELZIMMER (13) (Weitere Zimmertypen), All Inclusive inkl. Transfer, TUI",
+  "status": "available"
+ },
  "ruefa:d84ac26f9a76": {
   "checked": 1,
   "checked_at": "2026-11-15T15:29:45Z",
@@ -79,6 +160,36 @@
   "options": 25,
   "price": 2071,
   "room": "Doppelzimmer BK, All Inclusive ohne Transfer, Coral Travel",
+  "status": "available"
+ },
+ "ruefa:eeecf47530d6": {
+  "checked": 1,
+  "checked_at": "2026-11-15T21:10:55Z",
+  "listed": 1639,
+  "listing": 1639,
+  "options": 1,
+  "price": 1638,
+  "room": "Einzelbelegung Standard Zimmer (Balkon) (Einzelzimmer), All Inclusive inkl. Transfer, TUI",
+  "status": "available"
+ },
+ "ruefa:f93494e22087": {
+  "checked": 1,
+  "checked_at": "2026-11-15T21:11:26Z",
+  "listed": 2181,
+  "listing": 2181,
+  "options": 18,
+  "price": 2781,
+  "room": "STANDARD EINZELZIMMER (13) (Weitere Zimmertypen), All Inclusive inkl. Transfer, TUI",
+  "status": "available"
+ },
+ "ruefa:fd7ba6625e83": {
+  "checked": 1,
+  "checked_at": "2026-11-15T21:11:20Z",
+  "listed": 1882,
+  "listing": 1882,
+  "options": 7,
+  "price": 1881,
+  "room": "DOUBLE STANDARD ROOM WITH BALCONY (Doppelzimmer), All Inclusive inkl. Transfer, TUI",
   "status": "available"
  }
 }
