@@ -124,8 +124,13 @@ def gps_dist(a, b):
 
 
 def compact_offer(o):
+    """[source, price, board, date, nights, departure, exact 0/1, url, verification or None]; verification =
+    [status, verified bookable price or None, room, checked_at] (run.py run_verify)."""
+    v = o.get("verified") or {}
+    ver = [v["status"], o.get("price_verified") or v.get("price"), v.get("room"), v.get("checked_at")] \
+        if v.get("status") else None
     return [o["source"], o["price_total"], o.get("board"), o["date_from"], o["nights"], o.get("departure"),
-            1 if o.get("price_exact") else 0, o["url"]]
+            1 if o.get("price_exact") else 0, o["url"], ver]
 
 
 def summarize(hotel, offers, src_name, parties, ruefa_attr=None):

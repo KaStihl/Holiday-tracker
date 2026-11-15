@@ -30,14 +30,17 @@ Watched hotels (watch() hook, checked 2026-10-30 from GitHub runners):
   giataid is one of the asked gids. hotelSearchtext=<name> filters too, but by text; the ids are exact.
 """
 
+import json
+import random
 import re
-from datetime import date, datetime
+import string
+from datetime import date, datetime, timezone
 from urllib.parse import parse_qs, urlencode, urlsplit
 
 from bs4 import BeautifulSoup
 
 from adapters import at_common
-from common import facilities, get, parse_price
+from common import facilities, get, parse_price, strip_accents
 from config import continent, period_label
 
 NAME = "Ruefa"
@@ -454,3 +457,194 @@ def side_attributes(cfg, gids, max_calls=ATTR_CALLS):
         for g in got:
             found.setdefault(g, []).append(fac)
     return {g: sorted(v) for g, v in found.items()}
+
+
+# --- offer verification (run.py verify hook) -----------------------------------------------------------------------
+# The cards' data-price is a cached "from" price (the cheapest the tour operators' feeds listed). What Ruefa itself
+# does when an offer is opened (checked 2026-11-15 from a runner; js/min/ajaxLoadDetails.min.js):
+# 1. The hotel page (index.php?page=hotel&…) builds a `conf` object from its URL parameters (start, until, adults,
+#    children, dauer, abflughafen, ankunftshafen, veranstalter = rva, reisetag, rq, gid, cabinClass, …) and POSTs it
+#    to /hub/ajax/additionalOffersHotelpage.php (conf=JSON, price, data, debug). The answer is HTML (~3.7 MB for
+#    Royal Alhambra Palace, 1+2, 7 nights): one .additionalOfferContainer per room type with .hotel-offer rows
+#    (data-offer = "dep*ret*…*outFlight*retFlight*roomCode***boardCode*roomTypes****1*bu*TOC", data-rva = tour
+#    operator, b.detailHl = the operator's room name, .board/.transfer, .additionalButton[data-price] = listed total).
+# 2. justCheckPrice() – run automatically for the first row and for every row whose "Verfügbarkeit prüfen" button
+#    is clicked – POSTs conf (veranstalter = the row's rva) + data = data-offer + a random bid + isHotelPriceCheck=1 to
+#    /hub/ajax/checkPrice.php. The answer is tags: <preis>N</preis> (live total for the party, 0 = not bookable),
+#    <pPPreis>, <originalPrice>, <preisText>, optionally <error>. The page shows "JETZT BUCHEN" when error is empty
+#    and preis > 0, else "Angebot nicht verfügbar". An <error> mentioning "Lücke"/"Leerzeitraum" is re-asked once
+#    with recheck=1. Nothing is booked: the booking page (index.php?page=book&bid=…) is only opened on a click.
+# The PHP session cookie the first request sets is needed (without it every check answered preis 0); the hotel page
+# itself is not. So one offer costs 1 list request + 1 check per room/flight option tried, cheapest first.
+# First result (2026-11-15, Royal Alhambra Palace, 1 adult + kids 10/12, 1.–8. 7. 2027, from VIE): listed 3 596 €
+# (TUI, Double Superior) -> preis 0; TUI lateral sea view 3 706 € -> 0; TUI from BTS 3 707 € -> 0; ITS "Alhambra
+# Suite", AI ohne Transfer, listed 3 725 € -> bookable at 3 692 €.
+VERIFY_CALLS = 25   # requests per run for verification (list + checks)
+VERIFY_CHECKS = 4   # checkPrice calls per offer at most (cheapest options first)
+_AI_BOARD_CODES = ("GT06-AI", "GT06-UAI", "GT06-AIP", "GT06-AIU", "GT06-AIR")
+
+
+def verify_conf(offer):
+    """The hotel page's conf object, from the offer URL (same keys the page script sets)."""
+    q = {k: v[0] for k, v in parse_qs(urlsplit(offer["url"]).query).items()}
+    nights = int(offer.get("nights") or 7)
+    return {"start": q.get("start", offer["date_from"]), "until": q.get("until", offer.get("date_to") or ""),
+            "adults": q.get("adults", ""), "children": q.get("children", ""), "destinationName": "",
+            "destinationId": "", "airline": "", "dauer": str(2 ** nights), "abflughafen": q.get("abflughafen", "VIE BTS"),
+            "ankunftshafen": q.get("ankunftshafen", ""), "preis": "", "stars": "", "bewertung": "", "name": "",
+            "veranstalter": q.get("rva", ""), "reisetag": q.get("reisetag", offer["date_from"]), "verpflegung": "",
+            "room": "", "rq": q.get("rq", "1"), "gid": q.get("gid", ""), "hotelOnly": "", "nonStop": "", "stops": "",
+            "transfer": "", "baggageincluded": "", "sort": "price", "depApt": "", "dstApt": "", "rfId": "",
+            "offset": "", "dstOutMax": "", "dstOutMin": "", "depOutMax": "", "depOutMin": "",
+            "cabinClass": q.get("cabinClass", "economy")}
+
+
+def parse_options(html):
+    """Bookable-candidate rows of additionalOffersHotelpage.php: [{price, data, rva, toc, room, board, transfer,
+    dep, start, end, board_code, group}] sorted by listed price."""
+    soup = BeautifulSoup(html or "", "lxml")
+    out = []
+    for c in soup.select(".additionalOfferContainer"):
+        h5 = c.select_one("h5")
+        if h5:
+            for s in h5.select("span"):
+                s.decompose()
+        kind = _txt(h5)
+        for o in c.select(".hotel-offer[data-offer]"):
+            btn = o.select_one(".additionalButton[data-price]")
+            try:
+                price = float(btn["data-price"]) if btn else float(o.get("data-price"))
+            except (TypeError, ValueError):
+                continue
+            f = o["data-offer"].split("*")
+            if len(f) < 9 or price <= 0:
+                continue
+            room = _txt(o.select_one("b.detailHl")) or kind
+            out.append({"price": round(price), "data": o["data-offer"], "rva": o.get("data-rva") or "",
+                        "toc": o.get("data-rvaname") or "", "room": room, "kind": kind,
+                        "board": _txt(o.select_one(".board")), "transfer": _txt(o.select_one(".transfer")),
+                        "dep": f[3][:3], "start": f[0][:10], "end": f[1][:10], "board_code": f[8],
+                        "group": (o.get("data-rva"), f[3], f[4], f[5])})
+    return sorted(out, key=lambda x: x["price"])
+
+
+def candidates(options, offer, cfg):
+    """Rows comparable to the offer: same term, an asked departure airport, an AI board when the offer is AI/UAI;
+    one row per (operator, flights, room) – its cheapest – in price order."""
+    deps = set(cfg["departures"]) | set(cfg.get("departures_secondary") or [])
+    ai = offer.get("board") in ("AI", "UAI")
+    seen, out = set(), []
+    for x in options:
+        if x["start"] != offer["date_from"] or (offer.get("date_to") and x["end"] != offer["date_to"]):
+            continue
+        if x["dep"] not in deps or (ai and x["board_code"] not in _AI_BOARD_CODES):
+            continue
+        if x["group"] in seen:
+            continue
+        seen.add(x["group"])
+        out.append(x)
+    return out
+
+
+def _tag(name, text):
+    m = re.search(rf"<{name}>(.*?)</{name}>", text or "", re.S)
+    return m.group(1).strip() if m else ""
+
+
+def parse_check(text):
+    """checkPrice.php answer -> ('available'|'on_request'|'unavailable'|'retry', price or None)."""
+    err = _tag("error", text)
+    try:
+        price = int(float(_tag("preis", text) or 0))
+    except ValueError:
+        price = 0
+    low = strip_accents(err).lower()
+    if "lucke" in low or "leerzeitraum" in low:
+        return "retry", None
+    if not err and price > 0:
+        return "available", price
+    if "anfrage" in low:
+        return "on_request", price or None
+    return "unavailable", None
+
+
+def _room_text(x):
+    bits = [x["room"] + (f" ({x['kind']})" if x["kind"] and x["kind"].lower() not in x["room"].lower() else ""),
+            " ".join(b for b in (x["board"], x["transfer"]) if b), x["toc"]]
+    return ", ".join(b for b in bits if b)[:160]
+
+
+def verify_one(offer, cfg, budget):
+    """(result dict or None, requests made) for one offer, ≤ budget requests."""
+    conf = verify_conf(offer)
+    if not conf["gid"] or budget < 2:
+        return None, 0
+    referer = offer["url"]
+    hdr = {"X-Requested-With": "XMLHttpRequest", "Referer": referer, "Origin": IBE}
+    html = get(IBE + "/hub/ajax/additionalOffersHotelpage.php", method="POST", headers=hdr, timeout=60,
+               data={"conf": json.dumps(conf), "price": "", "data": "", "debug": ""})
+    calls = 1
+    opts = parse_options(html)
+    todo = candidates(opts, offer, cfg)
+    now = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+    res = {"status": "unavailable", "price": None, "room": None, "checked_at": now, "options": len(todo),
+           "checked": 0, "listed": todo[0]["price"] if todo else None}
+    if not todo:
+        print(f"[ruefa] verify {offer['hotel']} {offer['date_from']}: {len(opts)} rows, none comparable -> unavailable")
+        return res, calls
+    on_request = None
+    for x in todo[:VERIFY_CHECKS]:
+        if calls >= budget:
+            break
+        status, price = "retry", None
+        for recheck in ("0", "1"):
+            if calls >= budget:
+                break
+            text = get(IBE + "/hub/ajax/checkPrice.php", method="POST", headers=hdr,
+                       data={"conf": json.dumps(dict(conf, veranstalter=x["rva"])), "data": x["data"],
+                             "bid": "".join(random.choice(string.ascii_letters + string.digits) for _ in range(10)),
+                             "recheck": recheck, "isHotelPriceCheck": "1", "url": referer, "alternative": "",
+                             "debug": ""})
+            calls += 1
+            status, price = parse_check(text)
+            if status != "retry":
+                break
+        res["checked"] += 1
+        print(f"[ruefa] verify {offer['hotel']} {offer['date_from']}: {x['toc']} {x['room']} {x['dep']} "
+              f"listed {x['price']} -> {status} {price or ''}")
+        if status == "available":
+            res.update(status="available", price=price, room=_room_text(x))
+            return res, calls
+        if status == "on_request" and not on_request:
+            on_request = (x, price)
+    if on_request:
+        x, price = on_request
+        res.update(status="on_request", price=price or x["price"], room=_room_text(x))
+    elif res["checked"] < len(todo):
+        res["partial"] = True  # only the cheapest options were tried; a dearer one may still be bookable
+    return res, calls
+
+
+def verify(cfg, offers):
+    """run.py hook: {offer id: {status, price, room, checked_at, …}} for the given offers (most important first),
+    ≤ VERIFY_CALLS requests in total. Offers left out (budget, errors) are simply not in the answer."""
+    out, calls = {}, 0
+    for o in offers:
+        if VERIFY_CALLS - calls < 2:
+            print(f"[ruefa] verify: request budget {VERIFY_CALLS} reached")
+            break
+        if not o.get("url", "").startswith(IBE + "/") or "page=hotel" not in o["url"]:
+            continue
+        try:
+            res, n = verify_one(o, cfg, VERIFY_CALLS - calls)
+        except Exception as e:
+            print(f"[ruefa] verify {o['hotel']}: {type(e).__name__} {str(e)[:120]}")
+            calls += 1
+            if "403" in str(e) or "429" in str(e):
+                break
+            continue
+        calls += n
+        if res:
+            out[o["id"]] = res
+    print(f"[ruefa] verify: {len(out)} offers checked with {calls} requests")
+    return out

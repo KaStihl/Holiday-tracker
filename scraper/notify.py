@@ -44,9 +44,46 @@ def row(o, extra=""):
     how = f"✈️ {o.get('departure') or ''}".strip() if o["transport"] == "flight" else "🚗 autom" + (" 🐕" if o.get("pets_allowed") else "")
     stars = " " + "★" * int(o["stars"]) if o.get("stars") else ""
     exact = " ✓" if o.get("price_exact") else ""
+    st = (o.get("verified") or {}).get("status")
+    if o.get("price_verified"):
+        exact += f" → overené {eur(o['price_verified'])}"
+    elif st == "unavailable":
+        exact += " ✗ nedostupné"
     return (f"- **{eur(o['price_total'])}**{exact}{extra} · [{o['hotel']}]({o['url']}){stars}  \n"
             f"  {where} · {int(d)}.\u00a0{int(m)}.\u00a0{y} · {o['nights']}\u00a0nocí · "
             f"{BOARD.get(o.get('board'), '?')} · {how} · {o['source_name']}")
+
+
+def _day(iso):
+    try:
+        y, m, d = str(iso)[:10].split("-")
+        return f"{int(d)}.\u00a0{int(m)}."
+    except ValueError:
+        return ""
+
+
+def verify_text(o):
+    """Verification line of an offer (Ruefa's own availability check, see run.py run_verify), Slovak."""
+    v = o.get("verified") or {}
+    st, when = v.get("status"), _day(v.get("checked_at"))
+    when = f" {when}" if when else ""
+    if st == "available":
+        if o.get("price_verified") and o["price_verified"] > o["price_total"]:
+            return (f"⚠ za {eur(o['price_total'])} nedostupné – overené{when}: dostupné od "
+                    f"**{eur(o['price_verified'])}**" + (f" ({v['room']})" if v.get("room") else ""))
+        return f"✓ overené{when}: dostupné od **{eur(o.get('price_verified') or o['price_total'])}**"
+    if st == "on_request":
+        return "⚠ len na vyžiadanie" + (f" (overené{when})" if when else " (podľa cestovky)")
+    if st == "unavailable":
+        return (f"✗ overené{when}: nedostupné" +
+                (f" (skúšaných {v['checked']} najlacnejších možností)" if v.get("partial") and v.get("checked") else ""))
+    return "? cena neoverená (len cena z ponuky cestovky)"
+
+
+def bookable_key(o):
+    """Watched-hotel choice: bookable (or unverified) offers first, by their verified/listing price."""
+    st = (o.get("verified") or {}).get("status")
+    return (st == "unavailable", o.get("price_verified") or o["price_total"])
 
 
 def boards_title(boards):
@@ -60,7 +97,7 @@ def watched_best(offers, cfg=CONFIG):
     best = {t: None for t in cfg.get("watched") or []}
     for o in offers:
         t = o.get("watched") if o.get("watched") in best else match(o.get("hotel"), cfg.get("watched"), o.get("country_code"))
-        if t and (best[t] is None or o["price_total"] < best[t]["price_total"]):
+        if t and (best[t] is None or bookable_key(o) < bookable_key(best[t])):
             best[t] = o
     return best
 
@@ -87,6 +124,7 @@ def watched_section(prev, offers, cfg=CONFIG):
         cap = " · ⚠ nad strop" if o["price_total"] > cfg["price_cap"] else ""
         parts.append(f"- **{t}**{change}{cap}")
         parts.append(row(o).replace("- ", "  ", 1))
+        parts[-1] += "  \n  " + verify_text(o)
     return parts + [""]
 
 

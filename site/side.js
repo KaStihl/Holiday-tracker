@@ -228,6 +228,23 @@
     });
     return near ? { r: near, how: "term" } : same ? { r: same, how: "nights" } : any ? { r: any, how: "other" } : null;
   }
+  // verification of an agency package (scraper/side.py compact_offer: r[8] = [status, price, room, checked_at])
+  function verBadge(r) {
+    var v = Array.isArray(r[8]) ? r[8] : null;
+    var st = v && typeof v[0] === "string" ? v[0] : "";
+    var price = v ? num(v[1]) : null, room = v && typeof v[2] === "string" ? v[2].slice(0, 160) : "";
+    var dayS = v && typeof v[3] === "string" && isDay(v[3].slice(0, 10)) ? v[3].slice(0, 10) : "";
+    var when = dayS ? (dayS === iso(Date.now()) ? "overené dnes" : "overené " + short(dayS)) : "overené";
+    var b;
+    if (st === "available" && price !== null && price > num(r[1])) b = el("div", "ver-badge ver-warn", "⚠ za uvedenú cenu nedostupné – dostupné od " + eur(price));
+    else if (st === "available") b = el("div", "ver-badge ver-ok", "✓ " + when + ": dostupné od " + eur(price !== null ? price : r[1]));
+    else if (st === "on_request") b = el("div", "ver-badge ver-warn", "⚠ len na vyžiadanie");
+    else if (st === "unavailable") b = el("div", "ver-badge ver-bad", "✗ nedostupné");
+    else if (r[0] === "ruefa") b = el("div", "ver-badge ver-unk", "? neoverené");
+    else return null;
+    if (room && (st === "available" || st === "on_request")) { b.title = room; b.appendChild(el("small", "ver-room", " · " + room)); }
+    return b;
+  }
   function agencyFor(h, p) { var rows = h.of && Array.isArray(h.of[p.id]) ? h.of[p.id] : []; return pickRow(rows, 3, 4); }
   function hotelOnlyFor(h, p) { var rows = h.ho && Array.isArray(h.ho[p.id]) ? h.ho[p.id] : []; var x = pickRow(rows, 2, 3); return x && x.how !== "other" ? x : null; }
 
@@ -397,6 +414,8 @@
       colA.appendChild(el("div", "sh-big mono", eur(r[1])));
       colA.appendChild(el("div", "sh-small", srcName(r[0]) + " · " + short(r[3]) + " · " + r[4] + " " + plural(r[4], "noc", "noci", "nocí") + (r[2] ? " · " + (BOARD[r[2]] || r[2]) : "") + (r[5] ? " · z " + r[5] : "")));
       colA.appendChild(el("div", "sh-small " + (r[6] ? "ok" : "approx"), r[6] ? "✓ presná cena pre " + p.persons + " os." : "orientačne (cena za os. × " + p.persons + ")"));
+      var vb = verBadge(r);
+      if (vb) colA.appendChild(vb);
       if (ag.how !== "term") colA.appendChild(el("div", "sh-other", ag.how === "nights" ? "iný dátum ako " + short(S.d) : "iná dĺžka/termín – " + S.n + " nocí bez ponuky"));
       colA.appendChild(link(r[7], "Zobraziť zájazd ↗", "btn btn-sm"));
     } else colA.appendChild(el("div", "muted sh-small", "Žiadna ponuka cestovky pre túto skupinu."));

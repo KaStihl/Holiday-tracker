@@ -207,7 +207,14 @@
    "price_change": 0,
    "continent": "Európa",
    "price_exact": true,
-   "party": "a1-c10-12"
+   "party": "a1-c10-12",
+   "verified": {
+    "status": "available",
+    "price": 1897,
+    "room": "Štandardná izba, All Inclusive",
+    "checked_at": "2026-11-15T04:31:00Z",
+    "checked": 1
+   }
   },
   {
    "id": "ukazka:fa94ac07f561",
@@ -397,7 +404,12 @@
    ],
    "price_change": -250,
    "price_exact": true,
-   "party": "a1-c10-12"
+   "party": "a1-c10-12",
+   "verified": {
+    "status": "unavailable",
+    "checked_at": "2026-11-15T04:31:00Z",
+    "checked": 2
+   }
   },
   {
    "id": "ukazka:48d7c9cd6c18",
@@ -564,7 +576,14 @@
    "price_change": -250,
    "continent": "Európa",
    "price_exact": true,
-   "party": "a1-c10-12"
+   "party": "a1-c10-12",
+   "verified": {
+    "status": "on_request",
+    "price": 2968,
+    "room": "Suite, All Inclusive",
+    "checked_at": "2026-11-15T04:31:00Z",
+    "checked": 2
+   }
   },
   {
    "id": "ukazka:e3990d2293a4",
@@ -2667,7 +2686,15 @@
    "price_exact": false,
    "price_note": "orientačne: cena za osobu pri 2 dospelých × 3",
    "watched": "Sural",
-   "party": "a1-c10-12"
+   "party": "a1-c10-12",
+   "verified": {
+    "status": "available",
+    "price": 3410,
+    "room": "Rodinná izba s výhľadom na more (Family Room), All Inclusive inkl. Transfer, Ukážkový TO",
+    "checked_at": "2026-11-15T04:31:00Z",
+    "checked": 3
+   },
+   "price_verified": 3410
   },
   {
    "id": "ukazka:watch2",
@@ -2707,7 +2734,14 @@
    "price_exact": false,
    "price_note": "orientačne: cena za osobu pri 2 dospelých × 3",
    "watched": "Sural",
-   "party": "a1-c10-12"
+   "party": "a1-c10-12",
+   "verified": {
+    "status": "available",
+    "price": 3990,
+    "room": "Dvojlôžková izba, All Inclusive inkl. Transfer, Ukážkový TO",
+    "checked_at": "2026-11-15T04:31:00Z",
+    "checked": 1
+   }
   },
   {
    "id": "ukazka2:watch3",
@@ -2788,7 +2822,13 @@
    "price_note": "orientačne: cena za osobu pri 2 dospelých × 3",
    "watched": "Sural",
    "over_cap": true,
-   "party": "a1-c10-12"
+   "party": "a1-c10-12",
+   "verified": {
+    "status": "unavailable",
+    "checked_at": "2026-11-15T04:31:00Z",
+    "checked": 4,
+    "partial": true
+   }
   },
   {
    "id": "ukazka:9f7c2b48a898@a2-c10-12",
@@ -4684,5 +4724,10 @@
     "a2": 0
    }
   }
- ]
+ ],
+ "verify": {
+  "sources": [
+   "ukazka"
+  ]
+ }
 }

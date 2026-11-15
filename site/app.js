@@ -41,6 +41,7 @@
 
   var data = null;
   var everyOffer = []; // offers of every party
+  var VERIFY_SRC = []; // sources with an availability check (offers.json "verify")
   var allOffers = [];  // offers of the selected party (state.osoby)
   var PARTIES = [];    // [{id, nazov, adults, kids, persons}]
   var PARTY_BY_ID = {};
@@ -290,7 +291,7 @@
     DEFAULTS = {
       t: "all", ct: [], c: [], pmin: 0, pmax: Math.min(CFG.budget, CFG.priceMax), df: "", dt: "",
       nmin: CFG.nLo, nmax: CFG.nHi, b: CFG.boardsPref.slice(), st: 0, r: 0, d: [], src: [],
-      ex: false, z: false, dog: false, dr: false, w: false, q: "", s: "score", pp: false, osoby: DEFAULT_PARTY
+      ex: false, z: false, dog: false, dr: false, w: false, va: false, q: "", s: "score", pp: false, osoby: DEFAULT_PARTY
     };
     OPEN = clone(DEFAULTS);
     OPEN.pmax = CFG.priceMax;
@@ -322,14 +323,14 @@
     if (o.nmin > o.nmax) { var t = o.nmin; o.nmin = o.nmax; o.nmax = t; }
     var st = num(s.st); if (st !== null && STAR_OPTS.indexOf(st) >= 0) o.st = st;
     var r = num(s.r); if (r !== null && RATING_OPTS.indexOf(r) >= 0) o.r = r;
-    ["ex", "z", "dog", "dr", "w", "pp"].forEach(function (k) { if (typeof s[k] === "boolean") o[k] = s[k]; });
+    ["ex", "z", "dog", "dr", "w", "va", "pp"].forEach(function (k) { if (typeof s[k] === "boolean") o[k] = s[k]; });
     if (typeof s.q === "string") o.q = s.q.slice(0, 80);
     if (SORTS[s.s]) o.s = s.s;
     if (typeof s.osoby === "string" && PARTY_BY_ID[s.osoby]) o.osoby = s.osoby;
     return o;
   }
   var ARR_KEYS = ["ct", "c", "b", "d", "src"];
-  var BOOL_KEYS = ["ex", "z", "dog", "dr", "w", "pp"];
+  var BOOL_KEYS = ["ex", "z", "dog", "dr", "w", "va", "pp"];
   function stateToHash(s) {
     var h = new URLSearchParams();
     Object.keys(DEFAULTS).forEach(function (k) {
@@ -408,10 +409,60 @@
       price_history: hist,
       price_change: num(o.price_change),
       watched: typeof o.watched === "string" && o.watched.length <= 80 ? o.watched : "",
+      verified: normVerified(o.verified),
+      price_verified: num(o.price_verified) !== null && num(o.price_verified) > 0 ? num(o.price_verified) : null,
       party: typeof o.party === "string" && PARTY_BY_ID[o.party] ? o.party : DEFAULT_PARTY
     };
     n._text = fold([n.hotel, n.place, n.region, n.country].join(" "));
     return n;
+  }
+  // verification by the agency's own availability check (run.py run_verify; Ruefa), or "on request" from the listing
+  var VER_STATUS = { available: 1, on_request: 1, unavailable: 1, unknown: 1 };
+  function normVerified(v) {
+    if (!v || typeof v !== "object" || !VER_STATUS[v.status]) return null;
+    var price = num(v.price);
+    return {
+      status: v.status, price: price !== null && price > 0 ? price : null,
+      room: typeof v.room === "string" ? v.room.slice(0, 160) : "",
+      day: typeof v.checked_at === "string" && isDay(v.checked_at.slice(0, 10)) ? v.checked_at.slice(0, 10) : "",
+      partial: v.partial === true, checked: num(v.checked), listing: v.via === "listing"
+    };
+  }
+  // the price to act on: the verified bookable total when known, else the listing price
+  function eff(o) { return o.price_verified || o.price_total; }
+  function verifiable(o) { return VERIFY_SRC.indexOf(o.source) >= 0; }
+  function todayIso() {
+    var d = new Date();
+    return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+  }
+  function verWhen(v) {
+    if (!v.day) return "overené";
+    return v.day === todayIso() ? "overené dnes" : "overené " + shortDay(v.day);
+  }
+  // [badge element, room note element or null]; null when there's nothing to say (unverifiable source, not watched)
+  function verifyBadge(o) {
+    var v = o.verified, b, room = null;
+    if (v && v.status === "available") {
+      if (o.price_verified && o.price_verified > o.price_total) {
+        b = el("span", "ver-badge ver-warn", "⚠ za uvedenú cenu nedostupné – dostupné od " + priceText(o.price_verified));
+        b.title = verWhen(v) + " kontrolou dostupnosti cestovky: za " + eur(o.price_total) + " sa termín kúpiť nedá, najlacnejšia dostupná možnosť stojí " + eur(o.price_verified);
+      } else {
+        b = el("span", "ver-badge ver-ok", "✓ " + verWhen(v) + ": dostupné od " + priceText(eff(o)));
+        b.title = "Cestovka pri kontrole dostupnosti potvrdila cenu pre " + partyLong();
+      }
+      if (v.room) room = el("span", "ver-room", v.room);
+    } else if (v && v.status === "on_request") {
+      b = el("span", "ver-badge ver-warn", "⚠ len na vyžiadanie" + (o.price_verified ? " – od " + priceText(o.price_verified) : ""));
+      b.title = v.listing ? "Cestovka tento termín predáva na vyžiadanie (nie je hneď rezervovateľný online)" : verWhen(v) + ": termín je len na vyžiadanie";
+      if (v.room) room = el("span", "ver-room", v.room);
+    } else if (v && v.status === "unavailable") {
+      b = el("span", "ver-badge ver-bad", "✗ nedostupné" + (v.partial && v.checked ? " (" + v.checked + " " + plural(v.checked, "najlacnejšia možnosť", "najlacnejšie možnosti", "najlacnejších možností") + ")" : ""));
+      b.title = verWhen(v) + ": " + (v.partial ? "najlacnejšie možnosti termínu sa kúpiť nedajú, drahšie sa neoverovali" : "žiadna možnosť tohto termínu sa kúpiť nedá");
+    } else if (verifiable(o) || o.watched) {
+      b = el("span", "ver-badge ver-unk", "? neoverené");
+      b.title = verifiable(o) ? "Dostupnosť sa ešte neoverovala (kontrola má denný limit požiadaviek)" : "Táto cestovka neponúka kontrolu dostupnosti – cena je z jej zoznamu ponúk";
+    } else return null;
+    return [b, room];
   }
   function isDiscount(o) {
     return !!(o.discount_label || (o.discount_pct && o.discount_pct > 0) || (o.price_original && o.price_original > o.price_total));
@@ -447,6 +498,7 @@
     if (s.dog && !(o.transport === "car" && o.pets_allowed === true)) return false;
     if (s.dr && !(o.price_change !== null && o.price_change < 0)) return false;
     if (s.w && !o.watched) return false;
+    if (s.va && !(o.verified && o.verified.status === "available")) return false;
     for (var i = 0; i < qWords.length; i++) if (o._text.indexOf(qWords[i]) < 0) return false;
     return true;
   }
@@ -462,9 +514,9 @@
   function sortOffers(list) {
     function nullLast(v) { return v === null ? -Infinity : v; }
     var by = {
-      score: function (a, b) { return (b.score || 0) - (a.score || 0) || a.price_total - b.price_total; },
-      price: function (a, b) { return a.price_total - b.price_total; },
-      pp: function (a, b) { return a.price_total - b.price_total; }, // same party for every offer
+      score: function (a, b) { return (b.score || 0) - (a.score || 0) || eff(a) - eff(b); },
+      price: function (a, b) { return eff(a) - eff(b); },
+      pp: function (a, b) { return eff(a) - eff(b); }, // same party for every offer
       discount: function (a, b) { return discPct(b) - discPct(a) || a.price_total - b.price_total; },
       date: function (a, b) { return a.date_from < b.date_from ? -1 : a.date_from > b.date_from ? 1 : a.price_total - b.price_total; },
       rating: function (a, b) { return nullLast(b.rating) - nullLast(a.rating) || a.price_total - b.price_total; },
@@ -726,6 +778,7 @@
       $(p[0]).addEventListener("change", function () { state[p[1]] = this.checked; update(); });
     });
     $("f-watch").addEventListener("change", function () { setWatchOnly(this.checked); });
+    $("f-ver").addEventListener("change", function () { state.va = this.checked; update(); });
     $("watch-filter").addEventListener("click", function () {
       setWatchOnly(true);
       var t = $("ponuky");
@@ -796,6 +849,8 @@
     $("f-drop").checked = state.dr;
     $("f-watch").checked = state.w;
     $("f-watch-wrap").hidden = !CFG.watched.length && !state.w;
+    $("f-ver").checked = state.va;
+    $("f-ver-wrap").hidden = !everyOffer.some(function (o) { return o.verified; }) && !state.va;
     $("f-ex-label").textContent = "Len presné ceny pre našu skupinu" + (partyShort() ? " (" + partyShort() + ")" : "");
   }
 
@@ -826,6 +881,7 @@
     if (s.dog) add("len so psami", function () { s.dog = false; });
     if (s.dr) add("len zlacnené", function () { s.dr = false; });
     if (s.w) add("⭐ len sledované", function () { s.w = false; });
+    if (s.va) add("✓ len overené dostupné", function () { s.va = false; });
     if (s.q) add("„" + s.q + "“", function () { s.q = ""; setVal("f-q", ""); });
     return out;
   }
@@ -927,6 +983,8 @@
     });
     return out;
   }
+  // watched hotels: the cheapest offer that can be booked (verified or not yet verified) first, unavailable last
+  function watchKey(o) { return eff(o) + (o.verified && o.verified.status === "unavailable" ? 1e7 : 0); }
   function watchRow(o, more) {
     var li = el("li", "watch-row");
     var name = el("div", "watch-hotel", flag(o.country_code) + " " + o.hotel);
@@ -954,9 +1012,13 @@
       tags.appendChild(cb);
     } else if (o.price_total > CFG.budget) tags.appendChild(el("span", "tag", "nad budget"));
     if (more) tags.appendChild(el("span", "tag", "+" + more + " " + plural(more, "ďalší termín", "ďalšie termíny", "ďalších termínov")));
+    var vb = verifyBadge(o);
+    if (vb) tags.appendChild(vb[0]);
     li.appendChild(tags);
+    if (vb && vb[1]) { vb[1].classList.add("watch-ver-room"); li.appendChild(vb[1]); }
     var pr = el("div", "watch-price");
-    pr.appendChild(el("div", "price-total mono", priceText(o.price_total)));
+    pr.appendChild(el("div", "price-total mono", priceText(eff(o))));
+    if (o.price_verified) pr.appendChild(el("div", "price-listed", "v ponuke " + priceText(o.price_total)));
     if (o.url) {
       var a = el("a", "btn", "Ponuka ↗");
       a.href = o.url; a.target = "_blank"; a.rel = "noopener noreferrer";
@@ -981,17 +1043,17 @@
         var k = fold(o.hotel) + "|" + o.source;
         var g = groups[k] || (groups[k] = { best: o, n: 0 });
         g.n++;
-        if (o.price_total < g.best.price_total) g.best = o;
+        if (watchKey(o) < watchKey(g.best)) g.best = o;
       });
       var rows = Object.keys(groups).map(function (k) { return groups[k]; })
-        .sort(function (a, b) { return a.best.price_total - b.best.price_total; });
+        .sort(function (a, b) { return watchKey(a.best) - watchKey(b.best); });
       var card = el("article", "watch-term");
       var h = el("h3", "", "⭐ " + term);
       var hotels = {};
       rows.forEach(function (g) { hotels[fold(g.best.hotel)] = 1; });
       var nh = Object.keys(hotels).length, no = rows.reduce(function (s, g) { return s + g.n; }, 0);
       h.appendChild(el("span", "muted", rows.length
-        ? nh + " " + plural(nh, "hotel", "hotely", "hotelov") + " · " + no + " " + offersWord(no) + " · od " + priceText(rows[0].best.price_total)
+        ? nh + " " + plural(nh, "hotel", "hotely", "hotelov") + " · " + no + " " + offersWord(no) + " · od " + priceText(eff(rows[0].best))
         : "zatiaľ bez ponuky"));
       card.appendChild(h);
       if (rows.length) {
@@ -1131,7 +1193,7 @@
 
     var party = partyLong();
     var total = node.querySelector(".price-total");
-    total.textContent = eur(pv(o.price_total));
+    total.textContent = eur(pv(eff(o)));
     var sub = node.querySelector(".price-sub");
     sub.textContent = perPerson() ? "za osobu · spolu " + eur(o.price_total) : "spolu za " + (partyShort() || "skupinu");
     total.setAttribute("title", (o.price_exact ? "Presná cena za " : "Orientačná cena za ") + party + (o.price_note ? " – " + o.price_note : ""));
@@ -1145,6 +1207,13 @@
       note.title = o.price_note || ("Cestovka nedáva cenu presne pre " + party + " – prepočítané, overte pred rezerváciou");
     }
 
+    var vb = verifyBadge(o);
+    if (vb) {
+      var vbox = node.querySelector(".price-verify");
+      vbox.appendChild(vb[0]);
+      if (vb[1]) vbox.appendChild(vb[1]);
+      if (o.price_verified) vbox.appendChild(el("span", "price-listed", "cena v ponuke cestovky: " + eur(pv(o.price_total))));
+    }
     var trend = node.querySelector(".price-trend");
     var pc = o.price_change;
     var tr;
@@ -1316,6 +1385,7 @@
   function start(json) {
     data = json && typeof json === "object" ? json : {};
     readParties();
+    VERIFY_SRC = strList(data.verify && data.verify.sources, 20);
     everyOffer = expandOffers(Array.isArray(data.offers) ? data.offers : []).map(normOffer).filter(Boolean);
     allOffers = everyOffer;
     CFG = buildConfig();

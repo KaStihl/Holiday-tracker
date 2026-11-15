@@ -25,6 +25,11 @@ first round), so a cheaper Brno term never replaces the BTS/VIE one of the same 
 tail (second pages / 10–14 pass of the big countries) instead. First run (2026-11-01): Brno flies to Turecko,
 Taliansko, Grécko, Španielsko, Bulharsko, Egypt, Tunisko (+ Čierna Hora/Albánsko listed, 0 tours) and all ~155 tours
 were KARTAGO products – Fischer's pass stops after SEC_MISSES pages without an own-brand tour.
+Availability (checked 2026-11-15 for the verification feature): each tour carries tour.isOnline (False = "na
+vyžiadanie", on request) – kept as offer["on_request"]. A live check comparable to Ruefa's exists only inside the
+order flow (/api/pricecheck is used by the order-verification app, AppVerifyOrder, after a term is chosen for
+booking), and the detail page's term list (/api/ndhotelpricetable) shows the same cached prices, so there is no
+verify() hook for Kartago/Fischer.
 Kartago and Fischer search one shared inventory (both sites list ATCOM_Kartago and ATCOM_Fischer
 products at the same prices), so each adapter keeps only its own brand's products to avoid duplicates.
 """
@@ -151,6 +156,9 @@ def to_offer(t, home, cfg):
         "discount_label": fm if exact else approx_label(cfg, fm),
         "pets_allowed": None,
         **({"price_exact": True} if exact else {"price_note": f"orientačne: cena za dospelého × {party}"}),
+        # tour.isOnline False = the term is sold "na vyžiadanie" (on request), not bookable online (see run.py
+        # attach_verified: shown as "na vyžiadanie", no extra request)
+        **({"on_request": True} if tour.get("isOnline") is False else {}),
         **hotel_facts(h, room),
     }
 

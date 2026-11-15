@@ -26,12 +26,16 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "site" / "data"
 OFFERS = DATA / "offers.json"
 HISTORY = DATA / "history.json"
+VERIFY = DATA / "verify.json"
 
 HISTORY_POINTS = 90
 # offers.json is embedded in dovolenka.html: above this size the extra parties keep only their best offers
 SIZE_LIMIT = 8_000_000
 EXTRA_EXACT_MAX = 6  # exact_price() lookups (Čedok detail pages) per extra party and source
 HISTORY_KEEP_DAYS = 60
+VERIFY_KEEP_DAYS = 3  # a verification older than this is dropped (shown with its date until then)
+# score factor of a verified offer that can't be booked at all / only on request
+VERIFY_PENALTY = {"unavailable": 0.6, "on_request": 0.85}
 BOARD_SCORE = {"UAI": 1.0, "AI": 0.95, "FB": 0.6, "HB": 0.45, "BB": 0.25, "RO": 0.1, None: 0.2}
 
 
@@ -155,9 +159,14 @@ def within_limit(o, cfg):
     return o["price_total"] <= (keep_limit(cfg) if o.get("watched") else cfg["price_cap"])
 
 
+def effective_price(o):
+    """The verified bookable total when a verification found one, else the listing price."""
+    return o.get("price_verified") or o["price_total"]
+
+
 def score(o, cfg):
     budget = cfg["budget"]
-    p = o["price_total"]
+    p = effective_price(o)
     price_s = 1.0 if p <= budget * 0.7 else max(0.0, 1 - (p - budget * 0.7) / (cfg["price_cap"] - budget * 0.7))
     board_s = BOARD_SCORE.get(o["board"], 0.2)
     if o["board"] in cfg["boards_preferred"]:
@@ -171,7 +180,86 @@ def score(o, cfg):
         s *= 0.9
     if o["transport"] == "car" and o.get("pets_allowed") is None:
         s *= 0.85
+    s *= VERIFY_PENALTY.get((o.get("verified") or {}).get("status"), 1.0)
     return round(100 * s)
+
+
+# --- verification (adapters with a verify(cfg, offers) hook: Ruefa) ---------------------------------------------
+# The listing price is the agency's cached "from" price; verify() asks the agency's own availability check for the
+# cheapest bookable option of the same term (see adapters/ruefa.py). Results live in site/data/verify.json
+# {offer id: {status, price, room, checked_at, …}}; an offer is re-verified at most once a day, entries of offers
+# that are gone or older than VERIFY_KEEP_DAYS are dropped.
+
+def verify_shortlist(offers, name, cfg, skip=()):
+    """Offers of one source to verify, most important first: the primary party's watched hotels (cheapest first),
+    then its other offers by score. The adapter stops when its request budget is spent."""
+    primary = party_of(cfg)
+    mine = [o for o in offers if o["source"] == name and (o.get("party") or primary) == primary
+            and o["id"] not in skip and not o.get("stale")]
+    watched = sorted((o for o in mine if o.get("watched")), key=lambda o: o["price_total"])
+    rest = sorted((o for o in mine if not o.get("watched")), key=lambda o: (-score(o, cfg), o["price_total"]))
+    return watched + rest
+
+
+def load_verify(present, today, path=None):
+    """verify.json entries of offers still present and not older than VERIFY_KEEP_DAYS."""
+    cache = load(path or VERIFY, {})
+    limit = date.fromisoformat(today).toordinal() - VERIFY_KEEP_DAYS
+    out = {}
+    for k, v in (cache.items() if isinstance(cache, dict) else []):
+        try:
+            seen = date.fromisoformat(str(v.get("checked_at"))[:10]).toordinal()
+        except (AttributeError, ValueError):
+            continue
+        if k in present and seen >= limit and v.get("status") in ("available", "on_request", "unavailable", "unknown"):
+            out[k] = v
+    return out
+
+
+def attach_verified(o, v):
+    """o["verified"] (+ o["price_verified"] when the bookable total differs from the listing price). A DERTOUR term
+    flagged on request in the listing itself gets status on_request without a check."""
+    o.pop("verified", None)
+    o.pop("price_verified", None)
+    if v:
+        o["verified"] = {k: v.get(k) for k in ("status", "price", "room", "checked_at", "partial", "checked")
+                         if v.get(k) is not None}
+        if v.get("status") in ("available", "on_request") and v.get("price") and int(v["price"]) != o["price_total"]:
+            o["price_verified"] = int(v["price"])
+    elif o.get("on_request"):
+        o["verified"] = {"status": "on_request", "via": "listing"}
+
+
+def run_verify(offers, mods, sources, cfg, today, path=None):
+    """Verify a shortlist per source (cache: once a day), attach the results to offers, return the new cache."""
+    cache = load_verify({o["id"] for o in offers}, today, path)
+    fresh = {k for k, v in cache.items() if str(v.get("checked_at"))[:10] == today}
+    for name, mod in mods.items():
+        hook = getattr(mod, "verify", None)
+        info = next((s for s in sources if s["id"] == name), {})
+        if not hook or info.get("status") != "ok":
+            continue
+        todo = verify_shortlist(offers, name, cfg, fresh)
+        t0 = time.time()
+        try:
+            got = hook(cfg, todo) or {}
+        except Exception as e:
+            print(f"[{name}] verify failed: {type(e).__name__} {str(e)[:200]}")
+            got = {}
+        listing = {o["id"]: o["price_total"] for o in todo}
+        for k, v in got.items():
+            if k in listing:
+                cache[k] = dict(v, listing=listing[k])
+        counts = {}
+        for k, v in cache.items():
+            if k.split(":")[0] == name:
+                counts[v["status"]] = counts.get(v["status"], 0) + 1
+        info["verify"] = {"checked": len(got), "cached": len([k for k in fresh if k.split(":")[0] == name]),
+                          "seconds": round(time.time() - t0, 1), "status": counts}
+        print(f"[{name}] verify: {len(got)} new results, {counts}")
+    for o in offers:
+        attach_verified(o, cache.get(o["id"]))
+    return cache
 
 
 def refine_exact(offers, mods, cfg, limit=None):
@@ -539,7 +627,8 @@ def main(only=None):
     for party, pcfg in extra_parties(cfg):
         result += refine_exact(list(party_offers.get(party["id"], {}).values()), exact_src, pcfg, EXTRA_EXACT_MAX)
     print(f"exact prices took {time.time() - t0:.0f} s")
-    result = sorted(result, key=lambda o: (-score(o, cfg), o["price_total"]))
+    verified = run_verify(result, exact_src, sources, cfg, today)
+    result = sorted(result, key=lambda o: (-score(o, cfg), effective_price(o)))
     for o in result:
         o["score"] = score(o, cfg)
     for info in sources:
@@ -556,6 +645,7 @@ def main(only=None):
         "deeplinks": deeplinks,
         "offers": result,
         "watched": watched_summary(result, watch_links, cfg),
+        "verify": {"sources": sorted(n for n, m in mods.items() if getattr(m, "verify", None))},
     }
     if only:
         print(json.dumps(out, ensure_ascii=False, indent=1)[:4000])
@@ -576,6 +666,7 @@ def main(only=None):
     text = dump(out)
     OFFERS.write_text(text, encoding="utf-8")
     HISTORY.write_text(json.dumps(hist, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    VERIFY.write_text(json.dumps(verified, ensure_ascii=False, indent=1, sort_keys=True), encoding="utf-8")
     print(f"wrote {len(out['offers'])} offers from {sum(s['status'] == 'ok' for s in sources)} sources "
           f"(party {party_short(cfg)}, {party_size(cfg)} persons), offers.json {len(text.encode()) / 1e6:.2f} MB")
     summary(expand_offers(out["offers"]), cfg)

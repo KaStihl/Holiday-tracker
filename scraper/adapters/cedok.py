@@ -16,6 +16,11 @@ participants[0][adults]=A&participants[0][children][i]=DD.MM.YYYY (party from na
 embeds the priced variant as "date":{"range":{start,end}} … "participants":{"adultNumber":A,"childrenNumber":C,
 "childrenBirthDates":[…]},"totalPrice":N. exact_price() fetches that for a shortlist chosen by run.py and only
 accepts it when the dates and the party in the payload match the offer (otherwise the offer stays approximate).
+
+No verify() hook (checked 2026-11-15): the detail page lists rooms and prices from the same catalogue as the
+search (no availability flag per term/room), and the live availability check is a Next.js server action of the
+booking configurator ("availabilityProperties", "withPreBooking": true) leading to /booking (robots.txt disallows
+/booking* and /api*). Calling a pre-booking action is beyond the read-only check we allow ourselves.
 """
 
 import json

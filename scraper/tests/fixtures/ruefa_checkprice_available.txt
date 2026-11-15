@@ -1,0 +1,1 @@
+<pPPreis>1231</pPPreis><originalPrice>0</originalPrice><preisText><span class="headline">Preis pro Person</span></preisText><preis>3692</preis>
