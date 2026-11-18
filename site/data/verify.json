@@ -1,7 +1,7 @@
 {
  "ruefa:0b207c8faf00": {
   "checked": 1,
-  "checked_at": "2026-11-17T23:37:46Z",
+  "checked_at": "2026-11-18T23:06:19Z",
   "listed": 2151,
   "listing": 2151,
   "options": 7,
@@ -11,7 +11,7 @@
  },
  "ruefa:145bc5802412": {
   "checked": 1,
-  "checked_at": "2026-11-17T13:33:47Z",
+  "checked_at": "2026-11-18T23:05:01Z",
   "listed": 1496,
   "listing": 1496,
   "options": 13,
@@ -31,7 +31,7 @@
  },
  "ruefa:1f2380da3be2": {
   "checked": 1,
-  "checked_at": "2026-11-17T23:37:40Z",
+  "checked_at": "2026-11-18T23:06:12Z",
   "listed": 2060,
   "listing": 2060,
   "options": 8,
@@ -41,7 +41,7 @@
  },
  "ruefa:2802c212666d": {
   "checked": 1,
-  "checked_at": "2026-11-17T13:34:18Z",
+  "checked_at": "2026-11-18T23:05:32Z",
   "listed": 1802,
   "listing": 1802,
   "options": 13,
@@ -59,29 +59,9 @@
   "room": "Doppelzimmer, Klimaanlage, Dusche, Balkon, All Inclusive ohne Transfer, ByeBye",
   "status": "available"
  },
- "ruefa:43832a05ccb8": {
-  "checked": 1,
-  "checked_at": "2026-11-17T13:34:24Z",
-  "listed": 1911,
-  "listing": 1911,
-  "options": 18,
-  "price": 1911,
-  "room": "Standard Zimmer (Poolblick) (Weitere Zimmertypen), All Inclusive inkl. Transfer, TUI",
-  "status": "available"
- },
- "ruefa:5ec8731aad07": {
-  "checked": 1,
-  "checked_at": "2026-11-17T23:37:53Z",
-  "listed": 2217,
-  "listing": 2217,
-  "options": 21,
-  "price": 2217,
-  "room": "Standard Zimmer (Poolblick) (Weitere Zimmertypen), All Inclusive inkl. Transfer, TUI",
-  "status": "available"
- },
  "ruefa:631f309b89c0": {
   "checked": 1,
-  "checked_at": "2026-11-17T13:34:58Z",
+  "checked_at": "2026-11-18T23:06:05Z",
   "listed": 1524,
   "listing": 1524,
   "options": 7,
@@ -112,7 +92,7 @@
  },
  "ruefa:7efc14decc0d": {
   "checked": 1,
-  "checked_at": "2026-11-17T13:34:05Z",
+  "checked_at": "2026-11-18T23:05:21Z",
   "listed": 1423,
   "listing": 1423,
   "options": 8,
@@ -128,16 +108,6 @@
   "options": 92,
   "price": 3758,
   "room": "Themed Deluxe (Doppelzimmer), Vollpension ohne Transfer, Schauinsland-Reisen dynamisch",
-  "status": "available"
- },
- "ruefa:81a64db824aa": {
-  "checked": 1,
-  "checked_at": "2026-11-17T23:38:06Z",
-  "listed": 2187,
-  "listing": 2187,
-  "options": 30,
-  "price": 2187,
-  "room": "STANDARD NEBENGEBÄUDE DOPPEL ZIMMER MIT BALKON (Doppelzimmer), All Inclusive inkl. Transfer, TUI",
   "status": "available"
  },
  "ruefa:8d8ade0bf667": {
@@ -161,19 +131,9 @@
   "room": null,
   "status": "unavailable"
  },
- "ruefa:97512d9c19b7": {
-  "checked": 1,
-  "checked_at": "2026-11-17T13:34:11Z",
-  "listed": 1639,
-  "listing": 1639,
-  "options": 21,
-  "price": 1638,
-  "room": "Standard Zimmer (Poolblick) (Weitere Zimmertypen), All Inclusive inkl. Transfer, TUI",
-  "status": "available"
- },
  "ruefa:982150c2a627": {
   "checked": 1,
-  "checked_at": "2026-11-17T23:38:12Z",
+  "checked_at": "2026-11-18T23:06:36Z",
   "listed": 1538,
   "listing": 1538,
   "options": 6,
@@ -181,29 +141,9 @@
   "room": "Doppelzimmer zur Alleinbenutzung CLUBZIMMER (Einzelzimmer), All Inclusive inkl. Transfer, TUI",
   "status": "available"
  },
- "ruefa:9cf97cffeaf7": {
-  "checked": 1,
-  "checked_at": "2026-11-17T23:37:35Z",
-  "listed": 1904,
-  "listing": 1904,
-  "options": 24,
-  "price": 1905,
-  "room": "STANDARD NEBENGEBÄUDE DOPPEL ZIMMER MIT BALKON (Doppelzimmer), All Inclusive inkl. Transfer, TUI",
-  "status": "available"
- },
- "ruefa:a515bc01e745": {
-  "checked": 1,
-  "checked_at": "2026-11-17T23:38:32Z",
-  "listed": 1865,
-  "listing": 1865,
-  "options": 18,
-  "price": 1865,
-  "room": "Doppelzimmer, Klimaanlage, Dusche, Balkon, All Inclusive ohne Transfer, ByeBye",
-  "status": "available"
- },
  "ruefa:a5fbb83082ca": {
   "checked": 1,
-  "checked_at": "2026-11-17T13:33:53Z",
+  "checked_at": "2026-11-18T23:05:13Z",
   "listed": 1579,
   "listing": 1579,
   "options": 7,
@@ -211,19 +151,9 @@
   "room": "STANDARD DOPPEL ZIMMER MIT BALKON (Doppelzimmer), All Inclusive inkl. Transfer, TUI",
   "status": "available"
  },
- "ruefa:ab3e0c9e8025": {
-  "checked": 1,
-  "checked_at": "2026-11-17T13:34:34Z",
-  "listed": 1629,
-  "listing": 1629,
-  "options": 36,
-  "price": 1629,
-  "room": "STANDARD NEBENGEBÄUDE DOPPEL ZIMMER MIT BALKON (Doppelzimmer), All Inclusive inkl. Transfer, TUI",
-  "status": "available"
- },
  "ruefa:adcdd62890ab": {
   "checked": 1,
-  "checked_at": "2026-11-17T13:34:40Z",
+  "checked_at": "2026-11-18T23:05:42Z",
   "listed": 1757,
   "listing": 1757,
   "options": 8,
@@ -243,22 +173,12 @@
  },
  "ruefa:ca788c27667d": {
   "checked": 1,
-  "checked_at": "2026-11-17T23:38:17Z",
+  "checked_at": "2026-11-18T23:06:42Z",
   "listed": 1756,
   "listing": 1756,
   "options": 4,
   "price": 1755,
   "room": "Doppelzimmer zur Alleinbenutzung CLUBZIMMER (Einzelzimmer), All Inclusive inkl. Transfer, TUI",
-  "status": "available"
- },
- "ruefa:d0dfc32db65d": {
-  "checked": 1,
-  "checked_at": "2026-11-17T23:38:27Z",
-  "listed": 1656,
-  "listing": 1656,
-  "options": 17,
-  "price": 1641,
-  "room": "Suite, Best Price, Klimaanlage, Dusche, Balkon (Familienzimmer), All Inclusive ohne Transfer, ByeBye",
   "status": "available"
  },
  "ruefa:d84ac26f9a76": {
@@ -271,6 +191,16 @@
   "room": "Doppelzimmer Economy, All Inclusive ohne Transfer, Coral Travel",
   "status": "available"
  },
+ "ruefa:e312572a1c2b": {
+  "checked": 1,
+  "checked_at": "2026-11-18T23:06:27Z",
+  "listed": 1991,
+  "listing": 1991,
+  "options": 16,
+  "price": 1992,
+  "room": "DoppelZweier Bungalow (Gartenblick), All Inclusive ohne Transfer, TUI",
+  "status": "available"
+ },
  "ruefa:eafdbda95b4b": {
   "checked": 1,
   "checked_at": "2026-11-18T13:11:03Z",
@@ -279,26 +209,6 @@
   "options": 25,
   "price": 1930,
   "room": "Doppelzimmer BK, All Inclusive ohne Transfer, Coral Travel",
-  "status": "available"
- },
- "ruefa:eeecf47530d6": {
-  "checked": 1,
-  "checked_at": "2026-11-17T13:33:59Z",
-  "listed": 1639,
-  "listing": 1639,
-  "options": 1,
-  "price": 1638,
-  "room": "Einzelbelegung Standard Zimmer (Balkon) (Einzelzimmer), All Inclusive inkl. Transfer, TUI",
-  "status": "available"
- },
- "ruefa:f03fbe1f4178": {
-  "checked": 1,
-  "checked_at": "2026-11-17T23:37:59Z",
-  "listed": 1664,
-  "listing": 1664,
-  "options": 12,
-  "price": 1665,
-  "room": "Doppelzimmer zur Alleinbenutzung OHNE BALKON (Einzelzimmer), All Inclusive ohne Transfer, TUI",
   "status": "available"
  },
  "ruefa:f75a92945ba3": {
@@ -313,22 +223,12 @@
  },
  "ruefa:f93494e22087": {
   "checked": 1,
-  "checked_at": "2026-11-17T13:34:52Z",
+  "checked_at": "2026-11-18T23:05:54Z",
   "listed": 2181,
   "listing": 2181,
   "options": 13,
   "price": 2781,
   "room": "STANDARD EINZELZIMMER (13) (Weitere Zimmertypen), All Inclusive inkl. Transfer, TUI",
-  "status": "available"
- },
- "ruefa:fd7ba6625e83": {
-  "checked": 1,
-  "checked_at": "2026-11-17T13:34:46Z",
-  "listed": 1918,
-  "listing": 1918,
-  "options": 7,
-  "price": 1917,
-  "room": "STANDARD DOPPEL ZIMMER MIT BALKON (Doppelzimmer), All Inclusive inkl. Transfer, TUI",
   "status": "available"
  }
 }
