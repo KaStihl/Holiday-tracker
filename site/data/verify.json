@@ -21,11 +21,11 @@
  },
  "ruefa:1d2217a5c1bb": {
   "checked": 1,
-  "checked_at": "2026-11-17T00:23:48Z",
+  "checked_at": "2026-11-18T13:11:20Z",
   "listed": 3151,
   "listing": 3150,
   "options": 78,
-  "price": 3156,
+  "price": 3054,
   "room": "Doppelzimmer Landbl., All Inclusive ohne Transfer, Coral Travel",
   "status": "available"
  },
@@ -47,16 +47,6 @@
   "options": 13,
   "price": 2262,
   "room": "STANDARD EINZELZIMMER (13) (Weitere Zimmertypen), All Inclusive inkl. Transfer, TUI",
-  "status": "available"
- },
- "ruefa:2eb058ca24e0": {
-  "checked": 1,
-  "checked_at": "2026-11-17T00:24:26Z",
-  "listed": 4313,
-  "listing": 4313,
-  "options": 30,
-  "price": 4313,
-  "room": "Deluxe Room (Doppelzimmer), All Inclusive inkl. Transfer, TUI",
   "status": "available"
  },
  "ruefa:4167383463dd": {
@@ -100,8 +90,8 @@
   "status": "available"
  },
  "ruefa:69827361681e": {
-  "checked": 2,
-  "checked_at": "2026-11-17T00:24:34Z",
+  "checked": 4,
+  "checked_at": "2026-11-18T13:12:10Z",
   "listed": 8651,
   "listing": 8651,
   "options": 143,
@@ -112,11 +102,11 @@
  },
  "ruefa:7d437269777c": {
   "checked": 1,
-  "checked_at": "2026-11-17T00:23:38Z",
+  "checked_at": "2026-11-18T13:11:08Z",
   "listed": 2403,
   "listing": 2403,
   "options": 34,
-  "price": 2403,
+  "price": 2262,
   "room": "DZ Landbl. BK (Doppelzimmer), All Inclusive ohne Transfer, Coral Travel",
   "status": "available"
  },
@@ -131,15 +121,14 @@
   "status": "available"
  },
  "ruefa:80464af75d32": {
-  "checked": 4,
-  "checked_at": "2026-11-17T00:24:02Z",
+  "checked": 2,
+  "checked_at": "2026-11-18T13:11:38Z",
   "listed": 3704,
   "listing": 3704,
   "options": 92,
-  "partial": true,
-  "price": null,
-  "room": null,
-  "status": "unavailable"
+  "price": 3758,
+  "room": "Themed Deluxe (Doppelzimmer), Vollpension ohne Transfer, Schauinsland-Reisen dynamisch",
+  "status": "available"
  },
  "ruefa:81a64db824aa": {
   "checked": 1,
@@ -153,7 +142,7 @@
  },
  "ruefa:8d8ade0bf667": {
   "checked": 1,
-  "checked_at": "2026-11-17T00:23:54Z",
+  "checked_at": "2026-11-18T13:11:27Z",
   "listed": 3701,
   "listing": 3701,
   "options": 180,
@@ -163,7 +152,7 @@
  },
  "ruefa:971cc5a09b20": {
   "checked": 4,
-  "checked_at": "2026-11-17T00:24:15Z",
+  "checked_at": "2026-11-18T13:11:49Z",
   "listed": 4029,
   "listing": 4029,
   "options": 163,
@@ -242,6 +231,16 @@
   "room": "STANDARD EINZELZIMMER (13) (Weitere Zimmertypen), All Inclusive inkl. Transfer, TUI",
   "status": "available"
  },
+ "ruefa:b06a8b9a670d": {
+  "checked": 1,
+  "checked_at": "2026-11-18T13:12:01Z",
+  "listed": 5318,
+  "listing": 5318,
+  "options": 30,
+  "price": 5468,
+  "room": "Deluxe Room (Doppelzimmer), All Inclusive inkl. Transfer, TUI",
+  "status": "available"
+ },
  "ruefa:ca788c27667d": {
   "checked": 1,
   "checked_at": "2026-11-17T23:38:17Z",
@@ -264,21 +263,21 @@
  },
  "ruefa:d84ac26f9a76": {
   "checked": 1,
-  "checked_at": "2026-11-17T00:23:42Z",
+  "checked_at": "2026-11-18T13:11:14Z",
   "listed": 2543,
   "listing": 2543,
-  "options": 36,
-  "price": 2543,
+  "options": 48,
+  "price": 2402,
   "room": "Doppelzimmer Economy, All Inclusive ohne Transfer, Coral Travel",
   "status": "available"
  },
  "ruefa:eafdbda95b4b": {
   "checked": 1,
-  "checked_at": "2026-11-17T00:23:33Z",
+  "checked_at": "2026-11-18T13:11:03Z",
   "listed": 2071,
   "listing": 2070,
   "options": 25,
-  "price": 2071,
+  "price": 1930,
   "room": "Doppelzimmer BK, All Inclusive ohne Transfer, Coral Travel",
   "status": "available"
  },
