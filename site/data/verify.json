@@ -1,4 +1,14 @@
 {
+ "ruefa:031b7b3191fe": {
+  "checked": 1,
+  "checked_at": "2026-11-21T21:46:11Z",
+  "listed": 1549,
+  "listing": 1549,
+  "options": 15,
+  "price": 1548,
+  "room": "ECONOMY DOPPEL ZIMMER (Economy Doppelzimmer), All Inclusive inkl. Transfer, TUI",
+  "status": "available"
+ },
  "ruefa:1d2217a5c1bb": {
   "checked": 1,
   "checked_at": "2026-11-21T12:46:22Z",
@@ -41,22 +51,42 @@
  },
  "ruefa:43832a05ccb8": {
   "checked": 1,
-  "checked_at": "2026-11-20T22:48:28Z",
-  "listed": 1792,
-  "listing": 1792,
-  "options": 18,
-  "price": 1791,
+  "checked_at": "2026-11-21T21:46:17Z",
+  "listed": 1760,
+  "listing": 1760,
+  "options": 24,
+  "price": 1761,
   "room": "Standard Zimmer (Poolblick) (Weitere Zimmertypen), All Inclusive inkl. Transfer, TUI",
+  "status": "available"
+ },
+ "ruefa:465917e446e6": {
+  "checked": 1,
+  "checked_at": "2026-11-21T21:47:14Z",
+  "listed": 2134,
+  "listing": 2134,
+  "options": 14,
+  "price": 2133,
+  "room": "STANDARD EINZELZIMMER (13) (Weitere Zimmertypen), All Inclusive inkl. Transfer, TUI",
   "status": "available"
  },
  "ruefa:5ec8731aad07": {
   "checked": 1,
-  "checked_at": "2026-11-20T22:49:01Z",
-  "listed": 2108,
-  "listing": 2108,
-  "options": 21,
-  "price": 2109,
+  "checked_at": "2026-11-21T21:46:49Z",
+  "listed": 2064,
+  "listing": 2064,
+  "options": 30,
+  "price": 2064,
   "room": "Standard Zimmer (Poolblick) (Weitere Zimmertypen), All Inclusive inkl. Transfer, TUI",
+  "status": "available"
+ },
+ "ruefa:65bc3757b688": {
+  "checked": 1,
+  "checked_at": "2026-11-21T21:47:01Z",
+  "listed": 1698,
+  "listing": 1698,
+  "options": 12,
+  "price": 1971,
+  "room": "SINGLE ECONOMY (Weitere Zimmertypen), All Inclusive inkl. Transfer, TUI",
   "status": "available"
  },
  "ruefa:69827361681e": {
@@ -69,6 +99,16 @@
   "price": null,
   "room": null,
   "status": "unavailable"
+ },
+ "ruefa:74b5ccf2e74f": {
+  "checked": 1,
+  "checked_at": "2026-11-21T21:46:23Z",
+  "listed": 1393,
+  "listing": 1393,
+  "options": 18,
+  "price": 1617,
+  "room": "SINGLE ECONOMY (Weitere Zimmertypen), All Inclusive inkl. Transfer, TUI",
+  "status": "available"
  },
  "ruefa:80464af75d32": {
   "checked": 2,
@@ -113,11 +153,11 @@
  },
  "ruefa:97512d9c19b7": {
   "checked": 1,
-  "checked_at": "2026-11-20T22:48:16Z",
-  "listed": 1514,
-  "listing": 1514,
-  "options": 21,
-  "price": 1515,
+  "checked_at": "2026-11-21T21:46:04Z",
+  "listed": 1488,
+  "listing": 1488,
+  "options": 30,
+  "price": 1488,
   "room": "Standard Zimmer (Poolblick) (Weitere Zimmertypen), All Inclusive inkl. Transfer, TUI",
   "status": "available"
  },
@@ -133,9 +173,9 @@
  },
  "ruefa:9cf97cffeaf7": {
   "checked": 1,
-  "checked_at": "2026-11-20T22:48:54Z",
-  "listed": 1704,
-  "listing": 1704,
+  "checked_at": "2026-11-21T21:46:42Z",
+  "listed": 1678,
+  "listing": 1678,
   "options": 24,
   "price": 1848,
   "room": "STANDARD ROOM 32 PAX (Weitere Zimmertypen), All Inclusive inkl. Transfer, TUI",
@@ -151,11 +191,21 @@
   "room": "Doppelzimmer, Landseite, Klimaanlage, Bad oder Dusche, Balkon, All Inclusive ohne Transfer, ByeBye",
   "status": "available"
  },
+ "ruefa:a81431f52040": {
+  "checked": 1,
+  "checked_at": "2026-11-21T21:47:07Z",
+  "listed": 2132,
+  "listing": 2132,
+  "options": 15,
+  "price": 2133,
+  "room": "ECONOMY DOPPEL ZIMMER (Economy Doppelzimmer), All Inclusive inkl. Transfer, TUI",
+  "status": "available"
+ },
  "ruefa:ab3e0c9e8025": {
   "checked": 1,
-  "checked_at": "2026-11-20T22:48:35Z",
-  "listed": 1448,
-  "listing": 1448,
+  "checked_at": "2026-11-21T21:46:30Z",
+  "listed": 1428,
+  "listing": 1428,
   "options": 36,
   "price": 1545,
   "room": "STANDARD ROOM 32 PAX (Weitere Zimmertypen), All Inclusive inkl. Transfer, TUI",
@@ -173,9 +223,9 @@
  },
  "ruefa:d3f6ba0f1478": {
   "checked": 1,
-  "checked_at": "2026-11-20T22:49:07Z",
-  "listed": 1495,
-  "listing": 1495,
+  "checked_at": "2026-11-21T21:46:55Z",
+  "listed": 1474,
+  "listing": 1474,
   "options": 8,
   "price": 1746,
   "room": "STANDARD EINZELZIMMER (13) (Weitere Zimmertypen), All Inclusive inkl. Transfer, TUI",
@@ -223,11 +273,11 @@
  },
  "ruefa:fe59ffd95b49": {
   "checked": 1,
-  "checked_at": "2026-11-20T22:48:41Z",
-  "listed": 1537,
-  "listing": 1537,
+  "checked_at": "2026-11-21T21:46:36Z",
+  "listed": 1516,
+  "listing": 1516,
   "options": 21,
-  "price": 1536,
+  "price": 1515,
   "room": "PROMO SINGLE (13) (Weitere Zimmertypen), All Inclusive inkl. Transfer, TUI",
   "status": "available"
  }
