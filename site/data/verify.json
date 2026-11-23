@@ -11,7 +11,7 @@
  },
  "ruefa:1d2217a5c1bb": {
   "checked": 1,
-  "checked_at": "2026-11-22T12:43:15Z",
+  "checked_at": "2026-11-23T14:45:29Z",
   "listed": 3077,
   "listing": 3077,
   "options": 78,
@@ -21,11 +21,11 @@
  },
  "ruefa:2eb058ca24e0": {
   "checked": 1,
-  "checked_at": "2026-11-22T12:43:52Z",
-  "listed": 4243,
-  "listing": 4243,
+  "checked_at": "2026-11-23T14:46:06Z",
+  "listed": 4355,
+  "listing": 4355,
   "options": 30,
-  "price": 4243,
+  "price": 4355,
   "room": "Deluxe Room (Doppelzimmer), All Inclusive inkl. Transfer, TUI",
   "status": "available"
  },
@@ -47,16 +47,6 @@
   "options": 22,
   "price": 1761,
   "room": "Standard Zimmer (Poolblick) (Weitere Zimmertypen), All Inclusive inkl. Transfer, TUI",
-  "status": "available"
- },
- "ruefa:465917e446e6": {
-  "checked": 1,
-  "checked_at": "2026-11-22T21:53:57Z",
-  "listed": 2134,
-  "listing": 2134,
-  "options": 14,
-  "price": 2133,
-  "room": "STANDARD EINZELZIMMER (13) (Weitere Zimmertypen), All Inclusive inkl. Transfer, TUI",
   "status": "available"
  },
  "ruefa:5ec8731aad07": {
@@ -81,7 +71,7 @@
  },
  "ruefa:69827361681e": {
   "checked": 4,
-  "checked_at": "2026-11-22T12:44:01Z",
+  "checked_at": "2026-11-23T14:46:15Z",
   "listed": 8510,
   "listing": 8510,
   "options": 121,
@@ -102,7 +92,7 @@
  },
  "ruefa:80464af75d32": {
   "checked": 2,
-  "checked_at": "2026-11-22T12:43:31Z",
+  "checked_at": "2026-11-23T14:45:46Z",
   "listed": 3563,
   "listing": 3563,
   "options": 92,
@@ -122,20 +112,20 @@
  },
  "ruefa:8d8ade0bf667": {
   "checked": 1,
-  "checked_at": "2026-11-22T12:43:22Z",
+  "checked_at": "2026-11-23T14:45:36Z",
   "listed": 3561,
   "listing": 3561,
   "options": 201,
-  "price": 3562,
+  "price": 3346,
   "room": "Alhambra Suite (Suite mit Meerblick), All Inclusive ohne Transfer, ITS Deutschland",
   "status": "available"
  },
  "ruefa:971cc5a09b20": {
   "checked": 4,
-  "checked_at": "2026-11-22T12:43:40Z",
+  "checked_at": "2026-11-23T14:45:55Z",
   "listed": 3888,
   "listing": 3888,
-  "options": 173,
+  "options": 170,
   "partial": true,
   "price": null,
   "room": null,
@@ -163,7 +153,7 @@
  },
  "ruefa:9d0b0ed8b5c5": {
   "checked": 1,
-  "checked_at": "2026-11-22T12:43:06Z",
+  "checked_at": "2026-11-23T14:45:19Z",
   "listed": 2390,
   "listing": 2390,
   "options": 40,
@@ -203,7 +193,7 @@
  },
  "ruefa:d84ac26f9a76": {
   "checked": 1,
-  "checked_at": "2026-11-22T12:43:10Z",
+  "checked_at": "2026-11-23T14:45:24Z",
   "listed": 2454,
   "listing": 2453,
   "options": 57,
@@ -213,7 +203,7 @@
  },
  "ruefa:eafdbda95b4b": {
   "checked": 1,
-  "checked_at": "2026-11-22T12:43:01Z",
+  "checked_at": "2026-11-23T14:45:15Z",
   "listed": 1998,
   "listing": 1998,
   "options": 28,
