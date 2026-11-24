@@ -11,32 +11,22 @@
  },
  "ruefa:1d2217a5c1bb": {
   "checked": 1,
-  "checked_at": "2026-11-23T14:45:29Z",
+  "checked_at": "2026-11-24T03:02:13Z",
   "listed": 3077,
   "listing": 3077,
-  "options": 78,
-  "price": 3077,
+  "options": 75,
+  "price": 2977,
   "room": "Doppelzimmer, Economy, Landseite, Klimaanlage, Dusche, Balkon, All Inclusive ohne Transfer, ByeBye",
   "status": "available"
  },
  "ruefa:2eb058ca24e0": {
   "checked": 1,
-  "checked_at": "2026-11-23T14:46:06Z",
-  "listed": 4355,
-  "listing": 4355,
+  "checked_at": "2026-11-24T03:02:50Z",
+  "listed": 4348,
+  "listing": 4348,
   "options": 30,
-  "price": 4355,
+  "price": 4348,
   "room": "Deluxe Room (Doppelzimmer), All Inclusive inkl. Transfer, TUI",
-  "status": "available"
- },
- "ruefa:30223c690fd8": {
-  "checked": 1,
-  "checked_at": "2026-11-20T22:49:19Z",
-  "listed": 1571,
-  "listing": 1571,
-  "options": 18,
-  "price": 1572,
-  "room": "Doppelzimmer (Doppelbett) - Seiten-See-Sich (Weitere Zimmertypen), All Inclusive inkl. Transfer, TUI",
   "status": "available"
  },
  "ruefa:43832a05ccb8": {
@@ -71,7 +61,7 @@
  },
  "ruefa:69827361681e": {
   "checked": 4,
-  "checked_at": "2026-11-23T14:46:15Z",
+  "checked_at": "2026-11-24T03:03:01Z",
   "listed": 8510,
   "listing": 8510,
   "options": 121,
@@ -92,7 +82,7 @@
  },
  "ruefa:80464af75d32": {
   "checked": 2,
-  "checked_at": "2026-11-23T14:45:46Z",
+  "checked_at": "2026-11-24T03:02:30Z",
   "listed": 3563,
   "listing": 3563,
   "options": 92,
@@ -100,43 +90,32 @@
   "room": "Themed Deluxe (Doppelzimmer), Vollpension ohne Transfer, Schauinsland-Reisen dynamisch",
   "status": "available"
  },
- "ruefa:81a64db824aa": {
-  "checked": 1,
-  "checked_at": "2026-11-20T22:49:25Z",
-  "listed": 1962,
-  "listing": 1962,
-  "options": 30,
-  "price": 2169,
-  "room": "STANDARD ROOM 32 PAX (Weitere Zimmertypen), All Inclusive inkl. Transfer, TUI",
-  "status": "available"
- },
  "ruefa:8d8ade0bf667": {
   "checked": 1,
-  "checked_at": "2026-11-23T14:45:36Z",
-  "listed": 3561,
-  "listing": 3561,
-  "options": 201,
+  "checked_at": "2026-11-24T03:02:21Z",
+  "listed": 3345,
+  "listing": 3345,
+  "options": 204,
   "price": 3346,
   "room": "Alhambra Suite (Suite mit Meerblick), All Inclusive ohne Transfer, ITS Deutschland",
   "status": "available"
  },
  "ruefa:971cc5a09b20": {
-  "checked": 4,
-  "checked_at": "2026-11-23T14:45:55Z",
+  "checked": 2,
+  "checked_at": "2026-11-24T03:02:40Z",
   "listed": 3888,
   "listing": 3888,
-  "options": 170,
-  "partial": true,
-  "price": null,
-  "room": null,
-  "status": "unavailable"
+  "options": 174,
+  "price": 3984,
+  "room": "Doppelzimmer Superior Landblick (Deluxe Doppelzimmer Superior), All Inclusive ohne Transfer, ITS Deutschland",
+  "status": "available"
  },
  "ruefa:97512d9c19b7": {
   "checked": 1,
-  "checked_at": "2026-11-22T21:52:48Z",
+  "checked_at": "2026-11-24T03:03:15Z",
   "listed": 1488,
   "listing": 1488,
-  "options": 27,
+  "options": 30,
   "price": 1488,
   "room": "Standard Zimmer (Poolblick) (Weitere Zimmertypen), All Inclusive inkl. Transfer, TUI",
   "status": "available"
@@ -153,7 +132,7 @@
  },
  "ruefa:9d0b0ed8b5c5": {
   "checked": 1,
-  "checked_at": "2026-11-23T14:45:19Z",
+  "checked_at": "2026-11-24T03:02:02Z",
   "listed": 2390,
   "listing": 2390,
   "options": 40,
@@ -193,7 +172,7 @@
  },
  "ruefa:d84ac26f9a76": {
   "checked": 1,
-  "checked_at": "2026-11-23T14:45:24Z",
+  "checked_at": "2026-11-24T03:02:07Z",
   "listed": 2454,
   "listing": 2453,
   "options": 57,
@@ -203,22 +182,12 @@
  },
  "ruefa:eafdbda95b4b": {
   "checked": 1,
-  "checked_at": "2026-11-23T14:45:15Z",
+  "checked_at": "2026-11-24T03:01:57Z",
   "listed": 1998,
   "listing": 1998,
   "options": 28,
   "price": 1995,
   "room": "Doppelzimmer, Klimaanlage, Dusche, Balkon, All Inclusive ohne Transfer, ByeBye",
-  "status": "available"
- },
- "ruefa:f03fbe1f4178": {
-  "checked": 1,
-  "checked_at": "2026-11-20T22:49:13Z",
-  "listed": 1531,
-  "listing": 1531,
-  "options": 12,
-  "price": 1530,
-  "room": "Doppelzimmer zur Alleinbenutzung OHNE BALKON (Einzelzimmer), All Inclusive ohne Transfer, TUI",
   "status": "available"
  },
  "ruefa:fe59ffd95b49": {
