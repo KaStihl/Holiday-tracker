@@ -1,4 +1,14 @@
 {
+ "ruefa:00171943aeb9": {
+  "checked": 1,
+  "checked_at": "2026-11-25T14:29:09Z",
+  "listed": 1700,
+  "listing": 1700,
+  "options": 2,
+  "price": 1701,
+  "room": "KLASSISCHE SUITE (2ER + 1CH) (Weitere Zimmertypen), All Inclusive inkl. Transfer, TUI",
+  "status": "available"
+ },
  "ruefa:1d2217a5c1bb": {
   "checked": 1,
   "checked_at": "2026-11-25T00:53:34Z",
@@ -31,7 +41,7 @@
  },
  "ruefa:43832a05ccb8": {
   "checked": 1,
-  "checked_at": "2026-11-24T15:00:08Z",
+  "checked_at": "2026-11-25T14:29:29Z",
   "listed": 1760,
   "listing": 1760,
   "options": 24,
@@ -41,7 +51,7 @@
  },
  "ruefa:5ec8731aad07": {
   "checked": 1,
-  "checked_at": "2026-11-24T15:00:43Z",
+  "checked_at": "2026-11-25T14:30:37Z",
   "listed": 2064,
   "listing": 2064,
   "options": 30,
@@ -82,7 +92,7 @@
  },
  "ruefa:74b5ccf2e74f": {
   "checked": 1,
-  "checked_at": "2026-11-24T15:00:15Z",
+  "checked_at": "2026-11-25T14:29:41Z",
   "listed": 1393,
   "listing": 1393,
   "options": 18,
@@ -92,10 +102,10 @@
  },
  "ruefa:7efc14decc0d": {
   "checked": 1,
-  "checked_at": "2026-11-24T15:00:56Z",
+  "checked_at": "2026-11-25T14:30:43Z",
   "listed": 1474,
   "listing": 1474,
-  "options": 8,
+  "options": 14,
   "price": 1746,
   "room": "STANDARD EINZELZIMMER (13) (Weitere Zimmertypen), All Inclusive inkl. Transfer, TUI",
   "status": "available"
@@ -132,7 +142,7 @@
  },
  "ruefa:97512d9c19b7": {
   "checked": 1,
-  "checked_at": "2026-11-24T03:03:15Z",
+  "checked_at": "2026-11-25T14:29:16Z",
   "listed": 1488,
   "listing": 1488,
   "options": 30,
@@ -142,7 +152,7 @@
  },
  "ruefa:9cf97cffeaf7": {
   "checked": 1,
-  "checked_at": "2026-11-24T15:00:36Z",
+  "checked_at": "2026-11-25T14:30:30Z",
   "listed": 1678,
   "listing": 1678,
   "options": 22,
@@ -162,7 +172,7 @@
  },
  "ruefa:ab3e0c9e8025": {
   "checked": 1,
-  "checked_at": "2026-11-24T15:00:21Z",
+  "checked_at": "2026-11-25T14:29:47Z",
   "listed": 1428,
   "listing": 1428,
   "options": 33,
@@ -172,7 +182,7 @@
  },
  "ruefa:ca65bfd2e2d4": {
   "checked": 1,
-  "checked_at": "2026-11-24T15:00:01Z",
+  "checked_at": "2026-11-25T14:29:22Z",
   "listed": 1609,
   "listing": 1609,
   "options": 4,
@@ -190,6 +200,26 @@
   "room": "Doppelzimmer Economy, All Inclusive ohne Transfer, Coral Travel",
   "status": "available"
  },
+ "ruefa:e572cbb09dde": {
+  "checked": 1,
+  "checked_at": "2026-11-25T14:29:03Z",
+  "listed": 1436,
+  "listing": 1436,
+  "options": 3,
+  "price": 1497,
+  "room": "KLASSISCHE SUITE (2ER + 1CH) (Weitere Zimmertypen), All Inclusive inkl. Transfer, TUI",
+  "status": "available"
+ },
+ "ruefa:e763e5ffc123": {
+  "checked": 1,
+  "checked_at": "2026-11-25T14:29:35Z",
+  "listed": 2040,
+  "listing": 2040,
+  "options": 3,
+  "price": 2040,
+  "room": "KLASSISCHE SUITE (2ER + 1CH) (Weitere Zimmertypen), All Inclusive inkl. Transfer, TUI",
+  "status": "available"
+ },
  "ruefa:eafdbda95b4b": {
   "checked": 1,
   "checked_at": "2026-11-25T00:53:19Z",
@@ -200,19 +230,9 @@
   "room": "Doppelzimmer, Klimaanlage, Dusche, Balkon, All Inclusive ohne Transfer, ByeBye",
   "status": "available"
  },
- "ruefa:f2a847dd78d2": {
-  "checked": 1,
-  "checked_at": "2026-11-24T14:59:55Z",
-  "listed": 1549,
-  "listing": 1549,
-  "options": 15,
-  "price": 1548,
-  "room": "ECONOMY DOPPEL ZIMMER (Economy Doppelzimmer), All Inclusive inkl. Transfer, TUI",
-  "status": "available"
- },
  "ruefa:fe59ffd95b49": {
   "checked": 1,
-  "checked_at": "2026-11-24T15:00:29Z",
+  "checked_at": "2026-11-25T14:30:24Z",
   "listed": 1516,
   "listing": 1516,
   "options": 21,
