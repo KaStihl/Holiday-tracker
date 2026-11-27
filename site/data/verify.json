@@ -11,7 +11,7 @@
  },
  "ruefa:1d2217a5c1bb": {
   "checked": 1,
-  "checked_at": "2026-11-26T00:29:21Z",
+  "checked_at": "2026-11-27T00:43:09Z",
   "listed": 2979,
   "listing": 2979,
   "options": 78,
@@ -21,7 +21,7 @@
  },
  "ruefa:2eb058ca24e0": {
   "checked": 1,
-  "checked_at": "2026-11-26T00:29:59Z",
+  "checked_at": "2026-11-27T00:43:46Z",
   "listed": 4362,
   "listing": 4362,
   "options": 21,
@@ -81,10 +81,10 @@
  },
  "ruefa:69827361681e": {
   "checked": 4,
-  "checked_at": "2026-11-26T00:30:08Z",
+  "checked_at": "2026-11-27T00:43:54Z",
   "listed": 8510,
   "listing": 8510,
-  "options": 110,
+  "options": 112,
   "partial": true,
   "price": null,
   "room": null,
@@ -112,33 +112,34 @@
  },
  "ruefa:80464af75d32": {
   "checked": 2,
-  "checked_at": "2026-11-26T00:29:38Z",
+  "checked_at": "2026-11-27T00:43:25Z",
   "listed": 3533,
   "listing": 3533,
-  "options": 92,
-  "price": 3624,
+  "options": 89,
+  "price": 3644,
   "room": "Themed Deluxe (Doppelzimmer), Vollpension ohne Transfer, Schauinsland-Reisen dynamisch",
   "status": "available"
  },
  "ruefa:8d8ade0bf667": {
   "checked": 1,
-  "checked_at": "2026-11-26T00:29:28Z",
-  "listed": 3343,
+  "checked_at": "2026-11-27T00:43:16Z",
+  "listed": 3329,
   "listing": 3343,
-  "options": 188,
-  "price": 3346,
+  "options": 168,
+  "price": 3330,
   "room": "Alhambra Suite (Suite mit Meerblick), All Inclusive ohne Transfer, ITS Deutschland",
   "status": "available"
  },
  "ruefa:971cc5a09b20": {
-  "checked": 2,
-  "checked_at": "2026-11-26T00:29:48Z",
-  "listed": 3888,
-  "listing": 3888,
-  "options": 168,
-  "price": 3993,
-  "room": "Doppelzimmer Superior Landblick (Deluxe Doppelzimmer Superior), All Inclusive ohne Transfer, ITS Deutschland",
-  "status": "available"
+  "checked": 4,
+  "checked_at": "2026-11-27T00:43:35Z",
+  "listed": 3768,
+  "listing": 3855,
+  "options": 141,
+  "partial": true,
+  "price": null,
+  "room": null,
+  "status": "unavailable"
  },
  "ruefa:97512d9c19b7": {
   "checked": 1,
@@ -162,7 +163,7 @@
  },
  "ruefa:9d0b0ed8b5c5": {
   "checked": 1,
-  "checked_at": "2026-11-26T00:29:16Z",
+  "checked_at": "2026-11-27T00:43:04Z",
   "listed": 2390,
   "listing": 2390,
   "options": 40,
@@ -192,10 +193,10 @@
  },
  "ruefa:d84ac26f9a76": {
   "checked": 1,
-  "checked_at": "2026-11-26T00:29:11Z",
+  "checked_at": "2026-11-27T00:42:59Z",
   "listed": 2376,
   "listing": 2375,
-  "options": 54,
+  "options": 57,
   "price": 2376,
   "room": "Doppelzimmer Economy, All Inclusive ohne Transfer, Coral Travel",
   "status": "available"
@@ -222,7 +223,7 @@
  },
  "ruefa:eafdbda95b4b": {
   "checked": 1,
-  "checked_at": "2026-11-26T00:29:06Z",
+  "checked_at": "2026-11-27T00:42:55Z",
   "listed": 1982,
   "listing": 1981,
   "options": 28,
