@@ -1,7 +1,7 @@
 {
  "ruefa:00171943aeb9": {
   "checked": 1,
-  "checked_at": "2026-11-26T14:02:01Z",
+  "checked_at": "2026-11-27T13:59:12Z",
   "listed": 1700,
   "listing": 1700,
   "options": 2,
@@ -39,23 +39,13 @@
   "room": "STANDARD ROOM 32 PAX (Weitere Zimmertypen), All Inclusive inkl. Transfer, TUI",
   "status": "available"
  },
- "ruefa:429b2df0b2b3": {
-  "checked": 1,
-  "checked_at": "2026-11-26T14:02:28Z",
-  "listed": 1760,
-  "listing": 1760,
-  "options": 24,
-  "price": 1761,
-  "room": "Standard Zimmer (Poolblick) (Weitere Zimmertypen), All Inclusive inkl. Transfer, TUI",
-  "status": "available"
- },
  "ruefa:5ec8731aad07": {
   "checked": 1,
-  "checked_at": "2026-11-26T14:03:14Z",
-  "listed": 2064,
-  "listing": 2064,
+  "checked_at": "2026-11-27T14:00:11Z",
+  "listed": 2110,
+  "listing": 2110,
   "options": 30,
-  "price": 2064,
+  "price": 2109,
   "room": "Standard Zimmer (Poolblick) (Weitere Zimmertypen), All Inclusive inkl. Transfer, TUI",
   "status": "available"
  },
@@ -71,7 +61,7 @@
  },
  "ruefa:6614f59e4245": {
   "checked": 1,
-  "checked_at": "2026-11-26T14:02:07Z",
+  "checked_at": "2026-11-27T13:59:18Z",
   "listed": 1369,
   "listing": 1369,
   "options": 6,
@@ -92,7 +82,7 @@
  },
  "ruefa:74b5ccf2e74f": {
   "checked": 1,
-  "checked_at": "2026-11-26T14:02:45Z",
+  "checked_at": "2026-11-27T13:59:43Z",
   "listed": 1393,
   "listing": 1393,
   "options": 18,
@@ -102,7 +92,7 @@
  },
  "ruefa:7efc14decc0d": {
   "checked": 1,
-  "checked_at": "2026-11-26T14:03:21Z",
+  "checked_at": "2026-11-27T14:00:17Z",
   "listed": 1474,
   "listing": 1474,
   "options": 14,
@@ -143,17 +133,17 @@
  },
  "ruefa:97512d9c19b7": {
   "checked": 1,
-  "checked_at": "2026-11-26T14:02:14Z",
-  "listed": 1488,
-  "listing": 1488,
+  "checked_at": "2026-11-27T13:59:25Z",
+  "listed": 1510,
+  "listing": 1510,
   "options": 30,
-  "price": 1488,
+  "price": 1509,
   "room": "Standard Zimmer (Poolblick) (Weitere Zimmertypen), All Inclusive inkl. Transfer, TUI",
   "status": "available"
  },
  "ruefa:9cf97cffeaf7": {
   "checked": 1,
-  "checked_at": "2026-11-26T14:03:06Z",
+  "checked_at": "2026-11-27T14:00:04Z",
   "listed": 1678,
   "listing": 1678,
   "options": 22,
@@ -173,7 +163,7 @@
  },
  "ruefa:ab3e0c9e8025": {
   "checked": 1,
-  "checked_at": "2026-11-26T14:02:52Z",
+  "checked_at": "2026-11-27T13:59:50Z",
   "listed": 1428,
   "listing": 1428,
   "options": 33,
@@ -183,7 +173,7 @@
  },
  "ruefa:ca65bfd2e2d4": {
   "checked": 1,
-  "checked_at": "2026-11-26T14:02:21Z",
+  "checked_at": "2026-11-27T13:59:31Z",
   "listed": 1609,
   "listing": 1609,
   "options": 4,
@@ -203,7 +193,7 @@
  },
  "ruefa:e572cbb09dde": {
   "checked": 1,
-  "checked_at": "2026-11-26T00:30:19Z",
+  "checked_at": "2026-11-27T13:59:06Z",
   "listed": 1436,
   "listing": 1436,
   "options": 3,
@@ -213,7 +203,7 @@
  },
  "ruefa:e763e5ffc123": {
   "checked": 1,
-  "checked_at": "2026-11-26T14:02:38Z",
+  "checked_at": "2026-11-27T13:59:37Z",
   "listed": 2040,
   "listing": 2040,
   "options": 3,
@@ -233,7 +223,7 @@
  },
  "ruefa:fe59ffd95b49": {
   "checked": 1,
-  "checked_at": "2026-11-26T14:02:59Z",
+  "checked_at": "2026-11-27T13:59:57Z",
   "listed": 1516,
   "listing": 1516,
   "options": 21,
